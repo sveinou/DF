@@ -1,7 +1,7 @@
 DF
 ==
 
-Dynamic Firewall
+Dynamic Firewall based on Python, IPtables, DHCP and PHP
 
 
 
