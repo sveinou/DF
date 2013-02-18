@@ -3,6 +3,13 @@
 import sys
 from df_auth import Auth
 
+"""	df_login.py username password ip_address
+	Tries to login username with password. If successful, it will unblock 
+	the ip-address from iptables. (last part not implemented yet...)
+
+"""
+
+
 pwd_min_length = 4
 
 def get_input():
@@ -34,7 +41,7 @@ def main():
 		raise ValueError("Login failes")
 
 	#Code contiunes...
-	
+	#IPtables-magic goes here. 
 
 
 if __name__ == '__main__':
