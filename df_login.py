@@ -1,6 +1,7 @@
 #/usr/bin/python
 
 import sys
+import subprocess
 from df_auth import Auth
 
 """	df_login.py username password ip_address
@@ -32,6 +33,25 @@ def get_input():
 
 	return {'username':user, 'password': password, 'ip_addr':ip}
 
+
+def accept_ip4(ip):
+
+ 	rules = ["/sbin/iptables -I FORWARD -d"+ip+" -j ACCEPT",
+		"/sbin/iptables -I FORWARD -s"+ip+" -j ACCEPT",
+              	"/sbin/iptables -t nat -I PREROUTING -d"+ip+" -j ACCEPT",
+                "/sbin/iptables -t nat -I PREROUTING -s"+ip+" -j ACCEPT",]
+ 
+	for rule in rules:
+  		subprocess.call(rule, shell=True)
+
+def accept_ip6(ip):
+
+        rules = ["/sbin/iptables -I FORWARD -d"+ip+" -j ACCEPT",
+                "/sbin/iptables -I FORWARD -s"+ip+" -j ACCEPT",]
+ 
+        for rule in rules:
+                subprocess.call(rule, shell=True)
+
 def main():
 	inputs = get_input()
 	
@@ -39,9 +59,8 @@ def main():
 	Auth.set_password(input['password'])
 	if(!Auth.login())
 		raise ValueError("Login failes")
-
-	#Code contiunes...
-	#IPtables-magic goes here. 
+	else
+		accept_ip4(input['ip_addr'])
 
 
 if __name__ == '__main__':
