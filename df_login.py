@@ -57,7 +57,7 @@ def main():
 	
 	Auth.set_user(input['username'])
 	Auth.set_password(input['password'])
-	if !Auth.login():
+	if Auth.login() != True:
 		raise ValueError("Login failes")
 	else:
 		accept_ip4(input['ip_addr'])
