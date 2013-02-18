@@ -1,22 +1,28 @@
-class auth:
+import pam
+
+class Auth:
 	""" Does check of user and password to system """
-	
-	import pam
-	import sys
-	
-	def __init__(self):
-		self.logininfo = get_vars()
+#	user = None
+#	password = None	
 
-	def set_user(user):
+#	def __init__(self):
+#		self.username = None
+#		self.password = None
+
+	def __init__(self, username, password):
+		self.username = username
+		self.password = password
+
+	def set_user(self,username):
 		"""Checks user, sets variable"""
-		if(str != "" and type(user) == str):
-			self.user = user
+		if(user != "" and type(username) == str):
+			self.username = username
 
-	def set_password(password):
+	def set_password(self,password):
 		"""Checks password, sets variable"""
-		if(str != "" and type(user) == str):
-			self.user = user
+		if(password != "" and type(password) == str):
+			self.password = password
 
-	def login():
+	def login(self):
 		"""Does actual login-challange to \"login\"-program."""
-		return pam.authenticate(user,password)
+		return pam.authenticate(self.username,self.password)
