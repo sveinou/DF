@@ -6,7 +6,7 @@ from df_auth import Auth
 
 """	df_login.py username password ip_address
 	Tries to login username with password. If successful, it will unblock 
-	the ip-address from iptables. (last part not implemented yet...)
+	the ip-address from iptables. 
 
 """
 
