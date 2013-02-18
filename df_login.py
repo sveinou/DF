@@ -53,7 +53,7 @@ def accept_ip6(ip):
                 subprocess.call(rule, shell=True)
 
 def main():
-	inputs = get_input()
+	input = get_input()
 	
 	Auth.set_user(input['username'])
 	Auth.set_password(input['password'])
