@@ -59,7 +59,7 @@ def main():
 	Auth.set_password(input['password'])
 	if !Auth.login():
 		raise ValueError("Login failes")
-	else
+	else:
 		accept_ip4(input['ip_addr'])
 
 
