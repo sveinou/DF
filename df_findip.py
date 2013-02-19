@@ -8,10 +8,9 @@ class DHCP:
 	# We should probably make a configuration-file... 
 	leasefile = '/var/lib/dhcp/dhcpd.leases'
 	ip_filter = r'([\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})'
-	#ip_filter = r'^lease\ [\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\ \{$'
-	#regex_mac = r'([a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9])' 
+	mac_filter = r'([a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9])' 
 
-	def get_leases(self):
+	def get_ips(self):
 		""" 
 		parses lease-file in \"leasefile\" and returns list of registered ip-adresses
 		"""
@@ -20,13 +19,38 @@ class DHCP:
 		regex_ip = re.compile(self.ip_filter)
 		return regex_ip.findall(text)
 
-
-	def print_leases(self):
-		"""	
-		Prints out found leases
+	def get_macs(self):
 		"""
-		leases = self.get_leases()
-		print "Number of leases: ",len(leases)
-		for lease in leases:
-			print "IP: "+lease
+		Parses leasefile and returns mac-addresses
+		"""
+
+		file = open(self.leasefile)
+		text = file.read()
+		regex_mac = re.compile(self.mac_filter)
+		return regex_mac.findall(text)
+
+	def ip_exists(self, ip_address):
+		"""
+		Checks if ip_address exists in dhcp leasetable
+		"""
+		return ip_address in self.get_ips()
+
+	def mac_exists(self, mac_address):
+		"""
+		Checks if mac_address exists in dhcp leasetable
+		"""
+		return mac_address in self.get_macs()
+
+	def get_mac(self, ip_address):
+		"""
+		Searches for ip_address and returnes mac-address
+		raises KeyError
+		"""
+		return self.get_leases()[ip_address]
+
+	def get_leases(self):
+		"""
+		Returns dict with pairs of mac's and ip-addresses from dhcp-table
+		"""
+		return dict(zip(self.get_ips(),self.get_macs()))
 
