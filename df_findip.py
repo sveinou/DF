@@ -6,13 +6,17 @@ class DHCP:
 	"""
 	
 	# We should probably make a configuration-file... 
-	leasefile = '/var/lib/dhcp/dhcpd.leases'
+	
+	def __init__(self, leasefile):
+		if(leasefile == None or type(leasefile) != str):
+			raise ValueError("No leasefile given!")
+		self.leasefile = leasefile
 	ip_filter = r'([\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})'
 	mac_filter = r'([a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9])' 
 
 	def get_ips(self):
 		""" 
-		parses lease-file in \"leasefile\" and returns list of registered ip-adresses
+		Parses leasefile  and returns list of registered ip-adresses
 		"""
 		file = open(self.leasefile)
 		text = file.read()
