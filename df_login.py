@@ -53,11 +53,10 @@ def accept_ip6(ip):
                 subprocess.call(rule, shell=True)
 
 def main():
-	input = get_input()
+	inputs = get_input()
 	
-	Auth.set_user(input['username'])
-	Auth.set_password(input['password'])
-	if Auth.login() != True:
+	auth = Auth(inputs['username'],inputs['password'])
+	if auth.login() != True:
 		raise ValueError("Login failes")
 	else:
 		accept_ip4(input['ip_addr'])
