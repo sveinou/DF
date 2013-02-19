@@ -20,24 +20,37 @@ class DHCP:
 		return regex_ip.findall(text)
 
 	def get_macs(self):
+		"""
+		Parses leasefile and returns mac-addresses
+		"""
+
 		file = open(self.leasefile)
 		text = file.read()
 		regex_mac = re.compile(self.mac_filter)
 		return regex_mac.findall(text)
 
-
 	def ip_exists(self, ip_address):
+		"""
+		Checks if ip_address exists in dhcp leasetable
+		"""
 		return ip_address in self.get_ips()
 
-	def get_leases(self):
-		return dict(zip(self.get_macs(),self.get_ips()))
-
-	def print_leases(self):
-		"""	
-		Prints out found leases
+	def mac_exists(self, mac_address):
 		"""
-		leases = self.get_leases()
-		print "Number of leases: ",len(leases)
-		for lease in leases:
-			print lease.key, ": ",lease.value
+		Checks if mac_address exists in dhcp leasetable
+		"""
+		return mac_address in self.get_macs()
+
+	def get_mac(self, ip_address):
+		"""
+		Searches for ip_address and returnes mac-address
+		raises KeyError
+		"""
+		return self.get_leases()[ip_address]
+
+	def get_leases(self):
+		"""
+		Returns dict with pairs of mac's and ip-addresses from dhcp-table
+		"""
+		return dict(zip(self.get_ips(),self.get_macs()))
 
