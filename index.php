@@ -9,16 +9,17 @@
 
 //Get user ip-address
 $ip_addr = $_SERVER['REMOTE_ADDR'];
-$exec = "python ./df_login.py ";
+$exec = "sudo python ./df_login.py ";
 
 // 
 if(isset($_POST['user'])){
     // kjører login scriptet
 
     $username = $_POST['user'];
-    $password = $_POST['password'];         
+    $password = $_POST['pass'];         
     $cmd = $exec." ".$username." ".$password." ".$ip_addr;
 
+    print($cmd);
     exec($cmd, $out);
     print "<h1> Internet enabled </h1> ".$out;
 }
