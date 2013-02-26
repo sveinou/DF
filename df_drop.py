@@ -1,6 +1,7 @@
 #/usr/bin/python
 import subprocess
 import sys
+from df_firewall import Firewall
 
 def get_input():
 	"""
@@ -20,35 +21,16 @@ def get_input():
 
 	return {'username':user, 'ip_addr':ip}
 
-def drop_ip4(ip):
-
-	rules = ["/sbin/iptables -D FORWARD -d"+ip+" -j ACCEPT",
-		"/sbin/iptables -D FORWARD -s"+ip+" -j ACCEPT",
-              	"/sbin/iptables -t nat -D PREROUTING -d"+ip+" -j ACCEPT",
-              	"/sbin/iptables -t nat -D PREROUTING -s"+ip+" -j ACCEPT",]
-	
-	for rule in rules:
-		subprocess.call(rule, shell=True)
-
-
-
-def drop_ip6(ip):
-	rules = ["/sbin/ip6tables -D FORWARD -d"+ip+" -j ACCEPT",
-		"/sbin/ip6tables -D FORWARD -s"+ip+" -j ACCEPT",]
-	
-
-	for rule in rules:
-	 subprocess.call(rule, shell=True)	
-
 
 def main():
-	input = get_input()
-	ip = input['ip_addr']
+	indata = get_input()
+	ip = indata['ip_addr']
+    firewall = Firewall()
 
 	if len(ip) > 15:
-		drop_ip6(ip)
+		firewall.drop_ip6(ip)
  	else:
-		drop_ip4(ip)
+		firewall.drop_ip4(ip)
 
 	#add db thingy that updates the user as "droped"
 
