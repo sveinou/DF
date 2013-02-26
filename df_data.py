@@ -54,7 +54,9 @@ def get_input():
 def db(user,mac,ip4,ip6):
 
 	"""
-	
+		
+	this method adds a new entery to an exsisting db, or updates a line	
+
 	"""
 
 
@@ -64,11 +66,11 @@ def db(user,mac,ip4,ip6):
 	cur.execute("select * from clients WHERE User = %s", user)
 	row = cur.fetchone()
 	
-	if row[4] == True :
+	if row and row[4] == True :
 		raise ValueError("User is actually Active") #perhaps some other errorThingy
 		return False
 
-	elif row[4] == False :
+	elif row and row[4] == False :
 		
 		sql = "UPDATE clients SET Mac='%s', IP4='%s', IP6='%s', Active=TRUE WHERE User='%s'" % (mac,ip4,ip6,user)
 		cur.execute(sql)
@@ -78,18 +80,19 @@ def db(user,mac,ip4,ip6):
 		sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', TRUE) " % (user,mac,ip4,ip6)
 		cur.execute(sql) 
 		db.commit
+		
+		cur.execute("select * from clients ")
+		for row in cur.fetchall():
+			print row[0]
+
 		return True
 
 
-	cur.execute("select * from clients ")
-
-	for row in cur.fetchall():
-		print row[0]
 
 	
 	
 
 
-db("svein","loolmac","ip4","ip6")
+db("neidu","loolmac","ip4","ip6")
 	
 
