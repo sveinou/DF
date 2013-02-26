@@ -1,7 +1,8 @@
 #/usr/bin/python
 
 import sys
-
+import MySQLdb
+import conf
 """
 This script takes an input, and are supposed to save it to somwhere, somthing
 like an database. if it gets more than 3 variables it will create a new entery
@@ -46,13 +47,49 @@ def get_input():
 
 	else:
 		raise ValueError(" this scripts needs atleast 2 args")
-		error = " lol "
 	
 		return
+
+
+def db(user,mac,ip4,ip6):
+
+	"""
 	
-test = get_input()
+	"""
 
 
-print([str(item) for item in test])
 
+	db = MySQLdb.connect(conf.db_server, conf.db_user, conf.db_pw, conf.db_name)
+	cur = db.cursor()
+	cur.execute("select * from clients WHERE User = %s", user)
+	row = cur.fetchone()
+	
+	if row[4] == True :
+		raise ValueError("User is actually Active") #perhaps some other errorThingy
+		return False
+
+	elif row[4] == False :
+		
+		sql = "UPDATE clients SET Mac='%s', IP4='%s', IP6='%s', Active=TRUE WHERE User='%s'" % (mac,ip4,ip6,user)
+		cur.execute(sql)
+		return True	
+
+	else:
+		sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', TRUE) " % (user,mac,ip4,ip6)
+		cur.execute(sql) 
+		db.commit
+		return True
+
+
+	cur.execute("select * from clients ")
+
+	for row in cur.fetchall():
+		print row[0]
+
+	
+	
+
+
+db("svein","loolmac","ip4","ip6")
+	
 
