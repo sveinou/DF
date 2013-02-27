@@ -74,21 +74,20 @@ class Firewall:
 		
 
 
-	def isRule(ip):
-	"""
-	Returns true if there is an rule with given ip-addres, 
-	if the rule do not exist, it wil return false
-	"""
+    def isRule(ip):
+        """
+        Returns true if there is an rule with given ip-addres, 
+        if the rule do not exist, it wil return false
+        """
+        ip6 = subprocess.check_output("/sbin/ip6tables -L -n", shell=True)
 
-        	ip6 = subprocess.check_output("/sbin/ip6tables -L -n", shell=True)
+        ip4 = subprocess.check_output("/sbin/iptables -L -n", shell=True)
+        ip4_nat = subprocess.check_output("/sbin/iptables -t nat -L -n ", shell=True)
 
-        	ip4 = subprocess.check_output("/sbin/iptables -L -n", shell=True)
-        	ip4_nat = subprocess.check_output("/sbin/iptables -t nat -L -n ", she$
-
-        	if ip in ip4 or ip in ip6 or ip in ip4_nat:
-                	return(True)
-        	else:
-                	return(False)	
+        if ip in ip4 or ip in ip6 or ip in ip4_nat:
+            return(True)
+        else:
+            return(False)	
 
 	
 
