@@ -61,7 +61,7 @@ def db(user,mac,ip4,ip6):
 
 
 
-	db = MySQLdb.connect(conf.db_server, conf.db_user, conf.db_pw, conf.db_name)
+	db = MySQLdb.connect(conf.db.server, conf.db.user, conf.db.pw, conf.db.name)
 	cur = db.cursor()
 	cur.execute("select * from clients WHERE User = %s", user)
 	row = cur.fetchone()
