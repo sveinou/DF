@@ -1,18 +1,17 @@
-import re	# regexp
+import re	    # regexp
+import conf     # most settings exists in conf.py
 
 class DHCP:
 	"""
 	Checks leases in dhcp
 	"""
 	
-	# We should probably make a configuration-file... 
-	
 	def __init__(self, leasefile):
 		if(leasefile == None or type(leasefile) != str):
 			raise ValueError("No leasefile given!")
 		self.leasefile = leasefile
-	ip_filter = r'([\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})'
-	mac_filter = r'([a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9])' 
+#	ip_filter = r'([\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})'
+#	mac_filter = r'([a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9])' 
 
 	def get_ips(self):
 		""" 
@@ -20,7 +19,7 @@ class DHCP:
 		"""
 		file = open(self.leasefile)
 		text = file.read()
-		regex_ip = re.compile(self.ip_filter)
+		regex_ip = re.compile(conf.filter.ipv4_in_leasefile)
 		return regex_ip.findall(text)
 
 	def get_macs(self):
@@ -30,7 +29,7 @@ class DHCP:
 
 		file = open(self.leasefile)
 		text = file.read()
-		regex_mac = re.compile(self.mac_filter)
+		regex_mac = re.compile(conf.filter.mac_in_leasefile)
 		return regex_mac.findall(text)
 
 	def ip_exists(self, ip_address):
@@ -45,6 +44,7 @@ class DHCP:
 		"""
 		return mac_address in self.get_macs()
 
+
 	def get_mac(self, ip_address):
 		"""
 		Searches for ip_address and returnes mac-address
@@ -58,3 +58,12 @@ class DHCP:
 		"""
 		return dict(zip(self.get_ips(),self.get_macs()))
 
+    def is_ipv4(self, address):
+        """
+        Checks address to IPv4-filter
+        """
+        test = re.compile(conf.filter.ipv4_exact)
+        if(test.match(address) != None):
+            return True
+
+        return False
