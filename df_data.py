@@ -34,8 +34,10 @@ def get_input():
 		#	raise ValueError("error on ip6 input")
 		return {'username':user, 'ip4_addr':ip4, 'mac_addr':mac, 'ip6_addr':ip6}
 
+def get_input2():
 
-	elif len(argv) == 3:
+	argv = sys.argv
+	if len(argv) == 3:
 		
 		findUser = argv[1]
 		data = argv[2]
@@ -50,7 +52,7 @@ def get_input():
 		return {'User':findUser, 'data':data, 'type':type}
 
 	else:
-		raise ValueError(" this scripts needs atleast 2 args")
+		raise ValueError(" this script needs atleast 2 args")
 	
 		return
 
@@ -95,10 +97,11 @@ def db(user,mac,ip4,ip6):
 
 def main():
     	indata = get_input()
-		
-	if indata['data']:		
-    		d = db(indata['User'],indata['data'],indata['type'],"NA")
-    	else:
+	indata2 = get_input2()
+	
+	if indata2['data']:		
+    		d = db(indata2['User'],indata2['data'],indata2['type'],"NA")
+    	elif indata['ip4_addr']:
 		d = db(indata['User'],indata['mac'],indata['ip4'],indata['ip6'])
 	print d
 
