@@ -15,8 +15,7 @@ class db:
 ## DHCP-server
 class files:
     leasefile = "/var/lib/dhcp/dhcpd.leases"
-	
-	ip_conntrack = "/proc/net/ip_conntrack"
+    ip_conntrack = "/proc/net/ip_conntrack"
 
 ## Filters used in the firewall.
 #  Don't mess with this, unless you REALLY KNOW what you are doing.
