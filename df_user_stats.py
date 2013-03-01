@@ -14,8 +14,8 @@ class Statistics:
 		"""
 		Returns list of ip_conntrack entries of self.ip
 		"""
-		ipct = open(conf.files.leasefile).read().split("\n")
-		return [line for line in iptc if line.find(self.ip) > 0] #add lines with self.ip to my-list.
+		ipct = open(conf.files.ip_conntrack).read().split("\n")
+		return [line for line in ipct if line.find(self.ip) > 0] #add lines with self.ip to my-list.
 		
 		
 	def get_bytes_io(self):
