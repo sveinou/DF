@@ -9,7 +9,7 @@ import os
 USAGE: 
 no args, it prints the database
 one arg, the user. it prints that users row
-two args, user data(ip4,mac,ip6) it wil update what you type in
+two args, user data(ip4,mac,ip6) it wil update what you typed in
 two args, user drop, it vil set the active flag as null
 4 args, it wil create a compleet new row with active status
 4 args, and user already exists. updates and activate that user.
@@ -18,6 +18,11 @@ two args, user drop, it vil set the active flag as null
 """
 
 def connDB():
+
+"""
+creates the connection to the database. using a simple file database
+creates the file  and the table if it do not exsists
+"""
 
 	if not os.path.isfile('df.db'):
 		sql = """ 
@@ -55,6 +60,9 @@ def executeDB(sql):
 
 def printDB():
 
+#somthing similar to a to-string method
+
+
 	conn = connDB()
 	cur = conn['cur']
 	db = conn['db']
@@ -67,6 +75,10 @@ def printDB():
 	closeDB(db,cur)
 
 def printRow(user):
+
+#returns the row of the user
+
+
 	conn = connDB()
         cur = conn['cur']
         db = conn['db']
@@ -82,6 +94,9 @@ def printRow(user):
 
 def DbAddRow(user,mac,ip4,ip6):
 
+#add a new user, or updating an exsiting one
+
+
 	if len(mac) != 17 and len(ip4) < 7 and len(ip4) > 17 and ip6 < 17:
 		raise ValueError("somthing od with ip4/mac/ip6")
 	elif printRow(user):
@@ -92,7 +107,10 @@ def DbAddRow(user,mac,ip4,ip6):
 	executeDB(sql)
 
 def DbActive(user,active):
-	
+
+#acitvates or deactivates an user
+
+
 
 	sql = "UPDATE clients SET Active=%s WHERE User='%s'" % (active,user)
 	
@@ -100,6 +118,8 @@ def DbActive(user,active):
 
 
 def DbUpdateRow(user,data):
+
+#updates one part in a user`s row
 
  		# maybeh make a better check for it...
 
