@@ -63,6 +63,8 @@ def db(user,mac,ip4,ip6):
 		
 	this method adds a new entery to an exsisting db, or updates a line
 
+	and sql injection should work just fine :)
+
 	"""
 
 
