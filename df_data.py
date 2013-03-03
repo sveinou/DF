@@ -1,111 +1,175 @@
 #/usr/bin/python
 
 import sys
-import MySQLdb
+import sqlite3
 import conf
+import os
 
 """
-This script takes an input, and are supposed to save it to somwhere, somthing
-like an database. if it gets more than 3 variables it will create a new entery
-if it gets two, it vil search up the user in the first arg, and save the 
-seccond var where it belongs.
+USAGE: 
+no args, it prints the database
+one arg, the user. it prints that users row
+two args, user data(ip4,mac,ip6) it wil update what you type in
+two args, user drop, it vil set the active flag as null
+4 args, it wil create a compleet new row with active status
+4 args, and user already exists. updates and activate that user.
+
 
 """
 
-def get_input():
-	argv = sys.argv
-	
-	if len(argv) > 3:
+def connDB():
 
-		user = argv[1]
-		ip4 = argv[2]
-		mac = argv[3]
-		if len(argv) == 5:
-			ip6 = argv[4]
-		else:
-			ip6 = "NA"
-
-		if  len(ip4) < 7:
-			raise ValueError("error on IP4 input")
-		elif  len(mac) != 17:
-			print len(mac)
- 			raise ValueError("error on mac input")
-		#elif type(ip6) != str or len(ip6) < 17:
-		#	raise ValueError("error on ip6 input")
-		return {'username':user, 'ip4_addr':ip4, 'mac_addr':mac, 'ip6_addr':ip6}
-
-def get_input2():
-
-	argv = sys.argv
-	if len(argv) == 3:
-		
-		findUser = argv[1]
-		data = argv[2]
-		if len(data) > 17:
-			type = "IP6"
-		elif len(data) == 17:
-			type = "Mac"
-		elif len(data) > 7:
-			type = "IP4" 
-		else:
-			raise ValueError("seccond var is nether an ip4, mac nor ip6")
-		return {'User':findUser, 'data':data, 'type':type}
-
-	else:
-		raise ValueError(" this script needs atleast 2 args")
-	
-		return
-
-
-def db(user,mac,ip4,ip6):
-
-	"""
-		
-	this method adds a new entery to an exsisting db, or updates a line
-
-	and sql injection should work just fine :)
-
-	"""
-
-
-
-	db = MySQLdb.connect(conf.db.server, conf.db.user, conf.db.pw, conf.db.name)
-	cur = db.cursor()
-	cur.execute("select * from clients WHERE User = %s", user)
-	row = cur.fetchone()
-	
-	if row and row[4] == True :
-		raise ValueError("User is actually Active") #perhaps some other errorThingy
-		return False
-
-	elif row and row[4] == False :
-		
-		if len(ip4) == 3:
-			type = ip4
-			data = mac
-			sql = "UPDATE clients SET %s='%s', Active=TRUE WHERE User='%s'" % (type,data,user)
-		
-		else:
-			sql = "UPDATE clients SET Mac='%s', IP4='%s', IP6='%s', Active=TRUE WHERE User='%s'" % (mac,ip4,ip6,user)
+	if not os.path.isfile('df.db'):
+		sql = """ 
+		CREATE TABLE clients
+		(
+		User text,
+		Mac text,
+		IP4 text,
+		IP6 text,
+		Active integer
+		 )
+		"""
+		db = sqlite3.connect('df.db')
+		cur = db.cursor()
 		cur.execute(sql)
-		cur.execute("select * from clients ")
-		return True	
+		db.commit()
+	else:
+		db = sqlite3.connect('df.db')
+		cur = db.cursor()
 
-	elif row and len(ip4) != 3:
-		sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', TRUE) " % (user,mac,ip4,ip6)
-		cur.execute(sql) 
-		db.commit
-		return True
+	return {'db':db,'cur':cur}
+
+def closeDB(db,cur):
+	cur.close()
+	db.close()
+
+def executeDB(sql):
+        conn = connDB()
+        db = conn['db']
+        cur = conn['cur']
+        cur.execute(sql)
+        db.commit()
+        closeDB(db,cur)
+	
+
+def printDB():
+
+	conn = connDB()
+	cur = conn['cur']
+	db = conn['db']
+
+	cur.execute("select * from clients")
+	rows = cur.fetchall()
+	for row in rows:
+		print ("%s %s %s %s %i") % (row[0],row[1],row[2],row[3],row[4])
+	
+	closeDB(db,cur)
+
+def printRow(user):
+	conn = connDB()
+        cur = conn['cur']
+        db = conn['db']
+	sql = "select * from clients where User='%s'" % user
+        cur.execute(sql)
+        row = cur.fetchone()
+
+        closeDB(db,cur)
+	return row
+
+	
+
+
+def DbAddRow(user,mac,ip4,ip6):
+
+	if len(mac) != 17 and len(ip4) < 7 and len(ip4) > 17 and ip6 < 17:
+		raise ValueError("somthing od with ip4/mac/ip6")
+	elif printRow(user):
+		sql = "UPDATE clients set Mac='%s', IP4='%s', IP6='%s', Active=1 WHERE User='%s'" % (mac,ip4,ip6,user) 
+	else:
+		sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', 1) " % (user,mac,ip4,ip6)
+
+	executeDB(sql)
+
+def DbActive(user,active):
+	
+
+	sql = "UPDATE clients SET Active=%s WHERE User='%s'" % (active,user)
+	
+	executeDB(sql)
+
+
+def DbUpdateRow(user,data):
+
+ 		# maybeh make a better check for it...
+
+
+	if len(data) > 17:
+       		type = "IP6"
+  	elif len(data) == 17:
+       		type = "Mac"
+        elif len(data) > 7:
+               	type = "IP4"
+	else:
+		raise ValueError("input error")
+
+	sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (type,data,user)
+
+
+
+	excuteDB(sql)
+	
+
+
+
+#			sql = "UPDATE clients SET Mac='%s', IP4='%s', IP6='%s', Active=TRUE WHERE User='%s'" % (mac,ip4,ip6,user)
+
+
+
+
+
 
 def main():
-    	indata = get_input()
-	indata2 = get_input2()
+	argv = sys.argv
+
+	if len(argv) == 3:
+		user = argv[1]
+		data = argv[2]
+		if data == "1" or data == "0":
+			DbActive(user,data)
+		else:
+			DbUpdateRow(user,data)
+
+
+	elif len(argv) == 4:
+                user = argv[1]
+                mac = argv[2]
+                ip4 = argv[3]
+		ip6 = "NA"
+		DbAddRow(user,mac,ip4,ip6)
+
+	elif len(argv) == 5:
+                user = argv[1]
+                mac = argv[2]
+                ip4 = argv[3]
+                ip6 = argv[4]
+                DbAddRow(user,mac,ip4,ip6)
+		
+	elif len(argv) == 2:
+		user = argv[1]
+		row =printRow(user)
+		print ("%s %s %s %s %i") % (row[0],row[1],row[2],row[3],row[4])
+
+
+	elif len(argv) == 1:
+		printDB()
+
+	else:
+		raise ValueError(" to manny args ")
+		
+
 	
-	if indata2['data']:		
-    		d = db(indata2['User'],indata2['data'],indata2['type'],"NA")
-    	elif indata['ip4_addr']:
-		d = db(indata['User'],indata['mac'],indata['ip4'],indata['ip6'])
-	print d
+
 
 
 if __name__ == '__main__':
