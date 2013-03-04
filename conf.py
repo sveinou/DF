@@ -28,4 +28,9 @@ class filter:
     ipv4_exact = r'(^[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}$)'
 
 
+class exit_status:
+    login_error = 1
+    ip_mac_mismatch_error = 2
+    input_error = 3
+    other_exception = 9
 
