@@ -19,14 +19,15 @@ if(isset($_POST['user'])){
     $password = $_POST['pass'];         
     $cmd = $exec." ".$username." ".$password." ".$ip_addr;
 
-    //we should probably check that input before sendingit with sudo... 
+    //we should probably check that input before sending it with sudo-rights... 
+    
 
     print($cmd);
     exec($cmd, $out, $code);
     
     switch($code){
         case 0:
-            $msg = "Welcome to the internet."
+            $msg = "Welcome to the internet.";
         case 1:
             $msg = "Login failed";
             break;
