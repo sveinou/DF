@@ -5,6 +5,7 @@ import subprocess
 from df_auth import Auth
 from df_firewall import Firewall
 from df_findip import DHCP
+from df_data import Data
 
 """	df_login.py username password ip_address
 	Tries to login username with password. If successful, it will unblock 
@@ -42,6 +43,7 @@ def main():
     firewall = Firewall()
     dhcp = DHCP(None)   ## Uses default leasefile given in conf.py
     lease = dhcp.get_ipv4_lease(indata['ip_addr']);
+    data = data()
 
     if lease == None:
         raise ValueError("IP/MAC mismatch")
@@ -51,6 +53,7 @@ def main():
         firewall.accept_ip4(indata['ip_addr'])
 
 	## DATABASE GOES HERE
+	#data.DbAddRow(indata['username'],"mac",indata['ip_addr'],"ipv6")
 
     return "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
 
