@@ -39,12 +39,12 @@ def get_input():
 def main():
     indata = get_input()
     auth = Auth(indata['username'],indata['password'])
-   	firewall = Firewall()
-	dhcp = DHCP()
-	lease = dhcp.get_ipv4_lease(indata['ip_addr']);
+    firewall = Firewall()
+    dhcp = DHCP(None)   ## Uses default leasefile given in conf.py
+    lease = dhcp.get_ipv4_lease(indata['ip_addr']);
 
-	if lease == None:
-		raise ValueError("IP/MAC mismatch")
+    if lease == None:
+        raise ValueError("IP/MAC mismatch")
     elif auth.login() != True:
         raise ValueError("Login failes")
     else:
@@ -52,7 +52,10 @@ def main():
 
 	## DATABASE GOES HERE
 
-	return "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr']
+    return "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
+
 
 if __name__ == '__main__':
-	main()
+    main()
+    
+
