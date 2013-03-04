@@ -7,8 +7,11 @@ import os
 
 
 class Data:
-	def connDB(self, sql):
 
+    def __init__(self):
+        pass
+
+	def connDB(self, sql):
 
 		if not os.path.isfile('df.db'):
 			tabl = """ 
@@ -45,7 +48,7 @@ class Data:
 
 	def getRow(self,user):
 
-		#returns the row of the user
+		#returns the row of the us
 		sql = "select * from clients where User='%s'" % user
 		return Data().connDB(sql)
 
@@ -68,7 +71,7 @@ class Data:
 	def DbActive(self,user,active):
 
 	#acitvates or deactivates an user
-
+ 
 
 		sql = "UPDATE clients SET Active=%s WHERE User='%s'" % (active,user)
 	

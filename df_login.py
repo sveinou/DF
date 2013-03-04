@@ -1,4 +1,4 @@
-
+#!/usr/bin/python
 
 import sys
 import subprocess
@@ -49,7 +49,7 @@ def main():
     firewall = Firewall()
     dhcp = DHCP(None)   ## Uses default leasefile given in conf.py
     lease = dhcp.get_ipv4_lease(indata['ip_addr']);
-    data = data()
+#    data = data()
 
     if lease == None:
     # ip/mac pair does not exist in leasefile
@@ -61,7 +61,7 @@ def main():
         firewall.accept_ip4(indata['ip_addr'])
 
 	## DATABASE GOES HERE
-	DbAddRow(indata['username'],lease[1],lease[0],"IPv6")
+#	DbAddRow(indata['username'],lease[1],lease[0],"IPv6")
 
 ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
     print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
