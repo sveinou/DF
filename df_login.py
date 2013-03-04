@@ -38,7 +38,13 @@ def get_input():
 
 
 def main():
-    indata = get_input()
+    indata = None;
+    try:
+        indata = get_input()
+    except ValueError:
+        print "ERROR_WITH_INDATA"
+        exit(3)
+        
     auth = Auth(indata['username'],indata['password'])
     firewall = Firewall()
     dhcp = DHCP(None)   ## Uses default leasefile given in conf.py
@@ -46,17 +52,21 @@ def main():
     data = data()
 
     if lease == None:
-        raise ValueError("IP/MAC mismatch")
+    # ip/mac pair does not exist in leasefile
+        exit(conf.exit_status.ip_mac_mismatch_error)
     elif auth.login() != True:
-        raise ValueError("Login failes")
+#        Login failed.
+        exit(conf.exit_status.login_error)
     else:
         firewall.accept_ip4(indata['ip_addr'])
 
 	## DATABASE GOES HERE
-	#data.DbAddRow(indata['username'],"mac",indata['ip_addr'],"ipv6")
 
     return "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
 
+### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
+    print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
+    
 
 if __name__ == '__main__':
     main()
