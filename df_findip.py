@@ -58,6 +58,18 @@ class DHCP:
 		"""
 		return dict(zip(self.get_ips(),self.get_macs()))
 
+	def get_ipv4_lease(ipv4_addr):
+		"""
+		Retrurns tuple with (ip,mac) or None if does not exist
+		"""
+		mac_addr = get_mac(ipv4_addr)
+		if(not ip_exists(ipv4_addr):
+			return None
+		elif(not mac_exists(mac_addr):
+			return None
+		
+		return (ipv4_addr, mac_addr)
+
     def is_ipv4(self, address):
         """
         Checks address to IPv4-filter
