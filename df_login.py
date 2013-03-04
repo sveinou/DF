@@ -61,6 +61,7 @@ def main():
         firewall.accept_ip4(indata['ip_addr'])
 
 	## DATABASE GOES HERE
+	DbAddRow(indata['username'],"mac",indata['ip_addr'],"ip6")
 
     return "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
 
