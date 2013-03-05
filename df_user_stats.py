@@ -1,44 +1,46 @@
 import conf
-
+import subprocess as sp
 
 class Statistics:
-	"""
-	Shows statistics based on ip_address
-	"""
-	
-	def __init__(self, ipv4_addr):
-		self.ip = ipv4_addr
+    """
+    Shows statistics based on ip_address
+    """
+    
+    def __init__(self):
+        pass
 
-	
-	def get_conntrack(self):
-		"""
-		Returns list of ip_conntrack entries of self.ip
-		"""
-		ipct = open(conf.files.ip_conntrack).read().split("\n")
-		return [line for line in ipct if line.find(self.ip) > 0] #add lines with self.ip to my-list.
-		
-		
-	def get_bytes_io(self):
-		"""
-		Counts bytes form ip_conntrack and returns tuple with (sendt,recived) bytes
-		"""
+    
+    def get_conntrack(self, ip):
+        """
+        Returns list of ip_conntrack entries of self.ip
+        """
+        ipct = open(conf.files.ip_conntrack).read().split("\n")
+        return [line for line in ipct if line.find(ip) > 0] #add lines with self.ip to my-list.
 
-		iptc = self.get_conntrack()		
-		tx = 0;
-		rx = 0;
-		tx_tcp = [line.split(" ")[14][6:] for line in iptc if line.split(" ")[0] == 'tcp']	##TCP
-		tx_udp = [line.split(" ")[13][6:] for line in iptc if line.split(" ")[0] == 'udp']	##UDP		
-		rx_tcp = [line.split(" ")[-5][6:] for line in iptc if line.split(" ")[0] == 'tcp']	##TCP
-		rx_udp = [line.split(" ")[-4][6:] for line in iptc if line.split(" ")[0] == 'udp']	##UDP		
+    def get_active_connections(self, ip):
+        """
+        Returns number of active connections to self.ip
+        """
+        return len(self.get_conntrack(ip))
+    
+    def get_iptables_io(self, ip):
+        """
+        Executes call to iptables and filters out info about ip
 
-		for t in tx_tcp:
-			tx += int(t)
-		for u in tx_udp:
-			tx += int(u)
-		for t in rx_tcp:
-			rx += int(t)
-		for u in rx_udp:
-			rx += int(u)
+        Returns dictionary with following info:
+            pkt_sent = Packages sent from self.ip (int)
+            pkt_received = Packages recieved to self.ip (int)
+            bytes_sent  = Bytes sent from self.ip (int)
+            bytes_received = Bytes received to self.ip (int)
+        """
+        ipcmd = ['iptables', '-nvxL']
+        ipres  = sp.Popen(ipcmd, stdout=sp.PIPE).communicate()[0].split("\n")
+        res = [line for line in ipres if line.find(ip) > 0]
+        
+        tx_pkts = int(res[0].split(*'')[0])
+        rx_pkts = int(res[1].split(*'')[0])
+        tx_bytes = int(res[0].split(*'')[1])
+        rx_bytes = int(res[1].split(*'')[1])
 
-		return (tx,rx)
+        return {'pkt_sent':tx_pkts, 'pkt_received':rx_pkts, 'bytes_sent':tx_bytes, 'bytes_received':rx_bytes}
 
