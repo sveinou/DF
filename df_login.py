@@ -2,10 +2,12 @@
 
 import sys
 import subprocess
+import conf
 from df_auth import Auth
 from df_firewall import Firewall
 from df_findip import DHCP
 from df_data import Data
+
 
 """	df_login.py username password ip_address
 	Tries to login username with password. If successful, it will unblock 
