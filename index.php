@@ -9,18 +9,21 @@
 
 //Get user ip-address
 $ip_addr = $_SERVER['REMOTE_ADDR'];
-$exec = "sudo python ./df_login.py ";
+
+//set up script and path
+$path = "/var/www/DF/";
+$exec = 'sudo '.$path.'df_login.py ';
 
 // 
 if(isset($_POST['user'])){
     // kjører login scriptet
-
-    $username = $_POST['user'];
-    $password = $_POST['pass'];         
-    $cmd = $exec." ".$username." ".$password." ".$ip_addr;
-
-    //we should probably check that input before sending it with sudo-rights... 
     
+    
+    
+    $username = escapeshellcmd($_POST['user']);     //this should remove any xss-stuff.
+    $password = escapeshellcmd($_POST['pass']);         
+    $cmd = $exec." ".$username." ".$password." ".$ip_addr;
+        
 
     print($cmd);
     exec($cmd, $out, $code);
