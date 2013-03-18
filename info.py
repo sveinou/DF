@@ -22,6 +22,10 @@ class Dhcp:
             if lease.ip == ip:
                 return lease.mac
         return False
+        
+    def get_lease(self, ip):
+        pass
+        
 
 class Lease:       
     ip = ''
@@ -32,7 +36,7 @@ class Lease:
         maccheck = re.compile(conf.filter.mac_in_leasefile)
         ip = ipcheck.findall(fromleasefile) 
         if ip:
-            self.ip = ip[0][1]
+            self.ip = ip[0][1:]
         mac = maccheck.findall(fromleasefile)
         if mac:
             self.mac = mac[0]

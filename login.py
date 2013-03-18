@@ -5,11 +5,14 @@ import subprocess
 import conf
 from df_auth import Auth
 from df_firewall import Firewall
-from df_findip import DHCP
+#from df_findip import DHCP
+from info import Dhcp, Lease
 from df_data import Data
 from logger import Log
 
 class Login():
+    
+
     def check_input(self,user,password,ip):
 
         if type(user) != str:	
@@ -26,14 +29,15 @@ class Login():
 		
         log = Log(conf.files.loginlog)
         indata = self.check_input(username, password, ip)
-            
+        dhcp = Dhcp()    
         auth = Auth(indata['username'],indata['password'])
         firewall = Firewall()
-        dhcp = DHCP(None)   ## Uses default leasefile given in conf.py
-        lease = 1 #dhcp.get_ipv4_lease(indata['ip_addr']);
+#        dhcp = DHCP(None)   ## Uses default leasefile given in conf.py       
+#        lease = 1 #dhcp.get_ipv4_lease(indata['ip_addr']);
+        mac = dhcp.find_mac(indata['ip_addr'])
         data = Data()
 
-        if lease == None:
+        if mac == False:
             # ip/mac pair does not exist in leasefile
     	    print "FEIL Mac/IP combo"
             exit(conf.exit_status.ip_mac_mismatch_error)
@@ -46,7 +50,7 @@ class Login():
 
 	    ## DATABASE GOES HERE
         log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
-        data.DbAddRow(indata['username'],"na",indata['ip_addr'],"IPv6")
+        data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
 #	    print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])
