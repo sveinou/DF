@@ -72,6 +72,7 @@ class IP():
         ip = self.check_input(ip)
         return Data().isActiveIp4(ip) and DHCP(None).ip_exists(ip)
 
+##      this should be named print_stats
     def getStats(self,ip):
         ip = self.check_input(ip);
         
