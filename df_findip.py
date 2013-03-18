@@ -6,14 +6,8 @@ class DHCP:
     Checks leases in dhcp
     """
     
-    def __init__(self, leasefile):
-        if leasefile == None:
-            leasefile = conf.files.leasefile
-        elif type(leasefile) != str:
-            raise ValueError("No leasefile given!")
+    def __init__(self, leasefile=conf.files.leasefile):
         self.leasefile = leasefile
-#    ip_filter = r'([\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})'
-#    mac_filter = r'([a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9]\:[a-f|0-9][a-f|0-9])' 
 
     def get_ips(self):
         """ 

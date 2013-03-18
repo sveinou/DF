@@ -1,13 +1,14 @@
 import conf
 import subprocess as sp
-
+from logger import Log
 class Statistics:
     """
     Shows statistics based on ip_address
     """
     
+
     def __init__(self):
-        pass
+        self.log = Log()
 
     
     def get_conntrack(self, ip):
@@ -36,11 +37,13 @@ class Statistics:
         ipcmd = ['iptables', '-nvxL']
         ipres  = sp.Popen(ipcmd, stdout=sp.PIPE).communicate()[0].split("\n")
         res = [line for line in ipres if line.find(ip) > 0]
-        
-        tx_pkts = int(res[0].split(*'')[0])
-        rx_pkts = int(res[1].split(*'')[0])
-        tx_bytes = int(res[0].split(*'')[1])
-        rx_bytes = int(res[1].split(*'')[1])
 
-        return {'pkt_sent':tx_pkts, 'pkt_received':rx_pkts, 'bytes_sent':tx_bytes, 'bytes_received':rx_bytes}
+        if res:
+            tx_pkts = int(res[0].split(*'')[0])
+            rx_pkts = int(res[1].split(*'')[0])
+            tx_bytes = int(res[0].split(*'')[1])
+            rx_bytes = int(res[1].split(*'')[1])
 
+            return {'pkt_sent':tx_pkts, 'pkt_received':rx_pkts, 'bytes_sent':tx_bytes, 'bytes_received':rx_bytes}
+        else:
+            self.log.error("df_user_stats.py: Something wrong with iptables-lookup...: "+ip)

@@ -1,109 +1,187 @@
-#/usr/bin/python
-
+#!/usr/bin/python
+from datetime import datetime
 import sys
-import sqlite3
+import time
+#import sqlite3
 import conf
 import os
-
+import MySQLdb
 
 class Data:
 
     def __init__(self):
         pass
 
-	def connDB(self, sql):
+    def connDB(self, sql):
 
-		if not os.path.isfile('df.db'):
-			tabl = """ 
-			CREATE TABLE clients
-			(
-			User text,
-			Mac text,
-			IP4 text,
-			IP6 text,
-			Active integer
-		 	)
-			"""
-			db = sqlite3.connect('df.db')
-			cur = db.cursor()
-			cur.execute(tabl)
-			db.commit()
-		else:
-			db = sqlite3.connect('df.db')
-			cur = db.cursor()
+        
+        db = MySQLdb.connect('localhost','df','df','df')
 
-		if sql.startswith("select"):
-			cur.execute(sql)
-			return cur.fetchone()
-		else:
-			cur.execute(sql)
-			db.commit()
-		
-		cur.close()
-		db.close()
+        cur = db.cursor()
 
-		return 
-	
+        if sql.startswith("select"):
+            cur.execute(sql)
+            rows = cur.fetchone()
+        
+            return rows
+        elif sql.startswith("SELECT"):
+            cur.execute(sql)
+            rows = cur.fetchall()
+            return rows
+
+        else:
+            cur.execute(sql)
+            db.commit()
+        
+        cur.close()
+        db.close()
+
+        return 
+    
 
 
-	def getRow(self,user):
+    def getRow(self,user):
 
-		#returns the row of the us
-		sql = "select * from clients where User='%s'" % user
-		return Data().connDB(sql)
+        #returns the row of the us
+        sql = "select * from clients where User='%s'" % user
+        return Data().connDB(sql)
 
-	
+    def getIp4(self, ip4):
+        sql = sql = "select * from clients where IP4='%s'" % ip4
+        return Data().connDB(sql)
+
+    def getUsers(self):
+    
+        sql = "select * from clients"
+        return Data().connDB(sql)
+
+    def isActiveUser(self, user):
+        
+        if Data().getRow(user) != None and Data().getRow(user)[4] == 1:
+            return True
+        else:
+            return False
+
+    def isActiveIp4(self, ip4):
+        if Data().getIp4(ip4) != None and Data().getIp4(ip4)[4] == 1:
+            return True
+        else: 
+            return False
+
+    def getIpUser(self):
+        sql="SELECT User,IP4 from clients"
+        return self.connDB(sql)
+
+    def getUser(self, ip):
+        sql = "SELECT IP4 FROM clients WHERE User = '%s' " % (ip)
+        return self.connDB(sql)
+
+    def DbAddRow(self,user,mac,ip4,ip6):
+
+        #add a new user, or updating an exsiting one
 
 
-	def DbAddRow(self,user,mac,ip4,ip6):
+        if len(mac) != 17 and len(ip4) < 7 and len(ip4) > 17:
+            raise ValueError("somthing od with ip4/mac")
+        elif Data().getRow(user):
+            sql = "UPDATE clients set Mac='%s', IP4='%s', IP6='%s', Active=1 WHERE User='%s'" % (mac,ip4,ip6,user) 
+        else:
+            sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', 1) " % (user,mac,ip4,ip6)
+        Data().connDB(sql)
+        print sql
+    def DbActiveUser(self,user,active):
 
-		#add a new user, or updating an exsiting one
-
-
-		if len(mac) != 17 and len(ip4) < 7 and len(ip4) > 17:
-			raise ValueError("somthing od with ip4/mac")
-		elif Data().getRow(user):
-			sql = "UPDATE clients set Mac='%s', IP4='%s', IP6='%s', Active=1 WHERE User='%s'" % (mac,ip4,ip6,user) 
-		else:
-			sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', 1) " % (user,mac,ip4,ip6)
-		Data().connDB(sql)
-
-	def DbActive(self,user,active):
-
-	#acitvates or deactivates an user
+    #acitvates or deactivates an user
  
 
-		sql = "UPDATE clients SET Active=%s WHERE User='%s'" % (active,user)
-	
-		Data().connDB(sql)
+        sql = "UPDATE clients SET Active=%s WHERE User='%s'" % (active,user)
+            
+        Data().connDB(sql)
+
+    def DbActiveIp4(self, ip4, active):
+        sql ="UPDATE clients SET Active=%i WHERE IP4='%s'" % (active,ip4)
+        Data().connDB(sql)
+
+    def DbUpdateRow(self,user,data):
+
+    #updates one part in a user`s row
+
+     # maybeh make a better check for it...
 
 
-	def DbUpdateRow(self,user,data):
+        if len(data) > 17:
+            type = "IP6"
+        elif len(data) == 17:
+            type = "Mac"
+        elif len(data) > 7:
+            type = "IP4"
+        else:
+            raise ValueError("input error")
 
-	#updates one part in a user`s row
+        sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (type,data,user)
 
- 	# maybeh make a better check for it...
+        Data().connDB(sql)
+    
 
+    def updateStats(self, user, connections, tx, rx):
+    
+        sql = "select tx_total, rx_total, UNIX_TIMESTAMP(Time) from stats where User='%s'" % (user)
+        row = self.connDB(sql)    
+        if row:
+            tx_total = tx + row[0]
+            rx_total = rx + row[1]
+            sec = int(time.time() - row[2])
+            if sec > 0:
+                txs = tx_total/sec
+                rxs = rx_total/sec
+            else:
+                txs = 0
+                rxs = 0
+            sql= "UPDATE stats SET Connections=%i, tx_total=%i, rx_total=%i, txs=%i, rxs=%i, Time=FROM_UNIXTIME(%s) WHERE User='%s'" % (connections,tx_total,rx_total,txs,rxs,time.time(),user) 
+            
+            
+        else:
+            Time = time.time()
+            sql = "INSERT INTO stats VALUES ('%s', %i, %i, %i, 0, 0,FROM_UNIXTIME(%s))" %(user,connections,tx,rx,Time)
 
-		if len(data) > 17:
-       			type = "IP6"
-  		elif len(data) == 17:
-       			type = "Mac"
-        	elif len(data) > 7:
-               		type = "IP4"
-		else:
-			raise ValueError("input error")
+        self.connDB(sql)
 
-		sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (type,data,user)
+    def aboveDownLimit(self, limit):
+        sql = "SELECT User FROM stats WHERE rxs > %i" %(limit)
+        return self.connDB(sql)
+        
+    def aboveUpLimit(self, limit):
+        sql = "SELECT User FROM stats WHERE txs > %i" %(limit)
+        return self.connDB(sql)
+        
+    def aboveConnectionLimit(self, limit):
+        sql = "SELECT User FROM stats WHERE Connections > %i" %(limit)
+        return self.connDB(sql)
+        
+    def topFiveDownload(self):
+        sql = "SELECT user, rxs FROM stats ORDER BY rxs DESC LIMIT 5"
+        return self.connDB(sql)
 
-		Data().connDB(sql)
-	
+    def topFiveConnections(self):
+        sql = "SELECT user, connections FROM stats ORDER BY connections DESC LIMIT 5"
+        return self.connDB(sql)
+    
+    def topFiveUpload(self):
+        sql = "SELECT user, txs FROM stats ORDER BY txs DESC LIMIT 5"
+        return self.connDB(sql)
+    
+    def highscore(self):
+        tx_total = "SELECT user, tx_total FROM stats ORDER BY tx_total DESC LIMIT 1"
+        rx_total = "SELECT user, rx_total FROM stats ORDER BY rx_total DESC LIMIT 1"
+        txs = "SELECT user, txs FROM stats ORDER BY txs DESC LIMIT 1"
+        rxs = "SELECT user, rxs FROM stats ORDER BY rxs DESC LIMIT 1"
+        con = "SELECT user, connections FROM stats ORDER BY connections DESC LIMIT 1"
+        
+        tx_total = self.connDB(tx_total)
+        rx_total = self.connDB(rx_total)
+        txs = self.connDB(txs)
+        rxs = self.connDB(rxs)
+        con = self.connDB(con)
 
-
-
-	
-	
-
-
-	
-
+        return (tx_total, rx_total, txs, rxs, con)
+        

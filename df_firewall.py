@@ -68,11 +68,33 @@ class Firewall:
 
         for rule in rules:
             subprocess.call(rule, shell=True)   
-	
-	
-	
-		
 
+	
+    def limit_connections(self, ip, limit):
+        """
+        Adds connectionlimit to user
+        """
+        rules = ["iptables -I FORWARD -d "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT",
+                 "iptables -I FORWARD -s "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT"]
+        
+        for rule in rules:
+            subprocess.call(rule, shell=True)   
+
+        
+        #update something in the database?
+        
+        return
+
+    def remove_limit(self, ip, limit):
+        rules = ["iptables -D FORWARD -d "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT",
+                 "iptables -D FORWARD -s "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT"]
+
+        for rule in rules:
+            subprocess.call(rule, shell=True)   
+
+        #update something in DB
+
+        return        
 
     def isRule(ip):
         """
@@ -85,9 +107,9 @@ class Firewall:
         ip4_nat = subprocess.check_output("/sbin/iptables -t nat -L -n ", shell=True)
 
         if ip in ip4 or ip in ip6 or ip in ip4_nat:
-            return(True)
+            return True
         else:
-            return(False)	
+            return False
 
 	
 

@@ -8,6 +8,7 @@ service isc-dhcp-server restart
 
 #tillater forwarding av ipv4
 echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv6/ip_forward
 
 #flusler old rules
 $ip -F
