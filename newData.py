@@ -87,13 +87,13 @@ class Data:
 
         sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (type,data,user)
 
-        Data().connDB(sql)
+        Database.alter(sql)
     
 
     def updateStats(self, user, connections, tx, rx):
     
         sql = "select tx_total, rx_total, UNIX_TIMESTAMP(Time) from stats where User='%s'" % (user)
-        row = self.connDB(sql)    
+        row = Database.get_row(sql)    
         if row:
             tx_total = tx + row[0]
             rx_total = rx + row[1]
@@ -111,31 +111,32 @@ class Data:
             Time = time.time()
             sql = "INSERT INTO stats VALUES ('%s', %i, %i, %i, 0, 0,FROM_UNIXTIME(%s))" %(user,connections,tx,rx,Time)
 
-        self.connDB(sql)
+        Database.alter(sql)
 
     def aboveDownLimit(self, limit):
         sql = "SELECT User FROM stats WHERE rxs > %i" %(limit)
-        return self.connDB(sql)
+        return Database.get_all_rows(sql)
         
     def aboveUpLimit(self, limit):
         sql = "SELECT User FROM stats WHERE txs > %i" %(limit)
-        return self.connDB(sql)
+        return Database.get_all_rows(sql)
         
     def aboveConnectionLimit(self, limit):
         sql = "SELECT User FROM stats WHERE Connections > %i" %(limit)
-        return self.connDB(sql)
+        return Database.get_all_rows(sql)
+
         
     def topFiveDownload(self):
         sql = "SELECT user, rxs FROM stats ORDER BY rxs DESC LIMIT 5"
-        return self.connDB(sql)
+        return Database.get_all_rows(sql)
 
     def topFiveConnections(self):
         sql = "SELECT user, connections FROM stats ORDER BY connections DESC LIMIT 5"
-        return self.connDB(sql)
+        return Database.get_all_rows(sql)
     
     def topFiveUpload(self):
         sql = "SELECT user, txs FROM stats ORDER BY txs DESC LIMIT 5"
-        return self.connDB(sql)
+        return Database.get_all_rows(sql)
     
     def highscore(self):
         tx_total = "SELECT user, tx_total FROM stats ORDER BY tx_total DESC LIMIT 1"
@@ -144,11 +145,12 @@ class Data:
         rxs = "SELECT user, rxs FROM stats ORDER BY rxs DESC LIMIT 1"
         con = "SELECT user, connections FROM stats ORDER BY connections DESC LIMIT 1"
         
-        tx_total = self.connDB(tx_total)
-        rx_total = self.connDB(rx_total)
-        txs = self.connDB(txs)
-        rxs = self.connDB(rxs)
-        con = self.connDB(con)
+        tx_total = Database.get_all_rows(tx_total)
+        rx_total = Database.get_all_rows(rx_total)
+        txs = Database.get_all_rows(txs)
+        rxs = Database.get_all_rows(rxs)
+        con = Database.get_all_rows(con)
+
 
         return (tx_total, rx_total, txs, rxs, con)
         
