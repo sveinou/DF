@@ -2,9 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from drop import Drop
-from login import Login
-from info import IP
+#from drop import Drop
+#from login import Login
+#from info import IP
+
+from auth.df_auth import Auth
+from auth.drop import Drop
+from auth.login import Login
 
 def main():
     """

@@ -1,5 +1,5 @@
 import time, subprocess, os     #python modules
-import conf, info               #df modules
+import conf, database.info               #df modules
 
 class Bandwidth():
 #	lncmd = 'lnstat -s0 -i1 -c-1 -k rt_cache:in_hit,rt_cache:out_hit >> bwfile'

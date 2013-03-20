@@ -23,7 +23,7 @@ class Data:
         if type(search) == str:
 		sql = "select Active from clients where %s='%s'" % (type,user)
 	else:
-		# obs. må vite type i database
+		# obs. maa vite type i database
 		sql = "select Active from clients where %s={1}" % (type,search) 
 		
 	active = Database.get_row(sql)[0]
@@ -36,12 +36,12 @@ class Data:
     def get_info_client(self,get_type,search_type,search):
 
 	if type(search) == str:
-	sql = "select %s from clients where %s='%s'" % (get_type,search_type,search)
+	    sql = "select %s from clients where %s='%s'" % (get_type,search_type,search)
         else:
-                # obs. må vite type i database
+                # obs. maa vite type i database
                 sql = "select %s from clients where %s={1}" % (get_type,search_type,search)
 
-                return = Database.get_row(sql)[0]
+                return Database.get_row(sql)[0]
 
     def DbAddRow(self,user,mac,ip4,ip6):
 
