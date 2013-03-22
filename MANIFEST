@@ -1,3 +1,5 @@
+CHANGES.txt
+LICENSE.txt
 README.txt
 setup.py
 DNF/__init__.py
@@ -18,3 +20,4 @@ DNF/stats/df_findip.py
 DNF/stats/df_user_stats.py
 DNF/stats/logger.py
 bin/dynfw
+docs/HOWTO-dhcpd.txt
