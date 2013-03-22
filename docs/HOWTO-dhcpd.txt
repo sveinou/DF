@@ -1,0 +1,28 @@
+=======================
+ISC DHCP SERVER
+=======================
+
+Private domain config
+=======================
+The following is a configuration-example for the dhcpd.conf file in /etc/dhcp/dhcpd.conf
+
+ddns-update-style none;
+
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+default-lease-time 30;      #TESTPARAM
+max-lease-time 45;          #TESTPARAM
+
+authoritative;
+
+log-facility local7;
+
+subnet 10.20.30.0 netmask 255.255.255.0{
+	range 10.20.30.41 10.20.30.49;
+	option routers 10.20.30.40;
+
+    on expiry {
+        set ipaddr = binary-to-ascii(10,8, ".",leased-address);
+		execute("dynfw","drop",ipaddr);
+    }
+}
+
