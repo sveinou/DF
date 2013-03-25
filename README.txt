@@ -21,7 +21,7 @@ The following python (PyPi)-packages are needed:
 
 2. Installation
 =====================
-$ [sudo] apt-get install python python-pip mysql-server iptables isc-dhcp-server 
+$ [sudo] apt-get install python python-pip mysql-server iptables isc-dhcp-server   
 $ [sudo] pip install DynamicNetworkFirewall-v0.3.dev1.tar.gz
 
 3. Usage
