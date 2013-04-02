@@ -34,7 +34,12 @@ class bandwidth:
     max_connections_user = 1000 
     rx_max_user = 20*1024*1024 # in bytes
     tx_max_user = 20*1024*1024 # in bytes
-    
+
+    latency_test_addr = "vg.no" 
+    latency_hig = 15 # in ms, if latency > latency_hig return " latency is hig"
+
+    download_file_addr = "ftp://ftp.uninett.no/debian/ls-lR.gz" # file to test download speed, preff arround 10 mb
+    download_time_hig =  1.0 # in seconds, if download_time > download_time_hig return " download time higer than normal"
     
     
 ## Filters used in the firewall.
