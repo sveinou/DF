@@ -16,10 +16,10 @@ class Firewall:
         ipv4_addr -- IPv4-address to let trough firewall
         """
          
-        rules = ["/sbin/iptables -I FORWARD -d"+ipv4_addr+" -j ACCEPT",
-            "/sbin/iptables -I FORWARD -s"+ipv4_addr+" -j ACCEPT",
-            "/sbin/iptables -t nat -I PREROUTING -d"+ipv4_addr+" -j ACCEPT",
-            "/sbin/iptables -t nat -I PREROUTING -s"+ipv4_addr+" -j ACCEPT",]
+        rules = ["/sbin/iptables -I ALLOWED -d"+ipv4_addr+" -j ACCEPT",
+            "/sbin/iptables -I ALLOWED -s"+ipv4_addr+" -j ACCEPT",
+            "/sbin/iptables -t nat -I ALLOWED -d"+ipv4_addr+" -j ACCEPT",
+            "/sbin/iptables -t nat -I ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
  
         for rule in rules:
             subprocess.call(rule, shell=True)
@@ -33,8 +33,8 @@ class Firewall:
         ipv6_addr -- IPv6-address that's welcome trough our firewall
         """
         
-        rules = ["/sbin/iptables -I FORWARD -d"+ipv6_addr+" -j ACCEPT",
-  		"/sbin/iptables -I FORWARD -s"+ip6_addr+" -j ACCEPT",]
+        rules = ["/sbin/iptables -I ALLOWED -d"+ipv6_addr+" -j ACCEPT",
+  		"/sbin/iptables -I ALLOWED -s"+ip6_addr+" -j ACCEPT",]
         for rule in rules:
             subprocess.call(rule, shell=True)
 
@@ -47,10 +47,10 @@ class Firewall:
         ipv4_addr = IPv4-address to remove
         """
         
-        rules = ["/sbin/iptables -D FORWARD -d"+ipv4_addr+" -j ACCEPT",
-            "/sbin/iptables -D FORWARD -s"+ipv4_addr+" -j ACCEPT",
-            "/sbin/iptables -t nat -D PREROUTING -d"+ipv4_addr+" -j ACCEPT",
-            "/sbin/iptables -t nat -D PREROUTING -s"+ipv4_addr+" -j ACCEPT",]
+        rules = ["/sbin/iptables -D ALLOWED -d"+ipv4_addr+" -j ACCEPT",
+            "/sbin/iptables -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",
+            "/sbin/iptables -t nat -D ALLOWED -d"+ipv4_addr+" -j ACCEPT",
+            "/sbin/iptables -t nat -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
 
         for rule in rules:
             subprocess.call(rule, shell=True)
@@ -63,19 +63,19 @@ class Firewall:
         ipv6_addr = IPv6 address to remove
         """
         
-        rules = ["/sbin/ip6tables -D FORWARD -d"+ipv6_addr+" -j ACCEPT",
-            "/sbin/ip6tables -D FORWARD -s"+ipv6_addr+" -j ACCEPT",]
+        rules = ["/sbin/ip6tables -D ALLOWED -d"+ipv6_addr+" -j ACCEPT",
+            "/sbin/ip6tables -D ALLOWED -s"+ipv6_addr+" -j ACCEPT",]
 
         for rule in rules:
             subprocess.call(rule, shell=True)   
 
 	
-    def limit_connections(self, ip, limit):
+    def limit_connections(self, ip):
         """
         Adds connectionlimit to user
         """
-        rules = ["iptables -I FORWARD -d "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT",
-                 "iptables -I FORWARD -s "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT"]
+        rules = ["iptables -I LIMITED -d "+ip+" -j LIMIT",
+                 "iptables -I LIMITED -s "+ip+" -j LIMIT"]
         
         for rule in rules:
             subprocess.call(rule, shell=True)   
@@ -85,9 +85,9 @@ class Firewall:
         
         return
 
-    def remove_limit(self, ip, limit):
-        rules = ["iptables -D FORWARD -d "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT",
-                 "iptables -D FORWARD -s "+ip+" -m connlimit --connlimit-above "+limit+" -j REJECT"]
+    def remove_limit(self, ip):
+        rules = ["iptables -D LIMITED -d "+ip+" -j LIMIT",
+                 "iptables -D LIMITED -s "+ip+" -j LIMIT"]
 
         for rule in rules:
             subprocess.call(rule, shell=True)   
