@@ -14,8 +14,10 @@ DNF/database/info.py
 DNF/database/storage.py
 DNF/firewall/__init__.py
 DNF/firewall/df_firewall.py
+DNF/firewall/firewall.py
 DNF/stats/__init__.py
 DNF/stats/bandwidth.py
+DNF/stats/con_status.py
 DNF/stats/df_findip.py
 DNF/stats/df_user_stats.py
 DNF/stats/logger.py
