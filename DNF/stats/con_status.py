@@ -30,15 +30,15 @@ class Con:
 
 	
 	def is_slow(self):
-		time = self.download_time(self,bw.download_file_addr)
-		if time > bw.download_time_hig:
+		time = self.download_time(self, self.bw.download_file_addr)
+		if time > self.bw.download_time_hig:
 			return True
 		else:
 			return False
 
 	def is_hig_latency(self):
-		ms = self.download_time(self,bw.latency_test_addr)
-		if ms > bw.latency_hig:
+		ms = self.download_time(self, self.bw.latency_test_addr)
+		if ms > self.bw.latency_hig:
 			return True
 		else:
 			return False
