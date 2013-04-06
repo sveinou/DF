@@ -5,7 +5,7 @@ from time import time
 from DNF import conf
 
 class Con:
-	bw=conf.bandwidth
+	bw = conf.bandwidth
 	
 	#returns latency in ms
 	def get_ping(self,address):
@@ -32,13 +32,13 @@ class Con:
 	def is_slow(self):
 		time = self.download_time(self,bw.download_file_addr)
 		if time > bw.download_time_hig:
-			return true
-		else
-			return false
+			return True
+		else:
+			return False
 
 	def is_hig_latency(self):
 		ms = self.download_time(self,bw.latency_test_addr)
 		if ms > bw.latency_hig:
-			return true
-		else
-			return false
+			return True
+		else:
+			return False
