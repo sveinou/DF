@@ -1,0 +1,41 @@
+
+
+[global]
+server = localhost
+
+[database]
+server = localhost #name of your mysql Server
+user = df #name of database user
+name = df #name of database name
+password = df   #database password (mabeh an hased value 4 later??)
+
+
+
+[files]
+dhcp_leasefile = /var/lib/dhcp/dhcpd.leases
+ip_conntrack = /proc/net/ip_conntrack
+    
+[logs]
+default = /var/log/dfw/collect.log
+limit = /var/log/dfw/limited.log
+drop = /var/log/dfw/drop.log
+login = /var/log/dfw/login.log
+error = /var/log/dfw/error.log
+
+[bandwidth]
+rx_limit_soft = 50
+rx_limit_hard = 100*1024
+tx_limit_soft = 50 #50*1024 # in k bytes
+tx_limit_hard = 100*1024 # in k bytes    
+max_connections_soft = 500*100
+max_connections_hard = 1000*100
+max_connections_user = 1000 
+    
+rx_max_user = 20*1024*1024 # in bytes
+tx_max_user = 20*1024*1024 # in bytes
+
+latency_test_addr = vg.no 
+latency_hig = 15 # in ms, if latency > latency_hig return " latency is hig"
+
+download_file_addr = ftp://ftp.uninett.no/debian/ls-lR.gz # file to test download speed, preff arround 10 mb
+download_time_hig =  1.0 # in seconds, if download_time > download_time_hig return " download time higer than normal"  
