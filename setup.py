@@ -12,6 +12,7 @@ setup(
 	license='LICENSE.txt',
 	description='Combined firewall and captive portal, with dynamic bandwidth allocation',
 	long_description=open('README.txt').read(),
+	data_files=[('/etc/dnf/',['cfg/dnf.conf'])],
 	install_requires=[
 		"pam >= 0.1.3",
 		"MySQL-python >= 1.2.2",
