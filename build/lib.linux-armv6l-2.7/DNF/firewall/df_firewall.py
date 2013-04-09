@@ -1,5 +1,5 @@
 import subprocess
-
+from DNF.database.df_data import Data
 class Firewall:
     """
     Sends commands to iptables to alter chains
@@ -72,7 +72,7 @@ class Firewall:
             subprocess.call(rule, shell=True)   
 
 	
-    def limit_connections(self, ip):
+    def limit_connections(self, ipv4_addr):
         """
         Adds connectionlimit to user
         """
@@ -81,9 +81,9 @@ class Firewall:
         
         for rule in rules:
             subprocess.call(rule, shell=True)   
-
+	Data().add_limit(ipv4_addr,"CONNLIMIT")
         
-        #update something in the database?
+        
         
         return
 
@@ -103,17 +103,17 @@ class Firewall:
 			subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
 			subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True) 
 
-	#add db thingy!
+	Data().rm_limit(ip)
         return
 
     def limit_rx(self, ip):
 	subprocess.call("iptables -I LIMITED -d "+ip+" -j TXLIMIT", shell=True) # limit the trafic transfered to the ip, the ip are the destination (download)
-	#add db thingy!
+	Data().add_limit(ip,"TXLIMIT")
 	return
 
     def limit_tx(self, ip):
 	subprocess.call("iptables -I LIMITED -s "+ip+" -j RXLIMIT", shell=True) # limit the trafic transfered from the ip, the ip are the source. (upload)
-	#add db thingy!
+	Data().add_limit(ip,"RXLIMIT")
 	return
 
 

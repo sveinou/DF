@@ -133,7 +133,7 @@ class Data:
     def topFiveUpload(self):
         sql = "SELECT user, txs FROM stats ORDER BY txs DESC LIMIT 5"
         return Database().get_all_rows(sql)
-    
+        
     def highscore(self):
         tx_total = "SELECT user, tx_total FROM stats ORDER BY tx_total DESC LIMIT 1"
         rx_total = "SELECT user, rx_total FROM stats ORDER BY rx_total DESC LIMIT 1"
@@ -150,4 +150,31 @@ class Data:
 
 
         return (tx_total, rx_total, txs, rxs, con)
+
+    def get_limit(self, User):
+	sql = "select * from limited WHERE User='%s'" % User
+	return Database().get_row(sql)[0]
+        
+
+    def add_limit(self, ip, limit):
+                
+	User = self.get_info_client(self,"User","IP4",ip) # gets the user
+
+	if self.get_limit(User):
+	    sql = "UPDATE limited SET %s=1 WHERE User='%s'" %(limit,User)
+	else:
+            sql = "INSERT INTO limited (User, limit) values ('%s',  1)" % User
+
+        Database().alter(sql)
+	return
+
+    def rm_limit(self, ip):
+
+	User = self.get_info_client(self,"User","IP4",ip) 
+	
+	sql = "UPDATE limited SET CONNLIMIT=0 RXLIMIT=0 TXLIMIT=0"
+	Database().alter(sql)
+	return
+
+
         
