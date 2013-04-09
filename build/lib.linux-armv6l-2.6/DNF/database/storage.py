@@ -14,7 +14,7 @@ class Database:
                 password = db.pw
 		name = db.name
 		
-                self.con = MySQLdb.connect(server,user,password,name)
+                self.con = MySQLdb.connect(server,user,name,password)
                 self.cur = self.con.cursor()
 	
 	def get_row(self,sql):
