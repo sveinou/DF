@@ -1,23 +1,24 @@
 #!/usr/bin/python
 
-#from DNF.database.storage import Database
+from DNF.database.storage import Database
 
 import subprocess as sp
+
 
 print "Welcome to DF Firewall 0.0001 Alpha"
 
 print "Enter internal interface"
-internal_if = raw_input()
-
+#internal_if = raw_input()
+internal_if ="eth1"
 print "Enter internal IP"
-my_ip = raw_input()
-
+#my_ip = raw_input()
+my_ip = "10.0.0.1"
 print "Enter external interface"
-external_if = raw_input()
-
+#external_if = raw_input()
+external_if = "eth0"
 print "Use nat? (YES/NO)"
-nat = raw_input()
-
+#nat = raw_input()
+nat = "YES"
 
 
 
@@ -42,6 +43,8 @@ fw_rules = ["iptables -F",
         "iptables -t nat -F",
         "iptables -N ALLOWED",
         "iptables -N CONNLIMIT",
+	"iptables -N TXLIMIT",
+	"iptables -N RXLIMIT",
         "iptables -N TXLIMIT",
         "iptables -N RXLIMIT",
         "iptables -N LIMITED",
@@ -54,6 +57,9 @@ fw_rules = ["iptables -F",
         "iptables -t nat -A PREROUTING -p tcp -m multiport --ports 80,443 -j DNAT --to-destination "+my_ip+":80",
         "iptables -A FORWARD -d "+my_ip+" -p tcp -m multiport --ports 80,443 -j ACCEPT",
         "iptables -A FORWARD -j DROP",
+	"iptables -A CONNLIMIT -m connlimit --connlimit-above 50 -j REJECT",
+	"iptables -A TXLIMIT -j MARK --set-mark 200",
+	"iptables -A RXLIMIT -j MARK --set-mark 100",
         "iptables -A CONNLIMIT -m connlimit --connlimit-above 50 -j REJECT",
         "iptables -A TXLIMIT -j MARK --set-mark 200",
         "iptables -A RXLIMIT -j MARK --set-mark 100",
@@ -64,14 +70,14 @@ dhcp = "service isc-dhcp-server restart"
 
 ## Database drop / create tables
 
-#sql = "DROP table clients"
-#Database().alter(sql)
-#sql = "DROP table stats"
-#Database().alter(sql)
-#sql = "CREATE table clients (User varchar(80), Mac varchar(80), IP4 carchar(80), IP6 varchar(80), active int)"
-#Database().alter(sql)
-#sql = "CREATE table stats (User varchar(80), Connections bigint(255), tx_total bigint(255), rx_total bigint(255), txs bigint(255), rxs bigint(255), Time timestamp)"
-#Database().alter(sql)
+sql = "DROP table clients"
+Database().alter(sql)
+sql = "DROP table stats"
+Database().alter(sql)
+sql = "CREATE table clients (User varchar(80), Mac varchar(80), IP4 varchar(80), IP6 varchar(80), active int)"
+Database().alter(sql)
+sql = "CREATE table stats (User varchar(80), Connections bigint(255), tx_total bigint(255), rx_total bigint(255), txs bigint(255), rxs bigint(255), Time timestamp)"
+Database().alter(sql)
 
 
 print "Enabling IPv4 Routing...."
