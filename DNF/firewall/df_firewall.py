@@ -46,11 +46,13 @@ class Firewall:
         Keyword arguments:
         ipv4_addr = IPv4-address to remove
         """
+
         
         rules = ["/sbin/iptables -D ALLOWED -d"+ipv4_addr+" -j ACCEPT",
             "/sbin/iptables -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",
             "/sbin/iptables -t nat -D ALLOWED -d"+ipv4_addr+" -j ACCEPT",
             "/sbin/iptables -t nat -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
+
 
         for rule in rules:
             subprocess.call(rule, shell=True)
@@ -74,8 +76,8 @@ class Firewall:
         """
         Adds connectionlimit to user
         """
-        rules = ["iptables -I LIMITED -d "+ip+" -j LIMIT",
-                 "iptables -I LIMITED -s "+ip+" -j LIMIT"]
+        rules = ["iptables -I LIMITED -d "+ip+" -j CONNLIMIT",
+                 "iptables -I LIMITED -s "+ip+" -j CONNLIMIT"]
         
         for rule in rules:
             subprocess.call(rule, shell=True)   
@@ -85,16 +87,35 @@ class Firewall:
         
         return
 
-    def remove_limit(self, ip):
-        rules = ["iptables -D LIMITED -d "+ip+" -j LIMIT",
-                 "iptables -D LIMITED -s "+ip+" -j LIMIT"]
+    def rm_limit(self, ip):
 
-        for rule in rules:
-            subprocess.call(rule, shell=True)   
+	ipt = subprocess.Popen(["iptables","-L", "LIMITED"], stdout = subprocess.PIPE)
+	grep = subprocess.Popen(["grep", ip], stdin=ipt.stdout, stdout = subprocess.PIPE)
+	out = grep.communicate()[0]
+	for rule in out.split("\n"):
+		rule = rule.split("all")[0]
+		print rule
+		if rule == "RXLIMIT":
+			subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True)
+		elif rule == "TXLIMIT":
+			subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
+		else: # will try to remove tvice as manny rules as there are,
+			subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
+			subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True) 
 
-        #update something in DB
+	#add db thingy!
+        return
 
-        return        
+    def limit_rx(self, ip):
+	subprocess.call("iptables -I LIMITED -d "+ip+" -j TXLIMIT", shell=True) # limit the trafic transfered to the ip, the ip are the destination (download)
+	#add db thingy!
+	return
+
+    def limit_tx(self, ip):
+	subprocess.call("iptables -I LIMITED -s "+ip+" -j RXLIMIT", shell=True) # limit the trafic transfered from the ip, the ip are the source. (upload)
+	#add db thingy!
+	return
+
 
     def isRule(ip):
         """
