@@ -45,6 +45,8 @@ fw_rules = ["iptables -F",
         "iptables -N CONNLIMIT",
 	"iptables -N TXLIMIT",
 	"iptables -N RXLIMIT",
+        "iptables -N TXLIMIT",
+        "iptables -N RXLIMIT",
         "iptables -N LIMITED",
         "iptables -t nat -N ALLOWED",
         "iptables -A FORWARD -p udp -m multiport --ports 53 -j ACCEPT",
@@ -58,7 +60,11 @@ fw_rules = ["iptables -F",
 	"iptables -A CONNLIMIT -m connlimit --connlimit-above 50 -j REJECT",
 	"iptables -A TXLIMIT -j MARK --set-mark 200",
 	"iptables -A RXLIMIT -j MARK --set-mark 100",
+        "iptables -A CONNLIMIT -m connlimit --connlimit-above 50 -j REJECT",
+        "iptables -A TXLIMIT -j MARK --set-mark 200",
+        "iptables -A RXLIMIT -j MARK --set-mark 100",
         "iptables -I INPUT -p tcp --dport 22 -j ACCEPT"]
+
 
 dhcp = "service isc-dhcp-server restart"
 

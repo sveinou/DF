@@ -1,45 +1,59 @@
+## This file defines constants used in DNF. 
+# Most constants are defined from /etc/dnf/dnf.conf
 
+from ConfigParser import SafeConfigParser
 
+parser = SafeConfigParser()
+try:
+    parser.read("/etc/dnf/dnf.conf")
+except IOError:
+    print("CONFIG NOT FOUND IN /etc/dnf/dnf.conf")
+    exit(9)
+
+if not parser.read("/etc/dnf/dnf.conf"):
+    print("CONFIG NOT FOUND IN /etc/dnf/dnf.conf")
+    exit(9)
+    
 # globale
 
-server = "localhost"
+server = parser.get("global", "server")
 
 # database
 class db:
-    server = "localhost" #name of your mysql Server
-    user = "root" #name of database user
-    name = "df" #name of database name
-    pw = "df"	#database password (mabeh an hased value 4 later??)
+    server = parser.get("database", "server") 
+    user = parser.get("database", "user")#name of database user
+    name = parser.get("database", "name") #name of database name
+    pw = parser.get("database", "password")	#database password (mabeh an hased value 4 later??)
 
 
 ## DHCP-server
 class files:
-    leasefile = "/var/lib/dhcp/dhcpd.leases"
-    ip_conntrack = "/proc/net/ip_conntrack"
+    leasefile = parser.get("files", "dhcp_leasefile")
+    ip_conntrack = parser.get("files", "ip_conntrack")
 
-    defaultlog = "/var/log/dfw/collect.log"
-    limitlog = "/var/log/dfw/limited.log"
-    droplog = "/var/log/dfw/drop.log"
-    loginlog = "/var/log/dfw/login.log"
-    errorlog = "/var/log/dfw/error.log"
+    defaultlog = parser.get("logs", "default")
+    limitlog = parser.get("logs", "limit")
+    droplog = parser.get("logs", "drop")
+    loginlog = parser.get("logs", "login")
+    errorlog = parser.get("logs", "error")
 
 class bandwidth:
-    rx_limit_soft = 50 #50*1024 # in k bytes
-    rx_limit_hard = 100*1024 # in k bytes
-    tx_limit_soft = 50 #50*1024 # in k bytes
-    tx_limit_hard = 100*1024 # in k bytes    
-    max_connections_soft = 500*100
-    max_connections_hard = 1000*100
+    rx_limit_soft = parser.getint("bandwidth", "rx_limit_soft")
+    rx_limit_hard = parser.getint("bandwidth", "rx_limit_hard")
+    tx_limit_soft = parser.getint("bandwidth", "tx_limit_soft")
+    tx_limit_hard = parser.getint("bandwidth", "tx_limit_hard")
+    max_connections_soft = parser.getint("bandwidth", "max_connections_soft")
+    max_connections_hard = parser.getint("bandwidth", "max_connections_soft")
 
-    max_connections_user = 1000 
-    rx_max_user = 20*1024*1024 # in bytes
-    tx_max_user = 20*1024*1024 # in bytes
+    max_connections_user = parser.getint("bandwidth", "max_connections_user") 
+    rx_max_user = parser.getint("bandwidth", "rx_max_user")
+    tx_max_user = parser.getint("bandwidth", "tx_max_user")
 
-    latency_test_addr = "vg.no" 
-    latency_hig = 15 # in ms, if latency > latency_hig return " latency is hig"
+    latency_test_addr = parser.get("bandwidth","latency_test_addr")
+    latency_hig = parser.getint("bandwidth", "latency_high")  # in ms, if latency > latency_hig return " latency is hig"
 
-    download_file_addr = "ftp://ftp.uninett.no/debian/ls-lR.gz" # file to test download speed, preff arround 10 mb
-    download_time_hig =  1.0 # in seconds, if download_time > download_time_hig return " download time higer than normal"
+    download_file_addr = parser.get("bandwidth", "download_file_addr") # file to test download speed, preff arround 10 mb
+    download_time_hig =  parser.getint("bandwidth", "download_time_high") # in seconds, if download_time > download_time_hig return " download time higer than normal"
     
     
 ## Filters used in the firewall.
@@ -60,4 +74,5 @@ class exit_status:
     other_exception = 9
 
     user_already_logged_in = 10 
+
 

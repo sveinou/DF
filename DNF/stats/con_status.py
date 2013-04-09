@@ -5,11 +5,11 @@ from time import time
 from DNF import conf
 
 class Con:
-	bw=conf.bandwidth
-	
+	bw = conf.bandwidth
+
 	#returns latency in ms
 	def get_ping(self,address):
-		
+
 		ms = 0.0
 		p = subprocess.Popen(["ping","-c", "4", address], stdout = subprocess.PIPE)
 		for word in p.communicate()[0].split(' '):
@@ -28,17 +28,17 @@ class Con:
 		subprocess.call("rm NUL " + filename,shell=True)
 		return after - first	
 
-	
+
 	def is_slow(self):
-		time = self.download_time(self,bw.download_file_addr)
-		if time > bw.download_time_hig:
+		time = self.download_time(self, self.bw.download_file_addr)
+		if time > self.bw.download_time_hig:
 			return True
 		else:
 			return False
 
 	def is_hig_latency(self):
-		ms = self.download_time(self,bw.latency_test_addr)
-		if ms > bw.latency_hig:
+		ms = self.download_time(self, self.bw.latency_test_addr)
+		if ms > self.bw.latency_hig:
 			return True
 		else:
 			return False
