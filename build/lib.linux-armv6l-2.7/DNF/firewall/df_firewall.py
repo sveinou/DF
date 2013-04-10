@@ -72,7 +72,7 @@ class Firewall:
             subprocess.call(rule, shell=True)   
 
 	
-    def limit_connections(self, ipv4_addr):
+    def limit_connections(self, ip):
         """
         Adds connectionlimit to user
         """
@@ -81,7 +81,7 @@ class Firewall:
         
         for rule in rules:
             subprocess.call(rule, shell=True)   
-	Data().add_limit(ipv4_addr,"CONNLIMIT")
+	Data().add_limit(ip,"CONNLIMIT")
         
         
         
@@ -107,13 +107,13 @@ class Firewall:
         return
 
     def limit_rx(self, ip):
-	subprocess.call("iptables -I LIMITED -d "+ip+" -j TXLIMIT", shell=True) # limit the trafic transfered to the ip, the ip are the destination (download)
-	Data().add_limit(ip,"TXLIMIT")
+	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+	Data().add_limit(ip,"RXLIMIT")
 	return
 
     def limit_tx(self, ip):
-	subprocess.call("iptables -I LIMITED -s "+ip+" -j RXLIMIT", shell=True) # limit the trafic transfered from the ip, the ip are the source. (upload)
-	Data().add_limit(ip,"RXLIMIT")
+	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+	Data().add_limit(ip,"TXLIMIT")
 	return
 
 
