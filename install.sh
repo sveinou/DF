@@ -11,7 +11,7 @@ pip uninstall DynamicNetworkFirewall
 pip install dist/DynamicNetworkFirewall-0.3.dev1.tar.gz
 
 # database config, create the needed tables
-
+echo -e "setting up mySQL.."
 mysql -u root -p -h localhost df < database.sql
 
 # network options. interfaces, network mask, internal ip, package forwarding
