@@ -11,7 +11,7 @@ class Data:
 
     def getIp4(self, ip4):
         sql = sql = "select * from clients where IP4='%s'" % ip4
-        return Database().get_row(self,sql)
+        return Database().get_row(sql)
 
 
     def active(self, type, search):
@@ -153,26 +153,26 @@ class Data:
 
     def get_limit(self, User):
 	sql = "select * from limited WHERE User='%s'" % User
-	return Database().get_row(sql)[0]
+	return Database().get_row(sql)
         
 
     def add_limit(self, ip, limit):
                 
-	User = self.get_info_client(self,"User","IP4",ip) # gets the user
+	User = self.getIp4(ip)[0] # gets the user
 
 	if self.get_limit(User):
 	    sql = "UPDATE limited SET %s=1 WHERE User='%s'" %(limit,User)
 	else:
-            sql = "INSERT INTO limited (User, limit) values ('%s',  1)" % User
+            sql = "INSERT INTO limited (User, %s) values ('%s',  1)" % (limit,User)
 
         Database().alter(sql)
 	return
 
     def rm_limit(self, ip):
 
-	User = self.get_info_client(self,"User","IP4",ip) 
+	User = self.getIp4(ip)[0] 
 	
-	sql = "UPDATE limited SET CONNLIMIT=0 RXLIMIT=0 TXLIMIT=0"
+	sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
 	Database().alter(sql)
 	return
 

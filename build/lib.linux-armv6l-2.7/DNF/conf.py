@@ -17,13 +17,15 @@ if not parser.read("/etc/dnf/dnf.conf"):
 # globale
 
 server = parser.get("global", "server")
+internal_interface = parser.get("global", "internal_interface")
+external_interface = parser.get("global", "internal_interface")
 
 # database
 class db:
     server = parser.get("database", "server") 
     user = parser.get("database", "user")#name of database user
     name = parser.get("database", "name") #name of database name
-    pw = parser.get("database", "password")	#database password (mabeh an hased value 4 later??)
+    pw = parser.get("database", "password")
 
 
 ## DHCP-server
