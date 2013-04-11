@@ -175,3 +175,8 @@ class Data:
         sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
         self.db.alter(sql)
         return
+    def rm_limit(self, ip4):
+        User = self.getIp4(ip4)[0]
+        sql = "update limited set CONNLIMIT=0, RXLIMIT=0, RXLIMIT=0 where User='%s'" % User
+        return
+    
