@@ -34,7 +34,7 @@ class Statistics:
             bytes_sent  = Bytes sent from self.ip (int)
             bytes_received = Bytes received to self.ip (int)
         """
-        ipcmd = ['iptables', '-nvxL']
+        ipcmd = ['iptables', '-nvxL', 'ALLOWED']
         ipres  = sp.Popen(ipcmd, stdout=sp.PIPE).communicate()[0].split("\n")
         res = [line for line in ipres if line.find(ip) > 0]
 
