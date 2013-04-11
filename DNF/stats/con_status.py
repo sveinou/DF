@@ -44,11 +44,7 @@ class Con:
 		else:
 			return False
 
-	def check(self):
-		#if is_hig_latency || is_hig_ping
-		#find top users (connections and download)
-		#limit
-		return
+
 
 		
 
