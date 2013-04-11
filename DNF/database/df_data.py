@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #from datetime import datetime
 #import sys, os, time
 #from DNF import conf
@@ -13,18 +12,12 @@ class Data:
 
 
     def getIp4(self, ip4):
-<<<<<<< HEAD
         sql = "select * from clients where IP4='%s'" % ip4
         return self.db.get_row(sql)
-=======
-        sql = sql = "select * from clients where IP4='%s'" % ip4
-        return Database().get_row(sql)
-        
+
     def get_all_clients(self):
     	sql = "select * from clients"
-    	return Database().get_all_rows(sql)
->>>>>>> 42d73accc813a95171d8c4a8f75fd398bb67387b
-
+    	return self.db.get_all_rows(sql)
 
     def active(self, data_type, search):
         print str(type(search))
@@ -183,6 +176,3 @@ class Data:
         sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
         self.db.alter(sql)
         return
-
-
-        
