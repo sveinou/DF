@@ -12,6 +12,10 @@ class Data:
     def getIp4(self, ip4):
         sql = sql = "select * from clients where IP4='%s'" % ip4
         return Database().get_row(sql)
+        
+    def get_all_clients(self):
+    	sql = "select * from clients"
+    	return Database().get_all_rows(sql)
 
 
     def active(self, type, search):

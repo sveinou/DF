@@ -3,6 +3,7 @@
 import subprocess
 from time import time
 from DNF import conf
+from DNF.stats.df_user_stats import Statistics as stats
 
 class Con:
 	bw = conf.bandwidth
@@ -42,3 +43,7 @@ class Con:
 			return True
 		else:
 			return False
+
+
+		
+

@@ -3,38 +3,49 @@
 import sys, time
 import subprocess
 from DNF.daemon import Daemon
-from DNF.stats.con_status import Con
-from DNF.stats.df_user_stats import Statistics as stats
+from DNF.stats.conn_status import Con
 from DNF.database.df_data import Data
- 
+from DNF.stats.df_user_stats import Statistic as stats 
+from DNF.stats.con_status import Con
+
 class dynfd(Daemon):
         def run(self):
                 while True:
-                        self.rm_limit()
-                        self.update_stats()
-                        time.sleep(5)
-                        self.update_stats()
-                        self.limit()
+			self.remove_limit()
+			self.update_stats()
+                        time.sleep(30)
+			self.update_stats()
+			self.limit()
+
 
 	def update_stats(self):
-
-		subprocess.call("echo yay | wall", shell=True)
-		file = open("//opt//DF//init.d//test.txt","w")
-		
-
-		file.write("yayaaa")
-		file.close()
+	clients = Data().get_all_clients
+	if len(clients) > 0:
+		for client in clients:
+			User = client[0]
+			ip4 = client[2]
+			connections = stats().get_active_connections(ip4)
+			io = stats().get_iptables_io(ip4)
+			tx = io['bytes_sent']
+			rx = io['bytes_received']
+		Data().updateStats(user,connections,tx,rx)
 		return
 
 	def limit(self):
+		if not Con().is_slow() || not Con().is_hig_latency():
+			return
+		
+		rxers = Data().aboveDownLimit(limit)
+			for rexer in rexers:
+				
+		txers = Data().aboveUpLimit(limit)
+		coners = Data().aboveConnectionLimit(limit)
 
- 		return
-
-	def rm_limit(self):
-	
 		return
 
-
+	def rm_limit(self):
+		
+ 
 if __name__ == "__main__":
         daemon = dynfd('/tmp/daemon-example.pid')
         if len(sys.argv) == 2:
