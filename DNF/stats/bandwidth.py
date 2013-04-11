@@ -1,5 +1,5 @@
 import time, subprocess, os					#python modules
-import DNF.database.info			#df modules
+from DNF.stats import info
 from DNF import conf
 
 class Bandwidth():
@@ -12,13 +12,13 @@ class Bandwidth():
 
         ln_out_cmd = 'lnstat -s0 -i1 -c-1 -k rt_cache:out_hit >> bwout'
         ln_in_cmd = 'lnstat -s0 -i1 -c-1 -k rt_cache:in_hit >> bwin'
-	
+
         subprocess.Popen(ln_out_cmd, shell=True)
         subprocess.Popen(ln_in_cmd, shell=True)
         time.sleep(seconds)
         
         subprocess.Popen("killall lnstat", shell=True)
-	
+
         bwin = open('bwin').read().split('\n')
         bwout = open('bwout').read().split('\n')
         
@@ -52,7 +52,7 @@ class Bandwidth():
         for point in bwout:
             avgout += point
         avgout = avgout / len(bwout)
-	    
+
         return {'in':avgin,'out':avgout}
 
     def is_violating(self, hard=False, rx_limit=0, tx_limit=0, connections=0):
@@ -72,12 +72,10 @@ class Bandwidth():
         
         return ((avg['in'] > rx_limit), (avg['out'] > tx_limit), (connections < con))
         
-    def find_violators(hard = False):
+    def find_violators(self, hard = False):
         rx_limit = conf.bandwidth.rx_limit_hard if hard else conf.bandwidth.rx_limit_soft
-        tx_limit = cond.bandwidth.tx_limit_hard if hard else conf.bandwidth.tx_limit_soft
+        tx_limit = conf.bandwidth.tx_limit_hard if hard else conf.bandwidth.tx_limit_soft
         connections = conf.bandwidth.max_connections_hard if hard else conf.bandwidth.max_connections_soft
-        
-        
         
         return "Something from database"
         

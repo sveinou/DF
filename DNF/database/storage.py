@@ -10,15 +10,13 @@ class Database:
 
 	def __init__(self):
 		server = db.server
-                user = db.user
-                password = db.pw
+		user = db.user
+		password = db.pw
 		name = db.name
-		
-                self.con = MySQLdb.connect(server,user,password,name)
-                self.cur = self.con.cursor()
+		self.con = MySQLdb.connect(server,user,password,name)	
+		self.cur = self.con.cursor()
 	
 	def get_row(self,sql):
-	
 		self.cur.execute(sql)
 		return self.cur.fetchone()
 
