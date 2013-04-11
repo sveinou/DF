@@ -34,7 +34,7 @@ class Statistics:
             bytes_sent  = Bytes sent from self.ip (int)
             bytes_received = Bytes received to self.ip (int)
         """
-        ipcmd = ['iptables', '-nvxL']
+        ipcmd = ['iptables', '-nvxL', 'ALLOWED']
         ipres  = sp.Popen(ipcmd, stdout=sp.PIPE).communicate()[0].split("\n")
         res = [line for line in ipres if line.find(ip) > 0]
 
@@ -47,3 +47,4 @@ class Statistics:
             return {'pkt_sent':tx_pkts, 'pkt_received':rx_pkts, 'bytes_sent':tx_bytes, 'bytes_received':rx_bytes}
         else:
             self.log.error("df_user_stats.py: Something wrong with iptables-lookup...: "+ip)
+            return {'pkt_sent':0, 'pkt_received':0, 'bytes_sent':0, 'bytes_received':0}

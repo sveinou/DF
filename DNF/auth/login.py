@@ -3,7 +3,7 @@
 from DNF import conf
 from DNF.auth.df_auth import Auth
 from DNF.firewall.df_firewall import Firewall
-from DNF.database.info import Dhcp
+from DNF.stats.info import Dhcp
 from DNF.database.df_data import Data
 from DNF.stats.logger import Log
 
