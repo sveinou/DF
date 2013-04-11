@@ -1,15 +1,14 @@
 from DNF import conf
 import subprocess as sp
+from DNF.firewall.firewall import Firewall
 from DNF.stats.logger import Log
 class Statistics:
     """
     Shows statistics based on ip_address
     """
     
-
     def __init__(self):
         self.log = Log()
-
     
     def get_conntrack(self, ip):
         """
@@ -24,6 +23,18 @@ class Statistics:
         """
         return len(self.get_conntrack(ip))
     
+    def is_limited(self, ip):
+        """
+        Returns True if IP is in iptables limted-chain
+        """
+        return ip in [rule[7] for rule in Firewall().get_limited()]
+    
+    def is_allowed(self, ip):
+        """
+        Returns True if IP is in iptables allowed-chain
+        """
+        return ip in [rule[7] for rule in Firewall().get_allowed()]
+
     def get_iptables_io(self, ip):
         """
         Executes call to iptables and filters out info about ip

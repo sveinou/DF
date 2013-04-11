@@ -34,7 +34,7 @@ class Firewall:
         """
         
         rules = ["/sbin/iptables -I ALLOWED -d"+ipv6_addr+" -j ACCEPT",
-  		"/sbin/iptables -I ALLOWED -s"+ip6_addr+" -j ACCEPT",]
+  		"/sbin/iptables -I ALLOWED -s"+ipv6_addr+" -j ACCEPT",]
         for rule in rules:
             subprocess.call(rule, shell=True)
 
@@ -69,7 +69,7 @@ class Firewall:
         for rule in rules:
             subprocess.call(rule, shell=True)   
 
-	
+
     def limit_connections(self, ip):
         """
         Adds connectionlimit to user
@@ -96,7 +96,7 @@ class Firewall:
 
         return        
 
-    def isRule(ip):
+    def isRule(self, ip):
         """
         Returns true if there is an rule with given ip-addres, 
         if the rule do not exist, it wil return false
@@ -111,5 +111,21 @@ class Firewall:
         else:
             return False
 
-	
+
+    def get_limited(self):
+        """
+        returns all rules in limited-chain.        
+        """
+        ipcmd = ['iptables', '-nvxL', 'LIMITED']
+        ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        return [line.split() for line in ipres[2:-1]]
+    
+    def get_allowed(self):
+        """
+        Returns all rules in allowed-chain
+        """
+        ipcmd = ['iptables', '-nvxL', 'ALLOWED']
+        ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        return [line.split() for line in ipres[2:-1]]
+
 
