@@ -1,47 +1,48 @@
-#!/usr/bin/python
-from datetime import datetime
-import sys, os, time
-from DNF import conf
+#from datetime import datetime
+#import sys, os, time
+#from DNF import conf
+import time
 from DNF.database.storage import Database
 
 class Data:
+    db = Database()
+    
     def __init__(self):
         pass
 
 
     def getIp4(self, ip4):
-        sql = sql = "select * from clients where IP4='%s'" % ip4
-        return Database().get_row(sql)
-        
-    def get_all_clients(self):
-    	sql = "select * from clients"
-    	return Database().get_all_rows(sql)
+        sql = "select * from clients where IP4='%s'" % ip4
+        return self.db.get_row(sql)
 
+    def get_all_active_clients(self):
+    	sql = "select * from clients where Active=1"
+    	return self.db.get_all_rows(sql)
 
-    def active(self, type, search):
-	
+    def active(self, data_type, search):
+        print str(type(search))
         if type(search) == str:
-		sql = "select Active from clients where %s='%s'" % (type,user)
-	else:
-		# obs. maa vite type i database
-		sql = "select Active from clients where %s={1}" % (type,search) 
-		
-	active = Database().get_row(sql)[0]
+            sql = "select Active from clients where %s='%s'" % (data_type,search)
+        else:
+            # obs. maa vite type i database
+            sql = "select Active from clients where %s={1}" % (data_type,search) 
 
-        if active and active == 1:
-            return True
+        sql = self.db.get_row(sql)
+        if sql:
+            if sql[0] == 1:
+                return True
         else:
             return False
 
     def get_info_client(self,get_type,search_type,search):
 
-	if type(search) == str:
-	    sql = "select %s from clients where %s='%s'" % (get_type,search_type,search)
+        if type(search) == str:
+            sql = "select %s from clients where %s='%s'" % (get_type,search_type,search)
         else:
-                # obs. maa vite type i database
-                sql = "select %s from clients where %s={1}" % (get_type,search_type,search)
+            # obs. maa vite type i database
+            sql = "select %s from clients where %s={1}" % (get_type,search_type,search)
 
-                return Database().get_row(sql)[0]
+        return self.db.get_row(sql)
 
     def DbAddRow(self,user,mac,ip4,ip6):
 
@@ -54,7 +55,7 @@ class Data:
             sql = "UPDATE clients set Mac='%s', IP4='%s', IP6='%s', Active=1 WHERE User='%s'" % (mac,ip4,ip6,user) 
         else:
             sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', 1) " % (user,mac,ip4,ip6)
-        Database().alter(sql)
+        self.db.alter(sql)
 
     def DbActiveUser(self,user,active):
 
@@ -63,11 +64,11 @@ class Data:
 
         sql = "UPDATE clients SET Active=%s WHERE User='%s'" % (active,user)
             
-        Database().alter(sql)
+        self.db.alter(sql)
 
     def DbActiveIp4(self, ip4, active):
         sql ="UPDATE clients SET Active=%i WHERE IP4='%s'" % (active,ip4)
-        Database().alter(sql)
+        self.db.alter(sql)
 
     def DbUpdateRow(self,user,data):
 
@@ -87,7 +88,7 @@ class Data:
 
         sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (type,data,user)
 
-        Database().alter(sql)
+        self.db.alter(sql)
     
 
     def updateStats(self, user, connections, tx, rx):
@@ -111,31 +112,31 @@ class Data:
             Time = time.time()
             sql = "INSERT INTO stats VALUES ('%s', %i, %i, %i, 0, 0,FROM_UNIXTIME(%s))" %(user,connections,tx,rx,Time)
 
-        Database().alter(sql)
+        self.db.alter(sql)
 
     def aboveDownLimit(self, limit):
-        sql = "SELECT User FROM stats WHERE rxs > %i" %(limit)
+        sql = "SELECT User, IP4 FROM stats WHERE rxs > %i" %(limit)
         return Database().get_all_rows(sql)
         
     def aboveUpLimit(self, limit):
-        sql = "SELECT User FROM stats WHERE txs > %i" %(limit)
+        sql = "SELECT User, IP4 FROM stats WHERE txs > %i" %(limit)
         return Database().get_all_rows(sql)
         
     def aboveConnectionLimit(self, limit):
-        sql = "SELECT User FROM stats WHERE Connections > %i" %(limit)
+        sql = "SELECT User, IP4 FROM stats WHERE Connections > %i" %(limit)
         return Database().get_all_rows(sql)
 
         
     def topFiveDownload(self):
-        sql = "SELECT user, rxs FROM stats ORDER BY rxs DESC LIMIT 5"
+        sql = "SELECT user, IP4 rxs FROM stats ORDER BY rxs DESC LIMIT 5"
         return Database().get_all_rows(sql)
 
     def topFiveConnections(self):
-        sql = "SELECT user, connections FROM stats ORDER BY connections DESC LIMIT 5"
+        sql = "SELECT user, IP4 connections FROM stats ORDER BY connections DESC LIMIT 5"
         return Database().get_all_rows(sql)
     
     def topFiveUpload(self):
-        sql = "SELECT user, txs FROM stats ORDER BY txs DESC LIMIT 5"
+        sql = "SELECT user, IP4 txs FROM stats ORDER BY txs DESC LIMIT 5"
         return Database().get_all_rows(sql)
         
     def highscore(self):
@@ -156,29 +157,26 @@ class Data:
         return (tx_total, rx_total, txs, rxs, con)
 
     def get_limit(self, User):
-	sql = "select * from limited WHERE User='%s'" % User
-	return Database().get_row(sql)
+        sql = "select * from limited WHERE User='%s'" % User
+        return self.db.get_row(sql)
         
 
-    def add_limit(self, ip, limit):
-                
-	User = self.getIp4(ip)[0] # gets the user
-
-	if self.get_limit(User):
-	    sql = "UPDATE limited SET %s=1 WHERE User='%s'" %(limit,User)
-	else:
+    def add_limit(self, ip, limit):        
+        User = self.getIp4(ip)[0] # gets the user
+        if self.get_limit(User):
+            sql = "UPDATE limited SET %s=1 WHERE User='%s'" %(limit,User)
+        else:
             sql = "INSERT INTO limited (User, %s) values ('%s',  1)" % (limit,User)
 
-        Database().alter(sql)
-	return
+        self.db.alter(sql)
+        return
 
-    def rm_limit(self, ip):
-
-	User = self.getIp4(ip)[0] 
-	
-	sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
-	Database().alter(sql)
-	return
-
-
-        
+    def rm_all_limit(self): 
+        sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
+        self.db.alter(sql)
+        return
+    def rm_limit(self, ip4):
+        User = self.getIp4(ip4)[0]
+        sql = "update limited set CONNLIMIT=0, RXLIMIT=0, RXLIMIT=0 where User='%s'" % User
+        return
+    

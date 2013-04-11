@@ -77,6 +77,7 @@ class IP():
         s = Statistics()
         connections = s.get_active_connections(ip)
         io = s.get_iptables_io(ip)
+        
         active = "NOT ACTIVE"
         if self.isLoggedIn(ip):
             active = "ACTIVE"
@@ -85,7 +86,7 @@ Active Connections: {1}
 Sent {2} bytes using {3} packets
 Received {4} bytes using {5} packets
 
-User is currently {6}""".format(ip,connections,io['bytes_sent'],io['pkt_sent'],io['bytes_received'],io['pkt_received'], active)
+User is currently {6}""".format(ip, connections, io['bytes_sent'], io['pkt_sent'], io['bytes_received'], io['pkt_received'], active)
 
 class Leasefile:
     """

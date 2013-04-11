@@ -1,0 +1,73 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import sys
+from DNF.auth.df_auth import Auth
+from DNF.auth.drop import Drop
+from DNF.auth.login import Login
+from DNF import conf
+
+def main():
+    """
+    Gets input an checks it
+    """
+    
+    
+    if len(sys.argv) < 2:
+        show_help()
+        exit(0)
+
+    program = sys.argv[1].upper()
+
+    try:
+        if(program == "DROP" and len(sys.argv) == 3):
+            drop = Drop()
+            drop.ip4(sys.argv[2])
+        elif(program == "LOGIN" and len(sys.argv) >= 5):
+            login = Login()
+            pwd = sys.argv[4]
+            plist = sys.argv[5:]
+            for l in plist:
+                pwd = pwd + " " + l
+            login.ip4(sys.argv[3],pwd,sys.argv[2])
+        elif(program == "INFO" and len(sys.argv) == 4):     #username entered
+            user_info(sys.argv[3], sys.argv[2])
+        elif(program == "INFO" and len(sys.argv) == 5 and sys.argv[3].upper() == "IP"):     #IP keyword
+            ip_info(sys.argv[2], sys.argv[4])
+        else:
+            show_help()
+    except ValueError:
+        print "Plunder og heft."
+        show_help()
+
+
+def ip_info(request, ipaddr):
+    ip = IP()
+    request = request.upper()
+    if request == "STATUS":
+        if ip.isLoggedIn(ipaddr):
+            print "ACTIVE"
+            return
+        print "INACTIVE"
+    elif request == "STATS":
+        print ip.getStats(ipaddr)
+    else:
+        show_help()
+    return
+
+def user_info(request, username):
+    pass;
+
+def show_help():
+    print """Dynamic Firewall v0.1
+by Svein Ove Undal and Espen Gjærde
+source available at http://github.com/sveinou/DF/
+    
+Syntax:
+    DROP <ipv4-addr>
+    LOGIN <ipaddress> <user> <password>
+    INFO STATUS|STATS <IP [ipaddress]|user> (user not impl.)
+    """
+
+if __name__ == '__main__':
+    main()
