@@ -115,28 +115,28 @@ class Data:
         self.db.alter(sql)
 
     def aboveDownLimit(self, limit):
-        sql = "SELECT User FROM stats WHERE rxs > %i" %(limit)
+        sql = "SELECT User, IP4 FROM stats WHERE rxs > %i" %(limit)
         return Database().get_all_rows(sql)
         
     def aboveUpLimit(self, limit):
-        sql = "SELECT User FROM stats WHERE txs > %i" %(limit)
+        sql = "SELECT User, IP4 FROM stats WHERE txs > %i" %(limit)
         return Database().get_all_rows(sql)
         
     def aboveConnectionLimit(self, limit):
-        sql = "SELECT User FROM stats WHERE Connections > %i" %(limit)
+        sql = "SELECT User, IP4 FROM stats WHERE Connections > %i" %(limit)
         return Database().get_all_rows(sql)
 
         
     def topFiveDownload(self):
-        sql = "SELECT user, rxs FROM stats ORDER BY rxs DESC LIMIT 5"
+        sql = "SELECT user, IP4 rxs FROM stats ORDER BY rxs DESC LIMIT 5"
         return Database().get_all_rows(sql)
 
     def topFiveConnections(self):
-        sql = "SELECT user, connections FROM stats ORDER BY connections DESC LIMIT 5"
+        sql = "SELECT user, IP4 connections FROM stats ORDER BY connections DESC LIMIT 5"
         return Database().get_all_rows(sql)
     
     def topFiveUpload(self):
-        sql = "SELECT user, txs FROM stats ORDER BY txs DESC LIMIT 5"
+        sql = "SELECT user, IP4 txs FROM stats ORDER BY txs DESC LIMIT 5"
         return Database().get_all_rows(sql)
         
     def highscore(self):
