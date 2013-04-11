@@ -171,8 +171,7 @@ class Data:
         self.db.alter(sql)
         return
 
-    def rm_limit(self, ip):
-        User = self.getIp4(ip)[0] 
+    def rm_all_limit(self): 
         sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
         self.db.alter(sql)
         return
