@@ -105,6 +105,11 @@ class Firewall:
 
 	Data().rm_limit(ip)
         return
+    def rm_all_limit(self):
+    	subprocess.call("iptables -F LIMITED", shell=True)
+    	Data().rm_all_limit()
+    	
+        
 
     def limit_rx(self, ip):
 	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
