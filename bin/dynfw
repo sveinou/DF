@@ -1,11 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys
+import sys, time, subprocess
 from DNF.auth.df_auth import Auth
 from DNF.auth.drop import Drop
 from DNF.auth.login import Login
 from DNF import conf
+from DNF.stats.con_status import Con
+from DNF.stats.df_user_stats import Statistics as stats
+from DNF.database.df_data import Data
+from DNF.firewall.df_firewall import Firewall
+
 
 def main():
     """
@@ -34,6 +39,12 @@ def main():
             user_info(sys.argv[3], sys.argv[2])
         elif(program == "INFO" and len(sys.argv) == 5 and sys.argv[3].upper() == "IP"):     #IP keyword
             ip_info(sys.argv[2], sys.argv[4])
+	elif program == "UPDATE" and len(sys.argv) == 2:
+		update_stats()
+	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[3].upper() == "LIMITED":
+		rm_all_limit()
+	elif program == "LIMIT" and len(sys.argv) == 2:
+		limit()
         else:
             show_help()
     except ValueError:
@@ -55,6 +66,48 @@ def ip_info(request, ipaddr):
         show_help()
     return
 
+def update_stats():
+    clients = Data().get_all_active_clients()
+    for client in clients:
+        user = client[0]
+        ip4 = client[2]
+        connections = stats().get_active_connections(ip4)
+        io = stats().get_iptables_io(ip4)
+        tx = io['bytes_sent']
+        rx = io['bytes_received']
+        Data().updateStats(user,connections,tx,rx)
+    return
+
+def rm_all_limit():
+    Firewall().rm_all_limit()
+    return
+
+def limit():
+    if not Con().is_hig_latency():
+        return
+    else:
+        down_clients = Data().aboveDownLimit(conf.bandwidth().rx_max_user)
+	for client in down_clients:
+            user = client[0]
+	    ip4 = client[1]
+	    Firewall().limit_rx(ip)
+	
+	upl_clients = Data().aboveUpLimit(conf.bandwidth().tx_max_user)
+	for client in upl_clients:
+            user = client[0]
+            ip4 = client[1]
+            Firewall().limit_tx(ip)
+
+	conn_clients = Data().aboveConnectionLimit(conf.bandwidth().max_connections_user)
+	for client in conn_clients:
+            user = client[0]
+            ip4 = client[1]
+            Firewall().limit_connections(ip)
+
+
+    return
+
+
 def user_info(request, username):
     pass;
 
@@ -67,6 +120,9 @@ Syntax:
     DROP <ipv4-addr>
     LOGIN <ipaddress> <user> <password>
     INFO STATUS|STATS <IP [ipaddress]|user> (user not impl.)
+    UPDATE (updates stats to database)
+    FLUSH LIMITED|ALLOWED (flush iptables rules)
+    LIMIT (limits users if it is needed)
     """
 
 if __name__ == '__main__':

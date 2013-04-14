@@ -29,56 +29,15 @@ class App():
             #logger.warn("Warning message")
             #logger.error("Error message")
 
-    	    logger.debug("trying to remove all limit rules")
-	    self.rm_limit()
-	    logger.debug("trying to runn update_stats")
-	    self.update_stats()
+	    subprocess.call("/usr/local/bin/dynfw UPDATE", shell=True)
+	    time.sleep(20)
+	    subprocess.call("/usr/local/bin/dynfw FLUSH LIMITED", shell=True)
+	    time.sleep(20)
+	    subprocess.call("/usr/local/bin/dynfw UPDATE", shell=True)
+	    time.sleep(20)
+	    subprocess.call("/usr/local/bin/dynfw LIMIT", shell=True)
 	    time.sleep(30)
-	    logger.debug("trying to updating stats")
-	    self.update_stats()
-	    logger.debug("trying to run limited")
-	    self.limit()
-	
 
-    def update_stats(self):
-	clients = Data().get_all_active_clients()
-	for client in clients:
-		user = client[0]
-		ip4 = client[2]
-		connections = stats().get_active_connections(ip4)
-		io = stats().get_iptables_io(ip4)
-		tx = io['bytes_sent']
-		rx = io['bytes_received']
-		Data().updateStats(user,connections,tx,rx)
-		return 
-
-    def limit(self):
-	if not Con().is_hig_latency():
-		return
-	else:
-		down_clients = Data().aboveDownLimit(bandwidth().rx_max_user)
-		for client in down_clients:
-			user = client[0]
-			ip4 = client[1]
-			Firewall().limit_rx(ip)
-		
-		upl_clients = Data().aboveUpLimit(bandwidth().tx_max_user)
-		for client in upl_clients:
-                	user = client[0]
-                	ip4 = client[1]
-                	Firewall().limit_tx(ip)
-		conn_clients = Data().aboveConnectionLimit(bandwidth().max_connections_user)
-		for client in conn_clients:
-                	user = client[0]
-                	ip4 = client[1]
-                	Firewall().limit_connections(ip)
-
- 	return
-
-    def rm_limit(self):
-	Firewall().rm_all_limit()
-
-	return
 
 
 app = App()

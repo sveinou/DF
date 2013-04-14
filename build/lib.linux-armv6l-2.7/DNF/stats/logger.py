@@ -9,13 +9,21 @@ class Log():
         self.errorlog = conf.files.errorlog
 
     def info(self, logentry):
-        log = open(self.logfile, mode='a')
-        timestamp = str(datetime.datetime.now())
-        logentry = timestamp + ": " + logentry + "\n"
-        log.write(logentry)
+        try:
+            log = open(self.logfile, mode='a')
+            timestamp = str(datetime.datetime.now())
+            logentry = timestamp + ": " + logentry + "\n"
+            log.write(logentry)
+        except IOError, err:
+            print "CANNOT WRITE TO LOGFILE %s \n %s" % (self.logfile, err)
+        
         
     def error(self,logentry):
-        log = open(self.errorlog, mode='a')	
-        timestamp = str(datetime.datetime.now())
-        logentry = timestamp + ": " + logentry + "\n"
-        log.write(logentry)
+        try:
+            log = open(self.errorlog, mode='a')	
+            timestamp = str(datetime.datetime.now())
+            logentry = timestamp + ": " + logentry + "\n"
+            log.write(logentry)
+        except IOError, err:
+             print "CANNOT WRITE TO LOGFILE %s \n %s" % (self.errorlog, err)
+        

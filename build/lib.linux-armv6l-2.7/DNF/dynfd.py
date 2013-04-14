@@ -4,7 +4,6 @@ import logging
 import time
 from daemon import runner
 import subprocess
-from DNF.daemon import Daemon
 from DNF.stats.con_status import Con
 from DNF.stats.df_user_stats import Statistics as stats
 from DNF.database.df_data import Data
@@ -30,56 +29,9 @@ class App():
             #logger.warn("Warning message")
             #logger.error("Error message")
 
-    	    logger.debug("trying to remove all limit rules")
-	    self.rm_limit()
-	    logger.debug("trying to runn update_stats")
-	    self.update_stats()
-	    time.sleep(30)
-	    logger.debug("trying to updating stats")
-	    self.update_stats()
-	    logger.debug("trying to run limited")
-	    self.limit()
-	
+	    subprocess.call("/usr/bin/python /opt/DF/init.d/test.py", shell=True)
+	    time.sleep(20)
 
-	def update_stats(self):
-		clients = Data().get_all_active_clients()
-		for client in clients:
-			user = client[0]
-			ip4 = client[2]
-			connections = stats().get_active_connections(ip4)
-			io = stats().get_iptables_io(ip4)
-			tx = io['bytes_sent']
-			rx = io['bytes_received']
-			Data().updateStats(user,connections,tx,rx)
-		return 
-
-	def limit(self):
-		if not Con().is_hig_latency():
-			return
-		else:
-			down_clients = Data().aboveDownLimit(bandwidth().rx_max_user)
-			for client in down_clients:
-				user = client[0]
-				ip4 = client[1]
-				Firewall().limit_rx(ip)
-			
-			upl_clients = Data().aboveUpLimit(bandwidth().tx_max_user)
-			for client in upl_clients:
-                        	user = client[0]
-                        	ip4 = client[1]
-                        	Firewall().limit_tx(ip)
-			conn_clients = Data().aboveConnectionLimit(bandwidth().max_connections_user)
-			for client in conn_clients:
-                        	user = client[0]
-                        	ip4 = client[1]
-                        	Firewall().limit_connections(ip)
-
- 		return
-
-	def rm_limit(self):
-		Firewall().rm_all_limit()
-	
-		return
 
 
 app = App()
