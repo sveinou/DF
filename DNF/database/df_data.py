@@ -115,15 +115,15 @@ class Data:
         self.db.alter(sql)
 
     def aboveDownLimit(self, limit):
-        sql = "SELECT User, IP4 FROM stats WHERE rxs > %i" %(limit)
+        sql = "SELECT stats.User, clients.IP4 FROM stats join clients on stats.User=clients.User  WHERE stats.rxs > %i" %(limit)
         return Database().get_all_rows(sql)
         
     def aboveUpLimit(self, limit):
-        sql = "SELECT User, IP4 FROM stats WHERE txs > %i" %(limit)
+        sql = "SELECT stats.User, clients.IP4 FROM stats join clients on stats.User=clients.User  WHERE stats.txs > %i" %(limit)
         return Database().get_all_rows(sql)
         
     def aboveConnectionLimit(self, limit):
-        sql = "SELECT User, IP4 FROM stats WHERE Connections > %i" %(limit)
+        sql = "SELECT stats.User, clients.IP4 FROM stats join clients on stats.User=clients.User  WHERE stats.Connections > %i" %(limit)
         return Database().get_all_rows(sql)
 
         

@@ -41,7 +41,7 @@ def main():
             ip_info(sys.argv[2], sys.argv[4])
 	elif program == "UPDATE" and len(sys.argv) == 2:
 		update_stats()
-	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[3].upper() == "LIMITED":
+	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[2].upper() == "LIMITED":
 		rm_all_limit()
 	elif program == "LIMIT" and len(sys.argv) == 2:
 		limit()
@@ -90,19 +90,20 @@ def limit():
 	for client in down_clients:
             user = client[0]
 	    ip4 = client[1]
-	    Firewall().limit_rx(ip)
+	    print ip4+" "+user
+	    Firewall().limit_rx(ip4)
 	
 	upl_clients = Data().aboveUpLimit(conf.bandwidth().tx_max_user)
 	for client in upl_clients:
             user = client[0]
             ip4 = client[1]
-            Firewall().limit_tx(ip)
+            Firewall().limit_tx(ip4)
 
 	conn_clients = Data().aboveConnectionLimit(conf.bandwidth().max_connections_user)
 	for client in conn_clients:
             user = client[0]
             ip4 = client[1]
-            Firewall().limit_connections(ip)
+            Firewall().limit_connections(ip4)
 
 
     return

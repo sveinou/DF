@@ -29,8 +29,14 @@ class App():
             #logger.warn("Warning message")
             #logger.error("Error message")
 
-	    subprocess.call("/usr/bin/python /opt/DF/init.d/test.py", shell=True)
+	    subprocess.call("/usr/local/bin/dynfw UPDATE", shell=True)
 	    time.sleep(20)
+	    subprocess.call("/usr/local/bin/dynfw FLUSH LIMITED", shell=True)
+	    time.sleep(20)
+	    subprocess.call("/usr/local/bin/dynfw UPDATE", shell=True)
+	    time.sleep(20)
+	    subprocess.call("/usr/local/bin/dynfw LIMIT", shell=True)
+	    time.sleep(30)
 
 
 
