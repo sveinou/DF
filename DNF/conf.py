@@ -19,7 +19,7 @@ if not parser.read("/etc/dnf/dnf.conf"):
 server = parser.get("global", "server")
 internal_interface = parser.get("global", "internal_interface")
 external_interface = parser.get("global", "internal_interface")
-
+mode = parser.get("global", "mode")
 # database
 class db:
     server = parser.get("database", "server") 

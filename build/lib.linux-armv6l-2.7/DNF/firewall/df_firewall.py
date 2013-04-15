@@ -76,16 +76,20 @@ class Firewall:
         """
         Adds connectionlimit to user
         """
+	
         rules = ["iptables -I LIMITED -d "+ip+" -j CONNLIMIT",
                  "iptables -I LIMITED -s "+ip+" -j CONNLIMIT"]
+
+	if not isRule(ip,"LIMITED","CONNLIMIT"):
         
-        for rule in rules:
-            subprocess.call(rule, shell=True)   
-	Data().add_limit(ip,"CONNLIMIT")
+            for rule in rules:
+                subprocess.call(rule, shell=True)   
+	    Data().add_limit(ip,"CONNLIMIT")
         
         
         
         return
+
 
     def rm_limit(self, ip):
 
@@ -112,30 +116,25 @@ class Firewall:
         
 
     def limit_rx(self, ip):
-	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
-	Data().add_limit(ip,"RXLIMIT")
+	if not isRule(ip,"LIMITED","RXLIMIT"):
+	    subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+	    Data().add_limit(ip,"RXLIMIT")
 	return
 
     def limit_tx(self, ip):
-	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
-	Data().add_limit(ip,"TXLIMIT")
+	if not isRule(ip,"LIMITED","TXLIMIT"):
+	    subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+	    Data().add_limit(ip,"TXLIMIT")
 	return
 
 
-    def isRule(ip):
-        """
-        Returns true if there is an rule with given ip-addres, 
-        if the rule do not exist, it wil return false
-        """
-        ip6 = subprocess.check_output("/sbin/ip6tables -L -n", shell=True)
 
-        ip4 = subprocess.check_output("/sbin/iptables -L -n", shell=True)
-        ip4_nat = subprocess.check_output("/sbin/iptables -t nat -L -n ", shell=True)
+    def isRule(self, ip, chain, target):
 
-        if ip in ip4 or ip in ip6 or ip in ip4_nat:
-            return True
-        else:
+	ipt = subprocess.Popen(["iptables","-L", chain, "-n"], stdout = subprocess.PIPE)
+        grep = subprocess.Popen(["grep", ip], stdin=ipt.stdout, stdout = subprocess.PIPE)
+        out = grep.communicate()[0]
+        if target in out:
+	    return True
+	else: 
             return False
-
-	
-

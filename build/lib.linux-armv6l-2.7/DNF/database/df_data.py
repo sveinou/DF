@@ -48,7 +48,6 @@ class Data:
 
         #add a new user, or updating an exsiting one
 
-
         if len(mac) != 17 and len(ip4) < 7 and len(ip4) > 17:
             raise ValueError("somthing od with ip4/mac")
         elif self.get_info_client("User","IP4",ip4):
@@ -92,6 +91,8 @@ class Data:
     
 
     def updateStats(self, user, connections, tx, rx):
+	tx = tx/1000 # as in K
+	rx = rx/1000 # as in k
     
         sql = "select tx_total, rx_total, UNIX_TIMESTAMP(Time) from stats where User='%s'" % (user)
         row = Database().get_row(sql)    

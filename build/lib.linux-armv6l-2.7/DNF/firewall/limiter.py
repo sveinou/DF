@@ -6,6 +6,9 @@ import DNF.conf as c
 class limit:
 	IF = c.external_interface
 
+	def __init__(self):
+	    pass
+
  	
         def activate_limit(self,tx,rx):
 		limit().deactivate_limit()

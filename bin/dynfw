@@ -10,7 +10,7 @@ from DNF.stats.con_status import Con
 from DNF.stats.df_user_stats import Statistics as stats
 from DNF.database.df_data import Data
 from DNF.firewall.df_firewall import Firewall
-
+from DNF.firewall.limiter import limit
 
 def main():
     """
@@ -45,6 +45,8 @@ def main():
 		rm_all_limit()
 	elif program == "LIMIT" and len(sys.argv) == 2:
 		limit()
+	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
+		set_limit(sys.argv[3],sys.argv[4])
         else:
             show_help()
     except ValueError:
@@ -108,6 +110,22 @@ def limit():
 
     return
 
+def auto_limit():    
+    limit().activate_limit(limit_per_user()['txpu'],limit_per_user()['rxpu']) # (1mbit,1mbit)(100kbit,100kbit)
+    return
+
+def limit_per_user(): 
+    userCount = len(info_get_active_users())
+    rx = conf.bandwidth().rx_limit_hard
+    tx = conf.bandwidth().tx_limit_hard
+    MC = conf.bandwidth().mac_connections
+    rxpu = rx/userCount
+    txpu = tx/userCount
+    mcpu = MC/userCount	
+    return {'rxpu':rxpu, 'txpu':txpu, 'mcpu':txpu}
+
+def info_get_active_users():
+    return Data().get_all_active_clients()
 
 def user_info(request, username):
     pass;
@@ -122,9 +140,16 @@ Syntax:
     LOGIN <ipaddress> <user> <password>
     INFO STATUS|STATS <IP [ipaddress]|user> (user not impl.)
     UPDATE (updates stats to database)
-    FLUSH LIMITED|ALLOWED (flush iptables rules)
+    FLUSH LIMITED|ALLOWED (flush iptables rules, allowed not impl.)
     LIMIT (limits users if it is needed)
+    LIMIT AUTO (auto set to avg limits bassed on users) 
     """
+if conf.mode == "auto":
+    print "in auto mode, most settings are auto adjusted"
+elif conf.mode == "agresive":
+    print "in agresive mode, all users are limited to avg settings per user"
+else:
+    print "in manual mode"
 
 if __name__ == '__main__':
     main()
