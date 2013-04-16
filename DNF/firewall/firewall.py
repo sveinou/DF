@@ -22,7 +22,7 @@ class Firewall:
             "/sbin/iptables -t nat -I ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
  
         for rule in rules:
-            subprocess.call(rule, shell=True)
+            subprocess.call('sudo '+rule, shell=True)
 
 
     def accept_ip6(self, ipv6_addr):
@@ -36,7 +36,7 @@ class Firewall:
         rules = ["/sbin/iptables -I ALLOWED -d"+ipv6_addr+" -j ACCEPT",
   		"/sbin/iptables -I ALLOWED -s"+ipv6_addr+" -j ACCEPT",]
         for rule in rules:
-            subprocess.call(rule, shell=True)
+            subprocess.call('sudo '+ rule, shell=True)
 
 
     def drop_ip4(self, ipv4_addr):
@@ -53,7 +53,7 @@ class Firewall:
             "/sbin/iptables -t nat -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
 
         for rule in rules:
-            subprocess.call(rule, shell=True)
+            subprocess.call('sudo ' + rule, shell=True)
 
     def drop_ip6(self, ipv6_addr):
         """
@@ -67,7 +67,7 @@ class Firewall:
             "/sbin/ip6tables -D ALLOWED -s"+ipv6_addr+" -j ACCEPT",]
 
         for rule in rules:
-            subprocess.call(rule, shell=True)   
+            subprocess.call('sudo '+rule, shell=True)   
 
 
     def limit_connections(self, ip):
@@ -78,7 +78,7 @@ class Firewall:
                  "iptables -I LIMITED -s "+ip+" -j LIMIT"]
         
         for rule in rules:
-            subprocess.call(rule, shell=True)   
+            subprocess.call('sudo ' + rule, shell=True)   
 
         
         #update something in the database?
@@ -90,7 +90,7 @@ class Firewall:
                  "iptables -D LIMITED -s "+ip+" -j LIMIT"]
 
         for rule in rules:
-            subprocess.call(rule, shell=True)   
+            subprocess.call('sudo '+rule, shell=True)   
 
         #update something in DB
 
@@ -101,10 +101,10 @@ class Firewall:
         Returns true if there is an rule with given ip-addres, 
         if the rule do not exist, it wil return false
         """
-        ip6 = subprocess.check_output("/sbin/ip6tables -L -n", shell=True)
+        ip6 = subprocess.check_output("sudo /sbin/ip6tables -L -n", shell=True)
 
-        ip4 = subprocess.check_output("/sbin/iptables -L -n", shell=True)
-        ip4_nat = subprocess.check_output("/sbin/iptables -t nat -L -n ", shell=True)
+        ip4 = subprocess.check_output("sudo /sbin/iptables -L -n", shell=True)
+        ip4_nat = subprocess.check_output("sudo /sbin/iptables -t nat -L -n ", shell=True)
 
         if ip in ip4 or ip in ip6 or ip in ip4_nat:
             return True
@@ -116,7 +116,7 @@ class Firewall:
         """
         returns all rules in limited-chain.        
         """
-        ipcmd = ['iptables', '-nvxL', 'LIMITED']
+        ipcmd = ['sudo', 'iptables', '-nvxL', 'LIMITED']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
         return [line.split() for line in ipres[2:-1]]
     
@@ -124,7 +124,7 @@ class Firewall:
         """
         Returns all rules in allowed-chain
         """
-        ipcmd = ['iptables', '-nvxL', 'ALLOWED']
+        ipcmd = ['sudo', 'iptables', '-nvxL', 'ALLOWED']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
         return [line.split() for line in ipres[2:-1]]
 
