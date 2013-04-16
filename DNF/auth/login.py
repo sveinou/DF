@@ -57,7 +57,7 @@ class Login():
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        
         return True
         
-    def cli_login()
+    def cli_login():
         log = Log(conf.files.loginlog)
         indata = self.check_input(username, password, ip)
         dhcp = Dhcp()    
