@@ -10,18 +10,26 @@ class Statistics:
     def __init__(self):
         self.log = Log()
     
+    @DeprecationWarning
     def get_conntrack(self, ip):
         """
         Returns list of ip_conntrack entries of self.ip
         """
-        ipct = open(conf.files.ip_conntrack).read().split("\n")
-        return [line for line in ipct if line.find(ip) > 0] #add lines with self.ip to my-list.
+        #ipct = open(conf.files.ip_conntrack, mode='r').read().split("\n")
+        #return [line for line in ipct if line.find(ip) > 0] #add lines with self.ip to my-list.
+        return self.get_connections(ip)
+    
+    def get_connections(self, ip):
+        cmd = ['netstat', '--ip', ip]
+        res  = sp.Popen(cmd, stdout=sp.PIPE).communicate()[0].split("\n")
+        return res[2:]
 
     def get_active_connections(self, ip):
         """
         Returns number of active connections to self.ip
         """
-        return len(self.get_conntrack(ip))
+        #return len(self.get_conntrack(ip))
+        return len(self.get_connections(ip))
     
     def is_limited(self, ip):
         """
