@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import os, subprocess
 from DNF import conf
 from DNF.auth.df_auth import Auth
 from DNF.firewall.df_firewall import Firewall
@@ -51,3 +52,10 @@ class Login():
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        
         return True
+        
+if __name__ == '__main__':
+    l = Login()
+    if(os.getuid() == 0):
+        l.check_login(sys.argv[1],sys.argv[2], sys.argv[3])
+    else:
+        print "You must be root to get pam access."
