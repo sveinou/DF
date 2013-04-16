@@ -33,7 +33,7 @@ class Login():
         data = Data()
         
         if not os.getuid() == 0:
-            cmd = 'sudo dynfw login %s %s %s' % (ip, username, password)
+            cmd = 'sudo /usr/local/bin/dynfw login %s %s %s' % (ip, username, password)
             return subprocess.call(cmd, shell=True) == 0
             
         if mac == False:
