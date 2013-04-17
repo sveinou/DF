@@ -80,7 +80,7 @@ class Firewall:
         rules = ["iptables -I LIMITED -d "+ip+" -j CONNLIMIT",
                  "iptables -I LIMITED -s "+ip+" -j CONNLIMIT"]
 
-	if not isRule(ip,"LIMITED","CONNLIMIT"):
+	if not self.isRule(ip,"LIMITED","CONNLIMIT"):
         
             for rule in rules:
                 subprocess.call(rule, shell=True)   
@@ -116,13 +116,13 @@ class Firewall:
         
 
     def limit_rx(self, ip):
-	if not isRule(ip,"LIMITED","RXLIMIT"):
+	if not Firewall().isRule(ip,"LIMITED","RXLIMIT"):
 	    subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
 	    Data().add_limit(ip,"RXLIMIT")
 	return
 
     def limit_tx(self, ip):
-	if not isRule(ip,"LIMITED","TXLIMIT"):
+	if not Firewall().isRule(ip,"LIMITED","TXLIMIT"):
 	    subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
 	    Data().add_limit(ip,"TXLIMIT")
 	return

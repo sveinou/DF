@@ -40,16 +40,10 @@ class files:
     errorlog = parser.get("logs", "error")
 
 class bandwidth:
-    rx_limit_soft = parser.getint("bandwidth", "rx_limit_soft")
-    rx_limit_hard = parser.getint("bandwidth", "rx_limit_hard")
-    tx_limit_soft = parser.getint("bandwidth", "tx_limit_soft")
-    tx_limit_hard = parser.getint("bandwidth", "tx_limit_hard")
-    max_connections_soft = parser.getint("bandwidth", "max_connections_soft")
-    max_connections_hard = parser.getint("bandwidth", "max_connections_soft")
-
-    max_connections_user = parser.getint("bandwidth", "max_connections_user") 
-    rx_max_user = parser.getint("bandwidth", "rx_max_user")
-    tx_max_user = parser.getint("bandwidth", "tx_max_user")
+    unit = parser.get("bandwidth", "unit")
+    max_rxs = parser.getint("bandwidth", "max_rxs")
+    max_txs = parser.getint("bandwidth", "max_txs")
+    max_connections = parser.getint("bandwidth", "max_connections")
 
     latency_test_addr = parser.get("bandwidth","latency_test_addr")
     latency_hig = parser.getint("bandwidth", "latency_high")  # in ms, if latency > latency_hig return " latency is hig"

@@ -15,6 +15,14 @@ class Data:
         sql = "select * from clients where IP4='%s'" % ip4
         return self.db.get_row(sql)
 
+    def get_stats(self, user):
+	sql = "select * from stats where User='%s'" % user
+	return self.db.get_row(sql)
+  
+    def get_limited(self, user):
+	sql = "select * from limited where User='%s'" % user
+	return self.db.get_row(sql)
+
     def get_all_active_clients(self):
     	sql = "select * from clients where Active=1"
     	return self.db.get_all_rows(sql)
@@ -91,8 +99,6 @@ class Data:
     
 
     def updateStats(self, user, connections, tx, rx):
-	tx = tx/1000 # as in K
-	rx = rx/1000 # as in k
     
         sql = "select tx_total, rx_total, UNIX_TIMESTAMP(Time) from stats where User='%s'" % (user)
         row = Database().get_row(sql)    
@@ -100,20 +106,26 @@ class Data:
             tx_total = tx + row[0]
             rx_total = rx + row[1]
             sec = int(time.time() - row[2])
-            if sec > 0:
-                txs = tx_total/sec
-                rxs = rx_total/sec
-            else:
-                txs = 0
-                rxs = 0
-            sql= "UPDATE stats SET Connections=%i, tx_total=%i, rx_total=%i, txs=%i, rxs=%i, Time=FROM_UNIXTIME(%s) WHERE User='%s'" % (connections,tx_total,rx_total,txs,rxs,time.time(),user) 
+            sql= "UPDATE stats SET Connections=%i, tx_total=%i, rx_total=%i, Time=FROM_UNIXTIME(%s) WHERE User='%s'" % (connections,tx_total,rx_total,time.time(),user) 
             
             
         else:
             Time = time.time()
-            sql = "INSERT INTO stats VALUES ('%s', %i, %i, %i, 0, 0,FROM_UNIXTIME(%s))" %(user,connections,tx,rx,Time)
+            sql = "INSERT INTO stats VALUES ('%s', %i, 0, 0, 0, 0,FROM_UNIXTIME(%s))" %(user,connections,Time)
 
         self.db.alter(sql)
+    def update_io(self,io):
+	sql = "select * from stats"
+	row = Database().get_row(sql)
+	if not row:
+            return "NO CLIENTS"
+	for client in io:
+	    #client [ip,tx,rx]
+	    sql = "UPDATE stats INNER JOIN clients ON stats.USER = clients.USER SET txs=%i, rxs=%i WHERE clients.IP4='%s'" %(client[1],client[2],client[0])
+	    Database().alter(sql)
+	return "done!"
+	
+
 
     def aboveDownLimit(self, limit):
         sql = "SELECT stats.User, clients.IP4 FROM stats join clients on stats.User=clients.User  WHERE stats.rxs > %i" %(limit)

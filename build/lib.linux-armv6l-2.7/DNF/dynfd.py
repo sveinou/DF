@@ -29,7 +29,7 @@ class App():
 	    count = 0
 
 	 if count == 6 and conf.mode != "manual" or 12 and conf.mode != "manual": 
-     	     subprocess.call("/usr/local/bin/dynfw LIMIT SET", shell=True)
+     	     subprocess.call("/usr/local/bin/dynfw LIMIT AUTO", shell=True)
 	     if conf.mode == "auto":
 	         subprocess.call("/usr/local/bin/dynfw LIMIT", shell=True)
 
