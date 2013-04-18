@@ -13,9 +13,9 @@ setup(
 	description='Combined firewall and captive portal, with dynamic bandwidth allocation',
 	long_description=open('README.txt').read(),
 	data_files=[('/etc/dnf/',['cfg/dnf.conf']),
-				('/etc/init.d/',['/cfg/dynfd.sh']),
-				('/etc/sudoers.d/', ['/cfg/dynfw.sudo']),
-				('/etc/dhcp/',['/cfg/dhcpd.dnf.conf']),
+				('/etc/init.d/',['cfg/dynfd.sh']),
+				('/etc/sudoers.d/', ['cfg/dynfw.sudo']),
+				('/etc/dhcp/',['cfg/dhcpd.dnf.conf']),
 				],
 	install_requires=[
 		"pam >= 0.1.3",
