@@ -1,5 +1,6 @@
 import subprocess
 from DNF.database.df_data import Data
+@DeprecationWarning
 class Firewall:
     """
     Sends commands to iptables to alter chains

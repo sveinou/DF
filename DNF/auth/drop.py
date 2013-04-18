@@ -2,7 +2,7 @@
 
 import re
 from DNF import conf
-from DNF.firewall.df_firewall import Firewall
+from DNF.firewall.firewall import Firewall
 from DNF.database.df_data import Data
 from DNF.stats.logger import Log
 class Drop:

@@ -35,7 +35,7 @@ iptables -A FORWARD -j LIMITED
 iptables -A FORWARD -j ALLOWED
 iptables -t nat -A PREROUTING -j ALLOWED
 iptables -A POSTROUTING -t nat -o $EXT -j MASQUERADE
-iptables -t nat -A PREROUTING -p tcp -m multiport --ports 80,443 -j DNAT --to-destination $IP:8000
+iptables -t nat -A PREROUTING -p tcp -m multiport --ports 80,443 -j DNAT --to-destination $IP:80
 iptables -A FORWARD -d $IP -p tcp -m multiport --ports 80,443 -j ACCEPT
 iptables -A FORWARD -j DROP
 iptables -A CONNLIMIT -m connlimit --connlimit-above 50 -j REJECT
