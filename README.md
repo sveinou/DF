@@ -23,8 +23,8 @@ The following python (PyPi)-packages are needed:
 
 2. Installation
 =====================
-$ [sudo] apt-get install python python-pip mysql-server iptables isc-dhcp-server python-django apache2 libapache2-mod-wsgi
-$ [sudo] pip install DynamicNetworkFirewall-v0.3.dev1.tar.gz
+* [sudo] apt-get install python python-pip python-django mysql-server iptables isc-dhcp-server apache2 libapache2-mod-wsgi
+* [sudo] pip install DynamicNetworkFirewall-v0.3.dev1.tar.gz
 
 3. Setup
 ======================
@@ -32,5 +32,5 @@ Nothing yet... or: you probably have to run install.sh to setup your firewall...
 
 4. Usage
 ======================
-dynfw <cmd> <arguments>
+dynfw &lg;cmd&gt; &lt;arguments&gt;
 
