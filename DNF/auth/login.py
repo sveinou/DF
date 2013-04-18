@@ -46,17 +46,22 @@ class Login():
             log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
             return False
 #            exit(conf.exit_status.login_error)
+        dbcheck = data.mark_user_active(indata['username'],mac,indata['ip_addr'])
+        if not dbcheck[0]:
+            log.info( "LOGIN FAILED, duplicates.")
+            log.info( "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[1],dbcheck[2],dbcheck[3]))
+            return False
         else:
             firewall.accept_ip4(indata['ip_addr'])
 
         ## DATABASE GOES HERE
         log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
-        data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
+        #data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
 #	    print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        
         return True
-        
+        r
     def cli_login():
         log = Log(conf.files.loginlog)
         indata = self.check_input(username, password, ip)
@@ -74,13 +79,19 @@ class Login():
             print "Login failed."
             log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
             exit(conf.exit_status.login_error)
+        dbcheck = data.mark_user_active(indata['username'],mac,indata['ip_addr'])
+        if not dbcheck[0]:
+            print "LOGIN FAILED, duplicates."
+            print "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[1],dbcheck[2],dbcheck[3])
+            exit(conf.exit_status.user_already_logged_in)
         else:
             firewall.accept_ip4(indata['ip_addr'])
 
         ## DATABASE GOES HERE
+
+        #data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
         log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
-        data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
-#        print lease[1]+" "+lease[0]
+        print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        
         return True

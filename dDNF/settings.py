@@ -1,7 +1,7 @@
 # Django settings for dDNF project.
 
 import django, os
-
+import DNF.conf
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -16,12 +16,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DNF.conf.db.name,                      # Or path to database file if using sqlite3.
+        'USER': DNF.conf.db.user,                      # Not used with sqlite3.
+        'PASSWORD': DNF.conf.db.pw ,                  # Not used with sqlite3.
+        'HOST': DNF.conf.db.server,                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': DNF.conf.db.port,                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -82,7 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'dDNF.urls'
@@ -99,10 +99,10 @@ STATIC_DOC_ROOT = os.path.join(SITE_ROOT,'templates/media')
 
 INSTALLED_APPS = (
     'django.contrib.auth',
-    'django.contrib.contenttypes',
+    #'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
+    #'django.contrib.sites',
+    #'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

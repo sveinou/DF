@@ -25,8 +25,9 @@ class Database:
 		return self.cur.fetchall()
 
 	def alter(self,sql):
-		self.cur.execute(sql)
-		self.con.commit()		
+		a = self.cur.execute(sql)
+		b = self.con.commit()
+		print("exec = %s , commit = %s" %(str(a), str(b)))		
 
 
 	def __del__(self):

@@ -21,13 +21,15 @@ internal_interface = parser.get("global", "internal_interface")
 external_interface = parser.get("global", "internal_interface")
 mode = parser.get("global", "mode")
 # database
+singel = parser.getboolean("global", "singel_login")
+
 class db:
     server = parser.get("database", "server") 
     user = parser.get("database", "user")#name of database user
     name = parser.get("database", "name") #name of database name
     pw = parser.get("database", "password")
-
-
+    port = parser.get("database", "port") 
+    
 ## DHCP-server
 class files:
     leasefile = parser.get("files", "dhcp_leasefile")

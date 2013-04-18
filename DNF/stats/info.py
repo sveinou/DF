@@ -65,7 +65,8 @@ class IP():
 
     def isLoggedIn(self,ip):
         ip = self.check_input(ip)
-        active = Data().active('ip4', ip)
+        #active = Data().active('ip4', ip)
+        active = ip in Data().all_active_ips()
         exists = Leasefile().ip_exists(ip)
         print("%s: A:%s, E:%s" % (ip,active,exists))
         return active and exists

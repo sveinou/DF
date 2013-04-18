@@ -20,16 +20,22 @@ def login(request):
         link = "http://"+request.META.get('HTTP_HOST')+request.get_full_path()
         return render_to_response("login.html",{'link':link})
     else:
-        username = str(request.POST['username'])
-        password = str(request.POST['password'])
+        username = request.POST['username'].encode('utf-8')
+        password = request.POST['password'].encode('utf-8')
+        #username = str(request.POST['username'])
+        #password = str(request.POST['password'])
 
         if request.POST['link']:
             link = str(request.POST['link'])
         else:
             link = "/"
-        if 'username' not in request.POST or 'password' not in request.POST:
+        
+        if not username or not password:
             return render_to_response("login.html",{'link':link,'no_post':True})
+        
         if l.ip4(username, password, ip_addr):
+            request.session['user'] = username
+            request.session['ip_addr'] = ip_addr
             return redirect(link)
         else:
             return render_to_response('login.html',{'link':link, 'failed':True})
@@ -39,6 +45,8 @@ def login(request):
 def logout(request):
     ip_addr = str(request.META['REMOTE_ADDR'])
     d.ip4(ip_addr);
+    del request.session['user']
+    del request.session['ip_addr']
     return render_to_response('login.html',{'logout':True})
 
 def checkmeta(request):

@@ -1,6 +1,6 @@
 #from datetime import datetime
 #import sys, os, time
-#from DNF import conf
+from DNF import conf
 import time
 from DNF.database.storage import Database
 
@@ -9,7 +9,6 @@ class Data:
     
     def __init__(self):
         pass
-
 
     def getIp4(self, ip4):
         sql = "select * from clients where IP4='%s'" % ip4
@@ -26,7 +25,11 @@ class Data:
     def get_all_active_clients(self):
     	sql = "select * from clients where Active=1"
     	return self.db.get_all_rows(sql)
-
+ 
+    def all_active_ips(self):
+        sql = "SELECT ip4 FROM clients WHERE active = 1"
+        return [row[0] for row in self.db.get_all_rows(sql)]
+    
     def active(self, data_type, search):
         print str(type(search))
         if type(search) == str:
@@ -52,17 +55,37 @@ class Data:
 
         return self.db.get_row(sql)
 
-    def DbAddRow(self,user,mac,ip4,ip6):
+    def DbAddRow(self,user,mac,ip4,ip6='Not in use'):
 
         #add a new user, or updating an exsiting one
 
         if len(mac) != 17 and len(ip4) < 7 and len(ip4) > 17:
             raise ValueError("somthing od with ip4/mac")
-        elif self.get_info_client("User","IP4",ip4):
+        elif self.get_info_client("user","user",user):
             sql = "UPDATE clients set Mac='%s', IP4='%s', IP6='%s', Active=1 WHERE User='%s'" % (mac,ip4,ip6,user) 
         else:
             sql = "INSERT INTO clients VALUES ('%s', '%s', '%s', '%s', 1) " % (user,mac,ip4,ip6)
         self.db.alter(sql)
+
+    def mark_user_active(self,user,mac,ip):
+        activelist = "select ip4, mac, user from clients where Active = 1"
+        activelist = self.db.get_all_rows(activelist)
+        ips = [row[0] for row in activelist]
+        macs = [row[1] for row in activelist]
+        
+        if conf.singel:
+            users = [row[2] for row in activelist]
+            if user in users:
+                return (False, ip, mac, user)
+            
+        if ip in ips or mac in macs:
+            return (False, ip, mac, user)
+        
+        self.DbAddRow(user, mac, ip)
+        
+        return (True, ip, mac, user)
+
+
 
     def DbActiveUser(self,user,active):
 
