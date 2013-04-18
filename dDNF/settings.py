@@ -1,7 +1,12 @@
 # Django settings for dDNF project.
 
+import django, os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -31,7 +36,8 @@ ALLOWED_HOSTS = []
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+#TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Oslo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -82,13 +88,14 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'dDNF.urls'
 
 TEMPLATE_DIRS = (
-    '/home/espen/workspace/combo/dDNF/templates',
+    #'/home/espen/workspace/combo/dDNF/templates',
+    os.path.join(SITE_ROOT,'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
-STATIC_DOC_ROOT = '/home/espen/workspace/combo/dDNF/templates/media'
+STATIC_DOC_ROOT = os.path.join(SITE_ROOT,'templates/media')
 
 INSTALLED_APPS = (
     'django.contrib.auth',

@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from login.views import checkmeta, login, logout
-from statistics.views import user_stats
+from dDNF.login.views import checkmeta, login, logout
+from dDNF.statistics.views import user_stats
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
