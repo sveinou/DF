@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %} {% endblock %} 
+{% block body%} 
+{% if logout %}
+	<div id="warning">
+	<h2>Logged out</h2>
+	<p>You have been logged out. You have to login again to get internet
+	access.</p>
+	</div>
+{% endif %} 
+{% if no_post %}
+	<div id="warning">
+	<h2>Input error</h2>
+	<p>You have to give us both your username and password!</p>
+	</div>
+{% endif %}
+ {% if failed %}
+	<div id="warning">
+	<h2>Login failed</h2>
+	<p>That combination of username and password is not known to us.</p>
+	</div>
+{% endif %}
+<h1>Please login to gain internet access</h1>
+<p>After the login, you will be forwarded to: <em>{{ link }}</em></p>
+<form action="/" method="post">{% csrf_token %} Username: <input
+	type="text" name="username"> Password: <input type="password"
+	name="password"> <input type="submit" value="Login"> <input
+	type="hidden" name="link" value="{{ link }}"></form>
+
+{% endblock %}
