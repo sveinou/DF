@@ -18,17 +18,17 @@ def login(request):
     
     if not request.POST:
         link = "http://"+request.META.get('HTTP_HOST')+request.get_full_path()
-        return render_to_response("login.html",{'no_post':True, 'link':link})
+        return render_to_response("login.html",{'link':link})
     else:
         username = str(request.POST['username'])
         password = str(request.POST['password'])
 
         if request.POST['link']:
             link = str(request.POST['link'])
-            print("link is not empty")
         else:
-            print("empty link...")
             link = "/"
+        if 'username' not in request.POST or 'password' not in request.POST:
+            return render_to_response("login.html",{'link':link,'no_post':True})
         if l.ip4(username, password, ip_addr):
             return redirect(link)
         else:
