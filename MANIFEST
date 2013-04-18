@@ -4,6 +4,7 @@ README.txt
 setup.py
 DNF/__init__.py
 DNF/conf.py
+DNF/dynfd.py
 DNF/auth/__init__.py
 DNF/auth/df_auth.py
 DNF/auth/drop.py
@@ -24,5 +25,6 @@ DNF/stats/df_user_stats.py
 DNF/stats/info.py
 DNF/stats/logger.py
 bin/dynfw
+cfg/dhcpd.dnf.conf
 cfg/dnf.conf
 docs/HOWTO-dhcpd.txt
