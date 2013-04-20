@@ -10,6 +10,12 @@ from DNF.stats.logger import Log
 
 class Login():
     
+    def test_user(self, username, password):
+        cmd = 'sudo /user/local/bin/dynfw usercheck %s %s'
+        return subprocess.call(cmd, shell=True) == 0;
+        
+    def test_ipv4_and_mac(self, ipv4):
+        return Dhcp().find_mac(ipv4)
 
     def check_input(self,user,password,ip):
 
@@ -23,6 +29,8 @@ class Login():
         return {'username':user, 'password': password, 'ip_addr':ip}
 
 
+    
+
     def ip4(self,username, password, ip):
         log = Log(conf.files.loginlog)
         indata = self.check_input(username, password, ip)
@@ -34,9 +42,12 @@ class Login():
         
         if not os.getuid() == 0:
             cmd = 'sudo /usr/local/bin/dynfw login %s %s %s' % (ip, username, password)
-            return subprocess.call(cmd, shell=True) == 0
+            #code = subprocess.call(cmd)
+            code = subprocess.call(['sudo', '/usr/local/bin/dynfw', 'login', ip, username, password])
+            log.info("NEED SUDO. \nCommand: %s \nExit code: %s" % (cmd, code))
+            return code == 0
             
-        if mac == False:
+        if not mac:
             # ip/mac pair does not exist in leasefile
             print "FEIL Mac/IP combo"
             return False
@@ -49,7 +60,7 @@ class Login():
         dbcheck = data.mark_user_active(indata['username'],mac,indata['ip_addr'])
         if not dbcheck[0]:
             log.info( "LOGIN FAILED, duplicates.")
-            log.info( "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[1],dbcheck[2],dbcheck[3]))
+            log.info( "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[3],dbcheck[2],dbcheck[1]))
             return False
         else:
             firewall.accept_ip4(indata['ip_addr'])
@@ -57,12 +68,12 @@ class Login():
         ## DATABASE GOES HERE
         log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
         #data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
-#	    print lease[1]+" "+lease[0]
+#        print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        
         return True
-        r
-    def cli_login():
+        
+    def cli_login(self, username, password, ip):
         log = Log(conf.files.loginlog)
         indata = self.check_input(username, password, ip)
         dhcp = Dhcp()    
@@ -74,16 +85,17 @@ class Login():
         if mac == False:
             # ip/mac pair does not exist in leasefile
             print "FEIL Mac/IP combo"
-            exit(conf.exit_status.ip_mac_mismatch_error)
+            sys.exit(conf.exit_status.ip_mac_mismatch_error)
         elif auth.login() != True:
             print "Login failed."
             log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
-            exit(conf.exit_status.login_error)
+            #sys.exit(conf.exit_status.login_error)
+            sys.exit(1)
         dbcheck = data.mark_user_active(indata['username'],mac,indata['ip_addr'])
         if not dbcheck[0]:
             print "LOGIN FAILED, duplicates."
             print "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[1],dbcheck[2],dbcheck[3])
-            exit(conf.exit_status.user_already_logged_in)
+            sys.exit(conf.exit_status.user_already_logged_in)
         else:
             firewall.accept_ip4(indata['ip_addr'])
 
@@ -91,11 +103,11 @@ class Login():
 
         #data.DbAddRow(indata['username'],mac,indata['ip_addr'],"IPv6")
         log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
-        print lease[1]+" "+lease[0]
+#        print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        
         return True
-        exit(0)
+        #exit(0)
         
 if __name__ == '__main__':
     l = Login()

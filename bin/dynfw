@@ -29,30 +29,35 @@ def main():
             drop = Drop()
             drop.ip4(sys.argv[2])
         elif(program == "LOGIN" and len(sys.argv) >= 5):
-            login = Login()
-            pwd = sys.argv[4]
-            plist = sys.argv[5:]
-            for l in plist:
-                pwd = pwd + " " + l
-            login.ip4(sys.argv[3],pwd,sys.argv[2])
+            user_login()
         elif(program == "INFO" and len(sys.argv) == 3):
-		user_info(sys.argv[2])	   	
-	elif program == "UPDATE" and len(sys.argv) == 2:
-		update_stats()
-	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[2].upper() == "LIMITED":
-		rm_all_limit()
-	elif program == "LIMIT" and len(sys.argv) == 2:
-		auto_limit_users()
-	elif program == "LIMIT" and len(sys.argv) == 5 and sys.argv[2].upper() == "SET":
-		set_limit(sys.argv[3],sys.argv[4])
-	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
-		auto_set_limit()
+            user_info(sys.argv[2])	   	
+    	elif program == "UPDATE" and len(sys.argv) == 2:
+    		update_stats()
+    	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[2].upper() == "LIMITED":
+    		rm_all_limit()
+    	elif program == "LIMIT" and len(sys.argv) == 2:
+    		auto_limit_users()
+    	elif program == "LIMIT" and len(sys.argv) == 5 and sys.argv[2].upper() == "SET":
+    		set_limit(sys.argv[3],sys.argv[4])
+    	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
+    		auto_set_limit()
+        elif program =="TESTLOGIN" and len(sys.argv == 4):
+            test_login()
         else:
-            show_help()
+            show_help()   
     except ValueError:
         print "Plunder og heft."
         show_help()
-
+        
+def user_login():
+    login = Login()
+    pwd = sys.argv[4]
+    plist = sys.argv[5:]
+    for l in plist:
+        pwd = pwd + " " + l
+    login.cli_login(sys.argv[3],pwd,sys.argv[2])
+    
 
 def update_stats():
     clients = Data().get_all_active_clients()
@@ -152,7 +157,14 @@ def user_info(search):
 	else:
 		print "found nuthing"
 
-
+def test_login():
+    a = Auth()
+    a.set_user(str(sys.argv[2]))
+    a.set_password(str(sys.argv[3]))
+    result = a.login()
+    print "Login for %s returned %s" % (a.username, result)
+#    return(result, a.username, a.password)
+    
 def show_help():
     print """Dynamic Firewall v0.1
 by Svein Ove Undal and Espen Gjærde
@@ -161,12 +173,13 @@ source available at http://github.com/sveinou/DF/
 Syntax:
     DROP <ipv4-addr>
     LOGIN <ipaddress> <user> <password>
+    TESTLOGIN <user> <password>
     INFO STATUS|STATS <IP [ipaddress]|user> (user not impl.)
     UPDATE (updates stats to database)
     FLUSH LIMITED|ALLOWED (flush iptables rules, allowed not impl.)
     LIMIT CONNLIMIT|RX|TX <ipv4-addr> (limits one spesific ip)
     LIMIT AUTO (auto set to avg limits bassed on users)
-     
+    
     """
 
 if __name__ == '__main__':
