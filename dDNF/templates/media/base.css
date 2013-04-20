@@ -40,7 +40,6 @@ div#footer {
 	height: auto;
 	font-family: arial;
 }
-
 div#warning {
 	border: 2px solid red;
 	background-color: pink;
@@ -63,4 +62,7 @@ table,th,td {
 
 tr,th {
 	width: auto;
+}
+input{
+    border: 1px solid #55B855;
 }

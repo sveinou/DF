@@ -43,6 +43,13 @@ TIME_ZONE = 'Europe/Oslo'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+ugettext = lambda s: s
+
+LANGUAGES = (
+             ('no', ugettext('Norwegian')),
+             ('en', ugettext('English')),
+             )
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -78,11 +85,12 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
 )
 
 ROOT_URLCONF = 'dDNF.urls'
@@ -96,15 +104,19 @@ TEMPLATE_DIRS = (
 )
 
 STATIC_DOC_ROOT = os.path.join(SITE_ROOT,'templates/media')
+ADMIN_DOC_ROOT = os.path.join(DJANGO_ROOT,'contrib/admin/media')
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
-    #'django.contrib.contenttypes',
+    'django.contrib.contenttypes',
     'django.contrib.sessions',
     #'django.contrib.sites',
-    #'django.contrib.messages',
+    'django.contrib.messages',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+AUTHENTICATION_BACKENDS = ('dDNF.login.migrate.FirstLoginAuth',
+                           'django.contrib.auth.backends.ModelBackend',)

@@ -3,3 +3,4 @@ recursive-include docs *.txt
 
 graft dDNF/templates
 graft cfg 
+graft dDNF/locale

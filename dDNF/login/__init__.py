@@ -1,1 +1,3 @@
-import views, models
+import views
+import models
+import migrate

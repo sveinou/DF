@@ -8,7 +8,7 @@ IP=$1
 echo -e "IP: $1 \nINTERNAL IF: $2 \nEXTERNAL IF: $3"
 echo -e "Installing DNF python package"
 pip uninstall DynamicNetworkFirewall
-pip install dist/DynamicNetworkFirewall-0.3.dev1.tar.gz
+pip install dist/DynamicNetworkFirewall*
 
 # database config, create the needed tables
 echo -e "setting up mySQL.."

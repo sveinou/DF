@@ -9,7 +9,7 @@ setup(
 	packages=['DNF','DNF.firewall','DNF.auth','DNF.stats','DNF.database',
               'dDNF','dDNF.statistics', 'dDNF.login'],
     #package_dir = {'dDNF':'/usr/local/share/dnf/'},
-    package_data = {'dDNF':['templates/*.html', 'templates/media/*']},
+    package_data = {'dDNF':['templates/*.html', 'templates/media/*','locale/no/LC_MESSAGES/*']},
 	scripts=['bin/dynfw'], # setup_firewall should be a command from dynfw
 	url='http://github.com/sveinou/DF',
 	license='LICENSE.txt',
