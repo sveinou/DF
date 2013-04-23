@@ -112,7 +112,10 @@ def limit_ip(what, ip4):
 
 def auto_set_limit():    
     lim = limit_per_user()
-    limit().activate_limit(str(lim['txpu'])+"bps",str(lim['rxpu'])+"bps") # (1mbit,1mbit)(100kbit,100kbit)
+    
+    tx = Data().aboveUpLimit(self, lim['txpu'])*lim['txpu']
+    rx = Data().aboveDownLimit(self, lim['rxpu'])*lim['rxpu']
+    limit().activate_limit(str(tx)+"bps",str(rx)+"bps") # (1mbit,1mbit)(100kbit,100kbit)
     return
 
 def set_limit(tx,rx):
