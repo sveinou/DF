@@ -1,5 +1,6 @@
 import subprocess
 from DNF.database.df_data import Data
+@DeprecationWarning
 class Firewall:
     """
     Sends commands to iptables to alter chains
@@ -22,7 +23,7 @@ class Firewall:
             "/sbin/iptables -t nat -I ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
  
         for rule in rules:
-            subprocess.call('sudo '+rule, shell=True)
+            subprocess.call(rule, shell=True)
 
 
     def accept_ip6(self, ipv6_addr):
@@ -34,9 +35,9 @@ class Firewall:
         """
         
         rules = ["/sbin/iptables -I ALLOWED -d"+ipv6_addr+" -j ACCEPT",
-  		"/sbin/iptables -I ALLOWED -s"+ipv6_addr+" -j ACCEPT",]
+  		"/sbin/iptables -I ALLOWED -s"+ip6_addr+" -j ACCEPT",]
         for rule in rules:
-            subprocess.call('sudo '+ rule, shell=True)
+            subprocess.call(rule, shell=True)
 
 
     def drop_ip4(self, ipv4_addr):
@@ -46,14 +47,16 @@ class Firewall:
         Keyword arguments:
         ipv4_addr = IPv4-address to remove
         """
+
         
         rules = ["/sbin/iptables -D ALLOWED -d"+ipv4_addr+" -j ACCEPT",
             "/sbin/iptables -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",
             "/sbin/iptables -t nat -D ALLOWED -d"+ipv4_addr+" -j ACCEPT",
             "/sbin/iptables -t nat -D ALLOWED -s"+ipv4_addr+" -j ACCEPT",]
 
+
         for rule in rules:
-            subprocess.call('sudo ' + rule, shell=True)
+            subprocess.call(rule, shell=True)
 
     def drop_ip6(self, ipv6_addr):
         """
@@ -67,56 +70,26 @@ class Firewall:
             "/sbin/ip6tables -D ALLOWED -s"+ipv6_addr+" -j ACCEPT",]
 
         for rule in rules:
-            subprocess.call('sudo '+rule, shell=True)   
+            subprocess.call(rule, shell=True)   
 
-
+	
     def limit_connections(self, ip):
         """
         Adds connectionlimit to user
         """
-        rules = ["iptables -I LIMITED -d "+ip+" -j LIMIT",
-                 "iptables -I LIMITED -s "+ip+" -j LIMIT"]
-        
-        for rule in rules:
-            subprocess.call('sudo ' + rule, shell=True)   
+	
+        rules = ["iptables -I LIMITED -d "+ip+" -j CONNLIMIT",
+                 "iptables -I LIMITED -s "+ip+" -j CONNLIMIT"]
 
+	if not self.isRule(ip,"LIMITED","CONNLIMIT"):
         
-        #update something in the database?
+            for rule in rules:
+                subprocess.call(rule, shell=True)   
+	    Data().add_limit(ip,"CONNLIMIT")
+        
+        
         
         return
-
-
-    def is_rule(self, ip): #isRule
-        """
-        Returns true if there is an rule with given ip-addres, 
-        if the rule do not exist, it wil return false
-        """
-        ip6 = subprocess.check_output("sudo /sbin/ip6tables -L -n", shell=True)
-
-        ip4 = subprocess.check_output("sudo /sbin/iptables -L -n", shell=True)
-        ip4_nat = subprocess.check_output("sudo /sbin/iptables -t nat -L -n ", shell=True)
-
-        if ip in ip4 or ip in ip6 or ip in ip4_nat:
-            return True
-        else:
-            return False
-
-
-    def get_limited(self):
-        """
-        returns all rules in limited-chain.        
-        """
-        ipcmd = ['sudo', 'iptables', '-nvxL', 'LIMITED']
-        ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
-        return [line.split() for line in ipres[2:-1]]
-    
-    def get_allowed(self):
-        """
-        Returns all rules in allowed-chain
-        """
-        ipcmd = ['sudo', 'iptables', '-nvxL', 'ALLOWED']
-        ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
-        return [line.split() for line in ipres[2:-1]]
 
 
     def rm_limit(self, ip):
@@ -144,13 +117,25 @@ class Firewall:
         
 
     def limit_rx(self, ip):
-	if not Firewall().is_rule(ip,"LIMITED","RXLIMIT"):
+	if not Firewall().isRule(ip,"LIMITED","RXLIMIT"):
 	    subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
 	    Data().add_limit(ip,"RXLIMIT")
 	return
 
     def limit_tx(self, ip):
-	if not Firewall().is_rule(ip,"LIMITED","TXLIMIT"):
+	if not Firewall().isRule(ip,"LIMITED","TXLIMIT"):
 	    subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
 	    Data().add_limit(ip,"TXLIMIT")
 	return
+
+
+
+    def isRule(self, ip, chain, target):
+
+	ipt = subprocess.Popen(["iptables","-L", chain, "-n"], stdout = subprocess.PIPE)
+        grep = subprocess.Popen(["grep", ip], stdin=ipt.stdout, stdout = subprocess.PIPE)
+        out = grep.communicate()[0]
+        if target in out:
+	    return True
+	else: 
+            return False
