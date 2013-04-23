@@ -146,7 +146,7 @@ def info_get_active_users():
 def user_info(search):
 
     if len(search.split(".")) == 4: 
-	client = Data().getIp4(search)
+	client = Data().get_ip4(search)
 	if client:
  	    user = client[0]
 	    stats = Data().get_stats(user)

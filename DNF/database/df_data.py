@@ -81,7 +81,7 @@ class Data:
         if ip in ips or mac in macs:
             return (False, ip, mac, user)
         
-        self.DbAddRow(user, mac, ip)
+        self.add_row(user, mac, ip)
         
         return (True, ip, mac, user)
 
@@ -198,7 +198,7 @@ class Data:
         
 
     def add_limit(self, ip, limit):        
-        User = self.getIp4(ip)[0] # gets the user
+        User = self.get_ip4(ip)[0] # gets the user
         if self.get_limit(User):
             sql = "UPDATE limited SET %s=1 WHERE User='%s'" %(limit,User)
         else:
@@ -212,7 +212,7 @@ class Data:
         self.db.alter(sql)
         return
     def rm_limit(self, ip4):
-        User = self.getIp4(ip4)[0]
+        User = self.get_ip4(ip4)[0]
         sql = "update limited set CONNLIMIT=0, RXLIMIT=0, RXLIMIT=0 where User='%s'" % User
         return
     
