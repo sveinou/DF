@@ -79,6 +79,7 @@ def rm_all_limit():
 
 def auto_limit_users():
     lim = limit_per_user()
+    returning = " "
     if not Con().is_hig_latency():
         return
     else:
@@ -86,21 +87,25 @@ def auto_limit_users():
 	for client in down_clients:
             user = client[0]
 	    ip4 = client[1]
-	    print ip4+" "+user
 	    Firewall().limit_rx(ip4)
+	    returning += "CONNLIMIT " + user + " ;"
 	
 	upl_clients = Data().above_up_limit(lim['txpu'])
 	for client in upl_clients:
             user = client[0]
             ip4 = client[1]
             Firewall().limit_tx(ip4)
+	    returning += "TXLIMIT " + user + " ;"
 
 	conn_clients = Data().above_connection_limit(lim['mcpu'])
 	for client in conn_clients:
             user = client[0]
             ip4 = client[1]
             Firewall().limit_connections(ip4)
-    return
+	    returning += "RXLIMIT " + user + " ;"
+
+    return returning
+
 def limit_ip(what, ip4):
 	if what == "CONNLIMIT":
 		Firewall().limit_connections(ip4)
@@ -112,9 +117,12 @@ def limit_ip(what, ip4):
 
 def auto_set_limit():    
     lim = limit_per_user()
-    
-    tx = Data().above_up_limit(self, lim['txpu'])*lim['txpu']
-    rx = Data().above_down_limit(self, lim['rxpu'])*lim['rxpu']
+    tx_count = len(Data().above_up_limit(lim['txpu'])) if len(Data().above_down_limit(lim['rxpu'])) != 0 else 1
+    rx_count = len(Data().above_down_limit(lim['txpu'])) if len(Data().above_down_limit(lim['txpu'])) !=0 else 1
+    tx = int(tx_count*lim['txpu']*conf.bandwidth().limit_offsett)
+    rx = int(rx_count*lim['rxpu']*conf.bandwidth().limit_offsett)
+    print tx
+    print rx
     limit().activate_limit(str(tx)+"bps",str(rx)+"bps") # (1mbit,1mbit)(100kbit,100kbit)
     return
 
@@ -135,8 +143,9 @@ def limit_per_user():
     rx = conf.bandwidth().max_rxs
     tx = conf.bandwidth().max_txs
     MC = conf.bandwidth().max_connections
-    rxpu = rx/userCount*get_multiplication()
-    txpu = tx/userCount*get_multiplication()
+    offset = conf.bandwidth().limit_offsett
+    rxpu = rx/userCount*get_multiplication()*offset
+    txpu = tx/userCount*get_multiplication()*offset
     mcpu = MC/userCount
     return {'rxpu':rxpu, 'txpu':txpu, 'mcpu':mcpu}
 

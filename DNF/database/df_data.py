@@ -195,7 +195,10 @@ class Data:
     def get_limit(self, User):
         sql = "select * from limited WHERE User='%s'" % User
         return self.db.get_row(sql)
-        
+
+    def count_limited(self, limit_type):
+	sql = "select count(*) from limited WHERE %s=1" % limit_type #CONNLIMIT, RXLIMIT, TXLIMIT  
+        return self.db.get_row(sql)
 
     def add_limit(self, ip, limit):        
         User = self.get_ip4(ip)[0] # gets the user

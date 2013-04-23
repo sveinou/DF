@@ -49,6 +49,7 @@ class bandwidth:
 
     latency_test_addr = parser.get("bandwidth","latency_test_addr")
     latency_hig = parser.getint("bandwidth", "latency_high")  # in ms, if latency > latency_hig return " latency is hig"
+    limit_offsett = parser.getfloat("bandwidth", "limit_offsett")
 
     download_file_addr = parser.get("bandwidth", "download_file_addr") # file to test download speed, preff arround 10 mb
     download_time_hig =  parser.getint("bandwidth", "download_time_high") # in seconds, if download_time > download_time_hig return " download time higer than normal"
