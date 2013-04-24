@@ -33,17 +33,17 @@ def main():
         elif(program == "INFO" and len(sys.argv) == 3):
             user_info(sys.argv[2])	   	
     	elif program == "UPDATE" and len(sys.argv) == 2:
-    		update_stats()
+    		print update_stats()
     	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[2].upper() == "LIMITED":
-    		rm_all_limit()
+    		print rm_all_limit()
     	elif program == "LIMIT" and len(sys.argv) == 2:
-    		auto_limit_users()
+    		print auto_limit_users()
     	elif program == "LIMIT" and len(sys.argv) == 5 and sys.argv[2].upper() == "SET":
-    		set_limit(sys.argv[3],sys.argv[4])
+    		print set_limit(sys.argv[3],sys.argv[4])
     	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
-    		auto_set_limit()
+    		print auto_set_limit()
         elif program =="TESTLOGIN" and len(sys.argv == 4):
-            test_login()
+            	print test_login()
         else:
             show_help()   
     except ValueError:
@@ -71,17 +71,17 @@ def update_stats():
         Data().update_stats(user,connections,tx,rx)
 
     Data().update_io(stats().get_all_io([x[2] for x in clients]))
-    return
+    return "stats updated"
 
 def rm_all_limit():
     Firewall().rm_all_limit()
-    return
+    return "flushed LIMITED"
 
 def auto_limit_users():
     lim = limit_per_user()
     returning = " "
     if not Con().is_hig_latency():
-        return
+        return "there is no increased latency"
     else:
         down_clients = Data().above_down_limit(lim['rxpu'])
 	for client in down_clients:
@@ -107,13 +107,17 @@ def auto_limit_users():
     return returning
 
 def limit_ip(what, ip4):
+	returning = "CONNLIMIT|RXLIMIT|TXLIMIT"
 	if what == "CONNLIMIT":
 		Firewall().limit_connections(ip4)
+		returning = "CONNLIMITED "+ip4
 	elif what == "RXLIMIT":
 		Firewall().limit_rx(ip4)
+		returning = "RXLIMITED "+ip4
 	elif what == "TXLIMIT":
 		Firewall().limit_tx(ip4)
-	
+		returning = "TXLIMITED "+ip4
+	return returning
 
 def auto_set_limit():    
     lim = limit_per_user()
@@ -121,10 +125,8 @@ def auto_set_limit():
     rx_count = len(Data().above_down_limit(lim['txpu'])) if len(Data().above_down_limit(lim['txpu'])) !=0 else 1
     tx = int(tx_count*lim['txpu']*conf.bandwidth().limit_offsett)
     rx = int(rx_count*lim['rxpu']*conf.bandwidth().limit_offsett)
-    print tx
-    print rx
     limit().activate_limit(str(tx)+"bps",str(rx)+"bps") # (1mbit,1mbit)(100kbit,100kbit)
-    return
+    return "txlimit is now "+str(tx/1000)+"kbps. and rxlimit is "+str(tx/1000)+"kbps " 
 
 def set_limit(tx,rx):
 	limit().activate_limit(tx,rx)
@@ -135,7 +137,8 @@ def get_multiplication():
                 return 1000
         elif unit is "m":
                 return 1000000
-	return 1
+	else:
+		return 1
 
 
 def limit_per_user(): 
