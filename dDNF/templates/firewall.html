@@ -1,0 +1,116 @@
+{% extends "admin_page.html" %}
+{% load i18n %}
+
+{% block adminmodule %}
+<h2>{% trans "Firewall configuration" %}</h2>
+
+<!-- FORWARD CHAIN -->
+<h3>{% trans "Traffic forwarding rules" %}</h3>
+<table>
+<tr>
+	<th>{% trans "From" %} </th>
+	<th> &nbsp;</th>
+	<th>{% trans "To" %}</th>
+	<th>&nbsp;</th>
+	<th>{% trans "Options" %}</th>
+	<th>{% trans "Action" %}</th>
+</tr>
+{% for rule in forward %}
+<tr>
+	<td>{{ rule.i }}</td>
+	<td>{{ rule.s }}</td>
+	<td>{{ rule.o }}</td>
+	<td>{{ rule.d }}</td>
+	<td>{{ rule.rest }}</td>
+	<td>{{ rule.j }}</td>
+</tr>
+{% empty %}
+</table>
+<p>No rules present." %}</p>
+<table>
+{% endfor %}
+
+
+</table>
+<form>
+iptables 
+<select>
+    <option> -I </option>
+    <option> -A </option>
+</select>
+&nbsp;
+<select>
+    <option>FORWARD</option>
+    <option>INPUT</option>
+</select>
+-p 
+<select>
+    <option> TCP </option>
+    <option> UDP </option>
+</select>
+
+<input type="text" length="48" >
+ -J 
+<select>
+    <option> DROP </OPTION>
+    <option> ACCEPT </OPTION>
+    <option> RECJECT </OPTION>
+</select>
+<input type="submit" value="ADD">
+</form>
+
+
+<!-- INPUT CHAIN -->
+<h3>{% trans "Server rules" %}</h3>
+<table>
+<tr>
+	<th>{% trans "From" %} </th>
+	<th> &nbsp;</th>
+	<th>{% trans "To" %}</th>
+	<th>&nbsp;</th>
+	<th>{% trans "Options" %}</th>
+	<th>{% trans "Action" %}</th>
+</tr>
+{% for rule in input %}
+<tr>
+	<td>{{ rule.i }}</td>
+	<td>{{ rule.s }}</td>
+	<td>{{ rule.o }}</td>
+	<td>{{ rule.d }}</td>
+	<td>{{ rule.rest }}</td>
+	<td>{{ rule.j }}</td>
+</tr>
+{% empty %}
+</table>
+<p>{% trans "No rules present." %}</p>
+<table>
+{% endfor %}
+</table>
+<br>
+<form>
+iptables 
+<select>
+    <option> -I </option>
+    <option> -A </option>
+</select>
+<select>
+    <option>FORWARD</option>
+    <option>INPUT</option>
+</select>
+-p 
+<select>
+    <option> TCP </option>
+    <option> UDP </option>
+</select>
+
+
+<input type="text" length="48" >
+ -J 
+<select>
+    <option> DROP </OPTION>
+    <option> ACCEPT </OPTION>
+    <option> RECJECT </OPTION>
+</select>
+<input type="submit" value="ADD">
+</form>
+{% endblock %}

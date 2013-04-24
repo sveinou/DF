@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-20 18:08+0200\n"
+"POT-Creation-Date: 2013-04-22 17:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: settings.py:47
+#: settings.py:49
 msgid "Norwegian"
 msgstr "Norsk"
 
-#: settings.py:48
+#: settings.py:50
 msgid "English"
 msgstr "Engelsk"
 
-#: templates/base.html:2
+#: templates/base.html:6 templates/base.html.py:11 templates/base.html:15
 msgid "Dynamic Network Firewall"
 msgstr "Dynamisk nettverksbrannmur"
 
@@ -33,21 +33,30 @@ msgstr "Dynamisk nettverksbrannmur"
 msgid "by Espen Gjærde and Svein Ove Undal"
 msgstr "av Espen Gjærde og Svein Ove Undal"
 
-#: templates/login.html:6
+#: templates/login.html:7
 msgid "Logged out"
 msgstr "Logga ut"
+
+#: templates/login.html:8
+msgid ""
+"You have been logged out. You have to login again to get internet access."
+msgstr "Du har blitt logga ut. Logg inn på nytt for å få tilgang til internett"
 
 #: templates/login.html:13
 msgid "Input error"
 msgstr "Feil med inndata"
 
+#: templates/login.html:14
+msgid "You have to give us both your username and password!"
+msgstr "Du må oppgi både brukarnamn og passord."
+
 #: templates/login.html:19
 msgid "Login failed"
-msgstr "Logginn feila"
+msgstr "Feil ved pålogging"
 
 #: templates/login.html:25
 msgid "Account deactivated"
-msgstr "Kontoen stengt"
+msgstr "Kontoen er stengt"
 
 #: templates/login.html:26
 msgid "Your account has been deactivated."
@@ -69,57 +78,65 @@ msgstr "Brukarnamn"
 msgid "Password"
 msgstr "Passord"
 
-#: templates/stats.html:3
-msgid "bytes"
-msgstr "byte"
-
 #: templates/stats.html:4
-msgid "packets"
-msgstr "pakkar"
-
-#: templates/stats.html:5
 msgid "User statistics for"
 msgstr "Brukarstatistikk for"
 
-#: templates/stats.html:6
+#: templates/stats.html:5
 msgid "IP address:"
 msgstr "IP-adresse"
 
-#: templates/stats.html:8
+#: templates/stats.html:7
 msgid ""
 "Hey there boss! Want to check out the admin-panel? Just click the link "
 "below..."
 msgstr "Hei sjef! Sjekk linken nedanfor for å gå til administrasjonspanelet!"
 
-#: templates/stats.html:14
+#: templates/stats.html:12
+msgid "YOUR CONNECTION HAS BEEN LIMITED"
+msgstr "DI TILKOPLING HAR NO RESTRIKSJONAR"
+
+#: templates/stats.html:13
 #, python-format
 msgid ""
 "You have been limited because you have violated %(limit)s. If you think this "
 "is an error, please contact your network admin. "
-msgstr "Vi har satt restriksjonar på nettbruken din fordi du har brote  grensa %(limit)s.  Om du trur dette er ein feil, gjer vel å ta kontakt med personalet."
+msgstr ""
+"Vi har satt restriksjonar på nettbruken din fordi du har brote  grensa "
+"%(limit)s. Ta kontakt med personalet om du trur dette er ein feil"
 
-#: templates/stats.html:18
+#: templates/stats.html:17
 msgid "Your statistics"
 msgstr "Din statistikk"
 
-#: templates/stats.html:21
+#: templates/stats.html:20
 msgid "Connections:"
 msgstr "Tilkoplingar:"
 
-#: templates/stats.html:27
+#: templates/stats.html:26
 msgid "Sent:"
 msgstr "Sendt:"
 
-#: templates/stats.html:41 
+#: templates/stats.html:27 templates/stats.html.py:33
+msgid "bytes"
+msgstr "byte"
+
+#: templates/stats.html:28 templates/stats.html.py:34
+msgid "packets"
+msgstr "pakkar"
+
+#: templates/stats.html:32
+msgid "Recieved:"
+msgstr "Motteke:"
+
+#: templates/stats.html:40
 msgid "Log me out"
 msgstr "Logg meg ut"
 
-#: templates/stats.html:48
+#: templates/stats.html:47
 msgid "Active connections"
 msgstr "Aktive tilkoplingar"
 
-#: templates/stats.html:53
+#: templates/stats.html:52
 msgid "NO ACVTIVE CONNECTIONS."
 msgstr "INGEN AKTIVE TILKOPLINGAR"
-
-

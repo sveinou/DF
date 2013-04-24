@@ -24,6 +24,8 @@ iptables -F
 iptables -t nat -F
 iptables -N ALLOWED
 iptables -N CONNLIMIT
+iptables -N CUSTOM_FORWARD
+iptables -N CUSTOM_INPUT
 iptables -N TXLIMIT
 iptables -N RXLIMIT
 iptables -N TXLIMIT
@@ -45,3 +47,5 @@ iptables -A CONNLIMIT -m connlimit --connlimit-above 50 -j REJECT
 iptables -A TXLIMIT -j MARK --set-mark 200
 iptables -A RXLIMIT -j MARK --set-mark 100
 iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+iptables -I FORWARD -j CUSTOM_FORWARD
+iptables -I INPUT -j CUSTOM_INPUT

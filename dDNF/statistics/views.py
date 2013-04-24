@@ -20,5 +20,6 @@ def user_stats(request):
         return render_to_response('stats.html',{'ip':ipaddr,'io':io,'conn':conn, 'user':user, 'limited': limited, 'limit':limit[0]})
     
     logout(request)
+    print("STATS, but not authenicated")
     return redirect('/')
     
