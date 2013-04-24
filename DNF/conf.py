@@ -18,7 +18,7 @@ if not parser.read("/etc/dnf/dnf.conf"):
 
 server = parser.get("global", "server")
 internal_interface = parser.get("global", "internal_interface")
-external_interface = parser.get("global", "internal_interface")
+external_interface = parser.get("global", "external_interface")
 mode = parser.get("global", "mode")
 # database
 singel = parser.getboolean("global", "singel_login")
@@ -57,7 +57,7 @@ class bandwidth:
     
 ## Filters used in the firewall.
 #  Don't mess with this, unless you REALLY KNOW what you are doing.
-#  
+#  .. and even then. STAY AWAY.
 
 class filter:
     ipv4_in_leasefile = r'(\ [\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3})'

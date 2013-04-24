@@ -26,39 +26,12 @@
 </tr>
 {% empty %}
 </table>
-<p>No rules present." %}</p>
+<p>{% trans "No rules present." %}</p>
 <table>
 {% endfor %}
 
 
 </table>
-<form>
-iptables 
-<select>
-    <option> -I </option>
-    <option> -A </option>
-</select>
-&nbsp;
-<select>
-    <option>FORWARD</option>
-    <option>INPUT</option>
-</select>
--p 
-<select>
-    <option> TCP </option>
-    <option> UDP </option>
-</select>
-
-<input type="text" length="48" >
- -J 
-<select>
-    <option> DROP </OPTION>
-    <option> ACCEPT </OPTION>
-    <option> RECJECT </OPTION>
-</select>
-<input type="submit" value="ADD">
-</form>
-
 
 <!-- INPUT CHAIN -->
 <h3>{% trans "Server rules" %}</h3>
@@ -86,31 +59,25 @@ iptables
 <table>
 {% endfor %}
 </table>
-<br>
-<form>
-iptables 
-<select>
-    <option> -I </option>
-    <option> -A </option>
-</select>
-<select>
-    <option>FORWARD</option>
-    <option>INPUT</option>
-</select>
--p 
-<select>
-    <option> TCP </option>
-    <option> UDP </option>
-</select>
-
-
-<input type="text" length="48" >
- -J 
-<select>
-    <option> DROP </OPTION>
-    <option> ACCEPT </OPTION>
-    <option> RECJECT </OPTION>
-</select>
-<input type="submit" value="ADD">
+<form action="/admin/firewall" method="post"> {% csrf_token %}
+<table>
+	<tr>
+		<th>{% trans "SRC IP" %}</th>
+		<th>{% trans "SRC P" %}</th>
+		<th>{% trans "DST IP" %}</th>
+		<th>{% trans "DST P" %}</th>
+		<th>{% trans "J" %}</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td>{{ form.src_ip }} / {{ form.src_subnet }}</td>
+		<td>{{ form.src_port }}</td>
+		<td>{{ form.dst_ip }} / {{ form.dst_subnet }}</td>
+		<td>{{ form.dst_port }}</td>
+		<td>{{ form.action }}</td>
+		<td><input type="submit" value="{% trans "add" %}"></td>
+	</tr>
+</table>
 </form>
+
 {% endblock %}
