@@ -1,5 +1,7 @@
 DROP TABLE clients;
 DROP TABLE stats;
+DROP TABLE limited;
+
 CREATE TABLE clients(
     user varchar(80), 
     mac varchar(80), 
@@ -15,3 +17,10 @@ CREATE TABLE stats (
     txs bigint(255), 
     rxs bigint(255), 
     time timestamp);
+
+CREATE TABLE limited (
+    User varchar(255),
+    CONNLIMIT int(8),
+    RXLIMIT int(8),
+    TXLIMIT int(8))
+

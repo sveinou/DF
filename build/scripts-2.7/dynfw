@@ -79,7 +79,6 @@ def rm_all_limit():
 
 def auto_limit_users():
     lim = limit_per_user()
-    returning = " "
     if not Con().is_hig_latency():
         return
     else:
@@ -87,25 +86,21 @@ def auto_limit_users():
 	for client in down_clients:
             user = client[0]
 	    ip4 = client[1]
+	    print ip4+" "+user
 	    Firewall().limit_rx(ip4)
-	    returning += "CONNLIMIT " + user + " ;"
 	
 	upl_clients = Data().above_up_limit(lim['txpu'])
 	for client in upl_clients:
             user = client[0]
             ip4 = client[1]
             Firewall().limit_tx(ip4)
-	    returning += "TXLIMIT " + user + " ;"
 
 	conn_clients = Data().above_connection_limit(lim['mcpu'])
 	for client in conn_clients:
             user = client[0]
             ip4 = client[1]
             Firewall().limit_connections(ip4)
-	    returning += "RXLIMIT " + user + " ;"
-
-    return returning
-
+    return
 def limit_ip(what, ip4):
 	if what == "CONNLIMIT":
 		Firewall().limit_connections(ip4)
