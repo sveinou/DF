@@ -5,21 +5,22 @@ from DNF.auth.drop import Drop
 from DNF.stats import info 
 from django.shortcuts import render_to_response, redirect
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.template import RequestContext
 #from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 l = Login()
 d = Drop()
 ip = info.IP()
 
-@csrf_exempt
+@csrf_protect
 def dnf_login(request):    
     ip_addr = str(request.META['REMOTE_ADDR'])
-    if ip.isLoggedIn(ip_addr) and request.user.is_authenticated():
+    if ip.isLoggedIn(ip_addr):# and request.user.is_authenticated():        
         return redirect('/stats/')
     
     if not request.POST:
         link = "http://"+request.META.get('HTTP_HOST')+request.get_full_path()
-        return render_to_response("login.html",{'link':link})
+        return render_to_response("login.html",{'link':link}, context_instance=RequestContext(request))
     else:
         username = request.POST['username'].encode('utf-8')
         password = request.POST['password'].encode('utf-8')
@@ -30,7 +31,7 @@ def dnf_login(request):
             link = "/"
         
         if not username or not password:
-            return render_to_response("login.html",{'link':link,'no_post':True})
+            return render_to_response("login.html",{'link':link,'no_post':True}, context_instance=RequestContext(request))
             
         user = authenticate(username=username, password=password, ipaddress=ip_addr)       
         if user and user.is_active:
@@ -38,11 +39,11 @@ def dnf_login(request):
             return redirect(link)
         elif user and not user.is_active:
             d.ip(ip_addr)
-            return render_to_response('login.html',{'deactivated':True})
+            return render_to_response('login.html',{'deactivated':True}, context_instance=RequestContext(request))
         else:
-            return render_to_response('login.html',{'link':link, 'failed':True})
+            return render_to_response('login.html',{'link':link, 'failed':True}, context_instance=RequestContext(request))
          
-    return render_to_response("login.html",{'no_post':True})
+    return render_to_response("login.html",{'no_post':True}, context_instance=RequestContext(request))
 
 def dnf_logout(request):
     ip_addr = str(request.META['REMOTE_ADDR'])

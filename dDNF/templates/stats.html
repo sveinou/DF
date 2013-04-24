@@ -1,4 +1,5 @@
 {% extends "base.html" %} 
+{% load i18n %}
 {% block body %}
 <h1>{% trans "User statistics for" %} {{user.username}}</h1>
 <p><strong>{% trans "IP address:" %}</strong> {{ip}}</p>
@@ -8,7 +9,7 @@
 {% endif %}
 {% if limited %}
     <div id="warning">
-        <h2>YOUR CONNECTION HAS BEEN LIMITED</h2>
+        <h2>{% trans "YOUR CONNECTION HAS BEEN LIMITED" %} </h2>
         <p>{% blocktrans %}You have been limited because you have violated {{ limit }}. If you think this is an error, please contact your network admin. {% endblocktrans %}</p>
     </div>
 {% endif %}
@@ -22,13 +23,13 @@
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<th>{% trans "Sent:" %}/th>
+		<th>{% trans "Sent:" %}</th>
 		<td>{{ io.bytes_sent }} {% trans "bytes" %}</td>
 		<td>{{ io.pkt_sent }} {% trans "packets" %}</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<th>{% trans "Recieved:</th>
+		<th>{% trans "Recieved:" %}</th>
 		<td>{{ io.bytes_received }} {% trans "bytes" %}</td>
 		<td>{{ io.pkt_received }} {% trans "packets" %}</td>
 		<td>&nbsp;</td>

@@ -7,8 +7,7 @@ setup(
 	author='espengj && sveinou',
 	author_email='@stud.hist.no',
 	packages=['DNF','DNF.firewall','DNF.auth','DNF.stats','DNF.database',
-              'dDNF','dDNF.statistics', 'dDNF.login'],
-    #package_dir = {'dDNF':'/usr/local/share/dnf/'},
+              'dDNF','dDNF.statistics', 'dDNF.login', 'dDNF.manager'],
     package_data = {'dDNF':['templates/*.html', 'templates/media/*','locale/no/LC_MESSAGES/*']},
 	scripts=['bin/dynfw'], # setup_firewall should be a command from dynfw
 	url='http://github.com/sveinou/DF',

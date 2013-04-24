@@ -24,14 +24,36 @@ div#header {
 	height: auto;
 	border-bottom: 2px solid #AADCAA;
 	text-align: left;
+	float:left;
 }
+div.menu{
+	width: 100%;
+	height: auto;
+	background-color: #AADCAA;
+	text-align: right;
+	float:left;
+}
+li.menu{
+	text-align:right;
+	list-style-type: none;
+	padding-right: 5px;
+	padding-left: 5px;
+	float:right;
 
+	}
+a.menu{
+	text-decoration: none;
+	color: black;
+	}
+li.menu:HOVER{
+	background-color: #55B855;
+	margin-top: -2px;
+	}
 h1.header {
 	color: white;
 	font-family: arial;
 	font-size: 3em;
 }
-
 div#footer {
 	width: 100%;
 	color: #224A22;
@@ -62,7 +84,13 @@ table,th,td {
 
 tr,th {
 	width: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 }
-input{
+input.text{
     border: 1px solid #55B855;
+}
+table.borders{
+	border-left: 2px solid #55B855;
+	border-right: 2px solid #55B855;
 }
