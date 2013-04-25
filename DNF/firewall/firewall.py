@@ -134,6 +134,10 @@ class Firewall:
 
 
     def rm_limit(self, ip):
+    	"""
+    	this is an dynamic method that will remove anny limmit with an certan ip
+    	just incase there are duplicate enteries of somthing that shouldnt happen
+    	"""
 
 	ipt = subprocess.Popen(["iptables","-L", "LIMITED"], stdout = subprocess.PIPE)
 	grep = subprocess.Popen(["grep", ip], stdin=ipt.stdout, stdout = subprocess.PIPE)
@@ -151,6 +155,7 @@ class Firewall:
 
 	Data().rm_limit(ip)
         return
+        
     def rm_all_limit(self):
     	subprocess.call("iptables -F LIMITED", shell=True)
     	Data().rm_all_limit()
@@ -165,4 +170,23 @@ class Firewall:
     def limit_tx(self, ip):
 	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
 	Data().add_limit(ip,"TXLIMIT")
+
+    def limit_rx(self, ip): 
+    	"""
+    	makes a rule on the LIMITED chain that jumps to RXLIMIT
+    	RXLIMIT will flagg everypackage for linux trafic controll to limit
+    	"""
+	if not Firewall().is_rule(ip,"LIMITED","RXLIMIT"):
+	    subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+	    Data().add_limit(ip,"RXLIMIT")
+	return
+
+    def limit_tx(self, ip):
+    	"""
+    	makes a rule on the LIMITED chain that jumps to TXLIMIT
+    	TXLIMIT will flagg everypackage for linux trafic controll to limit
+    	"""
+	if not Firewall().is_rule(ip,"LIMITED","TXLIMIT"):
+	    subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+	    Data().add_limit(ip,"TXLIMIT")
 	return

@@ -4,6 +4,11 @@ import subprocess
 import DNF.conf as c
 
 class limit:
+	"""
+	This class will create an limit on both up, and down flow. 
+	The limit only applies to packgages that are marked. packages are later marked with iptables. 
+	with mark 100(rx) or 200(tx).
+	"""
 	IF = c.external_interface
 
 	def __init__(self):

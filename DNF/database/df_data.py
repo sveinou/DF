@@ -5,12 +5,16 @@ import time
 from DNF.database.storage import Database
 
 class Data:
+	"""
+	This is where all the sql queries are done
+	most method are selfe explained
+	"""
     db = Database()
     
     def __init__(self):
         pass
 
-    def get_ip4(self, ip4): #getIp4
+    def get_ip4(self, ip4): 
         sql = "select * from clients where IP4='%s'" % ip4
         return self.db.get_row(sql)
 
@@ -35,7 +39,7 @@ class Data:
         if type(search) == str:
             sql = "select Active from clients where %s='%s'" % (data_type,search)
         else:
-            # obs. maa vite type i database
+            # need to know the database data type
             sql = "select Active from clients where %s={1}" % (data_type,search) 
 
         sql = self.db.get_row(sql)
@@ -50,7 +54,7 @@ class Data:
         if type(search) == str:
             sql = "select %s from clients where %s='%s'" % (get_type,search_type,search)
         else:
-            # obs. maa vite type i database
+            # need to know the database data type
             sql = "select %s from clients where %s={1}" % (get_type,search_type,search)
 
         return self.db.get_row(sql)
@@ -137,6 +141,7 @@ class Data:
             sql = "INSERT INTO stats VALUES ('%s', %i, 0, 0, 0, 0,FROM_UNIXTIME(%s))" %(user,connections,Time)
 
         self.db.alter(sql)
+        
     def update_io(self,io):
 	sql = "select * from stats"
 	row = Database().get_row(sql)

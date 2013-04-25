@@ -117,6 +117,10 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+	## MY APPS
+	'dDNF.login',
+	'dDNF.statistics',
+	'dDNF.manager',
 )
 AUTHENTICATION_BACKENDS = ('dDNF.login.migrate.FirstLoginAuth',
                            'django.contrib.auth.backends.ModelBackend',)

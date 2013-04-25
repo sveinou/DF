@@ -14,18 +14,18 @@
 </tr>
 {% for user in active %}
 <tr>
-<td>{{ user }}</td>
-<td> Not impl</td>
-<td> Not impl</td>
+<td>{{ user.last_seen_ip }}</td>
+<td>{{ user.username }}</td>
+<td>{{ user.last_login }}</td>
 	<td><table><tr><td>
-		<form>
-		<input type="hidden" value="{{ user }}" name="limit">
+		<form action="/admin/currently-active/limit/" method="POST">{% csrf_token %}
+		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
 		<input type="submit" value="{% trans "LIMIT" %} " class="mini">
 		</form>
 		</td><td>
-		<form>
-		<input type="hidden" value="{{ user }}" name="drop">
-		<input type="submit" value="{% trans "UNBLOCK" %} " class="mini">
+		<form action="/admin/currently-active/drop/" method="POST">{% csrf_token %}
+		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+		<input type="submit" value="{% trans "KICK" %} " class="mini">
 		</form>
 		</td></tr></table>
 	</td>
@@ -49,19 +49,19 @@
 </tr>
 {% for user in limited %}
 <tr>
-<td>{{ user }}</td>
-<td> Not impl</td>
-<td> Not impl</td>
+<td>{{ user.last_seen_ip }}</td>
+<td>{{ user.username }}</td>
+<td>{{ user.last_login }}</td>
 	<td>
 		<table><tr><td>
-		<form>
-		<input type="hidden" value="{{ user }}" name="limit">
-		<input type="submit" value="{% trans "LIMIT" %} " class="mini">
+		<form action="/admin/currently-active/free/" method="POST">{% csrf_token %}
+		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+		<input type="submit" value="{% trans "SET FREE" %} " class="mini">
 		</form>
 		</td><td>
-		<form>
-		<input type="hidden" value="{{ user }}" name="drop">
-		<input type="submit" value="{% trans "UNBLOCK" %} " class="mini">
+		<form action="/admin/currently-active/drop/" method="POST">{% csrf_token %}
+		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+		<input type="submit" value="{% trans "KICK" %} " class="mini">
 		</form>
 		</td></tr></table>
 	</td>

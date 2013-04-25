@@ -1,6 +1,6 @@
-DROP TABLE clients;
-DROP TABLE stats;
-DROP TABLE limited;
+
+
+
 
 CREATE TABLE clients(
     user varchar(80), 
