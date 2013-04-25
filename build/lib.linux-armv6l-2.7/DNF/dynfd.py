@@ -28,7 +28,7 @@ class App():
   	    subprocess.call("/usr/local/bin/dynfw FLUSH LIMITED", shell=True)
 	    count = 0
 
-	 if count == 6 and conf.mode != "manual" or 12 and conf.mode != "manual": 
+	 if count == 6 and conf.mode != "manual" or count == 12 and conf.mode != "manual": 
      	     subprocess.call("/usr/local/bin/dynfw LIMIT AUTO", shell=True)
 	     if conf.mode == "auto":
 	         subprocess.call("/usr/local/bin/dynfw LIMIT", shell=True)
@@ -36,8 +36,8 @@ class App():
 
 
 	 subprocess.call("/usr/local/bin/dynfw UPDATE", shell=True)
-	
-	 time.sleep(20)
+	 count += 1
+	 time.sleep(1)
 
 
 

@@ -33,17 +33,17 @@ def main():
         elif(program == "INFO" and len(sys.argv) == 3):
             user_info(sys.argv[2])	   	
     	elif program == "UPDATE" and len(sys.argv) == 2:
-    		update_stats()
+    		print update_stats()
     	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[2].upper() == "LIMITED":
-    		rm_all_limit()
+    		print rm_all_limit()
     	elif program == "LIMIT" and len(sys.argv) == 2:
-    		auto_limit_users()
+    		print auto_limit_users()
     	elif program == "LIMIT" and len(sys.argv) == 5 and sys.argv[2].upper() == "SET":
-    		set_limit(sys.argv[3],sys.argv[4])
+    		print set_limit(sys.argv[3],sys.argv[4])
     	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
-    		auto_set_limit()
+    		print auto_set_limit()
         elif program =="TESTLOGIN" and len(sys.argv == 4):
-            test_login()
+            	print test_login()
         else:
             show_help()   
     except ValueError:
@@ -71,36 +71,42 @@ def update_stats():
         Data().update_stats(user,connections,tx,rx)
 
     Data().update_io(stats().get_all_io([x[2] for x in clients]))
-    return
+    return "stats updated"
 
 def rm_all_limit():
     Firewall().rm_all_limit()
-    return
+    return "flushed LIMITED"
 
 def auto_limit_users():
     lim = limit_per_user()
+    returning = " "
     if not Con().is_hig_latency():
-        return
+        return "there is no increased latency"
     else:
-        down_clients = Data().above_down_limit(lim['rxpu'])
+        down_clients = Data().above_down_limit(int(lim['rxpu']))
 	for client in down_clients:
             user = client[0]
 	    ip4 = client[1]
-	    print ip4+" "+user
 	    Firewall().limit_rx(ip4)
+	    print ip4
+	    returning += "RXLIMIT " + user + " ;"
 	
-	upl_clients = Data().above_up_limit(lim['txpu'])
+	upl_clients = Data().above_up_limit(int(lim['txpu']))
 	for client in upl_clients:
             user = client[0]
             ip4 = client[1]
             Firewall().limit_tx(ip4)
+	    returning += "TXLIMIT " + user + " ;"
 
-	conn_clients = Data().above_connection_limit(lim['mcpu'])
+	conn_clients = Data().above_connection_limit(int(lim['mcpu']))
 	for client in conn_clients:
             user = client[0]
             ip4 = client[1]
             Firewall().limit_connections(ip4)
-    return
+	    returning += "CONNLIMIT " + user + " ;"
+
+    return returning
+
 def limit_ip(what, ip4):
 	if what == "CONNLIMIT":
 		Firewall().limit_connections(ip4)
@@ -108,18 +114,21 @@ def limit_ip(what, ip4):
 		Firewall().limit_rx(ip4)
 	elif what == "TXLIMIT":
 		Firewall().limit_tx(ip4)
-	
+	return what+" "+ip4
 
 def auto_set_limit():    
     lim = limit_per_user()
-    tx_count = len(Data().above_up_limit(lim['txpu'])) if len(Data().above_down_limit(lim['rxpu'])) != 0 else 1
-    rx_count = len(Data().above_down_limit(lim['txpu'])) if len(Data().above_down_limit(lim['txpu'])) !=0 else 1
-    tx = int(tx_count*lim['txpu']*conf.bandwidth().limit_offsett)
-    rx = int(rx_count*lim['rxpu']*conf.bandwidth().limit_offsett)
-    print tx
-    print rx
+    tx_count = len(Data().above_up_limit(lim['txpu']))
+    if tx_count >= 0:
+	tx_count = 1
+    rx_count = len(Data().above_down_limit(lim['rxpu']))
+    if rx_count >= 0: 
+	rx_count = 1
+
+    tx = int(tx_count*lim['txpu'])
+    rx = int(rx_count*lim['rxpu'])
     limit().activate_limit(str(tx)+"bps",str(rx)+"bps") # (1mbit,1mbit)(100kbit,100kbit)
-    return
+    return "txlimit is now "+str(tx/1000)+"kbps. and rxlimit is "+str(tx/1000)+"kbps. if user is above "+str(lim['txpu'])+" / "+str(lim['rxpu'])
 
 def set_limit(tx,rx):
 	limit().activate_limit(tx,rx)
@@ -130,7 +139,8 @@ def get_multiplication():
                 return 1000
         elif unit is "m":
                 return 1000000
-	return 1
+	else:
+		return 1
 
 
 def limit_per_user(): 
@@ -139,8 +149,8 @@ def limit_per_user():
     tx = conf.bandwidth().max_txs
     MC = conf.bandwidth().max_connections
     offset = conf.bandwidth().limit_offsett
-    rxpu = rx/userCount*get_multiplication()*offset
-    txpu = tx/userCount*get_multiplication()*offset
+    rxpu = int(rx/userCount*get_multiplication()*offset)
+    txpu = int(tx/userCount*get_multiplication()*offset)
     mcpu = MC/userCount
     return {'rxpu':rxpu, 'txpu':txpu, 'mcpu':mcpu}
 
@@ -158,9 +168,11 @@ def user_info(search):
 	    print "info on "+search
 	    print " "
     	    print "User:%s Mac:%s IP4:%s IP6:%s Active:%i" % (client[0],client[1],client[2],client[3],client[4])
-	    print "connections:%i txt:%i rxt:%i txs:%i rxs:%i" % (stats[1],stats[2],stats[3],stats[4],stats[5])
- 	    print "limited: connlimit=%i RXLIMIT=%i TXLIMIT=%i" % (limited[1],limited[2],limited[3])
-	    print " "
+	    if stats:
+	    	print "connections:%i txt:%i rxt:%i txs:%i rxs:%i" % (stats[1],stats[2],stats[3],stats[4],stats[5])
+	    elif limited:
+ 	    	print "limited: connlimit=%i RXLIMIT=%i TXLIMIT=%i" % (limited[1],limited[2],limited[3])
+	    	print " "
 	else:
 		print "found nuthing"
 

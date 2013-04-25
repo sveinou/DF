@@ -100,8 +100,22 @@ class Firewall:
             return True
         else:
             return False
-
-
+        
+    def get_custom_forward(self):
+        """
+        returns all rules in limited-chain.        
+        """
+        ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_FORWARD']
+        ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        return [line.split() for line in ipres[2:-1]]
+    def get_custom_input(self):
+        """
+        returns all rules in limited-chain.        
+        """
+        ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_INPUT']
+        ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        return [line.split() for line in ipres[2:-1]]
+    
     def get_limited(self):
         """
         returns all rules in limited-chain.        
@@ -144,13 +158,11 @@ class Firewall:
         
 
     def limit_rx(self, ip):
-	if not Firewall().is_rule(ip,"LIMITED","RXLIMIT"):
-	    subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
-	    Data().add_limit(ip,"RXLIMIT")
+	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+	Data().add_limit(ip,"RXLIMIT")
 	return
 
     def limit_tx(self, ip):
-	if not Firewall().is_rule(ip,"LIMITED","TXLIMIT"):
-	    subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
-	    Data().add_limit(ip,"TXLIMIT")
+	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+	Data().add_limit(ip,"TXLIMIT")
 	return

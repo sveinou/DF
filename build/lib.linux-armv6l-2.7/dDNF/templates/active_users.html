@@ -1,0 +1,79 @@
+{% extends "admin_page.html" %}
+{% load i18n %}
+
+{% block adminmodule %}
+
+<h2>{% trans "Currently active users" %}</h2>
+<p>
+<table class="borders">
+<tr>
+<th>{% trans "IP-address" %}</th>
+<th>{% trans "Username" %}</th>
+<th>{% trans "Login timestamp" %}</th>
+<th>{% trans "Action" %}</th>
+</tr>
+{% for user in active %}
+<tr>
+<td>{{ user }}</td>
+<td> Not impl</td>
+<td> Not impl</td>
+	<td><table><tr><td>
+		<form>
+		<input type="hidden" value="{{ user }}" name="limit">
+		<input type="submit" value="{% trans "LIMIT" %} " class="mini">
+		</form>
+		</td><td>
+		<form>
+		<input type="hidden" value="{{ user }}" name="drop">
+		<input type="submit" value="{% trans "UNBLOCK" %} " class="mini">
+		</form>
+		</td></tr></table>
+	</td>
+</tr>
+{% empty %}
+<tr><td>{% trans "No users currently active." %}</p></td></tr>
+{% endfor %}
+</table>
+</p>
+
+<table><tr><td>&nbsp;</td></tr></table>
+
+<h2>{% trans "Limited users" %}</h2>
+
+<table class="borders">
+<tr>
+<th>{% trans "IP-address" %}</th>
+<th>{% trans "Username" %}</th>
+<th>{% trans "Login timestamp" %}</th>
+<th>{% trans "Action" %}</th>
+</tr>
+{% for user in limited %}
+<tr>
+<td>{{ user }}</td>
+<td> Not impl</td>
+<td> Not impl</td>
+	<td>
+		<table><tr><td>
+		<form>
+		<input type="hidden" value="{{ user }}" name="limit">
+		<input type="submit" value="{% trans "LIMIT" %} " class="mini">
+		</form>
+		</td><td>
+		<form>
+		<input type="hidden" value="{{ user }}" name="drop">
+		<input type="submit" value="{% trans "UNBLOCK" %} " class="mini">
+		</form>
+		</td></tr></table>
+	</td>
+</tr>
+{% empty %}
+</table>
+<table>
+<tr><td><em>
+{% trans "No user are currently limited" %}</p>
+{% endfor %}
+</em></td></tr>
+</table>
+
+
+{% endblock %}

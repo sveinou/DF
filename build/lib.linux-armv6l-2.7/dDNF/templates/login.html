@@ -29,8 +29,8 @@
 <h1>{% trans "Please login to gain internet access" %}</h1>
 <p>{% trans "After the login, you will be forwarded to:" %} <em>{{ link }}</em></p>
 <form action="/" method="post">{% csrf_token %}
-     {% trans "Username" %}: <input type="text" name="username"> 
-     {% trans "Password" %}: <input type="password" name="password"> 
+     {% trans "Username" %}: <input type="text" name="username" class="text"> 
+     {% trans "Password" %}: <input type="password" name="password"  class="text"> 
                <input type="hidden" name="link" value="{{ link }}">
                <input type="submit" value="Login"> 
 </form>

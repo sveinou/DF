@@ -158,13 +158,11 @@ class Firewall:
         
 
     def limit_rx(self, ip):
-	if not Firewall().is_rule(ip,"LIMITED","RXLIMIT"):
-	    subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
-	    Data().add_limit(ip,"RXLIMIT")
+	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+	Data().add_limit(ip,"RXLIMIT")
 	return
 
     def limit_tx(self, ip):
-	if not Firewall().is_rule(ip,"LIMITED","TXLIMIT"):
-	    subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
-	    Data().add_limit(ip,"TXLIMIT")
+	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+	Data().add_limit(ip,"TXLIMIT")
 	return
