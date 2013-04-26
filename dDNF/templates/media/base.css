@@ -69,7 +69,13 @@ div#warning {
 	padding: 20px 20px 20px 20px;
 	text-color: purple;
 }
-
+div#done {
+	border: 2px solid green;
+	background-color: pink;
+	height: auto;
+	padding: 20px 20px 20px 20px;
+	text-color: purple;
+}
 h1 {
 	color: #55B855;
 }
