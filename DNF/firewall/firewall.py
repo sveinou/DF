@@ -161,15 +161,15 @@ class Firewall:
     	Data().rm_all_limit()
     	
         
-
-    def limit_rx(self, ip):
-	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
-	Data().add_limit(ip,"RXLIMIT")
-	return
-
-    def limit_tx(self, ip):
-	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
-	Data().add_limit(ip,"TXLIMIT")
+# DUPLICATE!
+#    def limit_rx(self, ip):
+#	subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+#	Data().add_limit(ip,"RXLIMIT")
+#	return
+#
+ #   def limit_tx(self, ip):
+#	subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+#	Data().add_limit(ip,"TXLIMIT")
 
     def limit_rx(self, ip): 
     	"""
