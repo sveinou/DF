@@ -139,21 +139,21 @@ class Firewall:
         just incase there are duplicate enteries of somthing that shouldnt happen
         """
 
-    ipt = subprocess.Popen(["iptables","-L", "LIMITED"], stdout = subprocess.PIPE)
-    grep = subprocess.Popen(["grep", ip], stdin=ipt.stdout, stdout = subprocess.PIPE)
-    out = grep.communicate()[0]
-    for rule in out.split("\n"):
-        rule = rule.split("all")[0]
-        print rule
-        if rule == "RXLIMIT":
-            subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True)
-        elif rule == "TXLIMIT":
-            subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
-        else: # will try to remove tvice as manny rules as there are,
-            subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
-            subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True) 
-
-    Data().rm_limit(ip)
+        ipt = subprocess.Popen(["iptables","-L", "LIMITED"], stdout = subprocess.PIPE)
+        grep = subprocess.Popen(["grep", ip], stdin=ipt.stdout, stdout = subprocess.PIPE)
+        out = grep.communicate()[0]
+        for rule in out.split("\n"):
+            rule = rule.split("all")[0]
+            print rule
+            if rule == "RXLIMIT":
+                subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True)
+            elif rule == "TXLIMIT":
+                subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
+            else: # will try to remove tvice as manny rules as there are,
+                subprocess.call("iptables -D LIMITED -s "+ip+" -j "+rule, shell=True)
+                subprocess.call("iptables -D LIMITED -d "+ip+" -j "+rule, shell=True) 
+    
+        Data().rm_limit(ip)
         return
         
     def rm_all_limit(self):
@@ -176,17 +176,17 @@ class Firewall:
         makes a rule on the LIMITED chain that jumps to RXLIMIT
         RXLIMIT will flagg everypackage for linux trafic controll to limit
         """
-    if not Firewall().is_rule(ip,"LIMITED","RXLIMIT"):
-        subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
-        Data().add_limit(ip,"RXLIMIT")
-    return
-
+        if not Firewall().is_rule(ip,"LIMITED","RXLIMIT"):
+            subprocess.call("iptables -I LIMITED -d "+ip+" -j RXLIMIT", shell=True) 
+            Data().add_limit(ip,"RXLIMIT")
+        return
+    
     def limit_tx(self, ip):
         """
         makes a rule on the LIMITED chain that jumps to TXLIMIT
         TXLIMIT will flagg everypackage for linux trafic controll to limit
         """
-    if not Firewall().is_rule(ip,"LIMITED","TXLIMIT"):
-        subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
-        Data().add_limit(ip,"TXLIMIT")
-    return
+        if not Firewall().is_rule(ip,"LIMITED","TXLIMIT"):
+            subprocess.call("iptables -I LIMITED -s "+ip+" -j TXLIMIT", shell=True) 
+            Data().add_limit(ip,"TXLIMIT")
+        return
