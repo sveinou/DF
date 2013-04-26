@@ -5,14 +5,14 @@
 
 {% if action and not error %}
 <div id="done">
-<h1>{% blocktrans %} {{ user.username }} @ {{ user.last_seen_ip }} has been {{ action }} {% endblocktrans %}</h1>
+<h1>{{ user.username }} @ {{ user.last_seen_ip }} has been {{ action }}</h1>
 <p>{% trans "You can undo this in the section below. A kicked user must login again." %}<</p>
 </div>
 {% endif%}
 {% if error %}
 <div id="warning">
-<h1>{% blocktrans %} Oh snap! Something went wrong {% endblocktrans %}</h1>
-<p>{% blocktrans %} We tried to {{ action }}. That didn't go well... {% endblocktrans %}</p>
+<h1>Oh snap! Something went wrong</h1>
+<p>We tried to {{ action }}. That didn't go well... </p>
 </div>
 {% endif%}
 <h2>{% trans "Currently active users" %}</h2>

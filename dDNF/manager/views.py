@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from DNF.firewall.firewall import Firewall
+from DNF.auth.drop import Drop
 from DNF import conf
 
 def edit_user(request):
@@ -48,7 +49,8 @@ def list_active(request, action=None):
     elif action and action == 'kick' and request.POST:
         user = LoggedInUser.objects.get(last_seen_ip=request.POST.get('victim'))
         if user:
-            f.drop_ip4(user.last_seen_ip)
+            Drop().ip4(user.last_seen_ip)
+#            f.drop_ip4(user.last_seen_ip)
 #            user.is_active = False        
         else:
             error = True;
