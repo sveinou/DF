@@ -3,8 +3,21 @@
 
 {% block adminmodule %}
 
+{% if action and not error %}
+<div id="done">
+<h1>{{ user.username }} @ {{ user.last_seen_ip }} has been {{ action }}</h1>
+<p>{% trans "You can undo this in the section below. A kicked user must login again." %}<</p>
+</div>
+{% endif%}
+{% if error %}
+<div id="warning">
+<h1>Oh snap! Something went wrong</h1>
+<p>We tried to {{ action }}. That didn't go well... </p>
+</div>
+{% endif%}
 <h2>{% trans "Currently active users" %}</h2>
 <p>
+
 <table class="borders">
 <tr>
 <th>{% trans "IP-address" %}</th>
@@ -12,22 +25,32 @@
 <th>{% trans "Login timestamp" %}</th>
 <th>{% trans "Action" %}</th>
 </tr>
+
 {% for user in active %}
 <tr>
 <td>{{ user.last_seen_ip }}</td>
 <td>{{ user.username }}</td>
 <td>{{ user.last_login }}</td>
-	<td><table><tr><td>
+	<td>
+		<table><tr>
 		<form action="/admin/currently-active/limit/" method="POST">{% csrf_token %}
-		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
-		<input type="submit" value="{% trans "LIMIT" %} " class="mini">
+		<td>
+			 TX <input type="radio" name="setlimit" value="TX"> 
+			 RX <input type="radio" name="setlimit" value="RX">
+			 Co <input type="radio" name="setlimit" value="C">
+		</td>
+		<td>
+			<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+			<input type="submit" value="{% trans "LIMIT" %} " class="mini">
+		</td>
 		</form>
-		</td><td>
-		<form action="/admin/currently-active/drop/" method="POST">{% csrf_token %}
-		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
-		<input type="submit" value="{% trans "KICK" %} " class="mini">
+		<form action="/admin/currently-active/kick/" method="POST">{% csrf_token %}
+		<td>
+			<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+			<input type="submit" value="{% trans "KICK" %} " class="mini">
+		</td>
 		</form>
-		</td></tr></table>
+		</tr></table>
 	</td>
 </tr>
 {% empty %}
@@ -59,7 +82,7 @@
 		<input type="submit" value="{% trans "SET FREE" %} " class="mini">
 		</form>
 		</td><td>
-		<form action="/admin/currently-active/drop/" method="POST">{% csrf_token %}
+		<form action="/admin/currently-active/kick/" method="POST">{% csrf_token %}
 		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
 		<input type="submit" value="{% trans "KICK" %} " class="mini">
 		</form>

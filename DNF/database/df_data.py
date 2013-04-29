@@ -5,10 +5,11 @@ import time
 from DNF.database.storage import Database
 
 class Data:
-	"""
-	This is where all the sql queries are done
-	most method are selfe explained
-	"""
+    """
+    This is where all the sql queries are done
+    most method are selfe explained
+    """
+
     db = Database()
     
     def __init__(self):
@@ -19,16 +20,16 @@ class Data:
         return self.db.get_row(sql)
 
     def get_stats(self, user):
-	sql = "select * from stats where User='%s'" % user
-	return self.db.get_row(sql)
+        sql = "select * from stats where User='%s'" % user
+        return self.db.get_row(sql)
   
     def get_limited(self, user):
-	sql = "select * from limited where User='%s'" % user
-	return self.db.get_row(sql)
+        sql = "select * from limited where User='%s'" % user
+        return self.db.get_row(sql)
 
     def get_all_active_clients(self):
-    	sql = "select * from clients where Active=1"
-    	return self.db.get_all_rows(sql)
+        sql = "select * from clients where Active=1"
+        return self.db.get_all_rows(sql)
  
     def all_active_ips(self):
         sql = "SELECT ip4 FROM clients WHERE active = 1"
@@ -108,7 +109,7 @@ class Data:
 
     #updates one part in a user`s row
 
-     # maybeh make a better check for it...
+    # maybeh make a better check for it...
 
 
         if len(data) > 17:
@@ -143,16 +144,16 @@ class Data:
         self.db.alter(sql)
         
     def update_io(self,io):
-	sql = "select * from stats"
-	row = Database().get_row(sql)
-	if not row:
-            return "NO CLIENTS"
-	for client in io:
-	    #client [ip,tx,rx]
-	    sql = "UPDATE stats INNER JOIN clients ON stats.USER = clients.USER SET txs=%i, rxs=%i WHERE clients.IP4='%s'" %(client[1],client[2],client[0])
-	    Database().alter(sql)
-	return "done!"
-	
+        sql = "select * from stats"
+        row = Database().get_row(sql)
+        if not row:
+                return "NO CLIENTS"
+        for client in io:
+            #client [ip,tx,rx]
+            sql = "UPDATE stats INNER JOIN clients ON stats.USER = clients.USER SET txs=%i, rxs=%i WHERE clients.IP4='%s'" %(client[1],client[2],client[0])
+            Database().alter(sql)
+        return "done!"
+    
 
 
     def above_down_limit(self, limit): #aboveDownLimit
@@ -202,7 +203,7 @@ class Data:
         return self.db.get_row(sql)
 
     def count_limited(self, limit_type):
-	sql = "select count(*) from limited WHERE %s=1" % limit_type #CONNLIMIT, RXLIMIT, TXLIMIT  
+        sql = "select count(*) from limited WHERE %s=1" % limit_type #CONNLIMIT, RXLIMIT, TXLIMIT  
         return self.db.get_row(sql)
 
     def add_limit(self, ip, limit):        
@@ -219,8 +220,10 @@ class Data:
         sql = "UPDATE limited SET CONNLIMIT=0, RXLIMIT=0, TXLIMIT=0"
         self.db.alter(sql)
         return
+       
     def rm_limit(self, ip4):
         User = self.get_ip4(ip4)[0]
         sql = "update limited set CONNLIMIT=0, RXLIMIT=0, RXLIMIT=0 where User='%s'" % User
+        self.db.alter(sql)
         return
     
