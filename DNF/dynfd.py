@@ -10,17 +10,15 @@ class App():
    
     def __init__(self):
         self.stdin_path = '/dev/null'
-        self.stdout_path = '/dev/tty'
-        self.stderr_path = '/dev/tty'
+        self.stdout_path = '/dev/tty' #change to a logfile or /dev/null
+        self.stderr_path = '/dev/tty' #change to a logfile or /dev/null
         self.pidfile_path =  '/var/run/dynfwd/dynfwd.pid'
         self.pidfile_timeout = 5
             
     def run(self):
         count=0
         while True:
-         #Main code goes here ...
-         #Note that logger level needs to be set to logging.DEBUG before this shows up in the logs
-         #logger.debug("Debug message")
+         #logger.debug("Debug message") #(logging.DEBUG to enable)
          #logger.info("Info message")
          #logger.warn("Warning message")
          #logger.error("Error message")
