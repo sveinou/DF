@@ -17,6 +17,8 @@ mysql -u root -p -h localhost df < database.sql
 # network options. interfaces, network mask, internal ip, package forwarding
 /sbin/ifconfig $INT $IP netmask 255.255.255.0
 echo 1 > /proc/sys/net/ipv4/ip_forward
+#sysctl -w net.ipv6.conf.all.forwarding=1
+#/usr/sbin/dhcpd -6 -f -cf /etc/dhcp/dhcpd6.conf eth1
 service isc-dhcp-server restart
 
 # firewall settings, nat or not, redirect, allow dns, drop rest,
