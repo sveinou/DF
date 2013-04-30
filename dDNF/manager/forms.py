@@ -20,4 +20,5 @@ class FirewallRule(forms.Form):
     dst_ip = forms.IPAddressField(label='Destination IP')
     dst_port = forms.IntegerField(min_value=0, max_value=65535, label='Destination Post', widget=wgt_port)
     dst_subnet = forms.IntegerField(min_value=0, max_value=32, widget=wgt_sub)
-    action = forms.ChoiceField(choices=[(1,'ACCEPT'),(2,'DROP'),(3,'REJECT')], label='Action')
+    action = forms.ChoiceField(choices=[('ACCEPT','ACCEPT'),('DROP','DROP'),('REJECT','REJECT')], label='Action')
+    chain = forms.ChoiceField(choices=[('FORWARD','FORWARD'),('INPUT','INPUT')], label='Chain')

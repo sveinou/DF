@@ -107,14 +107,46 @@ class Firewall:
         """
         ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_FORWARD']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
-        return [line.split() for line in ipres[2:-1]]
+        rules = []
+        
+        for rule in [line.split() for line in ipres[2:-1]]:
+            dpt = 'any' 
+            spt = 'any'
+            rest = ''
+            for opt in rule[9:]:
+                if opt[:3] == 'dpt': dpt = opt[4:]
+                elif opt[:3] == 'spt': spt = opt[4:]
+                else: rest += opt
+            rules.append({'pkts':rule[0], 'bytes':rule[1],
+                          'target':rule[2],'prot':rule[3],
+                          'opt':rule[4],'in':rule[5],
+                          'out':rule[6],'src':rule[7],
+                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest})
+            
+        return rules;
+    
     def get_custom_input(self):
         """
         returns all rules in limited-chain.        
         """
         ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_INPUT']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
-        return [line.split() for line in ipres[2:-1]]
+        rules = []
+        for rule in [line.split() for line in ipres[2:-1]]:
+            dpt = 'any' 
+            spt = 'any'
+            rest = ''
+            for opt in rule[9:]:
+                if opt[:3] == 'dpt': dpt = opt[4:]
+                elif opt[:3] == 'spt': spt = opt[4:]
+                else: rest += opt
+            rules.append({'pkts':rule[0], 'bytes':rule[1],
+                          'target':rule[2],'prot':rule[3],
+                          'opt':rule[4],'in':rule[5],
+                          'out':rule[6],'src':rule[7],
+                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest})
+            
+        return rules;
     
     def get_limited(self):
         """

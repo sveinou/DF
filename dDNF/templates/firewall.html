@@ -8,21 +8,61 @@
 <h3>{% trans "Traffic forwarding rules" %}</h3>
 <table>
 <tr>
+	<th>{% trans "prot" %}</th>
 	<th>{% trans "From" %} </th>
-	<th> &nbsp;</th>
+<!--<th></th>  -->	
+	<th></th>
 	<th>{% trans "To" %}</th>
-	<th>&nbsp;</th>
-	<th>{% trans "Options" %}</th>
+<!-- 	<th></th> -->
+	<th></th>
 	<th>{% trans "Action" %}</th>
+	<th>{% trans "Extras" %}</th>
+</tr>
+<tr>
+<td></td>
+<!-- <td>nic</td>-->
+<td>IP</td>
+<td>port</td>
+<!-- <td>nic</td>-->
+<td>IP</td>
+<td>port</td>
 </tr>
 {% for rule in forward %}
+
 <tr>
-	<td>{{ rule.i }}</td>
-	<td>{{ rule.s }}</td>
-	<td>{{ rule.o }}</td>
-	<td>{{ rule.d }}</td>
-	<td>{{ rule.rest }}</td>
-	<td>{{ rule.j }}</td>
+	<td>{{ rule.prot }}</td>
+<!-- 	<td>
+		{% if rule.in == "*" %}
+			{% trans "any" %}
+		{% else %}
+			{{ rule.in }}
+		{% endif %}
+	</td> -->
+	<td>
+		{% if rule.src == "0.0.0.0/0" %}
+			{% trans "anywhere" %}
+		{% else %}
+			{{ rule.src }}
+		{% endif %}
+	</td>
+	<td>{{ rule.spt }}</td>
+<!-- 	<td>
+		{% if rule.out == "*" %}
+			{% trans "any" %}
+		{% else %}
+			{{ rule.out }}
+		{% endif %}
+	</td> -->
+	<td>
+		{% if rule.dst == "0.0.0.0/0" %}
+			{% trans "anywhere" %}
+		{% else %}
+			{{ rule.dst }}
+		{% endif %}
+	</td>
+	<td>{{ rule.dpt }}</td>
+	<td>{{ rule.target }}</td>
+	<td>{{ rule.rest}}</td>
 </tr>
 {% empty %}
 </table>
@@ -38,7 +78,7 @@
 <table>
 <tr>
 	<th>{% trans "From" %} </th>
-	<th> &nbsp;</th>
+	<th> &nbsp;</th> 
 	<th>{% trans "To" %}</th>
 	<th>&nbsp;</th>
 	<th>{% trans "Options" %}</th>
@@ -59,9 +99,12 @@
 <table>
 {% endfor %}
 </table>
+<h3>{% trans "Add new rule" %}</h3>
+<p>{% trans "In the form below, you can enter new rules to the firewall. You hav to select chain. 'FORWARD' is traffic passing trough, while 'INPUT' is traffic directed AT the server." %}</p>
 <form action="/admin/firewall" method="post"> {% csrf_token %}
 <table>
 	<tr>
+		<th>{% trans "CHAIN" %}</th>
 		<th>{% trans "SRC IP" %}</th>
 		<th>{% trans "SRC P" %}</th>
 		<th>{% trans "DST IP" %}</th>
@@ -70,6 +113,7 @@
 		<th></th>
 	</tr>
 	<tr>
+		<td>{{ form.chain }}</td>
 		<td>{{ form.src_ip }} / {{ form.src_subnet }}</td>
 		<td>{{ form.src_port }}</td>
 		<td>{{ form.dst_ip }} / {{ form.dst_subnet }}</td>

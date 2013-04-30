@@ -1,31 +1,36 @@
 
 
-from dDNF.manager.forms import FirewallRule, NetworkSettings
+from dDNF.manager.forms import FirewallRule
+from dDNF.manager.models import Rule
 from dDNF.login.models import LoggedInUser
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from DNF.firewall.firewall import Firewall
 from DNF.auth.drop import Drop
 from DNF import conf
 
-def edit_user(request):
-    if request.method == 'POST':
-        #form = UserForm(request.POST)
-        form = ""
-        if form.is_valid():
-            data = form.cleaned_data
-            user = LoggedInUser.objects.get(username=data['username'])
-            user.first_name = data['firstname']
-            user.last_name = data['lastname']
-            user.is_active = data['restrict']
-            user.save()
-            return HttpResponseRedirect('/admin/')
 
-def blockuser(request):
-    pass
+# def edit_user(request):
+#     if request.method == 'POST':
+#         #form = UserForm(request.POST)
+#         form = ""
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             user = LoggedInUser.objects.get(username=data['username'])
+#             user.first_name = data['firstname']
+#             user.last_name = data['lastname']
+#             user.is_active = data['restrict']
+#             user.save()
+#             return HttpResponseRedirect('/admin/')
+# 
+# def blockuser(request):
+#     pass
 
 def list_active(request, action=None):
+    if request.user.is_anonymous() or not request.user.is_staff:
+        return redirect('/')
+    
     f = Firewall()
     error = False
     user = None
@@ -70,16 +75,38 @@ def list_active(request, action=None):
 
 
 def firewall(request):
+    if request.user.is_anonymous() or not request.user.is_staff:
+        return redirect('/')
     f = Firewall()
-    FORWARD = [{'j': fw[2], 'p':fw[3], 'i':fw[5], 'o':fw[6], 's':fw[7],'d':fw[8], 'rest':fw[9:]} for fw in f.get_custom_forward()]
-    INPUT = [{'j': fw[2], 'p':fw[3], 'i':fw[5], 'o':fw[6], 's':fw[7],'d':fw[8], 'rest':fw[9:]} for fw in f.get_custom_input()]
-    newform = FirewallRule()
-    return render_to_response('firewall.html', {'forward':FORWARD, 'input':INPUT, 'form':newform}, context_instance=RequestContext(request))
+    if request.method == 'POST':
+        form = FirewallRule(request.POST)
+        rule = Rule()
+        if form.is_valid():
+            rule.src = str(form['src_ip']+'/'+form['src_subnet'])
+            rule.spt = str(form['src_port'])
+            rule.dst = str(form['dst_ip']+'/'+form['dst_subnet'])
+            rule.dpt = str(form['dst_port'])
+            rule.action = str(form['action'])
+            rule.chain = str(form['chain']) 
+            
+            
+            "iptables -I CUSTOM_chain -s src --sport spt -d dst --dport dpt -j action"
+            
+    rules_form = FirewallRule()
+    
+    
+    return render_to_response('firewall.html', {'forward':f.get_custom_forward(), 'input':f.get_custom_input(), 'form':newform}, context_instance=RequestContext(request))
 
 def users(request):
+    if request.user.is_anonymous() or not request.user.is_staff:
+        return redirect('/')
     users = LoggedInUser.objects.all()
     pass
 
 
 def show(request):
+    if request.user.is_anonymous() or not request.user.is_staff:
+        return redirect('/')
+    
     return render_to_response('admin_home.html',{'conf':conf,}, context_instance=RequestContext(request))
+    
