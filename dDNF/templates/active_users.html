@@ -2,17 +2,12 @@
 {% load i18n %}
 
 {% block adminmodule %}
-
-{% if action and not error %}
-<div id="done">
-<h1>{{ user.username }} @ {{ user.last_seen_ip }} has been {{ action }}</h1>
-<p>{% trans "Success." %}</p>
-</div>
-{% endif%}
 {% if error %}
 <div id="warning">
 <h1>Oh snap! Something went wrong</h1>
-<p>We tried to {{ action }}. That didn't go well... </p>
+<p>We tried to do "{{ action }}". That didn't go well... 
+You might want to check iptables and user database for inconsistency
+</p>
 </div>
 {% endif%}
 <h2>{% trans "Currently active users" %}</h2>
@@ -97,6 +92,4 @@
 {% endfor %}
 </em></td></tr>
 </table>
-
-
 {% endblock %}

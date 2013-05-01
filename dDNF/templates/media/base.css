@@ -71,10 +71,10 @@ div#warning {
 }
 div#done {
 	border: 2px solid green;
-	background-color: pink;
+	background-color: AADCAA;
 	height: auto;
 	padding: 20px 20px 20px 20px;
-	text-color: purple;
+	color: purple;
 }
 h1 {
 	color: #55B855;

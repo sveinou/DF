@@ -11,23 +11,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 
-
-# def edit_user(request):
-#     if request.method == 'POST':
-#         #form = UserForm(request.POST)
-#         form = ""
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             user = LoggedInUser.objects.get(username=data['username'])
-#             user.first_name = data['firstname']
-#             user.last_name = data['lastname']
-#             user.is_active = data['restrict']
-#             user.save()
-#             return HttpResponseRedirect('/admin/')
-# 
-# def blockuser(request):
-#     pass
-
 def list_active(request, action=None):
     if request.user.is_anonymous() or not request.user.is_staff:
         return redirect('/')
