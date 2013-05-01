@@ -6,7 +6,7 @@
 {% if action and not error %}
 <div id="done">
 <h1>{{ user.username }} @ {{ user.last_seen_ip }} has been {{ action }}</h1>
-<p>{% trans "You can undo this in the section below. A kicked user must login again." %}<</p>
+<p>{% trans "Success." %}</p>
 </div>
 {% endif%}
 {% if error %}
