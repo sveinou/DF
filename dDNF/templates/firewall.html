@@ -4,6 +4,18 @@
 {% block adminmodule %}
 <h2>{% trans "Firewall configuration" %}</h2>
 
+{% if error or form.errors %}
+<div id="warning">
+<h2>{% trans "Error" %}</h2>
+{% trans "DNF detected an error. Firewall not updated" %} 
+<ul>
+{% for field in form %} 
+   	{% if field.errors %} <li>{{ field.label}} ({{ field.value }}) {{ field.errors }}</li>{% endif %}
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+
 <!-- FORWARD CHAIN -->
 <h3>{% trans "Traffic forwarding rules" %}</h3>
 <table>
@@ -101,27 +113,45 @@
 </table>
 <h3>{% trans "Add new rule" %}</h3>
 <p>{% trans "In the form below, you can enter new rules to the firewall. You hav to select chain. 'FORWARD' is traffic passing trough, while 'INPUT' is traffic directed AT the server." %}</p>
-<form action="/admin/firewall" method="post"> {% csrf_token %}
 <table>
 	<tr>
 		<th>{% trans "CHAIN" %}</th>
 		<th>{% trans "SRC IP" %}</th>
+		<th></th>
 		<th>{% trans "SRC P" %}</th>
 		<th>{% trans "DST IP" %}</th>
+		<th></th>
 		<th>{% trans "DST P" %}</th>
-		<th>{% trans "J" %}</th>
+		<th>{% trans "TARGET" %}</th>
 		<th></th>
 	</tr>
+
+<form action="/admin/firewall/" method="POST"> {% csrf_token %}
 	<tr>
 		<td>{{ form.chain }}</td>
-		<td>{{ form.src_ip }} / {{ form.src_subnet }}</td>
+		<td>{{ form.src_ip }}</td>
+		<td>/ {{ form.src_subnet }}</td>
 		<td>{{ form.src_port }}</td>
-		<td>{{ form.dst_ip }} / {{ form.dst_subnet }}</td>
+		<td>{{ form.dst_ip }}</td>
+		<td> / {{ form.dst_subnet }}</td>
 		<td>{{ form.dst_port }}</td>
 		<td>{{ form.action }}</td>
 		<td><input type="submit" value="{% trans "add" %}"></td>
 	</tr>
-</table>
 </form>
+
+{% if form.errors %}
+	<tr>
+		<td>{{ form.chain.errors }}</td>
+		<td>{{ form.src_ip.errors }}</td>
+		<td>{{ form.src_port.errors }}</td>
+		<td>{{ form.dst_ip.errors }}</td>
+		<td>{{ form.dst_port.errors }}</td>
+		<td>{{ form.action.errors }}</td>
+	</tr>
+	{{ form.non_field.errors }}
+{% endif %}
+</table>
+
 
 {% endblock %}

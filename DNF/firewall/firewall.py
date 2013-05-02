@@ -1,5 +1,7 @@
 import subprocess
 from DNF.database.df_data import Data
+from DNF import conf
+from string import upper
 class Firewall:
     """
     Sends commands to iptables to alter chains
@@ -148,6 +150,26 @@ class Firewall:
             
         return rules;
     
+    def add_custom_rule(self,chain, src, src_port=None, dst=conf.external_interface, dst_port=None, target='FORWARD'):
+        """
+        Constructs rule according to input. requires chain, source and target.
+        If no destination is given, system presumes it's external interface as destination. 
+        """
+        if not (chain and src and target and dst):
+            return False
+        
+        #Construction
+        rule = "sudo /sbin/iptables -I "+upper(chain)   
+        rule += " -s "+src
+        if src_port: rule += " --sport "+src_port
+        rule += " -d "+dst
+        if dst_port: rule += " --dport "+dst_port
+        rule += " -j "+upper(target)
+        
+        #Send rule
+        subprocess.call(rule, shell=True)
+        return True
+        
     def get_limited(self):
         """
         returns all rules in limited-chain.        

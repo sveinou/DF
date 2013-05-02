@@ -17,9 +17,9 @@ from django.db import models
 #     int_if = models.OneToOneField(Interface.sett)
 
 class Rule(models.Model):
-    chain = models.CharField(max_length=6)
+    chain = models.CharField(max_length=7) #FORWARD / INPUT
     src = models.CharField(max_length=20)
-    spt = models.CharField(max_length=5)
-    dst = models.CharField(max_length=20)
-    dpt = models.CharField(max_length=5)
-    action = models.CharField(max_length=6) 
+    spt = models.CharField(max_length=5, null=True)
+    dst = models.CharField(max_length=20, null=True)
+    dpt = models.CharField(max_length=5, null=True)
+    action = models.CharField(max_length=6) #DROP / ACCEPT / REJECT 

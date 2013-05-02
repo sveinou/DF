@@ -64,24 +64,29 @@ def list_active(request, action=None):
 def firewall(request):
     if request.user.is_anonymous() or not request.user.is_staff:
         return redirect('/')
+    
+    error = False
+    rules_form = FirewallRule()
     f = Firewall()
     if request.method == 'POST':
         form = FirewallRule(request.POST)
         rule = Rule()
         if form.is_valid():
-            rule.src = str(form['src_ip']+'/'+form['src_subnet'])
-            rule.spt = str(form['src_port'])
-            rule.dst = str(form['dst_ip']+'/'+form['dst_subnet'])
-            rule.dpt = str(form['dst_port'])
-            rule.action = str(form['action'])
-            rule.chain = str(form['chain']) 
-            rule.save()
-            #make rule and update iptables.
             
-    rules_form = FirewallRule()
+            rule.src = form.cleaned_data.get('src_ip')
+            rule.src += '/' + str(form.cleaned_data.get('src_subnet'))
+            rule.spt = form.cleaned_data.get('src_port')
+            rule.dst = form.cleaned_data.get('dst_ip')
+            if rule.dst: rule.dst += '/' + str(form.cleaned_data.get('dst_subnet'))
+            rule.dpt = form.cleaned_data.get('dst_port')
+            rule.action = form.cleaned_data.get('action')
+            rule.chain = form.cleaned_data.get('chain') 
+            rule.save()
+
+            error = f.add_custom_rule(rule.chain, rule.src, rule.spt, rule.dst, rule.dpt, rule.action)
+        rules_form = form;
     
-    
-    return render_to_response('firewall.html', {'forward':f.get_custom_forward(), 'input':f.get_custom_input(), 'form':rules_form}, context_instance=RequestContext(request))
+    return render_to_response('firewall.html', {'error': error, 'forward':f.get_custom_forward(), 'input':f.get_custom_input(), 'form':rules_form}, context_instance=RequestContext(request))
 
 def users(request):
     if request.user.is_anonymous() or not request.user.is_staff:
