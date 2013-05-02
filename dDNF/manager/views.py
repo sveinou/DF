@@ -1,5 +1,3 @@
-
-
 from DNF import conf
 from DNF.auth.drop import Drop
 from DNF.firewall.firewall import Firewall
@@ -10,6 +8,8 @@ from django.contrib.sessions.models import Session
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
+import logging
+logging.basicConfig(filename=conf.files.djangolog, level=logging.DEBUG)
 
 def list_active(request, action=None):
     if request.user.is_anonymous() or not request.user.is_staff:
@@ -61,18 +61,20 @@ def list_active(request, action=None):
     return render_to_response('active_users.html', {'limited':limited, 'active':allowed, 'user':user, 'error':error, 'action':action}, context_instance=RequestContext(request))    
 
 
-def firewall(request):
+def firewall(request, action):
     if request.user.is_anonymous() or not request.user.is_staff:
         return redirect('/')
-    
-    error = False
+        logging.info("detected anon-user in adminpanel. Thrown out...")
+    result = ''
     rules_form = FirewallRule()
     f = Firewall()
-    if request.method == 'POST':
+    logging.debug('inside manager.views.firewall()')
+    if action == 'add' and request.method == 'POST':
+        logging.debug('-- DETECTED ADD-RULE')
         form = FirewallRule(request.POST)
         rule = Rule()
         if form.is_valid():
-            
+            logging.debug ('-- -- form is valid')
             rule.src = form.cleaned_data.get('src_ip')
             rule.src += '/' + str(form.cleaned_data.get('src_subnet'))
             rule.spt = form.cleaned_data.get('src_port')
@@ -81,12 +83,22 @@ def firewall(request):
             rule.dpt = form.cleaned_data.get('dst_port')
             rule.action = form.cleaned_data.get('action')
             rule.chain = form.cleaned_data.get('chain') 
+            rule.prot = form.cleaned_data.get('protocol')
             rule.save()
-
-            error = f.add_custom_rule(rule.chain, rule.src, rule.spt, rule.dst, rule.dpt, rule.action)
+            logging.debug('-- -- rule saved to db, sending rule to firewall.add_custom_rule')
+            result = f.add_custom_rule(rule.chain, rule.src, rule.spt, rule.dst, rule.dpt, rule.action, rule.prot)
         rules_form = form;
-    
-    return render_to_response('firewall.html', {'error': error, 'forward':f.get_custom_forward(), 'input':f.get_custom_input(), 'form':rules_form}, context_instance=RequestContext(request))
+    elif action == 'delete' and request.method == 'POST':
+        logging.debug('-- DETECTED DELETE-RULE')
+        rule = str(request.POST.get('ruleid'))
+        chain = str(request.POST.get('chain'))
+        f.del_custom_rule(chain, rule);
+    elif action == 'flush' and request.method == 'POST':
+        logging.debug('-- DETECTED FLUSH')
+        chain = request.POST.get('chain')
+        f.flush_custom_rules(chain)
+        
+    return render_to_response('firewall.html', {'result':result, 'forward':f.get_custom_forward(), 'input':f.get_custom_input(), 'form':rules_form}, context_instance=RequestContext(request))
 
 def users(request):
     if request.user.is_anonymous() or not request.user.is_staff:

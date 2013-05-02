@@ -1,6 +1,6 @@
 ## This file defines constants used in DNF. 
 # Most constants are defined from /etc/dnf/dnf.conf
-
+import logging
 from ConfigParser import SafeConfigParser
 
 parser = SafeConfigParser()
@@ -22,7 +22,7 @@ external_interface = parser.get("global", "external_interface")
 mode = parser.get("global", "mode")
 # database
 singel = parser.getboolean("global", "singel_login")
-
+loglevel = logging.DEBUG
 class db:
     server = parser.get("database", "server") 
     user = parser.get("database", "user")#name of database user
@@ -40,6 +40,7 @@ class files:
     droplog = parser.get("logs", "drop")
     loginlog = parser.get("logs", "login")
     errorlog = parser.get("logs", "error")
+    djangolog = parser.get("logs", "webservice")
 
 class bandwidth:
     unit = parser.get("bandwidth", "unit")

@@ -18,6 +18,7 @@ from django.db import models
 
 class Rule(models.Model):
     chain = models.CharField(max_length=7) #FORWARD / INPUT
+    prot = models.CharField(max_length=3, null=True) #TCP/UDP/null 
     src = models.CharField(max_length=20)
     spt = models.CharField(max_length=5, null=True)
     dst = models.CharField(max_length=20, null=True)

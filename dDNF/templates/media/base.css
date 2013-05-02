@@ -100,3 +100,6 @@ table.borders{
 	border-left: 2px solid #55B855;
 	border-right: 2px solid #55B855;
 }
+abbr{
+	border-bottom: 1px dotted #55B855;
+}

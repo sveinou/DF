@@ -27,7 +27,10 @@ urlpatterns += patterns('dDNF.manager.views',
      (r'^admin/currently-active/kick/$', 'list_active', {'action':'kick'}),
      (r'^admin/currently-active/limit/$', 'list_active', {'action':'limit'}),
      (r'^admin/currently-active/free/$', 'list_active', {'action':'free'}),
-     (r'^admin/firewall/$', 'firewall'),
+     (r'^admin/firewall/$', 'firewall',{'action':'show'}),
+     (r'^admin/firewall/add/$', 'firewall',{'action':'add'}),
+     (r'^admin/firewall/delete/$', 'firewall',{'action':'delete'}),
+     (r'^admin/firewall/flush/$', 'firewall',{'action':'flush'}),
 )
 
 urlpatterns += patterns('',

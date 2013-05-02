@@ -2,7 +2,11 @@ import subprocess
 from DNF.database.df_data import Data
 from DNF import conf
 from string import upper
+import logging
+
+
 class Firewall:
+    logging.basicConfig(filename=conf.files.djangolog, level=conf.loglevel)
     """
     Sends commands to iptables to alter chains
     """
@@ -110,8 +114,9 @@ class Firewall:
         ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_FORWARD']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
         rules = []
-        
+        id = 0
         for rule in [line.split() for line in ipres[2:-1]]:
+            id+=1
             dpt = 'any' 
             spt = 'any'
             rest = ''
@@ -123,7 +128,7 @@ class Firewall:
                           'target':rule[2],'prot':rule[3],
                           'opt':rule[4],'in':rule[5],
                           'out':rule[6],'src':rule[7],
-                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest})
+                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest,'id':id})
             
         return rules;
     
@@ -134,9 +139,11 @@ class Firewall:
         ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_INPUT']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
         rules = []
+        id = 0;
         for rule in [line.split() for line in ipres[2:-1]]:
             dpt = 'any' 
             spt = 'any'
+            id+=1
             rest = ''
             for opt in rule[9:]:
                 if opt[:3] == 'dpt': dpt = opt[4:]
@@ -146,30 +153,72 @@ class Firewall:
                           'target':rule[2],'prot':rule[3],
                           'opt':rule[4],'in':rule[5],
                           'out':rule[6],'src':rule[7],
-                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest})
+                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest, 'id':id})
             
         return rules;
     
-    def add_custom_rule(self,chain, src, src_port=None, dst=conf.external_interface, dst_port=None, target='FORWARD'):
+    def add_custom_rule(self,chain, src, src_port=None, dst=conf.external_interface, dst_port=None, target='FORWARD', protocol=None):
         """
         Constructs rule according to input. requires chain, source and target.
         If no destination is given, system presumes it's external interface as destination. 
         """
-        if not (chain and src and target and dst):
+        if not (chain and src and target):
             return False
+        if not dst:
+            dst = "LOCAL"
+            
+        chain = 'CUSTOM_'+chain
+#         #Construction   
+
+
+        rule = ['sudo', 'iptables']
+        rule += ['-I', str(chain).upper()]
+        if protocol:
+            rule += ['-p',str(protocol).lower()]
+        rule += ['-s',str(src)]
+        if src_port: rule += ['--sport', str(src_port)]
         
-        #Construction
-        rule = "sudo /sbin/iptables -I "+upper(chain)   
-        rule += " -s "+src
-        if src_port: rule += " --sport "+src_port
-        rule += " -d "+dst
-        if dst_port: rule += " --dport "+dst_port
-        rule += " -j "+upper(target)
+        if dst == 'LOCAL': 
+            rule +=['-i', conf.external_interface] #SHOULD USE IP ADDR.
+        elif dst: 
+            rule += ['-d',str(dst)]
+        if dst_port: rule += ['--dport', str(dst_port)]
+        rule += ['-j', str(target).upper()]
+#         
+#         
+#         #Send rule
+        logging.info('Command triggered:'+ str(rule))
+        ipres  = subprocess.Popen(rule, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        return ipres
         
-        #Send rule
-        subprocess.call(rule, shell=True)
-        return True
+    def del_custom_rule(self, chain, id=1):
+        chain = 'CUSTOM_'+str(chain).upper()
+        id = str(id)
+        command = ['sudo', 'iptables', '-D', chain, id]
+        logging.info('IPTABLES: '+ str(command))
+        ipres  = subprocess.Popen(command, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        logging.debug('ipt.Result: '+ str(ipres))
         
+        
+    def flush_custom_rules(self, chain=None):
+        forward_chain = ['sudo', 'iptables', '-F', 'CUSTOM_FORWARD']
+        input_chain = ['sudo', 'iptables', '-F', 'CUSTOM_INPUT']
+        logging.info(__name__)
+        ipres = ''
+        if chain.upper() == 'FORWARD':
+            logging.info('FLUSHING FORWARD CHAIN!!! '+ str(forward_chain))
+            ipres  = subprocess.Popen(forward_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        elif chain.upper() == 'INPUT':
+            logging.info('FLUSHING INPUT CHAIN!!! '+ str(input_chain))
+            ipres  = subprocess.Popen(input_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        elif not chain:
+            logging.info('FLUSHING CUSTOM CHAINS!!!\n..'+ str(input_chain)+"..\n"+ str(forward_chain))
+            ipres  = subprocess.Popen(forward_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
+            ipres  += subprocess.Popen(input_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
+        
+        logging.debug('ipt.Result: '+ str(ipres))
+        
+     
     def get_limited(self):
         """
         returns all rules in limited-chain.        

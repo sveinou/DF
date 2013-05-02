@@ -1,7 +1,14 @@
-{% extends "admin_page.html" %}
+?0c{% extends "admin_page.html" %}
 {% load i18n %}
 
 {% block adminmodule %}
+<form name="flushforward" action="/admin/firewall/flush/" method="POST">{% csrf_token %}
+<input type="hidden" name="chain" value="FORWARD">
+</form>
+<form name="flushinput" action="/admin/firewall/flush/" method="POST">{% csrf_token %}
+<input type="hidden" name="chain" value="INPUT">
+</form>
+
 <h2>{% trans "Firewall configuration" %}</h2>
 
 {% if error or form.errors %}
@@ -10,46 +17,38 @@
 {% trans "DNF detected an error. Firewall not updated" %} 
 <ul>
 {% for field in form %} 
-   	{% if field.errors %} <li>{{ field.label}} ({{ field.value }}) {{ field.errors }}</li>{% endif %}
+   	{% if field.errors %} <li><strong>{{ field.label }}</strong> {{ field.errors }}</li>{% endif %}
 {% endfor %}
 </ul>
 </div>
 {% endif %}
 
 <!-- FORWARD CHAIN -->
+
 <h3>{% trans "Traffic forwarding rules" %}</h3>
 <table>
 <tr>
-	<th>{% trans "prot" %}</th>
-	<th>{% trans "From" %} </th>
-<!--<th></th>  -->	
+	<th>ID</th>
+	<th>{% trans "Protocol" %}</th>
+	<th>{% trans "Source" %} </th>
 	<th></th>
-	<th>{% trans "To" %}</th>
-<!-- 	<th></th> -->
+	<th>{% trans "Destination" %}</th>
 	<th></th>
-	<th>{% trans "Action" %}</th>
-	<th>{% trans "Extras" %}</th>
+	<th>{% trans "Target" %}</th>
+	<th><a href="flush/" onclick="document.flushforward.submit();return false;">{% trans "Flush ALL rules" %}</a></th>
 </tr>
 <tr>
 <td></td>
-<!-- <td>nic</td>-->
 <td>IP</td>
 <td>port</td>
-<!-- <td>nic</td>-->
 <td>IP</td>
 <td>port</td>
 </tr>
 {% for rule in forward %}
 
 <tr>
+	<th>{{ rule.id }}</th>
 	<td>{{ rule.prot }}</td>
-<!-- 	<td>
-		{% if rule.in == "*" %}
-			{% trans "any" %}
-		{% else %}
-			{{ rule.in }}
-		{% endif %}
-	</td> -->
 	<td>
 		{% if rule.src == "0.0.0.0/0" %}
 			{% trans "anywhere" %}
@@ -58,13 +57,6 @@
 		{% endif %}
 	</td>
 	<td>{{ rule.spt }}</td>
-<!-- 	<td>
-		{% if rule.out == "*" %}
-			{% trans "any" %}
-		{% else %}
-			{{ rule.out }}
-		{% endif %}
-	</td> -->
 	<td>
 		{% if rule.dst == "0.0.0.0/0" %}
 			{% trans "anywhere" %}
@@ -74,7 +66,13 @@
 	</td>
 	<td>{{ rule.dpt }}</td>
 	<td>{{ rule.target }}</td>
-	<td>{{ rule.rest}}</td>
+	<td>
+	<form action="/admin/firewall/delete/" method="post">{% csrf_token %}
+	<input type="hidden" name="ruleid" value="{{ rule.id }}">
+	<input type="hidden" name="chain" value="FORWARD">
+	<input type="submit" value="{% trans "Delete" %}">	
+	</form>
+	</td>
 </tr>
 {% empty %}
 </table>
@@ -89,21 +87,50 @@
 <h3>{% trans "Server rules" %}</h3>
 <table>
 <tr>
-	<th>{% trans "From" %} </th>
-	<th> &nbsp;</th> 
-	<th>{% trans "To" %}</th>
-	<th>&nbsp;</th>
-	<th>{% trans "Options" %}</th>
-	<th>{% trans "Action" %}</th>
+	<th>ID</th>
+	<th>{% trans "Protocol" %}</th>
+	<th>{% trans "Source" %} </th>
+	<th></th>
+	<th>{% trans "Destination" %}</th>
+	<th></th>
+	<th>{% trans "Target" %}</th>
+	<th><a href="flush/" onclick="document.flushforward.submit();return false;">{% trans "Flush ALL rules" %}</a></th>
+</tr>
+<tr>
+<td></td>
+<td>IP</td>
+<td>port</td>
+<td>IP</td>
+<td>port</td>
 </tr>
 {% for rule in input %}
 <tr>
-	<td>{{ rule.i }}</td>
-	<td>{{ rule.s }}</td>
-	<td>{{ rule.o }}</td>
-	<td>{{ rule.d }}</td>
-	<td>{{ rule.rest }}</td>
-	<td>{{ rule.j }}</td>
+	<th>{{ rule.id }}</th>
+	<td>{{ rule.prot }}</td>
+	<td>
+		{% if rule.src == "0.0.0.0/0" %}
+			{% trans "anywhere" %}
+		{% else %}
+			{{ rule.src }}
+		{% endif %}
+	</td>
+	<td>{{ rule.spt }}</td>
+	<td>
+		{% if rule.dst == "0.0.0.0/0" %}
+			{% trans "anywhere" %}
+		{% else %}
+			{{ rule.dst }}
+		{% endif %}
+	</td>
+	<td>{{ rule.dpt }}</td>
+	<td>{{ rule.target }}</td>
+	<td>
+	<form action="/admin/firewall/delete/" method="post">{% csrf_token %}
+	<input type="hidden" name="ruleid" value="{{ rule.id }}">
+	<input type="hidden" name="chain" value="INPUT">
+	<input type="submit" value="{% trans "Delete" %}">	
+	</form>
+	</td>
 </tr>
 {% empty %}
 </table>
@@ -111,11 +138,14 @@
 <table>
 {% endfor %}
 </table>
+
+
 <h3>{% trans "Add new rule" %}</h3>
 <p>{% trans "In the form below, you can enter new rules to the firewall. You hav to select chain. 'FORWARD' is traffic passing trough, while 'INPUT' is traffic directed AT the server." %}</p>
 <table>
-	<tr>
+<!-- 	<tr>
 		<th>{% trans "CHAIN" %}</th>
+		<th>{% trans "PROTOCOL" %}</th>
 		<th>{% trans "SRC IP" %}</th>
 		<th></th>
 		<th>{% trans "SRC P" %}</th>
@@ -124,11 +154,23 @@
 		<th>{% trans "DST P" %}</th>
 		<th>{% trans "TARGET" %}</th>
 		<th></th>
-	</tr>
-
-<form action="/admin/firewall/" method="POST"> {% csrf_token %}
+	</tr> -->
 	<tr>
+		<th><abbr title="{{ form.chain.help_text }}"> {{ form.chain.label }}</abbr></th>
+		<th><abbr title="{{ form.protocol.help_text }}">{{ form.protocol.label }}</abbr></th>
+		<th><abbr title="{{ form.src_ip.help_text }}">{{ form.src_ip.label }}</abbr></th>
+		<th><abbr title="{{ form.src_subnet.help_text }}">{{ form.src_subnet.label }}</abbr></th>
+		<th><abbr title="{{ form.src_port.help_text }}">{{ form.src_port.label }}</abbr></th>
+		<th><abbr title="{{ form.dst_ip.help_text }}">{{ form.dst_ip.label }}</abbr></th>
+		<th><abbr title="{{ form.dst_subnet.help_text }}">{{ form.dst_subnet.label }}</abbr></th>
+		<th><abbr title="{{ form.dst_proto.help_text }}">{{ form.dst_port.label }}</abbr></th>
+		<th><abbr title="{{ form.action.help_text }}">{{ form.action.label }}</abbr></th>
+	</tr>
+<form action="/admin/firewall/add/" method="POST"> {% csrf_token %}
+	<tr>
+		
 		<td>{{ form.chain }}</td>
+		<td>{{ form.protocol }}</td>
 		<td>{{ form.src_ip }}</td>
 		<td>/ {{ form.src_subnet }}</td>
 		<td>{{ form.src_port }}</td>
@@ -139,19 +181,14 @@
 		<td><input type="submit" value="{% trans "add" %}"></td>
 	</tr>
 </form>
-
-{% if form.errors %}
-	<tr>
-		<td>{{ form.chain.errors }}</td>
-		<td>{{ form.src_ip.errors }}</td>
-		<td>{{ form.src_port.errors }}</td>
-		<td>{{ form.dst_ip.errors }}</td>
-		<td>{{ form.dst_port.errors }}</td>
-		<td>{{ form.action.errors }}</td>
-	</tr>
-	{{ form.non_field.errors }}
-{% endif %}
 </table>
-
-
+{% if form.errors %}
+<div id="warning">
+<ul>
+{% for field in form %} 
+   	{% if field.errors %} <li><strong>{{ field.label }}</strong> {{ field.errors }}</li>{% endif %}
+{% endfor %}
+</ul>
+</div>
+{% endif %}
 {% endblock %}
