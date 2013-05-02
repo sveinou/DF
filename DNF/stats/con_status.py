@@ -42,6 +42,28 @@ class Con:
 			return True
 		else:
 			return False
+			
+	def find_if(self):
+    		command = "/sbin/ifconfig | grep HWaddr | awk '{print $1;}'"
+    		interfaces = subprocess.check_output(command, shell=True).split("\n")
+    		internal=""
+    		external=""
+    		for interface in interfaces:
+			x = int(interfaces.index(interface))+1
+			x = int(100/len(interfaces)*x)
+			Gui().loadingbar(x, "Finding external interface")
+
+        		if interface:
+                		command = "/bin/ping -c 1 -I %s 8.8.8.8 | grep 64" % interface
+                	try:
+                        	ping = subprocess.check_output(command, shell=True)
+                        	if ping:
+                                	external = interface
+
+                	except Exception, e:
+                        	internal = interface
+		Gui().loadingbar(100, " Most Likely " + external)
+    		return{'ext':external,'int':internal}
 
 
 		
