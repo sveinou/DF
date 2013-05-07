@@ -104,34 +104,31 @@ Most static settings must be set in the configfile located in /etc/dnf/dnf.conf.
 	<td>{% trans "DEPREACIATED" %}</td>
 </tr>
 <tr>
+<th>log</th>
+</tr>
+<tr>
+	<td>Loglevel</td>
+	<td>{{ conf.log._web }}</td>
+	<td>STRING</td>
+	<td>{% trans "DEBUG | INFO | WARNING | ERROR | SEVERE" %}</td>
+</tr>
+<tr>
 	<td>default</td>
-	<td>{{ conf.files.defaultlog }}</td>
+	<td>{{ conf.log._default }}</td>
 	<td>path</td>
 	<td>{% trans "Default logfile" %}</td>
 </tr>
 <tr>
-	<td>limit</td>
-	<td>{{ conf.files.limitlog }}</td>
+	<td>access</td>
+	<td>{{ conf.log._users }}</td>
 	<td>path</td>
-	<td>{% trans "Logfile for limited users" %}</td>
+	<td>{% trans "Logs user-specific activities. " %}</td>
 </tr>
 <tr>
-	<td>drop</td>
-	<td>{{ conf.files.droplog }}</td>
+	<td>webservice</td>
+	<td>{{ conf.log._web }}</td>
 	<td>path</td>
-	<td>{% trans "Log of logouts and drops" %}</td>
-</tr>
-<tr>
-	<td>login</td>
-	<td>{{ conf.db.loginlog }}</td>
-	<td>path</td>
-	<td>{% trans "Logs userlogin" %}</td>
-</tr>
-<tr>
-	<td>error</td>
-	<td>{{ conf.db.errorlog }}</td>
-	<td>path</td>
-	<td>{% trans "Logs (non-fatal) errors" %}</td>
+	<td>{% trans "Logs errors and actions from the webui" %}</td>
 </tr>
 <tr>
 	<th>bandwidth</th>

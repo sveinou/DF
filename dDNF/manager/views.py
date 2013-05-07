@@ -9,7 +9,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 import logging
-logging.basicConfig(filename=conf.files.djangolog, level=logging.DEBUG)
+log = logging.getLogger(__name__)
+log.addHandler(conf.log.web)
+log.addFilter(conf.log.logformat)
+log.setLevel(conf.log.level)
 
 def list_active(request, action=None):
     if request.user.is_anonymous() or not request.user.is_staff:
@@ -64,17 +67,17 @@ def list_active(request, action=None):
 def firewall(request, action):
     if request.user.is_anonymous() or not request.user.is_staff:
         return redirect('/')
-        logging.info("detected anon-user in adminpanel. Thrown out...")
+        log.info("detected anon-user in adminpanel. Thrown out...")
     result = ''
     rules_form = FirewallRule()
     f = Firewall()
-    logging.debug('inside manager.views.firewall()')
+    log.debug('inside manager.views.firewall()')
     if action == 'add' and request.method == 'POST':
-        logging.debug('-- DETECTED ADD-RULE')
+        log.debug('-- DETECTED ADD-RULE')
         form = FirewallRule(request.POST)
         rule = Rule()
         if form.is_valid():
-            logging.debug ('-- -- form is valid')
+            log.debug ('-- -- form is valid')
             rule.src = form.cleaned_data.get('src_ip')
             rule.src += '/' + str(form.cleaned_data.get('src_subnet'))
             rule.spt = form.cleaned_data.get('src_port')
@@ -85,16 +88,16 @@ def firewall(request, action):
             rule.chain = form.cleaned_data.get('chain') 
             rule.prot = form.cleaned_data.get('protocol')
             rule.save()
-            logging.debug('-- -- rule saved to db, sending rule to firewall.add_custom_rule')
+            log.debug('-- -- rule saved to db, sending rule to firewall.add_custom_rule')
             result = f.add_custom_rule(rule.chain, rule.src, rule.spt, rule.dst, rule.dpt, rule.action, rule.prot)
         rules_form = form;
     elif action == 'delete' and request.method == 'POST':
-        logging.debug('-- DETECTED DELETE-RULE')
+        log.debug('-- DETECTED DELETE-RULE')
         rule = str(request.POST.get('ruleid'))
         chain = str(request.POST.get('chain'))
         f.del_custom_rule(chain, rule);
     elif action == 'flush' and request.method == 'POST':
-        logging.debug('-- DETECTED FLUSH')
+        log.debug('-- DETECTED FLUSH')
         chain = request.POST.get('chain')
         f.flush_custom_rules(chain)
         
