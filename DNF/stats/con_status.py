@@ -4,6 +4,7 @@ import subprocess
 from time import time
 from DNF.conf import bandwidth as bw
 from DNF.stats.df_user_stats import Statistics as stats
+from DNF.gui import Gui
 
 class Con:
 
@@ -16,6 +17,18 @@ class Con:
 			if "time" in word and "=" in word:
 				ms += float(word.split("=")[1])
 		return ms/4
+
+	def ping_cal(self,address):
+		ms = 0.0
+		times = 100
+		for i in range(times):
+			Gui().loadingbar(i,"latency test")
+			p = subprocess.Popen(["ping","-c", "1", address], stdout = subprocess.PIPE)
+			for word in p.communicate()[0].split(' '):
+				if "time" in word and "=" in word:
+					ms += float(word.split("=")[1])
+		Gui().loadingbar(100,"finished! ")
+		return ms/times
 
 	#returns how long it takes to download given file in secs
 	def download_time(self,address):
@@ -51,18 +64,20 @@ class Con:
     		for interface in interfaces:
 			x = int(interfaces.index(interface))+1
 			x = int(100/len(interfaces)*x)
-			Gui().loadingbar(x, "Finding external interface")
+			Gui().loadingbar(x)
 
         		if interface:
                 		command = "/bin/ping -c 1 -I %s 8.8.8.8 | grep 64" % interface
-                	try:
-                        	ping = subprocess.check_output(command, shell=True)
-                        	if ping:
-                                	external = interface
+                		try:
+                        		ping = subprocess.check_output(command, shell=True)
+                        		if ping:
+                                		external = interface
+					else:
+						internal = interface
 
-                	except Exception, e:
-                        	internal = interface
-		Gui().loadingbar(100, " Most Likely " + external)
+                		except Exception, e:
+                        		internal = interface
+		Gui().loadingbar(100)
     		return{'ext':external,'int':internal}
 
 
