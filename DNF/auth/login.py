@@ -1,14 +1,19 @@
 #!/usr/bin/python
 
-import os,sys, subprocess
+import os,sys, subprocess, logging
 from DNF import conf
 from DNF.auth.df_auth import Auth
 from DNF.firewall.firewall import Firewall
 from DNF.stats.info import Dhcp
 from DNF.database.df_data import Data
-from DNF.stats.logger import Log
+
 
 class Login():
+
+    log = logging.getLogger(__name__)
+    log.addHandler(conf.log.users)
+    log.addFilter(conf.log.logformat)
+    log.setLevel(conf.log.level)
     
     def test_user(self, username, password):
         cmd = 'sudo /user/local/bin/dynfw usercheck %s %s'
@@ -32,7 +37,6 @@ class Login():
     
 
     def ip4(self,username, password, ip):
-        log = Log(conf.files.loginlog)
         indata = self.check_input(username, password, ip)
         dhcp = Dhcp()    
         auth = Auth(indata['username'],indata['password'])
@@ -44,7 +48,7 @@ class Login():
             cmd = 'sudo /usr/local/bin/dynfw login %s %s %s' % (ip, username, password)
             #code = subprocess.call(cmd)
             code = subprocess.call(['sudo', '/usr/local/bin/dynfw', 'login', ip, username, password])
-            log.info("NEED SUDO. \nCommand: %s \nExit code: %s" % (cmd, code))
+            self.log.warn("NEED SUDO. \nCommand: %s \nExit code: %s" % (cmd, code))
             return code == 0
             
         if not mac:
@@ -54,19 +58,19 @@ class Login():
 #            exit(conf.exit_status.ip_mac_mismatch_error)
         elif auth.login() != True:
             print "Login failed."
-            log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
+            self.log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
             return False
 #            exit(conf.exit_status.login_error)
         dbcheck = data.mark_user_active(indata['username'],mac,indata['ip_addr'])
         if not dbcheck[0]:
-            log.info( "LOGIN FAILED, duplicates.")
-            log.info( "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[3],dbcheck[2],dbcheck[1]))
+            self.log.info( "LOGIN FAILED, duplicates.")
+            self.log.info( "User: %s \nMAC: %s \nIPv4: %s" % (dbcheck[3],dbcheck[2],dbcheck[1]))
             return False
         else:
             firewall.accept_ip4(indata['ip_addr'])
 
         ## DATABASE GOES HERE
-        log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
+        self.log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
         #data.add_row(indata['username'],mac,indata['ip_addr'],"IPv6")
 #        print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
@@ -74,7 +78,7 @@ class Login():
         return True
         
     def cli_login(self, username, password, ip):
-        log = Log(conf.files.loginlog)
+        
         indata = self.check_input(username, password, ip)
         dhcp = Dhcp()    
         auth = Auth(indata['username'],indata['password'])
@@ -88,7 +92,7 @@ class Login():
             sys.exit(conf.exit_status.ip_mac_mismatch_error)
         elif auth.login() != True:
             print "Login failed."
-            log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
+            self.log.info("LOGIN FAILED: "+indata['username']+" at "+ indata['ip_addr'])
             #sys.exit(conf.exit_status.login_error)
             sys.exit(1)
         dbcheck = data.mark_user_active(indata['username'],mac,indata['ip_addr'])
@@ -102,7 +106,7 @@ class Login():
         ## DATABASE GOES HERE
 
         #data.add_row(indata['username'],mac,indata['ip_addr'],"IPv6")
-        log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
+        self.log.info("LOGIN OK: "+indata['username']+" at "+ indata['ip_addr'])
 #        print lease[1]+" "+lease[0]
         ### WRITE SOMETHING TO A LOGFILE? (this goes to stdout)
         print "Login successful, {0} at ip {1}".format(indata['username'], indata['ip_addr'])        

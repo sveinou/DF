@@ -1,13 +1,7 @@
 import pam
-
+import logging
 class Auth:
 	""" Does check of user and password to system """
-#	user = None
-#	password = None	
-
-#	def __init__(self):
-#		self.username = None
-#		self.password = None
 
 	def __init__(self, username, password):
 		self.username = username

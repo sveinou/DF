@@ -22,7 +22,28 @@ external_interface = parser.get("global", "external_interface")
 mode = parser.get("global", "mode")
 # database
 singel = parser.getboolean("global", "singel_login")
-loglevel = logging.DEBUG
+
+class log:
+    _level = parser.get("logs", "loglevel")
+    level = logging.DEBUG
+    if _level.upper() == 'INFO':
+        level = logging.INFO
+    elif _level.upper == 'WARNING':
+        level = logging.WARNING
+    elif _level == 'ERROR':
+        level = logging.ERROR
+    elif _level.upper() == 'CRITICAL':
+        level = logging.CRITICAL
+    
+    logformat = logging.Formatter(' %(levelname)s : %(asctime)s - %(name)s - %(message)s')
+    _default = parser.get("logs", "default")
+    _users = parser.get("logs", "access")
+    _web = parser.get("logs", "webservice")
+    default = logging.FileHandler(filename=_default)
+    users = logging.FileHandler(filename=_users)
+    web = logging.FileHandler(filename=_web)
+    console = logging.StreamHandler()
+    
 class db:
     server = parser.get("database", "server") 
     user = parser.get("database", "user")#name of database user
@@ -35,12 +56,12 @@ class files:
     leasefile = parser.get("files", "dhcp_leasefile")
     ip_conntrack = parser.get("files", "ip_conntrack")
 
-    defaultlog = parser.get("logs", "default")
-    limitlog = parser.get("logs", "limit")
-    droplog = parser.get("logs", "drop")
-    loginlog = parser.get("logs", "login")
-    errorlog = parser.get("logs", "error")
-    djangolog = parser.get("logs", "webservice")
+#     defaultlog = parser.get("logs", "default")
+#     limitlog = parser.get("logs", "limit")
+#     droplog = parser.get("logs", "drop")
+#     loginlog = parser.get("logs", "login")
+#     errorlog = parser.get("logs", "error")
+#     djangolog = parser.get("logs", "webservice")
 
 class bandwidth:
     unit = parser.get("bandwidth", "unit")

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from datetime import datetime
-import sys, os, time, MySQLdb
+
+import MySQLdb
 from DNF.conf import db
 
 class Database:
@@ -30,9 +30,8 @@ class Database:
 		return self.cur.fetchall()
 
 	def alter(self,sql):
-		a = self.cur.execute(sql)
-		b = self.con.commit()
-		print("exec = %s , commit = %s" %(str(a), str(b)))		
+		self.cur.execute(sql)
+		self.con.commit()
 
 
 	def __del__(self):

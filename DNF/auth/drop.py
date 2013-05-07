@@ -1,18 +1,21 @@
 #!/usr/bin/python
 
-import re
+import re, logging
 from DNF import conf
 from DNF.firewall.firewall import Firewall
 from DNF.database.df_data import Data
-from DNF.stats.logger import Log
 class Drop:
     """
     Does magic stuff.
     """
     
+    log = logging.getLogger(__name__)
+    log.addHandler(conf.log.users)
+    log.addFilter(conf.log.logformat)
+    log.setLevel(conf.log.level)
+    
     def __init__(self):
         pass
-        self.log = Log(conf.files.droplog)
 
     def ip4(self,ip):
         """
@@ -21,6 +24,7 @@ class Drop:
         checkip = re.compile(conf.filter.ipv4_exact)
         if checkip.match(ip) == None:
             print "Invalid IP:\n"+ip
+            self.log.error("Tried to drop invalid IP %s" % ip)
             exit(conf.exit_status.input_error)
         
         firewall = Firewall()
@@ -29,7 +33,8 @@ class Drop:
         self.log.info("DROPPED: "+ip)
         firewall.drop_ip4(ip)
         data.active_ip4(ip,0)
-		
+
+
     def drop_ip6(self,ip):
         print "IPv6 not yet implemented."
 

@@ -1,13 +1,11 @@
-#from datetime import datetime
-#import sys, os, time
 from DNF import conf
 import time
 from DNF.database.storage import Database
 
 class Data:
     """
-    This is where all the sql queries are done
-    most method are selfe explained
+    This is where all the sql queries are done.
+    Methods returns resultsets from the database.  
     """
 
     db = Database()
@@ -113,15 +111,15 @@ class Data:
 
 
         if len(data) > 17:
-            type = "IP6"
+            q = "IP6"
         elif len(data) == 17:
-            type = "Mac"
+            q = "Mac"
         elif len(data) > 7:
-            type = "IP4"
+            q = "IP4"
         else:
             raise ValueError("input error")
 
-        sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (type,data,user)
+        sql = "UPDATE clients SET %s='%s', Active=1 WHERE User='%s'" % (q,data,user)
 
         self.db.alter(sql)
     
@@ -149,7 +147,6 @@ class Data:
         if not row:
                 return "NO CLIENTS"
         for client in io:
-            #client [ip,tx,rx]
             sql = "UPDATE stats INNER JOIN clients ON stats.USER = clients.USER SET txs=%i, rxs=%i WHERE clients.IP4='%s'" %(client[1],client[2],client[0])
             Database().alter(sql)
         return "done!"

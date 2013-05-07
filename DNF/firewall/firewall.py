@@ -1,15 +1,17 @@
 import subprocess
 from DNF.database.df_data import Data
 from DNF import conf
-from string import upper
 import logging
 
 
 class Firewall:
-    logging.basicConfig(filename=conf.files.djangolog, level=conf.loglevel)
     """
     Sends commands to iptables to alter chains
     """
+    log = logging.getLogger(__name__)
+    log.addHandler(conf.log.default)
+    log.addFilter(conf.log.logformat)
+    log.setLevel(conf.log.level)
 
     def __init__(self):
         pass
@@ -114,9 +116,9 @@ class Firewall:
         ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_FORWARD']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
         rules = []
-        id = 0
+        ruleid = 0
         for rule in [line.split() for line in ipres[2:-1]]:
-            id+=1
+            ruleid+=1
             dpt = 'any' 
             spt = 'any'
             rest = ''
@@ -128,7 +130,7 @@ class Firewall:
                           'target':rule[2],'prot':rule[3],
                           'opt':rule[4],'in':rule[5],
                           'out':rule[6],'src':rule[7],
-                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest,'id':id})
+                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest,'id':ruleid})
             
         return rules;
     
@@ -139,11 +141,11 @@ class Firewall:
         ipcmd = ['sudo', 'iptables', '-nvxL', 'CUSTOM_INPUT']
         ipres  = subprocess.Popen(ipcmd, stdout=subprocess.PIPE).communicate()[0].split("\n")
         rules = []
-        id = 0;
+        ruleid = 0;
         for rule in [line.split() for line in ipres[2:-1]]:
             dpt = 'any' 
             spt = 'any'
-            id+=1
+            ruleid+=1
             rest = ''
             for opt in rule[9:]:
                 if opt[:3] == 'dpt': dpt = opt[4:]
@@ -153,7 +155,7 @@ class Firewall:
                           'target':rule[2],'prot':rule[3],
                           'opt':rule[4],'in':rule[5],
                           'out':rule[6],'src':rule[7],
-                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest, 'id':id})
+                          'dst':rule[8], 'dpt':dpt, 'spt':spt, 'rest':rest, 'id':ruleid})
             
         return rules;
     
@@ -191,10 +193,10 @@ class Firewall:
         ipres  = subprocess.Popen(rule, stdout=subprocess.PIPE).communicate()[0].split("\n")
         return ipres
         
-    def del_custom_rule(self, chain, id=1):
+    def del_custom_rule(self, chain, ruleid=1):
         chain = 'CUSTOM_'+str(chain).upper()
-        id = str(id)
-        command = ['sudo', 'iptables', '-D', chain, id]
+        ruleid = str(ruleid)
+        command = ['sudo', 'iptables', '-D', chain, ruleid]
         logging.info('IPTABLES: '+ str(command))
         ipres  = subprocess.Popen(command, stdout=subprocess.PIPE).communicate()[0].split("\n")
         logging.debug('ipt.Result: '+ str(ipres))
@@ -206,13 +208,13 @@ class Firewall:
         logging.info(__name__)
         ipres = ''
         if chain.upper() == 'FORWARD':
-            logging.info('FLUSHING FORWARD CHAIN!!! '+ str(forward_chain))
+            self.log.info('FLUSHING FORWARD CHAIN!!! '+ str(forward_chain))
             ipres  = subprocess.Popen(forward_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
         elif chain.upper() == 'INPUT':
-            logging.info('FLUSHING INPUT CHAIN!!! '+ str(input_chain))
+            self.log.info('FLUSHING INPUT CHAIN!!! '+ str(input_chain))
             ipres  = subprocess.Popen(input_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
         elif not chain:
-            logging.info('FLUSHING CUSTOM CHAINS!!!\n..'+ str(input_chain)+"..\n"+ str(forward_chain))
+            self.log.info('FLUSHING CUSTOM CHAINS!!!\n..'+ str(input_chain)+"..\n"+ str(forward_chain))
             ipres  = subprocess.Popen(forward_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
             ipres  += subprocess.Popen(input_chain, stdout=subprocess.PIPE).communicate()[0].split("\n")
         
@@ -238,7 +240,7 @@ class Firewall:
 
     def rm_limit(self, ip):
         """
-        just incase there are duplicate enteries of somthing that shouldnt happen
+        just incase there are duplicate enteries of something that shouldn't happen
         """
 
         ipt = subprocess.Popen(['sudo', "iptables","-L", "LIMITED"], stdout = subprocess.PIPE)
@@ -259,6 +261,7 @@ class Firewall:
         return
         
     def rm_all_limit(self):
+        self.log.info("clearing all limits")
         subprocess.call("sudo /sbin/iptables -F LIMITED", shell=True)
         Data().rm_all_limit()
         
