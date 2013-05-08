@@ -12,7 +12,7 @@ class Login():
 
     log = logging.getLogger(__name__)
     log.addHandler(conf.log.users)
-    log.addFilter(conf.log.logformat)
+#    log.addFilter(conf.log.logformat)
     log.setLevel(conf.log.level)
     
     def test_user(self, username, password):
