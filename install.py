@@ -57,6 +57,7 @@ def intro():
 	text1 = "Dynfw setup"
 	text2 = "by Svein Ove Undal"
 	text3 = "and Espen Gjerde"
+	warning = "WARNING, two networkcards and an active connection are needed to install"
 	print "\033[%dm" %(colorcode)
 	print " %s" %("_"*(columns/2+1))	
 	print "|%s |" %(" "*(columns/2))	
@@ -68,6 +69,11 @@ def intro():
 	print "|%s |" %(" "*(columns/2))	
 	print "|%s|" %("_"*(columns/2+1))
 	print "\033[0m"
+	print ""
+	print ""
+        print "\033[31m%s%s\033[0m" %(" "*int(columns/2-len(warning)),warning)
+
+	
 
 def question(tex,answers=""):
 	colorcode = 35
