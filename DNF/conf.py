@@ -39,10 +39,23 @@ class log:
     _default = parser.get("logs", "default")
     _users = parser.get("logs", "access")
     _web = parser.get("logs", "webservice")
-    default = logging.FileHandler(filename=_default)
-    users = logging.FileHandler(filename=_users)
-    web = logging.FileHandler(filename=_web)
     console = logging.StreamHandler()
+    default = None
+    users = None
+    web = None
+    
+    try:
+        default = logging.FileHandler(filename=_default)
+    except IOError:
+        default = console
+    try:
+        users = logging.FileHandler(filename=_users)
+    except IOError:
+        users = console
+    try:
+        web = logging.FileHandler(filename=_web)
+    except IOError:
+        web = console
     
 class db:
     server = parser.get("database", "server") 
