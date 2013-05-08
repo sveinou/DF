@@ -10,8 +10,8 @@ class Gui:
 
     def __init__(self):
   	if DNF.conf.verbose == 0:
-		f = open(os.devnull, "w")
-		sys.stdout = f
+		#f = open(os.devnull, "w")
+		#sys.stdout = f
 	
 
     def loadingbar(self, x, text="Loading"):
@@ -21,11 +21,10 @@ class Gui:
 	print '\r%s: [\r%s: [\033[1;%dm%s\033[1;m%s] %d%%' %(text,text,colorCode, " "*(x/2), " "*(num/2-x/2), x),
 	sys.stdout.flush()
 	if x == num: print " "
-    
     	return
 
 
     def __del__(self):
-	sys.stdout = open('/dev/tty', 'w')
+	#sys.stdout = open('/dev/tty', 'w')
 
 
