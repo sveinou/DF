@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
 -- Dumping data for table `auth_permission`
 --
 
-INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
+INSERT IGNORE INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
 (1, 'Can add permission', 1, 'add_permission'),
 (2, 'Can change permission', 1, 'change_permission'),
 (3, 'Can delete permission', 1, 'delete_permission'),
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 -- Dumping data for table `auth_user`
 --
 
-INSERT INTO `auth_user` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `is_staff`, `is_active`, `is_superuser`, `last_login`, `date_joined`) VALUES
+INSERT IGNORE INTO `auth_user` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `is_staff`, `is_active`, `is_superuser`, `last_login`, `date_joined`) VALUES
 (4, 'espen', '', '', '', 'sha1$fc613$80217fd86cf4a3754930bc39276d03e0f2504c16', 1, 1, 1, '2013-05-02 10:52:14', '2013-04-24 15:30:58');
 
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
   UNIQUE KEY `app_label` (`app_label`,`model`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
-INSERT INTO `django_content_type` (`id`, `name`, `app_label`, `model`) VALUES
+INSERT IGNORE INTO `django_content_type` (`id`, `name`, `app_label`, `model`) VALUES
 (1, 'permission', 'auth', 'permission'),
 (2, 'group', 'auth', 'group'),
 (3, 'user', 'auth', 'user'),
