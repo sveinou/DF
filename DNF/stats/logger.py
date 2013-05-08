@@ -1,12 +1,11 @@
-
 import sys,datetime
 from DNF import conf
 
 class Log():
     
-    def __init__(self, logfile=conf.files.defaultlog):
+    def __init__(self, logfile=conf.log.default):
         self.logfile = logfile
-        self.errorlog = conf.files.errorlog
+        self.errorlog = conf.log.default
 
     def info(self, logentry):
         try:
