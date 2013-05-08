@@ -100,13 +100,13 @@ def message(text):
 
 packages = ("git apache2 mysql-server python-mysqldb")
 packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc")
-
+ping_server = "8.8.8.8"
 
 intro()
 answ = question("This will install and setup the awesome dynfw, move allong?(Y/N)",('Y','N'))
 if answ == 'N':
 	sys.exit()
-
+					# packageTestInstall
 message("ofcourse you would! ")
 miss = missing(packagespath)
 if miss:
@@ -117,19 +117,22 @@ if miss:
 	elif answ == "Y":
 		message("installing some awesome packages")
 		install(packages)
-
-message("installed hopfully some packages")
+		message("installed hopfully some packages")
+				
 
 if missing(packagespath):
 	message("meh, somthing wrong with packages, exiting")
 	sys.exit()
-		
-
+	
+					#DYNDNF installation
 message("will now install dynfw")		
 pull_create_install()
 message("It probobly worked!")
+					#adding database and user
 message("setting up the database!, it will ask you for the root password")	
 database()
+
+					#configChanges - interface
 message("Now we are gonna set up the config file!")
 message("interface test")
 from DNF.stats.con_status import Con
@@ -143,7 +146,10 @@ if answ == "N":
 	sys.exit()
 elif answ == "Y":
 	change_config("internal_interface","internal_interface = "+internal) 
-	change_config("external_interface","external_interface = "+external) 
+	change_config("external_interface","external_interface = "+external)
+	
+					#configChanges - interface
+					
 message("latency test next, make sure there is nothing downloading")
 question("Are you sure there is nothing taking up this connection?(YES)",("YES","Y"))
 ms = Con().ping_cal("8.8.8.8")
@@ -158,7 +164,7 @@ message("Awesome! editing the freaking file")
 change_config("latency_high","latency_high = "+str(int(ms)))
 change_config("latency_test_addr","latency_test_addr = 8.8.8.8")
 
-
+					#configChanges - rxs/txs
 message("ok, we need to know how good your connection is")
 answ = "notY"
 rx = "1000"
@@ -172,6 +178,10 @@ change_config("max_rxs","max_rxs = "+rx)
 change_config("max_txs", "max_txs = "+tx)
 
 message("done for now!!")
+
+#iptables
+#ipaddress
+#dhcpserver
 
 	
 
