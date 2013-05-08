@@ -21,7 +21,11 @@ def missing(packages):
 def install(packages):
 	
 	subprocess.call("apt-get install "+packages, shell=True)
-
+	
+def error_log(error):
+	f = open("dnfErrors.log",'w')
+	f.write(error)
+	f.close
 
 def pull_create_install():
 
@@ -141,7 +145,12 @@ database()
 					#configChanges - interface
 message("Now we are gonna set up the config file!")
 message("interface test")
-from DNF.stats.con_status import Con
+try:
+	from DNF.stats.con_status import Con
+except ImportError, e:
+	message("ohLord! seams like there is somthing wrong with our code!! more in logfile")
+	error_log(e)
+	sys.exit()
 interfaces = Con().find_if()
 internal = interfaces['int']
 external = interfaces['ext']
