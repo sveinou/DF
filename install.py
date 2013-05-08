@@ -152,7 +152,7 @@ elif answ == "Y":
 					
 message("latency test next, make sure there is nothing downloading")
 question("Are you sure there is nothing taking up this connection?(YES)",("YES","Y"))
-ms = Con().ping_cal("8.8.8.8")
+ms = Con().ping_cal(ping_server)
 ms += 2
 answ = "lol"
 while answ is not "Y":
@@ -162,7 +162,7 @@ while answ is not "Y":
 		ms = question("what latency_high setting you want then?(integer in ms)")
 message("Awesome! editing the freaking file")		
 change_config("latency_high","latency_high = "+str(int(ms)))
-change_config("latency_test_addr","latency_test_addr = 8.8.8.8")
+change_config("latency_test_addr","latency_test_addr = "+ping_server)
 
 					#configChanges - rxs/txs
 message("ok, we need to know how good your connection is")
