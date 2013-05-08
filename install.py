@@ -145,6 +145,9 @@ from DNF.stats.con_status import Con
 interfaces = Con().find_if()
 internal = interfaces['int']
 external = interfaces['ext']
+if not internal:
+	message("did not find a seccond interface, IM OUT!")
+	sys.exit()
 message("internal interface "+internal+". external interface "+external)
 answ = question("is this correct?(Y/N)",("Y","N"))
 if answ == "N":
