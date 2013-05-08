@@ -35,7 +35,7 @@ class log:
     elif _level.upper() == 'CRITICAL':
         level = logging.CRITICAL
     
-    logformat = logging.Formatter(' %(levelname)s : %(asctime)s - %(name)s - %(message)s')
+    #logformat = logging.Formatter(' %(levelname)s : %(asctime)s - %(name)s - %(message)s')
     _default = parser.get("logs", "default")
     _users = parser.get("logs", "access")
     _web = parser.get("logs", "webservice")
