@@ -28,12 +28,22 @@ def error_log(error):
 	f.close
 
 def pull_create_install():
-
 	newpath = r'/opt/DF' 
 	if not os.path.exists(newpath): os.makedirs(newpath)
 	subprocess.call("cd /opt/DF; git init; git pull https://github.com/sveinou/DF.git", shell=True)
 	subprocess.call("/usr/bin/python /opt/DF/setup.py install", shell=True)	
-
+	try:
+		from DNF.conf import log
+	except ImportError, e:
+		message("ohLord! seams like there is somthing wrong with our code!! more in logfile")
+		error_log(e)
+		sys.exit()
+	logpath = r'/var/log/dnf/'
+	if not os.path.exists(logpath): os.makedirs(logpath)
+	subprocess.call("touch "+log.default, shell=True)
+	subprocess.call("touch "+log.webservice, shell=True)
+	subprocess.call("touch "+log.access, shell=True)
+	
 def change_config(search,replace):
 	with open('/etc/dnf/dnf.conf', 'r') as file: data = file.readlines()
 	for line in data:
