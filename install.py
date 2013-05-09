@@ -207,7 +207,6 @@ change_config("max_txs", "max_txs = "+tx)
 
 message("done for now!!")
 
-#create logfiles
 #iptables
 #ipaddress
 #dhcpserver
