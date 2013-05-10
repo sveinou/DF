@@ -18,6 +18,9 @@ def missing(packages):
 
     return missing
 
+def miss(packgages):
+	
+
 def install(packages):
 	
 	subprocess.call("apt-get install "+packages, shell=True)
@@ -49,6 +52,18 @@ def change_config(search,replace):
 	with open('/etc/dnf/dnf.conf', 'w') as file: file.writelines(data)
 	return
 
+def network_iptables(IP4,mask,NAT):
+	try:
+		import DNF.conf as conf
+		external = conf().external_interface
+		internal = conf().internal_interface
+	except ImportError, e:
+        	message("ohLord! seams like there is somthing wrong with our code")
+        	error_log(e)
+        	sys.exit
+	command = ("/bin/bash /opt/DF/iptables.sh %d %d %d %d %d") %(external,internal,IP4,mask,NAT)
+	subprocess.call(command,shell=True)
+	
 def database():
 	try:
 		hmm = subprocess.check_output("mysql -u root -p -h localhost < /opt/DF/database.sql", shell=True)
@@ -115,8 +130,8 @@ def message(text):
 	print ""
 	time.sleep(1)
 
-packages = ("git apache2 mysql-server python-mysqldb")
-packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc")
+packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server")
+packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd")
 ping_server = "8.8.8.8"
 
 intro()
@@ -202,11 +217,19 @@ message("FANTASTIC soon done :) changing config")
 change_config("max_rxs","max_rxs = "+rx)
 change_config("max_txs", "max_txs = "+tx)
 
-message("done for now!!")
 
-#iptables
-#ipaddress
-#dhcpserver
+message("seting up firewall and networking")
+
+answ = "notY"
+IP4 = "10.0.0.1"
+mask = "255.255.255.0"
+NAT = "Y"
+while answ is not "Y":
+	IP4 = question("what ip addres do you want for your internal network=(%s)") %IP4
+	netmask = question("what netmask do you want(%d)") %netmask
+	NAT = question("do you want NAT?(Y/N)",("Y","N"))
+	answ = question("is this correct? ip="+IP4+". mask="+netmask+". NAT="+NAT)
+network_iptables(IP4,mask,NAT)
 
 	
 

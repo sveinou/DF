@@ -1,8 +1,10 @@
 #!/bin/bash
 
-EXT = $1
-IP = $2
-NAT = $3
+EXT=$1
+INT=$2
+IP=$3
+MASK=$4
+NAT=$5
 
 rules(){
 iptables -F
@@ -39,3 +41,19 @@ nat(){
 iptables -A POSTROUTING -t nat -o $EXT -j MASQUERADE
 }
 
+network(){
+echo 1 > /proc/sys/net/ipv4/ip_forward
+#sysctl -w net.ipv6.conf.all.forwarding=1
+service isc-dhcp-server restart
+/sbin/ifconfig $INT $IP netmask $MASK
+}
+
+
+
+rules
+network
+if [ $NAT == "Y" ]
+then
+ nat
+ echo "NAT"
+fi
