@@ -18,11 +18,8 @@ def missing(packages):
 
     return missing
 
-def miss(packgages):
-	
 
 def install(packages):
-	
 	subprocess.call("apt-get install "+packages, shell=True)
 	
 def error_log(error):
@@ -55,13 +52,13 @@ def change_config(search,replace):
 def network_iptables(IP4,mask,NAT):
 	try:
 		import DNF.conf as conf
-		external = conf().external_interface
-		internal = conf().internal_interface
+		external = conf.external_interface
+		internal = conf.internal_interface
 	except ImportError, e:
         	message("ohLord! seams like there is somthing wrong with our code")
         	error_log(e)
         	sys.exit
-	command = ("/bin/bash /opt/DF/iptables.sh %d %d %d %d %d") %(external,internal,IP4,mask,NAT)
+	command = ("/bin/bash /opt/DF/iptables.sh %s %s %s %s %s") %(external,internal,IP4,mask,NAT)
 	subprocess.call(command,shell=True)
 	
 def database():
@@ -108,7 +105,11 @@ def question(tex,answers=""):
 	text = "%s%s" %(" "*int(columns/2-len(text)),text)
 	print ""
 	print ""
-	ans = raw_input(text+":")
+	try:
+		ans = raw_input(text+":")
+        except Exception, e:
+                message("you have to write sothing ! !")
+
 	if not answers: return ans	
 	for answer in answers:
 		if ans.upper() == answer:
@@ -225,11 +226,12 @@ IP4 = "10.0.0.1"
 mask = "255.255.255.0"
 NAT = "Y"
 while answ is not "Y":
-	IP4 = question("what ip addres do you want for your internal network=(%s)") %IP4
-	netmask = question("what netmask do you want(%d)") %netmask
+	IP4 = question("what ip addres do you want for your internal network=("+IP4+")") 
+	netmask = question("what netmask do you want("+mask+")")
 	NAT = question("do you want NAT?(Y/N)",("Y","N"))
-	answ = question("is this correct? ip="+IP4+". mask="+netmask+". NAT="+NAT)
+	answ = question("is this correct? ip="+IP4+". mask="+netmask+". NAT="+NAT+("Y/N"),("Y","N"))
 network_iptables(IP4,mask,NAT)
 
 	
 
+#edit dhcpd files
