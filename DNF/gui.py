@@ -8,8 +8,8 @@ import os
 from sys import stdout
 class Gui:
 
-    def __init__(self):
-  	if DNF.conf.verbose == 0:
+    #def __init__(self):
+  	#if DNF.conf.verbose == 0:
 		#f = open(os.devnull, "w")
 		#sys.stdout = f
 	
@@ -24,7 +24,7 @@ class Gui:
     	return
 
 
-    def __del__(self):
+    #def __del__(self):
 	#sys.stdout = open('/dev/tty', 'w')
 
 
