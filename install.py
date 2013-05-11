@@ -49,6 +49,14 @@ def change_config(search,replace):
 	with open('/etc/dnf/dnf.conf', 'w') as file: file.writelines(data)
 	return
 
+def dhcp_setup(internal):
+	with open('/etc/default/isc-dhcp-server', 'r') as file: data = file.readlines()
+	for line in data:
+		if 'interfaces=""' in line:
+			data[data.index(line)] = 'INTERFACES="'+internal+'"'
+	with open('/etc/default/isc-dhcp-server', 'w') as file: file.writelines(data)
+	return
+
 def network_iptables(IP4,mask,NAT):
 	try:
 		import DNF.conf as conf
