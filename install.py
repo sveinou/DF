@@ -41,21 +41,17 @@ def pull_create_install():
 	subprocess.call("touch "+webservice, shell=True)
 	subprocess.call("touch "+access, shell=True)
 	
-def change_config(search,replace):
-	with open('/etc/dnf/dnf.conf', 'r') as file: data = file.readlines()
+def change_config(search,replace,file):
+	
+	with open(file, 'r') as file: data = file.readlines()
 	for line in data:
 		if search in line:
 			data[data.index(line)] = replace+"\n"
-	with open('/etc/dnf/dnf.conf', 'w') as file: file.writelines(data)
+	with open(file, 'w') as file: file.writelines(data)
 	return
 
-def dhcp_setup(internal):
-	with open('/etc/default/isc-dhcp-server', 'r') as file: data = file.readlines()
-	for line in data:
-		if 'interfaces=""' in line:
-			data[data.index(line)] = 'INTERFACES="'+internal+'"'
-	with open('/etc/default/isc-dhcp-server', 'w') as file: file.writelines(data)
-	return
+
+	
 
 def network_iptables(IP4,mask,NAT):
 	try:
@@ -194,8 +190,8 @@ if answ == "N":
 	message("whell fuck you then!!") #im getting tired
 	sys.exit()
 elif answ == "Y":
-	change_config("internal_interface","internal_interface = "+internal) 
-	change_config("external_interface","external_interface = "+external)
+	change_config("internal_interface","internal_interface = "+internal,"/etc/dnf/dnf.conf") 
+	change_config("external_interface","external_interface = "+external,"/etc/dnf/dnf.conf")
 	
 					#configChanges - interface
 					
@@ -210,8 +206,8 @@ while answ is not "Y":
 		message("THEN YOU TYPE IT!!")
 		ms = question("what latency_high setting you want then?(integer in ms)")
 message("Awesome! editing the freaking file")		
-change_config("latency_high","latency_high = "+str(int(ms)))
-change_config("latency_test_addr","latency_test_addr = "+ping_server)
+change_config("latency_high","latency_high = "+str(int(ms)),"/etc/dnf/dnf.conf")
+change_config("latency_test_addr","latency_test_addr = "+ping_server,"/etc/dnf/dnf.conf")
 
 					#configChanges - rxs/txs
 message("ok, we need to know how good your connection is")
@@ -223,22 +219,18 @@ while answ is not "Y":
 	tx = question("what is the tx(upload) speed in K(BYTES)")
 	answ = question("is this correct? tx="+tx+"rx="+rx+" (Y/N)",("Y","N"))
 message("FANTASTIC soon done :) changing config")
-change_config("max_rxs","max_rxs = "+rx)
-change_config("max_txs", "max_txs = "+tx)
+change_config("max_rxs","max_rxs = "+rx,"/etc/dnf/dnf.conf")
+change_config("max_txs", "max_txs = "+tx,"/etc/dnf/dnf.conf")
 
 
-message("seting up firewall and networking")
-
-answ = "notY"
+message("seting up iptables and networking")
+change_config('INTERFACES=””','INTERFACES=”'+internal+'”',"/etc/default/isc-dhcp-server")
 IP4 = "10.0.0.1"
 mask = "255.255.255.0"
 NAT = "Y"
-while answ is not "Y":
-	IP4 = question("what ip addres do you want for your internal network=("+IP4+")") 
-	netmask = question("what netmask do you want("+mask+")")
-	NAT = question("do you want NAT?(Y/N)",("Y","N"))
-	answ = question("is this correct? ip="+IP4+". mask="+netmask+". NAT="+NAT+("Y/N"),("Y","N"))
 network_iptables(IP4,mask,NAT)
+
+
 
 	
 
