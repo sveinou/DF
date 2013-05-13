@@ -223,11 +223,13 @@ change_config("max_rxs","max_rxs = "+rx,"/etc/dnf/dnf.conf")
 change_config("max_txs", "max_txs = "+tx,"/etc/dnf/dnf.conf")
 
 
-message("seting up iptables and networking")
+message("iptables and network config")
 change_config('INTERFACES=””','INTERFACES=”'+internal+'”',"/etc/default/isc-dhcp-server")
 IP4 = "10.0.0.1"
 mask = "255.255.255.0"
 NAT = "Y"
+subprocess.call("/bin/mv /etc/dhcpd/dhcpd.conf /etc/dhcpd/dhcpd.conf.old",shell=True)
+subprocess.call("/bin/mv /etc/dhcpd/dhcpd.dnf.conf /etc/dhcpd/dhcpd.conf",shell=True)
 network_iptables(IP4,mask,NAT)
 
 
