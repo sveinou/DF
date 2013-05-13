@@ -5,6 +5,29 @@
     year = "2003",
     url = "http://www.faqs.org/docs/artu/ch01s06.html",
 }
+@manual{dhcpdman,
+    title = "Dynamic Host Configuration Protocol Server",
+    author = "Ted Lemon",
+    organization = "Internet Systems Consortium / Vixie Labs",
+    url = "http://www.linuxmanpages.com/man8/dhcpd.8.php",
+    month = "Mai",
+    year = "2013",
+    }
+@manual{dhcpconf,
+    title = "dhcpd configuration file",
+    author = "Ted Lemon",
+    organization = "Internet Systems Consortium / Vixie Labs",
+    url = "http://www.linuxmanpages.com/man5/dhcpd.conf.5.php",
+    month = "Mai",
+    year = "2013",
+}
+@electronic{dhcpdpkg,
+    organization = "Debian Project",
+	title = "Package: isc-dhcp-server (4.1.1-P1-15+squeeze8)",
+	url = "http://packages.debian.org/squeeze/isc-dhcp-server",
+    month = "Mai",
+    year = "2013",
+}
 @online{Debian,
     organization = "Software in the Public Interest",
 	title = "Debian Linux",
@@ -108,6 +131,12 @@
 	url = "http://news.netcraft.com/archives/2013/05/03/may-2013-web-server-survey.html",
     month = "May",
 	year = "2013",
+}
+@article{mvc,
+    author = "Steve Burbeck, Ph.D.",
+    title = "Applications Programming in Smalltalk-80(TM): How to use Model-View-Controller (MVC)",
+    year = "1992",
+    url = "http://st-www.cs.illinois.edu/users/smarch/st-docs/mvc.html",
 }
 
 @online{apachewww,

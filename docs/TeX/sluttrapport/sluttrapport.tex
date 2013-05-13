@@ -21,17 +21,23 @@
 \maketitle
 \chapter{Forord}
 \paragraph*{}
-Denne rapporten er ein del av bacheloroppgåva til forfattarane, og markerar avsluttinga av tre år på Dataingeniør-linja på Avdeling for Informatikk og e-Læring ved Høgskolen i Sør-Trøndelag. 
+Denne rapporten er ein del av bacheloroppgåva til forfattarane, og markerer avsluttinga av tre år på Dataingeniørlinja hjå Avdeling for Informatikk og e-Læring ved Høgskolen i Sør-Trøndelag. 
 \paragraph*{}
-Det er ikkje med noko forstudierapport til bacheloroppgåva, da dette er ei vidareføring av Svein Ove Undal sitt prosjekt <<prosjektnamn>> i faget <<RMI med prosjekt i distibuerte systemer>>. Svein Ove Undal ønska då å vidareføre denne oppgåva som bachelorprosjekt. 
+Dette prosjektet er ei vidareføring av Svein Ove Undal sitt prosjekt <<prosjektnamn>> i faget <<RMI med prosjekt i distibuerte systemer>>. Svein Ove Undal ønska då å vidareføre denne oppgåva som bachelorprosjekt, og det var no Espen Gjærde kom inn i bildet. Begge forfattarane går på studieretninga <<Nettverksakitektur og -design>>, og er svært interessert i både nettverksteknologi og Linux. Det var derfor eit enkelt val når vi kunne bruke siste semester på å grave oss ned i desse fagfelta. 
+
+Sidan vi bestemte oss for å nytte Python som programmeringspråk i løysinga av oppgåva, og sidan ingen av forfattarane hadde noko erfaring med dette frå før, måtte vi bruke meir tid enn venta på å eiga opplæring. Sjølv om det i starten kunne sjå litt omfattande ut, henta vi inn mykje tid mot slutten når vi såg kor enkelt det var med eit programmeringspråk over heile fjøla, i staden for å blande bash og php. 
+
+\paragraph*{}
+Før vi startar på sjølve rapporten, vil vi nytte høvet til å takke rettleiar for bacheloroppgåva, Helge Hafting, for gode råd undervegs. Vi vi også rette ein stor takk til TIHLDE-LAN og spesielt deltakarena for tolmod og gode tilbakemeldingar under testinga av systemet. 
+ 
 \begin{figure}[b]
-Trondheim, \today
+Trondheim, \today \\
 \vspace{1cm}
 \end{figure}
 \begin{table}[b!]
 	\centering
 	\begin{tabular}[c]{ c p{4cm} c } 
-		\emph{(sign.)} & ~ & \emph{(sign.)} \\ 
+		%\emph{(sign.)} & ~ & \emph{(sign.)} \\ 
 		\cline{1-1} \cline{3-3}
 		\parbox{5cm}{\centering \textsc{Espen Gjærde}}
 		& & 
@@ -63,7 +69,7 @@ Ein ny og revidert oppgåvetekst vart laga, og går som følgjer:
 
 \tableofcontents
 \mainmatter
-\part{Rapporten}
+\part{Sluttrapporten}
 \chapter{Introduksjon}
 \section{Introduksjon}
 
@@ -79,6 +85,7 @@ Ein ny og revidert oppgåvetekst vart laga, og går som følgjer:
 \paragraph{IPv6} er ein ny versjon av IP, med mange fleire tilgjenelege addresser enn IPv4. 
 \paragraph{Distro} er ei forkorting/slang-form av distribusjon og blir brukt om ei avgreining eller ein type linux.
 \paragraph{WebUI} Web User Interface -- eit nettbasert brukargrensesnitt. 
+\paragraph{DHCP} \emph{Dynamic Host Configuration Protocol} er ein protokoll for utdeling av nettverkskonfigurasjon i eit nettverk. 
 
 \chapter{Teori}
 I denne delen av sluttrapporten vil vi gå gjennom teknologien vi har tilgjeneleg for å løyse oppgåva, og gje ei oversikt over dei konsepta vi kan bruke. 
@@ -86,9 +93,6 @@ I denne delen av sluttrapporten vil vi gå gjennom teknologien vi har tilgjenele
 \section{Konsept}
 \subsection{Captive-Portal}
 \emph{Captive-Portal} er eit samleomgrep for nettverksløysingar der brukarar vert tvinga til å gå gjennom ei påloggingsprosedyre i nettlesaren. Det er ikkje nokon fast definisjon på ein Captive Portal. I følgje Cisco skal ein captive-portal videresende ein nettlesar til ein bestem plass, ta vare på orginal HTTP-informasjon og \emph{kan} videresende brukaren basert på denne informasjonen. \cite{ciscoCP}
-
-%Personal Teleco, som jobbar med ein standard for Captive Portal definerer slik: \\ \emph{<<[Captive Portals] work by forcing un-authenticated users to a web page, once you have "captured them" this way by allowing the web page to interact with the router/firewall you can completely control their access>>} \cite{pcmag}
-%\\ \emph{<<Captive Portal does not provide any content to subscribers. Its main purpose is to determine how to redirect the subscriber browser. It can also preserve and pass along information from the original subscriber request to the content applications.>>} \cite{ciscoCP}\\  Altså noko som tvingar deg til ei bestemt nettside.
 
 \subsection{Behandling av trafikk}
 
@@ -98,7 +102,7 @@ Når vi no ser på dei forskjellige teknologiane vi kan nytte, er det naturleg �
 \subsubsection{Debian 6.0.6 <<Squeeze>>} 
 Vi har valt å nytte oss av linux-systemet Debian. Vi nyttar versjon 6.0.6, som er den versjonen som var den siste stabile utgivinga av Debian då vi starta med bacheloroppgåva. Denne har kodenavnet <<Squeeze>>. Det har i ettertid (3.mai) kome ut ein ny stable-versjon av Debian, <<Debian 7 Wheezy>>. \cite{wheezy}
 
-\subsection{Kodespråk}
+\subsection{Programmeringsspråk}
 \subsubsection{Python}
 Kodespråket Python er eit høgnivå kodespråk som kjem ferdiginstallert i dei fleste linux-distibusjonar. I Linuxversjonen vi nyttar er Python versjon 2.6.6 integrert. \cite{pythonversjon}. 
 Python har gode moglegheiter for å samarbeide med linux-systemet, og er eit kodespråk som <<plays well with others>>, altså er enkelt å setje opp mot andre systemer, slik som database og nettjenarar. \cite{python, pythonapps} I tillegg til dette er det også enkelt å gjere systemkall i linux frå Python. \cite{pythonsubprocess}
@@ -120,7 +124,10 @@ Hypertext Preprocessor er eit kodespråk for å lage dynamiske nettsider. Dette 
 Apache HTTP Server er den mest brukte http-tenaren på internett. \cite{apahcetraf}. Dette er ein robust vevstjenar som er basert på open kjeldekode. Dette har gjort at der er mange modular tilgjeneleg. Blandt desse har vi mod\textunderscore wsgi for Python og php5\textunderscore module for PHP. \cite{modwsgi, phpmodule}
 
 \subsubsection{MySQL Community Edition}
-MySQL er verdas mest populære opne relasjonsdatabase, og er spesielt vanlig å nytte til webapplikasjonar. Relasjonsdatabasen gir oss muligheten til å hurtig og effektivt lagre og hente data. 
+MySQL er verdas mest populære opne relasjonsdatabase, og er spesielt vanlig å nytte til webapplikasjonar. Relasjonsdatabasen gir oss muligheten til å hurtig og effektivt lagre og hente data. \cite{mysqlwww} 
+
+\subsubsection{Internet Systems Consortium DHCP Server}
+Internet Systems Consortium DHCP Server (ISC) er ein implementasjon av DHCP-systemet og står for utlevering av nettverksinformasjon til datamaskiner i eit nettverk. Noko av det mest vanlege er IP-addresser, DNS-informasjon og kva som er addressa til nærmaste router. Denne serveren har også moglegheit for å kjøre kommandoar når spesielle hendinga skjer \cite{dhcpconf, dhcpman}. 
 
 \subsection{Integrerte linuxmodular}
 \subsubsection{Netfilter og IPtables}
@@ -129,7 +136,6 @@ Netfilter er et rammeverk for filtrering av nettverkstrafikk, og har vore ein de
 \subsubsection{Linux Advanced Routing and Traffic Control}
 Linux Advanded Routing and Traffic Control (lartc) er eit sett med verktøy for å manipulere pakkar som går gjennom linux, og er ein del av kjerna i linux si pakkehandtering. \cite{lartcintro} Denne modulen gir mellom anna moglegheit for å merke pakkar slik at dei kan behandlast i andre verktøy seinare. 
 
-\subsection{isc-dhcp-server}
 
 \section{Kodefilisofi}
 I unix-filisofien heiter det seg at program skal <<gjere éin ting, og gjere den vel>>. Ein skal altså ha små men velfungerande modular, som skal fungere uavhengig av kvarandre \cite{unixprog}. På denne måten kan ein sikre at endringar i ein modul ikkje slår ut heile systemet, samstundes som at ein lagar eit fleksibelt og lett "hackbart"\footnote{Hack som i å nytte systemet på alternativ måte, ikkje hacking som i datainnbrot.} system. 
@@ -148,9 +154,6 @@ Ved å helde oss til desse prinsippa kan vi både lett halde oversikta når syst
 \chapter{Metode}
 I dette kapittelet vil vi gå gjennom og grunngi dei forskjellige vala av teknologi og greie ut om arbeidsprosessen fram mot det ferdige produktet. 
  
-\section{Oppdeling av koden}
-
-
 \section{Val av teknologi}
 \subsection{Operativsystem}
 Valet av operativsystem var eigentleg meir eit val mellom linuxdistribusjonar. I Windowsverda får vi ikkje samme kontroll over kva modular vi vil ha med, og kan dermed ikkje på same måte skreddersy operativsystemet til det behovet vi har. I tillegg er dei fleste linuxdistibudjonar fritt tilgjeneleg, i motseting til Microsoft-system. 
@@ -163,9 +166,11 @@ Når dette er sagt, er der ikkje nokon grunn til at systemet vi har utvikla ikkj
 \subsection{Programmeringsspråk}
 Valet her har vore mellom å lage eit sett av bash-script med PHP som WebUI, og å kode eit system i Python. Vi har valt å nytte oss av høgnivå-språket Python, med rammeverket Django for WebUI. Dette gjer at vi kan kode alt i eit programmeringspråk og gir ein enklare og tryggare måte å kommunisere mellom dei forskellige modulane. Å nytte Python gjer det også naturleg å skrive objektorientert kode, og dele inn systemet etter MVC-prinsippet. 
 
-Det systemet som var utvikla gjennom Svein Ove Undal sitt haustprosjekt var laga med bash-script og PHP. Det hadde derfor vore eit enkelt val å fortsette med dette, og berre bygge på meir på dette systemet. 
+Det systemet som var utvikla gjennom Svein Ove Undal sitt haustprosjekt var laga med bash-script og PHP. Det hadde derfor vore eit enkelt val å fortsette med dette, og berre bygge på meir på dette systemet. Ettersom vi også såg etter måtar å utvide oppgåva på vart det naturleg å legge systemet om til Python. Dette gav også utfordringar i form av opplæring.
 
-Ingen av utviklarane hadde frå før mykje erfaring med Python, noko som førte til at vi måtte bruke litt tid på å lære oss programmeringsspråket. Vi brukte noko tid på dette før vi endeleg bestemte oss for Python. Når vi etterkvart såg kor velegna og enkelt dette språket var
+Ingen av utviklarane hadde frå før mykje erfaring med Python, noko som førte til at vi måtte bruke litt tid på å lære oss programmeringsspråket. Vi brukte noko tid på dette før vi endeleg bestemte oss for Python. Når vi etterkvart såg kor veleigna og enkelt dette språket var, bestemte vi oss også for å sjå nærmare på å nytte Django i staden for PHP. Det viste seg fort at å nytte Django gav mange gode effektar. Sidan Django har ein del ferdigutvikla modular for sesjonshandtering på nett, kunne vi konsentrere oss meir om kjernefunksjonane i systemet.
+
+\subsection{Programvare}
 
 
 \chapter{Resultat}
