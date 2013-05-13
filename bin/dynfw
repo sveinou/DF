@@ -193,11 +193,12 @@ Syntax:
     DROP <ipv4-addr>
     LOGIN <ipaddress> <user> <password>
     TESTLOGIN <user> <password>
-    INFO STATUS|STATS <IP [ipaddress]|user> (user not impl.)
+    INFO <IP4> (returns info about the ip)
     UPDATE (updates stats to database)
     FLUSH LIMITED|ALLOWED (flush iptables rules, allowed not impl.)
     LIMIT CONNLIMIT|RX|TX <ipv4-addr> (limits one spesific ip)
     LIMIT AUTO (auto set to avg limits bassed on users)
+    LIMIT ( finds and set the allowed bandwith for limited users )
     
     """
 
