@@ -8,14 +8,22 @@
 \usepackage{subfiles}
 \usepackage{pdflscape}
 \usepackage[final]{pdfpages}
+\usepackage{IEEEtrantools}
 %\usepackage{biblatex}
+%\usepackage{makeidx}
+
+\usepackage[toc]{glossaries}
 
 \title{Sluttrapport \\ Dynamisk Nettverksbrannmur}
 %\subtitle{Bacheloroppgåve 20E}
 \author{Espen Gjærde \and Svein Ove Undal}
 %\institute{Høgskolen i Sør-Trøndelag \\ Avdeling for Informatikk og e-Læring}
 \date{2013}
+
+\makeglossaries
+
 \begin{document}
+\bstctlcite{trans}
 \includepdf[pages=1]{apx/20E.pdf}
 \frontmatter
 \maketitle
@@ -28,7 +36,7 @@ Dette prosjektet er ei vidareføring av Svein Ove Undal sitt prosjekt <<prosjekt
 Sidan vi bestemte oss for å nytte Python som programmeringspråk i løysinga av oppgåva, og sidan ingen av forfattarane hadde noko erfaring med dette frå før, måtte vi bruke meir tid enn venta på å eiga opplæring. Sjølv om det i starten kunne sjå litt omfattande ut, henta vi inn mykje tid mot slutten når vi såg kor enkelt det var med eit programmeringspråk over heile fjøla, i staden for å blande bash og php. 
 
 \paragraph*{}
-Før vi startar på sjølve rapporten, vil vi nytte høvet til å takke rettleiar for bacheloroppgåva, Helge Hafting, for gode råd undervegs. Vi vi også rette ein stor takk til TIHLDE-LAN og spesielt deltakarena for tolmod og gode tilbakemeldingar under testinga av systemet. 
+Før vi tek til på sluttrapporten vil vi nytte høvet til å takke rettleiar for bacheloroppgåva, Helge Hafting, for gode råd og innspel undervegs. Vi vi også rette ein stor takk til TIHLDE-LAN og spesielt deltakarena for tolmod og gode tilbakemeldingar under testinga av systemet. 
  
 \begin{figure}[b]
 Trondheim, \today \\
@@ -75,6 +83,10 @@ Ein ny og revidert oppgåvetekst vart laga, og går som følgjer:
 
 \section{Definisjonar og forkortingar}
 \subsection{Ordliste}
+
+
+%\printglossaries
+
 \paragraph{Apache} eller Apache HTTP Server er ein populær http-tjenar. Denne sørgjer for at nettsidene til systemet verte vist fram.
 \paragraph{Django} er eit rammeverk som gjer det enkelt å bygge dynamiske nettsider med python.
 \paragraph{Python} eit populært høgnivå kodespråk. Det er dette det meste av kodinga for prosjektet er gjort
@@ -86,6 +98,10 @@ Ein ny og revidert oppgåvetekst vart laga, og går som følgjer:
 \paragraph{Distro} er ei forkorting/slang-form av distribusjon og blir brukt om ei avgreining eller ein type linux.
 \paragraph{WebUI} Web User Interface -- eit nettbasert brukargrensesnitt. 
 \paragraph{DHCP} \emph{Dynamic Host Configuration Protocol} er ein protokoll for utdeling av nettverkskonfigurasjon i eit nettverk. 
+\paragraph{Linuxkjerna} 
+
+
+
 
 \chapter{Teori}
 I denne delen av sluttrapporten vil vi gå gjennom teknologien vi har tilgjeneleg for å løyse oppgåva, og gje ei oversikt over dei konsepta vi kan bruke. 
@@ -96,8 +112,11 @@ I denne delen av sluttrapporten vil vi gå gjennom teknologien vi har tilgjenele
 
 \subsection{Behandling av trafikk}
 
+\subsection{Tidsavbrot for sesjon}
+Når nokon har logga seg på eit system, er det ikkje sagt at vedkommande hugsar å logge seg ut. I eit høve der vi ikkje vil at uvedkommande skal kunne bruke eit system, eller der vi vil vere sikker på at vi har knytt rett brukarnamn til kvar sesjon, er det eit poeng at brukarar som ikkje er aktive vert logga ut. 
+
 \section{Aktuell teknologi}
-Når vi no ser på dei forskjellige teknologiane vi kan nytte, er det naturleg å dele desse inn i operativsystem, kodespråk og programvare. 
+Når vi no ser på dei forskjellige teknologiane vi kan nytte, er det naturleg å dele desse inn i operativsystem, kodespråk og programvare. Vi vel også å skilje ut viktige modular som er inkludert i Linuxkjerna og forklare desse nærmare.
 \subsection{Operativsystem}
 \subsubsection{Debian 6.0.6 <<Squeeze>>} 
 Vi har valt å nytte oss av linux-systemet Debian. Vi nyttar versjon 6.0.6, som er den versjonen som var den siste stabile utgivinga av Debian då vi starta med bacheloroppgåva. Denne har kodenavnet <<Squeeze>>. Det har i ettertid (3.mai) kome ut ein ny stable-versjon av Debian, <<Debian 7 Wheezy>>. \cite{wheezy}
@@ -127,7 +146,7 @@ Apache HTTP Server er den mest brukte http-tenaren på internett. \cite{apahcetr
 MySQL er verdas mest populære opne relasjonsdatabase, og er spesielt vanlig å nytte til webapplikasjonar. Relasjonsdatabasen gir oss muligheten til å hurtig og effektivt lagre og hente data. \cite{mysqlwww} 
 
 \subsubsection{Internet Systems Consortium DHCP Server}
-Internet Systems Consortium DHCP Server (ISC) er ein implementasjon av DHCP-systemet og står for utlevering av nettverksinformasjon til datamaskiner i eit nettverk. Noko av det mest vanlege er IP-addresser, DNS-informasjon og kva som er addressa til nærmaste router. Denne serveren har også moglegheit for å kjøre kommandoar når spesielle hendinga skjer \cite{dhcpconf, dhcpman}. 
+Internet Systems Consortium (ISC) DHCP Server er ein implementasjon av DHCP-systemet og står for utlevering av nettverksinformasjon til datamaskiner i eit nettverk. Noko av det mest vanlege er IP-addresser, DNS-informasjon og kva som er addressa til nærmaste router. Denne serveren har også moglegheit for å kjøre kommandoar når spesielle hendinga skjer \cite{dhcpconf, dhcpdman}. 
 
 \subsection{Integrerte linuxmodular}
 \subsubsection{Netfilter og IPtables}
@@ -135,6 +154,11 @@ Netfilter er et rammeverk for filtrering av nettverkstrafikk, og har vore ein de
 
 \subsubsection{Linux Advanced Routing and Traffic Control}
 Linux Advanded Routing and Traffic Control (lartc) er eit sett med verktøy for å manipulere pakkar som går gjennom linux, og er ein del av kjerna i linux si pakkehandtering. \cite{lartcintro} Denne modulen gir mellom anna moglegheit for å merke pakkar slik at dei kan behandlast i andre verktøy seinare. 
+
+\subsection{Protokollar}
+\subsubsection{DHCP}
+DHCP er ein protokoll for utsending av nettverkskonfigurasjon til klientar i eit nettverk. Denne protokollen fungerar ved at ein klient sender ut ein førespurnad om DHCP-informasjon og ein server svarer på desse. Klienten vil deretter automatisk få IP-addresse og vanligvis også få tilsendt innstillingar for standardruter i nettverket og informasjon om navnetjenarar.  \cite{datakom} 
+For å unngå at det <<hopar seg opp>> med inaktive klientar, har desse automatiske innstillingane eit tidsavbrot. Det er klienten sitt ansvar å seie frå om at den framleis er aktiv. Dersom dette ikkje vert gjort, kan tenaren sende ut desse innstillingane til nye klientar. \cite{rfc2131}
 
 
 \section{Kodefilisofi}
@@ -164,7 +188,7 @@ Den andre hovudgrunnen til at vi vel Debian er så enkel som at begge utviklaran
 Når dette er sagt, er der ikkje nokon grunn til at systemet vi har utvikla ikkje skal fungere på andre distribusjonar. Dei linuxmodulane vi nyttar er felles for dei fleste system, og kommandoane er like. 
 
 \subsection{Programmeringsspråk}
-Valet her har vore mellom å lage eit sett av bash-script med PHP som WebUI, og å kode eit system i Python. Vi har valt å nytte oss av høgnivå-språket Python, med rammeverket Django for WebUI. Dette gjer at vi kan kode alt i eit programmeringspråk og gir ein enklare og tryggare måte å kommunisere mellom dei forskellige modulane. Å nytte Python gjer det også naturleg å skrive objektorientert kode, og dele inn systemet etter MVC-prinsippet. 
+Valet her har vore mellom å lage eit sett av bash-script med PHP som WebUI, og å kode eit system i Python. Vi har valt å nytte oss av høgnivå-språket Python med rammeverket Django for WebUI. Dette gjer at vi kan kode alt i eit programmeringspråk og gir ein enklare og tryggare måte å kommunisere mellom dei forskellige modulane. Å nytte Python gjer det også naturleg å skrive objektorientert kode og dele inn systemet etter MVC-prinsippet. 
 
 Det systemet som var utvikla gjennom Svein Ove Undal sitt haustprosjekt var laga med bash-script og PHP. Det hadde derfor vore eit enkelt val å fortsette med dette, og berre bygge på meir på dette systemet. Ettersom vi også såg etter måtar å utvide oppgåva på vart det naturleg å legge systemet om til Python. Dette gav også utfordringar i form av opplæring.
 
@@ -172,6 +196,7 @@ Ingen av utviklarane hadde frå før mykje erfaring med Python, noko som førte 
 
 \subsection{Programvare}
 
+For å få betre kontroll på brukarane av systemet og for å kunne bruke DHCP-hendingar som utløysar for aksjonar i koden, har vi valt å nytte ISC DHCP-server. Dette var også eit naturleg val da dette er den mest utbredete dhcp-serveren i *nix-verda. ISC DHCP-server sin funksjon for å utnytte DHCP-protokollen si mekanisme for fornying av TCP/IP-innstillingar gjer denne programvara spesielt egna. I tillegg er dette ei programvare som begge utviklarane har erfaring med frå kurset <<Linux Systemdrift>> ved Høgskolen i Sør-Trøndelag. 
 
 \chapter{Resultat}
 
@@ -200,9 +225,10 @@ Administrator vil få tilgang til eigne administrasjonsider der dei kan sjå på
 \section{Vidareutvikling av produktet}
 \chapter{Konklusjon}
 \chapter{Kjelder og referansar}
+Mesteparten av litteraturen er på engelsk. Vi har derfor valt å merke det som er på norsk med [NORSK]. Dersom denne merkinga ikkje er i referansen, er kjelda engelsk. 
 
 \bibliographystyle{IEEEtran}
-\bibliography{kilder}
+\bibliography{IEEEabrv,kilder}{}
 
 \part{Vedlegg}
 \appendix 
@@ -233,4 +259,8 @@ Administrator vil få tilgang til eigne administrasjonsider der dei kan sjå på
 \paragraph{Helge Hafting} for god rettleiing og gode fagkunnskapar.
 \paragraph{TIHLDE} og spesielt TIHLDE-LAN for at vi fekk nytte dei som testkaninar lenge før systemet var produksjonsklart. Dette gav oss mykje gode erfaringar.
 \paragraph{Deltakarane på TIHLDE-LAN} som var hyggelege og ga oss verdifulle tilbakemeldingar.
+
+
+
+
 \end{document}

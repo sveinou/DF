@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.2.5)  13 MAY 2013 16:35
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.2.5)  13 MAY 2013 22:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -512,40 +512,175 @@ File: pppdftex.def 2012/04/03 v0.4s Pdfpages driver for pdfTeX (AM)
 \c@AM@survey=\count103
 \AM@templatesizebox=\box27
 )
+(/usr/share/texlive/texmf-dist/tex/latex/IEEEtran/IEEEtrantools.sty
+Package: IEEEtrantools 2007/01/11 V1.2 by Michael Shell
+
+-- See the "IEEEtrantools_doc.txt" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/tools/
+\@IEEEtrantmpdimenA=\dimen111
+\@IEEEtrantmpdimenB=\dimen112
+\@IEEEtrantmpcountA=\count104
+\@IEEEtrantmpcountB=\count105
+\@IEEEtrantmptoksA=\toks20
+\IEEEnormaljot=\dimen113
+\IEEEilabelindentA=\dimen114
+\IEEEilabelindentB=\dimen115
+\IEEEilabelindent=\dimen116
+\IEEEelabelindent=\dimen117
+\IEEEdlabelindent=\dimen118
+\IEEElabelindent=\dimen119
+\IEEEiednormlabelsep=\dimen120
+\IEEEiedmathlabelsep=\dimen121
+\IEEEiedtopsep=\skip47
+\c@IEEEsubequation=\count106
+\@IEEEeqnnumcols=\count107
+\@IEEEeqncolcnt=\count108
+\IEEEPARstartletwidth=\dimen122
+) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries.sty
+Package: glossaries 2012/05/21 v3.02 (NLCT)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks21
+\XKV@tempa@toks=\toks22
+\XKV@depth=\count109
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/mfirstuc.sty
+Package: mfirstuc 2012/05/21 v1.06 (NLCT)
+
+(/usr/share/texmf/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count110
+)
+\etb@tempcnta=\count111
+)
+\@glsmfirst=\toks23
+\@glsmrest=\toks24
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xfor/xfor.sty
+Package: xfor 2009/02/05 v1.05 (NLCT)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks25
+\ex@=\dimen123
+)
+(/usr/share/texmf/tex/latex/beamer/base/translator/translator.sty
+Package: translator 2010/06/12 ver 1.10
+
+(/usr/share/texmf/tex/latex/beamer/base/translator/translator-language-mappings
+.tex))
+\gls@level=\count112
+\@gls@tmpb=\toks26
+\gls@tmplen=\skip48
+\glswrite=\write3
+\glskeylisttok=\toks27
+\glslabeltok=\toks28
+\glsshorttok=\toks29
+\glslongtok=\toks30
+
+(/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.st
+y
+Package: glossary-hypernav 2007/07/04 v1.01 (NLCT)
+) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty
+Package: glossary-list 2011/03/28 v3.0 (NLCT)
+\glslistdottedwidth=\skip49
+) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty
+Package: glossary-long 2011/03/28 v3.0 (NLCT)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip50
+\LTright=\skip51
+\LTpre=\skip52
+\LTpost=\skip53
+\LTchunksize=\count113
+\LTcapwidth=\dimen124
+\LT@head=\box28
+\LT@firsthead=\box29
+\LT@foot=\box30
+\LT@lastfoot=\box31
+\LT@cols=\count114
+\LT@rows=\count115
+\c@LT@tables=\count116
+\c@LT@chunks=\count117
+\LT@p@ftn=\toks31
+)
+\glsdescwidth=\skip54
+\glspagelistwidth=\skip55
+)
+(/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty
+Package: glossary-super 2011/03/28 v3.0 (NLCT)
+
+(/usr/share/texlive/texmf-dist/tex/latex/supertabular/supertabular.sty
+Package: supertabular 2004/02/20 v4.1e the supertabular environment
+\c@tracingst=\count118
+\ST@wd=\dimen125
+\ST@rightskip=\skip56
+\ST@leftskip=\skip57
+\ST@parfillskip=\skip58
+\ST@pageleft=\dimen126
+\ST@headht=\dimen127
+\ST@tailht=\dimen128
+\ST@pagesofar=\dimen129
+\ST@pboxht=\dimen130
+\ST@lineht=\dimen131
+\ST@stretchht=\dimen132
+\ST@prevht=\dimen133
+\ST@toadd=\dimen134
+\ST@dimen=\dimen135
+\ST@pbox=\box32
+))
+(/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
+Package: glossary-tree 2011/03/28 v3.0 (NLCT)
+\glstreeindent=\skip59
+))
+\glo@main@file=\write4
+\openout4 = `sluttrapport.glo'.
+
+Package glossaries Info: Writing glossary file sluttrapport.glo on input line 2
+3.
+
 (./sluttrapport.aux)
 \openout1 = `sluttrapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 25.
  (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
-\scratchdimen=\dimen111
-\scratchbox=\box28
-\nofMPsegments=\count105
-\nofMParguments=\count106
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count107
-\MPscratchDim=\dimen112
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
-\everyMPtoPDFconversion=\toks21
+\scratchcounter=\count119
+\scratchdimen=\dimen136
+\scratchbox=\box33
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen137
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks33
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -561,8 +696,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 18.
+\AtBeginShipoutBox=\box34
+Package hyperref Info: Link coloring OFF on input line 25.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -570,83 +705,88 @@ Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count110
+\c@section@level=\count125
 )
-LaTeX Info: Redefining \ref on input line 18.
-LaTeX Info: Redefining \pageref on input line 18.
-LaTeX Info: Redefining \nameref on input line 18.
+LaTeX Info: Redefining \ref on input line 25.
+LaTeX Info: Redefining \pageref on input line 25.
+LaTeX Info: Redefining \nameref on input line 25.
 
 (./sluttrapport.out) (./sluttrapport.out)
-\@outlinefile=\write3
-\openout3 = `sluttrapport.out'.
+\@outlinefile=\write5
+\openout5 = `sluttrapport.out'.
 
 
-<apx/20E.pdf, id=194, page=1, 597.23125pt x 845.1575pt>
+(/usr/share/texlive/texmf-dist/tex/latex/glossaries/dict/glossaries-dictionary-
+English.dict
+Dictionary: glossaries-dictionary, Language: English 
+) <apx/20E.pdf, id=202, page=1, 597.23125pt x 845.1575pt>
 File: apx/20E.pdf Graphic file (type pdf)
 
 <use apx/20E.pdf, page 1>
-Package pdftex.def Info: apx/20E.pdf, page1 used on input line 19.
+Package pdftex.def Info: apx/20E.pdf, page1 used on input line 27.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: apx/20E.pdf Graphic file (type pdf)
  <use apx/20E.pdf, page 1>
-Package pdftex.def Info: apx/20E.pdf, page1 used on input line 19.
+Package pdftex.def Info: apx/20E.pdf, page1 used on input line 27.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: apx/20E.pdf Graphic file (type pdf)
  <use apx/20E.pdf, page 1>
-Package pdftex.def Info: apx/20E.pdf, page1 used on input line 19.
+Package pdftex.def Info: apx/20E.pdf, page1 used on input line 27.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: apx/20E.pdf Graphic file (type pdf)
 
 <use apx/20E.pdf, page 1>
-Package pdftex.def Info: apx/20E.pdf, page1 used on input line 19.
+Package pdftex.def Info: apx/20E.pdf, page1 used on input line 27.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: apx/20E.pdf Graphic file (type pdf)
  <use apx/20E.pdf, page 1>
-Package pdftex.def Info: apx/20E.pdf, page1 used on input line 19.
+Package pdftex.def Info: apx/20E.pdf, page1 used on input line 27.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
  [1
 
+\openout3 = `sluttrapport.ist'.
+
  <./apx/20E.pdf>]
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 22.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 30.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 22.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 30.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 22.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 30.
 
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 22.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 30.
 
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 22.
+(Font)              <14.4> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 22.
+(Font)              <10> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 22.
+(Font)              <7> on input line 30.
  [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 39.
+(Font)              <12> on input line 47.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 39.
+(Font)              <8> on input line 47.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 39.
+(Font)              <6> on input line 47.
 
-Overfull \hbox (44.33858pt too wide) in paragraph at lines 39--46
+Overfull \hbox (44.33858pt too wide) in paragraph at lines 47--54
  [][] 
  []
 
@@ -654,7 +794,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.48 \part
+l.56 \part
           {Oppgåva} [1
 
 ] [2
@@ -666,21 +806,21 @@ l.48 \part
 ] [5] (./sluttrapport.toc [6
 
 ])
-\tf@toc=\write4
-\openout4 = `sluttrapport.toc'.
+\tf@toc=\write6
+\openout6 = `sluttrapport.toc'.
 
  [7]pdfTeX warning (ext4): destination with the same identifier (name{page.1}) 
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.72 \part{Sluttrapporten}
+l.80 \part{Sluttrapporten}
                            [1
 
 
 ]
 Kapittel 1.
 
-Overfull \hbox (0.776pt too wide) in paragraph at lines 81--82
+Overfull \hbox (0.7838pt too wide) in paragraph at lines 93--94
  []\T1/lmr/bx/n/12 Bash(-script)[] \T1/lmr/m/n/12 Bourne-Again-SHell. Er ein ko
 -man-do-tolkar for unix-system.
  []
@@ -693,34 +833,30 @@ Kapittel 2.
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 114.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 114.
+(Font)              <5> on input line 133.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 133.
 
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [5]
-
-LaTeX Warning: Citation `dhcpman' on page 6 undefined on input line 130.
-
-[6] [7]
+) [5] [6] [7] [8]
 Kapittel 3.
-[8
+[9
 
-] [9]
+] [10]
 Kapittel 4.
-[10
+[11
 
-] [11]
+] [12]
 Kapittel 5.
-[12
-
-]
-Kapittel 6.
 [13
 
 ]
+Kapittel 6.
+[14
+
+]
 Kapittel 7.
-(./sluttrapport.bbl [14
+(./sluttrapport.bbl [15
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 26--30
@@ -728,1048 +864,1041 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--30
 / guide / con^^\g /
  []
 
-[15
+[16
 
 ]
-Underfull \hbox (badness 1152) in paragraph at lines 114--117
-[]\T1/lmr/m/n/12 ``May 2013 web serv-er sur-vey,'' May 2013. [On-
- []
-
-
-Underfull \hbox (badness 1320) in paragraph at lines 114--117
-\T1/lmr/m/n/12 line]. Avail-able: []$http : / / news . netcraft . com / archive
-s / 2013 / 05 / 03 /
- []
-
-) [16] [17
+** WARNING: IEEEtran.bst: No hyphenation pattern has been
+** loaded for the language `Norwegian'. Using the pattern for
+** the default language instead.
+[17]) [18] [19
 
 ]
 Tillegg A.
-[18
+[20
 
 ]
 Tillegg B.
-[19
+[21
 
-] <apx/visjonsdokument.pdf, id=511, page=1, 597.50829pt x 845.0471pt>
+] <apx/visjonsdokument.pdf, id=538, page=1, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 1>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 238.
 
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 1>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 1>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 1>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 1>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page1 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [20 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=528, page=2, 597.50829pt x 845.0471pt>
+ [22 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=555, page=2, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 2>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page2 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page2 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 2>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page2 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page2 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 2>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page2 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page2 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [21 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=543, page=3, 597.50829pt x 845.0471pt>
+ [23 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=570, page=3, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 3>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page3 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page3 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 3>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page3 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page3 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 3>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page3 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page3 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [22 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=549, page=4, 597.50829pt x 845.0471pt>
+ [24 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=575, page=4, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 4>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page4 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page4 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 4>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page4 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page4 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 4>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page4 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page4 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [23 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=554, page=5, 597.50829pt x 845.0471pt>
+ [25 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=580, page=5, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 5>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page5 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page5 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 5>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page5 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page5 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 5>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page5 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page5 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [24 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=559, page=6, 597.50829pt x 845.0471pt>
+ [26 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=585, page=6, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 6>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page6 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page6 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 6>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page6 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page6 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 6>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page6 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page6 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [25 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=579, page=7, 597.50829pt x 845.0471pt>
+ [27 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=605, page=7, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 7>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page7 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page7 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 7>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page7 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page7 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 7>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page7 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page7 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [26 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=589, page=8, 597.50829pt x 845.0471pt>
+ [28 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=616, page=8, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 8>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page8 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page8 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 8>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page8 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page8 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 8>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page8 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page8 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [27 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=594, page=9, 597.50829pt x 845.0471pt>
+ [29 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=621, page=9, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 9>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page9 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page9 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 9>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page9 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page9 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 9>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page9 used on input line 213.
+Package pdftex.def Info: apx/visjonsdokument.pdf, page9 used on input line 238.
 
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [28 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=600, page=10, 597.50829pt x 845.0471pt>
+ [30 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=626, page=10, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 10>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page10 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page10 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 10>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page10 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page10 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 10>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page10 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page10 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [29 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=605, page=11, 597.50829pt x 845.0471pt>
+ [31 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=631, page=11, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 11>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page11 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page11 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 11>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page11 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page11 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 11>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page11 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page11 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [30 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=610, page=12, 597.50829pt x 845.0471pt>
+ [32 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=636, page=12, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 12>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page12 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page12 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 12>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page12 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page12 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 12>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page12 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page12 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [31 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=616, page=13, 597.50829pt x 845.0471pt>
+ [33 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=642, page=13, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 13>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page13 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page13 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 13>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page13 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page13 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 13>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page13 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page13 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [32 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=621, page=14, 597.50829pt x 845.0471pt>
+ [34 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=648, page=14, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 14>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page14 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page14 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 14>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page14 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page14 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 14>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page14 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page14 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [33 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=626, page=15, 597.50829pt x 845.0471pt>
+ [35 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=653, page=15, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 15>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page15 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page15 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 15>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page15 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page15 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 15>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page15 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page15 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [34 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=632, page=16, 597.50829pt x 845.0471pt>
+ [36 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=658, page=16, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 16>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page16 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page16 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 16>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page16 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page16 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 16>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page16 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page16 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [35 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=637, page=17, 597.50829pt x 845.0471pt>
+ [37 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=663, page=17, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 17>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page17 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page17 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 17>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page17 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page17 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 17>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page17 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page17 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [36 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=642, page=18, 597.50829pt x 845.0471pt>
+ [38 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=668, page=18, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 18>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page18 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page18 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 18>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page18 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page18 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 18>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page18 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page18 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [37 <./apx/visjonsdokument.pdf>]
-<apx/visjonsdokument.pdf, id=650, page=19, 597.50829pt x 845.0471pt>
+ [39 <./apx/visjonsdokument.pdf>]
+<apx/visjonsdokument.pdf, id=676, page=19, 597.50829pt x 845.0471pt>
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 19>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page19 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page19 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
  <use apx/visjonsdokument.pdf, page 19>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page19 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page19 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/visjonsdokument.pdf Graphic file (type pdf)
 
 <use apx/visjonsdokument.pdf, page 19>
-Package pdftex.def Info: apx/visjonsdokument.pdf, page19 used on input line 213
+Package pdftex.def Info: apx/visjonsdokument.pdf, page19 used on input line 238
 .
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [38 <./apx/visjonsdokument.pdf>]
-<apx/rosanalyse.pdf, id=657, page=1, 845.0471pt x 597.50829pt>
+ [40 <./apx/visjonsdokument.pdf>]
+<apx/rosanalyse.pdf, id=685, page=1, 845.0471pt x 597.50829pt>
 File: apx/rosanalyse.pdf Graphic file (type pdf)
 
 <use apx/rosanalyse.pdf, page 1>
-Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 214.
+Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 239.
 (pdftex.def)             Requested size: 845.04504pt x 597.50682pt.
 File: apx/rosanalyse.pdf Graphic file (type pdf)
  <use apx/rosanalyse.pdf, page 1>
-Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 214.
+Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 239.
 (pdftex.def)             Requested size: 845.08372pt x 597.53416pt.
 File: apx/rosanalyse.pdf Graphic file (type pdf)
 
 <use apx/rosanalyse.pdf, page 1>
-Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 214.
+Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 239.
 (pdftex.def)             Requested size: 845.08372pt x 597.53416pt.
 File: apx/rosanalyse.pdf Graphic file (type pdf)
  <use apx/rosanalyse.pdf, page 1>
-Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 214.
+Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 239.
 (pdftex.def)             Requested size: 845.08372pt x 597.53416pt.
 File: apx/rosanalyse.pdf Graphic file (type pdf)
 
 <use apx/rosanalyse.pdf, page 1>
-Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 214.
+Package pdftex.def Info: apx/rosanalyse.pdf, page1 used on input line 239.
 (pdftex.def)             Requested size: 845.08372pt x 597.53416pt.
- [39 <./apx/rosanalyse.pdf>]
+ [41 <./apx/rosanalyse.pdf>]
 Tillegg C.
-[40
+[42
 
-] <apx/kravdokument.pdf, id=679, page=1, 597.50829pt x 845.0471pt>
+] <apx/kravdokument.pdf, id=706, page=1, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 1>
-Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 242.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 1>
-Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 1>
-Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 1>
-Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 1>
-Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page1 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [41 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=808, page=2, 597.50829pt x 845.0471pt>
+ [43 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=834, page=2, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 2>
-Package pdftex.def Info: apx/kravdokument.pdf, page2 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page2 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 2>
-Package pdftex.def Info: apx/kravdokument.pdf, page2 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page2 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 2>
-Package pdftex.def Info: apx/kravdokument.pdf, page2 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page2 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [42 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=883, page=3, 597.50829pt x 845.0471pt>
+ [44 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=909, page=3, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 3>
-Package pdftex.def Info: apx/kravdokument.pdf, page3 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page3 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 3>
-Package pdftex.def Info: apx/kravdokument.pdf, page3 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page3 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 3>
-Package pdftex.def Info: apx/kravdokument.pdf, page3 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page3 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [43 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=923, page=4, 597.50829pt x 845.0471pt>
+ [45 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=949, page=4, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 4>
-Package pdftex.def Info: apx/kravdokument.pdf, page4 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page4 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 4>
-Package pdftex.def Info: apx/kravdokument.pdf, page4 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page4 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 4>
-Package pdftex.def Info: apx/kravdokument.pdf, page4 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page4 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [44 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=971, page=5, 597.50829pt x 845.0471pt>
+ [46 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=998, page=5, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 5>
-Package pdftex.def Info: apx/kravdokument.pdf, page5 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page5 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 5>
-Package pdftex.def Info: apx/kravdokument.pdf, page5 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page5 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 5>
-Package pdftex.def Info: apx/kravdokument.pdf, page5 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page5 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [45 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=982, page=6, 597.50829pt x 845.0471pt>
+ [47 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=1009, page=6, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 6>
-Package pdftex.def Info: apx/kravdokument.pdf, page6 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page6 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 6>
-Package pdftex.def Info: apx/kravdokument.pdf, page6 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page6 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 6>
-Package pdftex.def Info: apx/kravdokument.pdf, page6 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page6 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [46 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=988, page=7, 597.50829pt x 845.0471pt>
+ [48 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=1014, page=7, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 7>
-Package pdftex.def Info: apx/kravdokument.pdf, page7 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page7 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 7>
-Package pdftex.def Info: apx/kravdokument.pdf, page7 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page7 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 7>
-Package pdftex.def Info: apx/kravdokument.pdf, page7 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page7 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [47 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=993, page=8, 597.50829pt x 845.0471pt>
+ [49 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=1019, page=8, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 8>
-Package pdftex.def Info: apx/kravdokument.pdf, page8 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page8 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 8>
-Package pdftex.def Info: apx/kravdokument.pdf, page8 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page8 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 8>
-Package pdftex.def Info: apx/kravdokument.pdf, page8 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page8 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [48 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=1010, page=9, 597.50829pt x 845.0471pt>
+ [50 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=1036, page=9, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 9>
-Package pdftex.def Info: apx/kravdokument.pdf, page9 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page9 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 9>
-Package pdftex.def Info: apx/kravdokument.pdf, page9 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page9 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 9>
-Package pdftex.def Info: apx/kravdokument.pdf, page9 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page9 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [49 <./apx/kravdokument.pdf>]
-<apx/kravdokument.pdf, id=1024, page=10, 597.50829pt x 845.0471pt>
+ [51 <./apx/kravdokument.pdf>]
+<apx/kravdokument.pdf, id=1050, page=10, 597.50829pt x 845.0471pt>
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 10>
-Package pdftex.def Info: apx/kravdokument.pdf, page10 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page10 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
  <use apx/kravdokument.pdf, page 10>
-Package pdftex.def Info: apx/kravdokument.pdf, page10 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page10 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/kravdokument.pdf Graphic file (type pdf)
 
 <use apx/kravdokument.pdf, page 10>
-Package pdftex.def Info: apx/kravdokument.pdf, page10 used on input line 217.
+Package pdftex.def Info: apx/kravdokument.pdf, page10 used on input line 242.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [50 <./apx/kravdokument.pdf>]
+ [52 <./apx/kravdokument.pdf>]
 Tillegg D.
-[51
+[53
 
-] <apx/arkitekturdokument.pdf, id=1044, page=1, 597.50829pt x 845.0471pt>
+] <apx/arkitekturdokument.pdf, id=1072, page=1, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
 <use apx/arkitekturdokument.pdf, page 1>
 Package pdftex.def Info: apx/arkitekturdokument.pdf, page1 used on input line 2
-20.
+45.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
 <use apx/arkitekturdokument.pdf, page 1>
 Package pdftex.def Info: apx/arkitekturdokument.pdf, page1 used on input line 2
-20.
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
 <use apx/arkitekturdokument.pdf, page 1>
 Package pdftex.def Info: apx/arkitekturdokument.pdf, page1 used on input line 2
-20.
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
 <use apx/arkitekturdokument.pdf, page 1>
 Package pdftex.def Info: apx/arkitekturdokument.pdf, page1 used on input line 2
-20.
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
 <use apx/arkitekturdokument.pdf, page 1>
 Package pdftex.def Info: apx/arkitekturdokument.pdf, page1 used on input line 2
-20.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [52 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1174, page=2, 597.50829pt x 845.0471pt>
-File: apx/arkitekturdokument.pdf Graphic file (type pdf)
-
-<use apx/arkitekturdokument.pdf, page 2>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page2 used on input line 2
-20.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: apx/arkitekturdokument.pdf Graphic file (type pdf)
-
-<use apx/arkitekturdokument.pdf, page 2>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page2 used on input line 2
-20.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: apx/arkitekturdokument.pdf Graphic file (type pdf)
-
-<use apx/arkitekturdokument.pdf, page 2>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page2 used on input line 2
-20.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [53 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1230, page=3, 597.50829pt x 845.0471pt>
-File: apx/arkitekturdokument.pdf Graphic file (type pdf)
-
-<use apx/arkitekturdokument.pdf, page 3>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page3 used on input line 2
-20.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: apx/arkitekturdokument.pdf Graphic file (type pdf)
-
-<use apx/arkitekturdokument.pdf, page 3>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page3 used on input line 2
-20.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: apx/arkitekturdokument.pdf Graphic file (type pdf)
-
-<use apx/arkitekturdokument.pdf, page 3>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page3 used on input line 2
-20.
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [54 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1277, page=4, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1200, page=2, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 4>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page4 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 2>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page2 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 4>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page4 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 2>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page2 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 4>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page4 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 2>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page2 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [55 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1349, page=5, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1256, page=3, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 5>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page5 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 3>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page3 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 5>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page5 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 3>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page3 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 5>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page5 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 3>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page3 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [56 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1360, page=6, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1303, page=4, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 6>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page6 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 4>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page4 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 6>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page6 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 4>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page4 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 6>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page6 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 4>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page4 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [57 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1365, page=7, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1375, page=5, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 7>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page7 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 5>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page5 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 7>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page7 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 5>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page5 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 7>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page7 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 5>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page5 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [58 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1380, page=8, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1387, page=6, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 8>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page8 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 6>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page6 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 8>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page8 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 6>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page6 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 8>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page8 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 6>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page6 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [59 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1391, page=9, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1392, page=7, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 9>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page9 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 7>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page7 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 9>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page9 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 7>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page7 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 9>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page9 used on input line 2
-20.
+<use apx/arkitekturdokument.pdf, page 7>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page7 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [60 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1402, page=10, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1406, page=8, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 10>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page10 used on input line 
-220.
+<use apx/arkitekturdokument.pdf, page 8>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page8 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 10>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page10 used on input line 
-220.
+<use apx/arkitekturdokument.pdf, page 8>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page8 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 10>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page10 used on input line 
-220.
+<use apx/arkitekturdokument.pdf, page 8>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page8 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [61 <./apx/arkitekturdokument.pdf>]
-<apx/arkitekturdokument.pdf, id=1416, page=11, 597.50829pt x 845.0471pt>
+<apx/arkitekturdokument.pdf, id=1417, page=9, 597.50829pt x 845.0471pt>
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 11>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page11 used on input line 
-220.
+<use apx/arkitekturdokument.pdf, page 9>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page9 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 11>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page11 used on input line 
-220.
+<use apx/arkitekturdokument.pdf, page 9>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page9 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: apx/arkitekturdokument.pdf Graphic file (type pdf)
 
-<use apx/arkitekturdokument.pdf, page 11>
-Package pdftex.def Info: apx/arkitekturdokument.pdf, page11 used on input line 
-220.
+<use apx/arkitekturdokument.pdf, page 9>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page9 used on input line 2
+45.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [62 <./apx/arkitekturdokument.pdf>]
+<apx/arkitekturdokument.pdf, id=1428, page=10, 597.50829pt x 845.0471pt>
+File: apx/arkitekturdokument.pdf Graphic file (type pdf)
+
+<use apx/arkitekturdokument.pdf, page 10>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page10 used on input line 
+245.
+(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+File: apx/arkitekturdokument.pdf Graphic file (type pdf)
+
+<use apx/arkitekturdokument.pdf, page 10>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page10 used on input line 
+245.
+(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+File: apx/arkitekturdokument.pdf Graphic file (type pdf)
+
+<use apx/arkitekturdokument.pdf, page 10>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page10 used on input line 
+245.
+(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+ [63 <./apx/arkitekturdokument.pdf>]
+<apx/arkitekturdokument.pdf, id=1442, page=11, 597.50829pt x 845.0471pt>
+File: apx/arkitekturdokument.pdf Graphic file (type pdf)
+
+<use apx/arkitekturdokument.pdf, page 11>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page11 used on input line 
+245.
+(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+File: apx/arkitekturdokument.pdf Graphic file (type pdf)
+
+<use apx/arkitekturdokument.pdf, page 11>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page11 used on input line 
+245.
+(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+File: apx/arkitekturdokument.pdf Graphic file (type pdf)
+
+<use apx/arkitekturdokument.pdf, page 11>
+Package pdftex.def Info: apx/arkitekturdokument.pdf, page11 used on input line 
+245.
+(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+ [64 <./apx/arkitekturdokument.pdf>]
 Tillegg E.
-[63
+[65
 
 ]
 Tillegg F.
-[64
+[66
 
-] <apx/sluttrapport_sou.pdf, id=1442, page=1, 614.295pt x 794.97pt>
+] <apx/sluttrapport_sou.pdf, id=1469, page=1, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 1>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 253
 .
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 1>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 1>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 1>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 1>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page1 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [65 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1458, page=2, 614.295pt x 794.97pt>
+ [67 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1485, page=2, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 2>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page2 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page2 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 2>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page2 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page2 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 2>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page2 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page2 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [66 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1464, page=3, 614.295pt x 794.97pt>
+ [68 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1490, page=3, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 3>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page3 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page3 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 3>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page3 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page3 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 3>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page3 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page3 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [67 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1469, page=4, 614.295pt x 794.97pt>
+ [69 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1495, page=4, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 4>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page4 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page4 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 4>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page4 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page4 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 4>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page4 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page4 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [68 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1474, page=5, 614.295pt x 794.97pt>
+ [70 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1501, page=5, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 5>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page5 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page5 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 5>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page5 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page5 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 5>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page5 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page5 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [69 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1484, page=6, 614.295pt x 794.97pt>
+ [71 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1511, page=6, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 6>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page6 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page6 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 6>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page6 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page6 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 6>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page6 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page6 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [70 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1490, page=7, 614.295pt x 794.97pt>
+ [72 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1516, page=7, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 7>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page7 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page7 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 7>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page7 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page7 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 7>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page7 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page7 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [71 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1495, page=8, 614.295pt x 794.97pt>
+ [73 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1521, page=8, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 8>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page8 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page8 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 8>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page8 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page8 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 8>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page8 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page8 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [72 <./apx/sluttrapport_sou.pdf>]
-<apx/sluttrapport_sou.pdf, id=1500, page=9, 614.295pt x 794.97pt>
+ [74 <./apx/sluttrapport_sou.pdf>]
+<apx/sluttrapport_sou.pdf, id=1526, page=9, 614.295pt x 794.97pt>
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 9>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page9 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page9 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
  <use apx/sluttrapport_sou.pdf, page 9>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page9 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page9 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: apx/sluttrapport_sou.pdf Graphic file (type pdf)
 
 <use apx/sluttrapport_sou.pdf, page 9>
-Package pdftex.def Info: apx/sluttrapport_sou.pdf, page9 used on input line 228
+Package pdftex.def Info: apx/sluttrapport_sou.pdf, page9 used on input line 253
 .
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
- [73 <./apx/sluttrapport_sou.pdf>]
-[74]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 237.
- [75
+ [75 <./apx/sluttrapport_sou.pdf>]
+[76]
+
+Package glossaries Warning: No \printglossary or \printglossaries found.
+This document will not have a glossary.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
+[77
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 237.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
  (./sluttrapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 237.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 237.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
 Package rerunfilecheck Info: File `sluttrapport.out' has not changed.
-(rerunfilecheck)             Checksum: E869BB3F0940AC76C59CB5B6CB64FFD9;2929.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 237.
+(rerunfilecheck)             Checksum: 75F636BF5FCDB8BDB1A95C74E6C67FFF;3070.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 266.
  ) 
 Here is how much of TeX's memory you used:
- 7513 strings out of 495059
- 109714 string characters out of 3182031
- 196143 words of memory out of 3000000
- 10362 multiletter control sequences out of 15000+200000
+ 10006 strings out of 495059
+ 148173 string characters out of 3182031
+ 256771 words of memory out of 3000000
+ 12774 multiletter control sequences out of 15000+200000
  76537 words of font info for 54 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 40i,18n,46p,756b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,18n,51p,1432b,526s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type
@@ -1785,10 +1914,10 @@ e/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm
 onts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pf
 b></usr/share/texmf/fonts/type1/public/lm/lmro12.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmtt10.pfb>
-Output written on sluttrapport.pdf (84 pages, 937350 bytes).
+Output written on sluttrapport.pdf (86 pages, 941720 bytes).
 PDF statistics:
- 1604 PDF objects out of 1728 (max. 8388607)
- 893 compressed objects within 9 object streams
- 196 named destinations out of 1000 (max. 500000)
- 692 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1634 PDF objects out of 1728 (max. 8388607)
+ 920 compressed objects within 10 object streams
+ 205 named destinations out of 1000 (max. 500000)
+ 708 words of extra memory for PDF output out of 10000 (max. 10000000)
 

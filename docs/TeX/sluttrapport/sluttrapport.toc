@@ -25,57 +25,61 @@
 \contentsline {paragraph}{Distro}{3}{section*.22}
 \contentsline {paragraph}{WebUI}{3}{section*.23}
 \contentsline {paragraph}{DHCP}{3}{section*.24}
+\contentsline {paragraph}{Linuxkjerna}{3}{section*.25}
 \contentsline {chapter}{\numberline {2}Teori}{4}{chapter.2}
 \contentsline {section}{\numberline {2.1}Konsept}{4}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Captive-Portal}{4}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Behandling av trafikk}{4}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Tidsavbrot for sesjon}{4}{subsection.2.1.3}
 \contentsline {section}{\numberline {2.2}Aktuell teknologi}{4}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Operativsystem}{4}{subsection.2.2.1}
-\contentsline {subsubsection}{Debian 6.0.6 <<Squeeze>>}{4}{section*.25}
-\contentsline {subsection}{\numberline {2.2.2}Programmeringspr\IeC {\r a}k}{5}{subsection.2.2.2}
-\contentsline {subsubsection}{Python}{5}{section*.26}
-\contentsline {subsubsection}{Django}{5}{section*.27}
-\contentsline {subsubsection}{Bash-scripting}{5}{section*.28}
-\contentsline {subsubsection}{PHP}{5}{section*.29}
+\contentsline {subsection}{\numberline {2.2.1}Operativsystem}{5}{subsection.2.2.1}
+\contentsline {subsubsection}{Debian 6.0.6 <<Squeeze>>}{5}{section*.26}
+\contentsline {subsection}{\numberline {2.2.2}Programmeringsspr\IeC {\r a}k}{5}{subsection.2.2.2}
+\contentsline {subsubsection}{Python}{5}{section*.27}
+\contentsline {subsubsection}{Django}{5}{section*.28}
+\contentsline {subsubsection}{Bash-scripting}{5}{section*.29}
+\contentsline {subsubsection}{PHP}{6}{section*.30}
 \contentsline {subsection}{\numberline {2.2.3}Programvare}{6}{subsection.2.2.3}
-\contentsline {subsubsection}{Apache HTTP Server}{6}{section*.30}
-\contentsline {subsubsection}{MySQL Community Edition}{6}{section*.31}
-\contentsline {subsubsection}{Internet Systems Consortium DHCP Server}{6}{section*.32}
+\contentsline {subsubsection}{Apache HTTP Server}{6}{section*.31}
+\contentsline {subsubsection}{MySQL Community Edition}{6}{section*.32}
+\contentsline {subsubsection}{Internet Systems Consortium DHCP Server}{6}{section*.33}
 \contentsline {subsection}{\numberline {2.2.4}Integrerte linuxmodular}{6}{subsection.2.2.4}
-\contentsline {subsubsection}{Netfilter og IPtables}{6}{section*.33}
-\contentsline {subsubsection}{Linux Advanced Routing and Traffic Control}{6}{section*.34}
+\contentsline {subsubsection}{Netfilter og IPtables}{6}{section*.34}
+\contentsline {subsubsection}{Linux Advanced Routing and Traffic Control}{7}{section*.35}
+\contentsline {subsection}{\numberline {2.2.5}Protokollar}{7}{subsection.2.2.5}
+\contentsline {subsubsection}{DHCP}{7}{section*.36}
 \contentsline {section}{\numberline {2.3}Kodefilisofi}{7}{section.2.3}
-\contentsline {paragraph}{Fr\IeC {\r a} objekt-orinentert}{7}{section*.35}
-\contentsline {paragraph}{}{7}{section*.36}
-\contentsline {chapter}{\numberline {3}Metode}{8}{chapter.3}
-\contentsline {section}{\numberline {3.1}Val av teknologi}{8}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Operativsystem}{8}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Programmeringsspr\IeC {\r a}k}{9}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Programvare}{9}{subsection.3.1.3}
-\contentsline {chapter}{\numberline {4}Resultat}{10}{chapter.4}
-\contentsline {section}{\numberline {4.1}Faglige resultat}{10}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}M\IeC {\r a}loppn\IeC {\r a}ing}{10}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Kommentar til UseCase-ar}{10}{subsection.4.1.2}
-\contentsline {subsubsection}{UseCase 1: Logg inn}{10}{section*.37}
-\contentsline {subsubsection}{Use Case 2: Vis statistikk}{10}{section*.38}
-\contentsline {subsubsection}{Use Case 3: Administrer Brannmur}{10}{section*.39}
-\contentsline {section}{\numberline {4.2}Administrative resultat}{11}{section.4.2}
-\contentsline {chapter}{\numberline {5}Dr\IeC {\o }fting}{12}{chapter.5}
-\contentsline {section}{\numberline {5.1}Kvifor dette resultatet?}{12}{section.5.1}
-\contentsline {section}{\numberline {5.2}Svakheiter ved produktet}{12}{section.5.2}
-\contentsline {section}{\numberline {5.3}Styrkar ved produktet}{12}{section.5.3}
-\contentsline {section}{\numberline {5.4}Vidareutvikling av produktet}{12}{section.5.4}
-\contentsline {chapter}{\numberline {6}Konklusjon}{13}{chapter.6}
-\contentsline {chapter}{\numberline {7}Kjelder og referansar}{14}{chapter.7}
-\contentsline {part}{III\hspace {1em}Vedlegg}{17}{part.3}
-\contentsline {chapter}{\numberline {A}Testrapport fr\IeC {\r a} TIHLDE-LAN}{18}{appendix.A}
-\contentsline {chapter}{\numberline {B}Visjonsdokument}{19}{appendix.B}
-\contentsline {chapter}{\numberline {C}Kravdokument}{40}{appendix.C}
-\contentsline {chapter}{\numberline {D}Arkitekturdokument}{51}{appendix.D}
-\contentsline {chapter}{\numberline {E}Prosjekthandbok}{63}{appendix.E}
-\contentsline {chapter}{\numberline {F}Dokumentasjon fr\IeC {\r a} haustprosjektet}{64}{appendix.F}
-\contentsline {chapter}{Etterord}{75}{appendix*.42}
-\contentsline {section}{\numberline {F.1}Takk!}{75}{section.F.1}
-\contentsline {paragraph}{Helge Hafting}{75}{section*.43}
-\contentsline {paragraph}{TIHLDE}{75}{section*.44}
-\contentsline {paragraph}{Deltakarane p\IeC {\r a} TIHLDE-LAN}{75}{section*.45}
+\contentsline {paragraph}{Fr\IeC {\r a} objekt-orinentert}{7}{section*.37}
+\contentsline {paragraph}{}{8}{section*.38}
+\contentsline {chapter}{\numberline {3}Metode}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Val av teknologi}{9}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Operativsystem}{9}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Programmeringsspr\IeC {\r a}k}{10}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Programvare}{10}{subsection.3.1.3}
+\contentsline {chapter}{\numberline {4}Resultat}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Faglige resultat}{11}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}M\IeC {\r a}loppn\IeC {\r a}ing}{11}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Kommentar til UseCase-ar}{11}{subsection.4.1.2}
+\contentsline {subsubsection}{UseCase 1: Logg inn}{11}{section*.39}
+\contentsline {subsubsection}{Use Case 2: Vis statistikk}{11}{section*.40}
+\contentsline {subsubsection}{Use Case 3: Administrer Brannmur}{11}{section*.41}
+\contentsline {section}{\numberline {4.2}Administrative resultat}{12}{section.4.2}
+\contentsline {chapter}{\numberline {5}Dr\IeC {\o }fting}{13}{chapter.5}
+\contentsline {section}{\numberline {5.1}Kvifor dette resultatet?}{13}{section.5.1}
+\contentsline {section}{\numberline {5.2}Svakheiter ved produktet}{13}{section.5.2}
+\contentsline {section}{\numberline {5.3}Styrkar ved produktet}{13}{section.5.3}
+\contentsline {section}{\numberline {5.4}Vidareutvikling av produktet}{13}{section.5.4}
+\contentsline {chapter}{\numberline {6}Konklusjon}{14}{chapter.6}
+\contentsline {chapter}{\numberline {7}Kjelder og referansar}{15}{chapter.7}
+\contentsline {part}{III\hspace {1em}Vedlegg}{19}{part.3}
+\contentsline {chapter}{\numberline {A}Testrapport fr\IeC {\r a} TIHLDE-LAN}{20}{appendix.A}
+\contentsline {chapter}{\numberline {B}Visjonsdokument}{21}{appendix.B}
+\contentsline {chapter}{\numberline {C}Kravdokument}{42}{appendix.C}
+\contentsline {chapter}{\numberline {D}Arkitekturdokument}{53}{appendix.D}
+\contentsline {chapter}{\numberline {E}Prosjekthandbok}{65}{appendix.E}
+\contentsline {chapter}{\numberline {F}Dokumentasjon fr\IeC {\r a} haustprosjektet}{66}{appendix.F}
+\contentsline {chapter}{Etterord}{77}{appendix*.44}
+\contentsline {section}{\numberline {F.1}Takk!}{77}{section.F.1}
+\contentsline {paragraph}{Helge Hafting}{77}{section*.45}
+\contentsline {paragraph}{TIHLDE}{77}{section*.46}
+\contentsline {paragraph}{Deltakarane p\IeC {\r a} TIHLDE-LAN}{77}{section*.47}

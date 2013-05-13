@@ -7,63 +7,52 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Database file #1: kilder.bib
-Warning--I didn't find a database entry for "dhcpman"
+Database file #1: IEEEabrv.bib
+Database file #2: kilder.bib
 -- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
-Warning--edition ordinal word "Squeeze" may be too high (or improper) for conversion in djangopkg
-Warning--edition ordinal word "squeeze" may be too high (or improper) for conversion in debbash
-Warning--empty journal in bashwww
-Warning--empty journal in bashabout
-Warning--empty author in apahcetraf
-Warning--empty journal in apahcetraf
-Warning--empty author in netfiltercore
-Warning--empty journal in netfiltercore
-Warning--empty journal in lartcintro
-Warning--missing publisher in unixprog
-Warning--empty journal in mvc
+** IEEEtran BST control entry "trans" detected.
 
 Done.
-You've used 23 entries,
+You've used 27 entries,
             4039 wiz_defined-function locations,
-            910 strings with 9639 characters,
-and the built_in function-call counts, 7747 in all, are:
-= -- 640
-> -- 54
-< -- 10
-+ -- 30
-- -- 7
+            1328 strings with 17795 characters,
+and the built_in function-call counts, 8960 in all, are:
+= -- 751
+> -- 62
+< -- 5
++ -- 36
+- -- 10
 * -- 338
-:= -- 1490
-add.period$ -- 36
-call.type$ -- 23
+:= -- 1726
+add.period$ -- 43
+call.type$ -- 27
 change.case$ -- 19
-chr.to.int$ -- 30
-cite$ -- 34
-duplicate$ -- 657
-empty$ -- 724
-format.name$ -- 7
-if$ -- 1624
+chr.to.int$ -- 15
+cite$ -- 27
+duplicate$ -- 729
+empty$ -- 876
+format.name$ -- 10
+if$ -- 1910
 int.to.chr$ -- 0
-int.to.str$ -- 23
-missing$ -- 131
-newline$ -- 138
-num.names$ -- 7
-pop$ -- 369
+int.to.str$ -- 26
+missing$ -- 165
+newline$ -- 151
+num.names$ -- 10
+pop$ -- 444
 preamble$ -- 1
 purify$ -- 0
-quote$ -- 6
-skip$ -- 637
+quote$ -- 4
+skip$ -- 747
 stack$ -- 0
-substring$ -- 25
-swap$ -- 365
+substring$ -- 19
+swap$ -- 451
 text.length$ -- 0
 text.prefix$ -- 0
-top$ -- 5
-type$ -- 23
-warning$ -- 11
-while$ -- 9
-width$ -- 25
-write$ -- 249
-(There were 12 warnings)
+top$ -- 6
+type$ -- 27
+warning$ -- 0
+while$ -- 12
+width$ -- 28
+write$ -- 285

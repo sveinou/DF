@@ -1,5 +1,10 @@
+@IEEEtranBSTCTL{trans,
+    CTLname_url_prefix = "[Online]. Kopling:",
+}
+
 @book{unixprog,
     author = "Eric Steven Raymond",
+    publisher = "Addison-Wesley Professional",
     title = "The Art of Unix Programming",
     chapter = "1.5.5",
     year = "2003",
@@ -21,6 +26,17 @@
     month = "Mai",
     year = "2013",
 }
+@book{datakom,
+    author = "Ø. Hallsteinsen, B. Klefstad, O. Skundberg",
+    title = "Innføring i datakommunikasjon",
+    publisher = "Stiftelsen TISIP og Gyldendal Norsk Forlag",
+    edition = "2",
+    year = "2010",
+    language = "Norwegian",
+    note = "[NORSK]",
+    chapter = "8.1.4",
+    pages = "176 - 177",
+}
 @electronic{dhcpdpkg,
     organization = "Debian Project",
 	title = "Package: isc-dhcp-server (4.1.1-P1-15+squeeze8)",
@@ -34,6 +50,16 @@
 	url = "http://debian.org/intro/about",
 	year = "07.05.2013",
 }
+@misc{rfc2131,
+    title = "Dynamic Host Configuration Protocol"
+    author = "R. Droms"
+    organization = "Internet Engineering Task Force",
+    howpublished = "RFC 2131",
+    url = "http://tools.ietf.org/html/rfc2131#section-3.1",
+    month = "Mars",
+    year ="1997",
+    note = "del 3.1, 4.1 - 4.4"
+}
 @online{wheezy,
     organization = "Software in the Public Interest",
 	title = "Debian 7.0 “Wheezy” released",
@@ -44,9 +70,16 @@
     organization = "Software in the Public Interest",
 	title = "Debian “squeeze” Release Information",
 	url = "http://www.debian.org/releases/squeeze/",
-	year = "07.05.2013",
+    month = "Mai",
+	year = "2013",
 }
-
+@online{mysqlwww,
+    organization ="Oracle Corporation",
+    title = "MySQL Community Edition",
+    url = "http://www.mysql.com/products/community/",
+    month = "Mai",
+    year = 2013,
+}
 @online{python,
 	organization = "Python Software Foundation",
 	title = "About Python",
@@ -77,7 +110,6 @@
 	title = "python-django (1.2.3-3+squeeze5) [security]",
 	url = "http://packages.debian.org/squeeze/python-django",
 	year = "07.05.2013",
-	edition = "Squeeze"
 }
 @online{djangowww,
 	organization="Django Software Foundation",
@@ -89,27 +121,28 @@
 	organization="Django Software Foundation",
 	title ="How to use sessions",
 	url = "https://docs.djangoproject.com/en/1.2/topics/http/sessions/",
-	year = "07.05.2013",
-	edition = "1.2"
+    month = "Mai",
+	year = "2013",
 }
 @manual{debbash,
 	organization = "Debian Project",
 	title = "Package: bash (4.1-3)",
 	url = "http://packages.debian.org/squeeze/bash",
-	year = "07.05.2013",
-	edition = "squeeze"
+    month = "Mai",
+	year = "2013",
 }
-@article{bashwww,
+@online{bashwww,
 	author = "Chet Ramey",
 	title = "The GNU Bourne-Again SHell",
 	url = "http://tiswww.case.edu/php/chet/bash/bashtop.html",
-	year = "07.05.2013",
+    month = "April",
+	year = "2013",
 }
-@article{bashabout,
+@online{bashabout,
 	author = "Chet Ramey",
 	title = "BASH - The Bourne-Again Shell",
 	url = "http://tiswww.case.edu/php/chet/bash/bash-intro.html",
-	year = "07.05.2013",
+	year = "2013",
 }
 
 @online{phpwww,
@@ -125,14 +158,14 @@
 	year = "07.05.2013",
 }
 
-@article{apahcetraf,
+@online{apahcetraf,
 	organization = "Netcraft Ltd",
 	title = "May 2013 Web Server Survey",
 	url = "http://news.netcraft.com/archives/2013/05/03/may-2013-web-server-survey.html",
     month = "May",
 	year = "2013",
 }
-@article{mvc,
+@online{mvc,
     author = "Steve Burbeck, Ph.D.",
     title = "Applications Programming in Smalltalk-80(TM): How to use Model-View-Controller (MVC)",
     year = "1992",
@@ -157,19 +190,19 @@
 	url = "http://www.php.net/downloads.php",
 	year = "Oktober 2006",
 }
-@article{lartcintro,
+@online{lartcintro,
 	author = "Martin A. Brown",
 	title = "Introduction to Linux Traffic Control",
     month = "Oktober",
 	year = "2006",
-    edition = "1.0.2",
     url = "http://www.linux.com/learn/docs/ldp/783-traffic-control-howto\# intro",
 }
-@article{netfiltercore,
+@electronic{netfiltercore,
 	organization = "Netfilter Core Team",
 	title = "The netfilter.org project",
 	url = "http://netfilter.org/",
-	year = "07.05.2013",
+    month = "Mai",
+	year = "2013",
 }
 @manual{ciscoCP,
 	organization = "Cisco Systems, Inc",

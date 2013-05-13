@@ -24,145 +24,164 @@
 \bibitem{ciscoCP}
 \BIBentryALTinterwordspacing
 \emph{Introduction to Captive Portal}, Cisco Systems, Inc, 07.05.2013.
-  [Online]. Available:
+  [Online]. Kopling:
   \url{http://www.cisco.com/en/US/docs/net_mgmt/subscriber_edge_services_manager/3.3/administration/guide/config/ad_cfcp.html#wp1219317}
 \BIBentrySTDinterwordspacing
 
 \bibitem{wheezy}
 \BIBentryALTinterwordspacing
 (07.05.2013) Debian 7.0 “wheezy” released. Software in the Public Interest.
-  [Online]. Available: \url{http://www.debian.org/News/2013/20130504}
+  [Online]. Kopling: \url{http://www.debian.org/News/2013/20130504}
 \BIBentrySTDinterwordspacing
 
 \bibitem{pythonversjon}
 \BIBentryALTinterwordspacing
 \emph{Package: python2.6 (2.6.6-8 and others)}, Debian Project, 07.05.2013.
-  [Online]. Available: \url{http://packages.debian.org/squeeze/python2.6}
+  [Online]. Kopling: \url{http://packages.debian.org/squeeze/python2.6}
 \BIBentrySTDinterwordspacing
 
 \bibitem{python}
 \BIBentryALTinterwordspacing
-(07.05.2013) About python. Python Software Foundation. [Online]. Available:
+(07.05.2013) About python. Python Software Foundation. [Online]. Kopling:
   \url{http://www.python.org/about/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{pythonapps}
 \BIBentryALTinterwordspacing
 (07.05.2013) Application domains. Python Software Foundatuion. [Online].
-  Available: \url{http://www.python.org/about/apps/}
+  Kopling: \url{http://www.python.org/about/apps/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{pythonsubprocess}
 \BIBentryALTinterwordspacing
 \emph{17.1 subprocess -- Subprocess management}, 2nd~ed., Python Software
-  Foundatuion, 2013. [Online]. Available:
+  Foundatuion, 2013. [Online]. Kopling:
   \url{http://docs.python.org/2.6/library/subprocess.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{djangowww}
 \BIBentryALTinterwordspacing
-(07.05.2013) Meet django. Django Software Foundation. [Online]. Available:
+(07.05.2013) Meet django. Django Software Foundation. [Online]. Kopling:
   \url{https://www.djangoproject.com/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{djangosessions}
 \BIBentryALTinterwordspacing
-\emph{How to use sessions}, 1st~ed., Django Software Foundation, 07.05.2013.
-  [Online]. Available:
-  \url{https://docs.djangoproject.com/en/1.2/topics/http/sessions/}
+\emph{How to use sessions}, Django Software Foundation, Mai 2013. [Online].
+  Kopling: \url{https://docs.djangoproject.com/en/1.2/topics/http/sessions/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{djangopkg}
 \BIBentryALTinterwordspacing
-\emph{python-django (1.2.3-3+squeeze5) [security]}, Squeeze~ed., Debian
-  Project, 07.05.2013. [Online]. Available:
-  \url{http://packages.debian.org/squeeze/python-django}
+\emph{python-django (1.2.3-3+squeeze5) [security]}, Debian Project, 07.05.2013.
+  [Online]. Kopling: \url{http://packages.debian.org/squeeze/python-django}
 \BIBentrySTDinterwordspacing
 
 \bibitem{debbash}
 \BIBentryALTinterwordspacing
-\emph{Package: bash (4.1-3)}, squeeze~ed., Debian Project, 07.05.2013.
-  [Online]. Available: \url{http://packages.debian.org/squeeze/bash}
+\emph{Package: bash (4.1-3)}, Debian Project, Mai 2013. [Online]. Kopling:
+  \url{http://packages.debian.org/squeeze/bash}
 \BIBentrySTDinterwordspacing
 
 \bibitem{bashwww}
 \BIBentryALTinterwordspacing
-C.~Ramey, ``The gnu bourne-again shell,'' 07.05.2013. [Online]. Available:
+C.~Ramey. (2013, April) The gnu bourne-again shell. [Online]. Kopling:
   \url{http://tiswww.case.edu/php/chet/bash/bashtop.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{bashabout}
 \BIBentryALTinterwordspacing
-------, ``Bash - the bourne-again shell,'' 07.05.2013. [Online]. Available:
+------. (2013) Bash - the bourne-again shell. [Online]. Kopling:
   \url{http://tiswww.case.edu/php/chet/bash/bash-intro.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{phpwww}
 \BIBentryALTinterwordspacing
-(07.05.2013) General information [about php]. The PHP Group. [Online].
-  Available: \url{http://no1.php.net/manual/en/faq.general.php}
+(07.05.2013) General information [about php]. The PHP Group. [Online]. Kopling:
+  \url{http://no1.php.net/manual/en/faq.general.php}
 \BIBentrySTDinterwordspacing
 
 \bibitem{phppkg}
 \BIBentryALTinterwordspacing
 (07.05.2013) Package: php5 (5.3.3-7+squeeze15). Debian Project. [Online].
-  Available: \url{http://packages.debian.org/squeeze/php5}
+  Kopling: \url{http://packages.debian.org/squeeze/php5}
 \BIBentrySTDinterwordspacing
 
 \bibitem{apahcetraf}
 \BIBentryALTinterwordspacing
-``May 2013 web server survey,'' May 2013. [Online]. Available:
+(2013, May) May 2013 web server survey. Netcraft Ltd. [Online]. Kopling:
   \url{http://news.netcraft.com/archives/2013/05/03/may-2013-web-server-survey.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{modwsgi}
 \BIBentryALTinterwordspacing
 G.~Dumpleton, \emph{Python WSGI adapter module for Apache.}, 07.05.2013.
-  [Online]. Available: \url{https://code.google.com/p/modwsgi/}
+  [Online]. Kopling: \url{https://code.google.com/p/modwsgi/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{phpmodule}
 \BIBentryALTinterwordspacing
 (Oktober 2006) Php 5.4.14 (current stable) complete source code. The PHP Group.
-  [Online]. Available: \url{http://www.php.net/downloads.php}
+  [Online]. Kopling: \url{http://www.php.net/downloads.php}
 \BIBentrySTDinterwordspacing
 
 \bibitem{mysqlwww}
 \BIBentryALTinterwordspacing
-(2013, Mai). [Online]. Available:
+(2013, Mai) Mysql community edition. Oracle Corporation. [Online]. Kopling:
   \url{http://www.mysql.com/products/community/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{dhcpconf}
 \BIBentryALTinterwordspacing
 T.~Lemon, \emph{dhcpd configuration file}, Internet Systems Consortium / Vixie
-  Labs, Mai 2013. [Online]. Available:
+  Labs, Mai 2013. [Online]. Kopling:
   \url{http://www.linuxmanpages.com/man5/dhcpd.conf.5.php}
+\BIBentrySTDinterwordspacing
+
+\bibitem{dhcpdman}
+\BIBentryALTinterwordspacing
+------, \emph{Dynamic Host Configuration Protocol Server}, Internet Systems
+  Consortium / Vixie Labs, Mai 2013. [Online]. Kopling:
+  \url{http://www.linuxmanpages.com/man8/dhcpd.8.php}
 \BIBentrySTDinterwordspacing
 
 \bibitem{netfiltercore}
 \BIBentryALTinterwordspacing
-``The netfilter.org project,'' 07.05.2013. [Online]. Available:
+(2013, Mai) The netfilter.org project. Netfilter Core Team. [Online]. Kopling:
   \url{http://netfilter.org/}
 \BIBentrySTDinterwordspacing
 
 \bibitem{lartcintro}
 \BIBentryALTinterwordspacing
-M.~A. Brown, ``Introduction to linux traffic control,'' Oktober 2006. [Online].
-  Available:
-  \url{http://www.linux.com/learn/docs/ldp/783-traffic-control-howto\# intro}
+M.~A. Brown. (2006, Oktober) Introduction to linux traffic control. [Online].
+  Kopling: \url{http://www.linux.com/learn/docs/ldp/783-traffic-control-howto\#
+  intro}
+\BIBentrySTDinterwordspacing
+
+\bibitem{datakom}
+O.~S. Ø.~Hallsteinsen, B.~Klefstad,
+  \emph{\BIBforeignlanguage{Norwegian}{Innføring i datakommunikasjon}},
+  2nd~ed.\hskip 1em plus 0.5em minus 0.4em\relax Stiftelsen TISIP og Gyldendal
+  Norsk Forlag, 2010, [NORSK].
+
+\bibitem{rfc2131}
+\BIBentryALTinterwordspacing
+R.~Droms, ``Dynamic host configuration protocol,'' RFC 2131, Internet
+  Engineering Task Force, Mars 1997, del 3.1, 4.1 - 4.4. [Online]. Kopling:
+  \url{http://tools.ietf.org/html/rfc2131#section-3.1}
 \BIBentrySTDinterwordspacing
 
 \bibitem{unixprog}
 \BIBentryALTinterwordspacing
-E.~S. Raymond, \emph{The Art of Unix Programming}, 2003. [Online]. Available:
+E.~S. Raymond, \emph{The Art of Unix Programming}.\hskip 1em plus 0.5em minus
+  0.4em\relax Addison-Wesley Professional, 2003. [Online]. Kopling:
   \url{http://www.faqs.org/docs/artu/ch01s06.html}
 \BIBentrySTDinterwordspacing
 
 \bibitem{mvc}
 \BIBentryALTinterwordspacing
-P.~Steve~Burbeck, ``Applications programming in smalltalk-80(tm): How to use
-  model-view-controller (mvc),'' 1992. [Online]. Available:
+P.~Steve~Burbeck. (1992) Applications programming in smalltalk-80(tm): How to
+  use model-view-controller (mvc). [Online]. Kopling:
   \url{http://st-www.cs.illinois.edu/users/smarch/st-docs/mvc.html}
 \BIBentrySTDinterwordspacing
 
