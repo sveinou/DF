@@ -1,15 +1,21 @@
 from DNF import conf
 import subprocess as sp
 from DNF.firewall.firewall import Firewall
-from DNF.stats.logger import Log
-import time
+import time, logging
+
+
 class Statistics:
     """
     Shows statistics based on ip_address
     """
     
+    log = logging.getLogger(__name__)
+    log.addHandler(conf.log.users)
+#    log.addFilter(conf.log.logformat)
+    log.setLevel(conf.log.level)
+    
     def __init__(self):
-        self.log = Log()
+        pass
     
     @DeprecationWarning
     def get_conntrack(self, ip):
@@ -69,36 +75,32 @@ class Statistics:
             self.log.error("df_user_stats.py: Something wrong with iptables-lookup...: "+ip)
             return {'pkt_sent':0, 'pkt_received':0, 'bytes_sent':0, 'bytes_received':0}
 
-    def get_all_io(self, ips, io=[]):
-	i=0
-	clients_bytes = []
+#     def get_all_io(self, ips, io=[]):
+#         i = 0
+#         clients_bytes = []
+#     
+#         for ip in ips:
+#         ipcmd = ['iptables', '-nvxL', 'ALLOWED']
+#             ipres = sp.Popen(ipcmd, stdout=sp.PIPE).communicate()[0].split("\n")
+#             res = [line for line in ipres if line.find(ip) > 0]
+#     
+#         if res and not io:
+#             tx_bytes = int(res[0].split(*'')[1])
+#             rx_bytes = int(res[1].split(*'')[1])
+#             clients_bytes += [[tx_bytes, rx_bytes]]
+#     
+#         elif res and io:  # will not work if the ip do not exsit!!
+#             tx_after = int(res[0].split(*'')[1])
+#             rx_after = int(res[1].split(*'')[1])
+#             tx_before = io[i][0]
+#             rx_before = io[i][1]
+#             txs = (tx_after - tx_before) / 10
+#             rxs = (rx_after - rx_before) / 10
+#             clients_bytes += [[ip, txs, rxs]]
+#     
+#         i += 1
+#         if not io:
+#             time.sleep(10)
+#     
+#         return self.get_all_io(ips, clients_bytes) if not io else clients_bytes
 
-	for ip in ips:
-	    ipcmd = ['iptables', '-nvxL', 'ALLOWED']
-            ipres  = sp.Popen(ipcmd, stdout=sp.PIPE).communicate()[0].split("\n")
-            res = [line for line in ipres if line.find(ip) > 0]
-
-	    if res and not io:
-	       tx_bytes = int(res[0].split(*'')[1])
-	       rx_bytes = int(res[1].split(*'')[1])
-	       clients_bytes += [[tx_bytes,rx_bytes]]
-
-	    elif res and io: # will not work if the ip do not exsit!!
-	       tx_after = int(res[0].split(*'')[1])
-               rx_after = int(res[1].split(*'')[1])
-	       tx_before = io[i][0]
-	       rx_before = io[i][1]
-	       txs = (tx_after-tx_before)/10
-	       rxs = (rx_after-rx_before)/10
-	       clients_bytes += [[ip,txs,rxs]]
-
-	    i += 1
-	if not io:
-	    time.sleep(10)
-
-        return self.get_all_io(ips,clients_bytes) if not io else clients_bytes
-	
-
-	    
-	     
-	 

@@ -122,5 +122,6 @@ INSTALLED_APPS = (
 	'dDNF.statistics',
 	'dDNF.manager',
 )
-AUTHENTICATION_BACKENDS = ('dDNF.login.migrate.FirstLoginAuth',
+AUTHENTICATION_BACKENDS = ('dDNF.login.migrate.DjangoDBLogin',
+                           'dDNF.login.migrate.FirstLoginAuth',
                            'django.contrib.auth.backends.ModelBackend',)

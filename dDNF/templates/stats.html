@@ -1,11 +1,17 @@
 {% extends "base.html" %} 
 {% load i18n %}
+{% block menu %}
+<li class="menu"><a class="menu" href="{{ server }}/logout/">{% trans "Log out" %}</a></li>
+{% if user.is_superuser %}
+<li class="menu"><a class="menu" href="{{ server }}/admin/">{% trans "Adminpanel" %}</a></li>
+{% endif %}
+{% endblock %}
 {% block body %}
 <h1>{% trans "User statistics for" %} {{user.username}}</h1>
 <p><strong>{% trans "IP address:" %}</strong> {{ip}}</p>
 {% if user.is_superuser %}
     <p>{% trans "Hey there boss! Want to check out the admin-panel? Just click the link below..." %}</p>
-    <p><a href="/admin/">ADMIN-PANEL</a></p>
+    <p><a href="{{ server }}/admin/">ADMIN-PANEL</a></p>
 {% endif %}
 {% if limited %}
     <div id="warning">
@@ -37,7 +43,7 @@
 </table>
 <table width="100%">
 	<tr>
-		<td><a href="logout/">{% trans "Log me out" %}</a></td>
+		<td><a href="{{ server }}/logout/">{% trans "Log me out" %}</a></td>
 		<td></td>
 	</tr>
 </table>

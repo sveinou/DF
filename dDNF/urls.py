@@ -10,7 +10,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('dDNF.login.views',
                       (r'^meta/$', 'checkmeta'),
-                      (r'/logout/$', 'dnf_logout'),
+                      (r'logout/$', 'dnf_logout'),
 )
 urlpatterns += patterns('dDNF.statistics.views',    
     (r'^stats/$', 'user_stats'),

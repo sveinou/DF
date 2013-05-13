@@ -83,7 +83,7 @@ Most static settings must be set in the configfile located in /etc/dnf/dnf.conf.
 </tr>
 <tr>
 	<td>port</td>
-	<td>{{ conf.db.port</td>
+	<td>{{ conf.db.port }}</td>
 	<td>Integer</td>
 	<td>{% trans "Port of MySQL-server. Default is 3306" %}</td>
 </tr>
@@ -95,7 +95,7 @@ Most static settings must be set in the configfile located in /etc/dnf/dnf.conf.
 	<td>dhcp_leasefile</td>
 	<td>{{ conf.files.leasefile }}</td>
 	<td>path</td>
-	<td>{% trans " " %}</td>
+	<td>{% trans "Your dhcpd leasesfile." %}</td>
 </tr>
 <tr>
 	<td>ip_conntrack</td>
@@ -108,25 +108,37 @@ Most static settings must be set in the configfile located in /etc/dnf/dnf.conf.
 </tr>
 <tr>
 	<td>Loglevel</td>
-	<td>{{ conf.log._web }}</td>
+	<td>{{ conf.log.level }}</td>
 	<td>STRING</td>
-	<td>{% trans "DEBUG | INFO | WARNING | ERROR | SEVERE" %}</td>
+	<td>{% trans "10: DEBUG | 20: INFO | 40: WARNING | 50: ERROR | 60: SEVERE" %}</td>
 </tr>
 <tr>
 	<td>default</td>
-	<td>{{ conf.log._default }}</td>
+	{% if conf.log.default.baseFilename %}
+	<td>{{ conf.log.default.baseFilename}}</td>
+	{% else %}
+	<td>{% trans "to console (STDERR)" %}</td>
+	{% endif %}
 	<td>path</td>
 	<td>{% trans "Default logfile" %}</td>
 </tr>
 <tr>
 	<td>access</td>
-	<td>{{ conf.log._users }}</td>
+	{% if conf.log.users.baseFilename %}
+	<td>{{ conf.log.users.baseFilename }}</td>
+	{% else %}
+	<td>{% trans "to console (STDERR)" %}</td>
+	{% endif %}
 	<td>path</td>
 	<td>{% trans "Logs user-specific activities. " %}</td>
 </tr>
 <tr>
 	<td>webservice</td>
-	<td>{{ conf.log._web }}</td>
+	{% if conf.log.web.baseFilename %}
+	<td>{{ conf.log.web.baseFilename }}</td>
+	{% else %}
+	<td>{% trans "to console (STDERR)" %}</td>
+	{% endif %}
 	<td>path</td>
 	<td>{% trans "Logs errors and actions from the webui" %}</td>
 </tr>
