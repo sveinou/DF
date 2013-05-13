@@ -60,6 +60,9 @@ def user_login():
     
 
 def update_stats():
+    """
+    This finds every client that is active and updates stats like, tx,rx and connections
+    """
     clients = Data().get_all_active_clients()
     for client in clients:
         user = client[0]
@@ -74,10 +77,18 @@ def update_stats():
     return "stats updated"
 
 def rm_all_limit():
+    """
+    simply flushes the LIMITED rule in iptables, makes all that are limited to not beeing limited.
+    """
     Firewall().rm_all_limit()
     return "flushed LIMITED"
 
 def auto_limit_users():
+    """
+    this method checks if there are an noticed increase in latency. 
+    if it is. it will check if there are any clients that are above the limits
+    and limit them in where they are above.
+    """
     lim = limit_per_user()
     returning = " "
     if not Con().is_hig_latency():
@@ -108,6 +119,9 @@ def auto_limit_users():
     return returning
 
 def limit_ip(what, ip4):
+	"""
+	forces an limit to a spesific IP4 address
+	"""
 	if what == "CONNLIMIT":
 		Firewall().limit_connections(ip4)
 	elif what == "RXLIMIT":
@@ -116,7 +130,11 @@ def limit_ip(what, ip4):
 		Firewall().limit_tx(ip4)
 	return what+" "+ip4
 
-def auto_set_limit():    
+def auto_set_limit():
+	"""
+	This autosets how mutch linux trafic controll will limit 
+	the limit is bassed on the connection speed, number of clients and the ofsett
+	"""
     lim = limit_per_user()
     tx_count = len(Data().above_up_limit(lim['txpu']))
     if tx_count >= 0:
@@ -131,9 +149,15 @@ def auto_set_limit():
     return "txlimit is now "+str(tx/1000)+"kbps. and rxlimit is "+str(tx/1000)+"kbps. if user is above "+str(lim['txpu'])+" / "+str(lim['rxpu'])
 
 def set_limit(tx,rx):
+	"""
+	manualy set the max bandiwth for the limited users
+	"""
 	limit().activate_limit(tx,rx)
 	return
 def get_multiplication():
+	"""
+	
+	"""
         unit = conf.bandwidth().unit
         if unit is "k":
                 return 1000
@@ -144,6 +168,9 @@ def get_multiplication():
 
 
 def limit_per_user(): 
+    """
+    calculates the limit per user, bassed on bandiwdth offsett and number of active users
+    """
     userCount = len(info_get_active_users())
     rx = conf.bandwidth().max_rxs
     tx = conf.bandwidth().max_txs
@@ -155,28 +182,41 @@ def limit_per_user():
     return {'rxpu':rxpu, 'txpu':txpu, 'mcpu':mcpu}
 
 def info_get_active_users():
+    """
+    returns all active clients
+    """
     return Data().get_all_active_clients()
 
 def user_info(search):
-
-    if len(search.split(".")) == 4: 
-	client = Data().get_ip4(search)
-	if client:
- 	    user = client[0]
-	    stats = Data().get_stats(user)
-	    limited = Data().get_limited(user)
-	    print "info on "+search
+    """
+    gives info about a client
+    """
+    client = ""
+    if not len(search.split(".")) == 4:
+    	for cli in Data().get_all_active_clients():
+    		if cli[0] == search:
+    			client = cli
+    	
+    elif len(search.split(".")) == 4: client = Data().get_ip4(search)
+    if client:
+    	user = client[0]
+	stats = Data().get_stats(user)
+	limited = Data().get_limited(user)
+	print "info on "+search
+	print " "
+    	print "User:%s Mac:%s IP4:%s IP6:%s Active:%i" % (client[0],client[1],client[2],client[3],client[4])
+	if stats:
+	    print "connections:%i txt:%i rxt:%i txs:%i rxs:%i" % (stats[1],stats[2],stats[3],stats[4],stats[5])
+	if limited:
+ 	    print "limited: connlimit=%i RXLIMIT=%i TXLIMIT=%i" % (limited[1],limited[2],limited[3])
 	    print " "
-    	    print "User:%s Mac:%s IP4:%s IP6:%s Active:%i" % (client[0],client[1],client[2],client[3],client[4])
-	    if stats:
-	    	print "connections:%i txt:%i rxt:%i txs:%i rxs:%i" % (stats[1],stats[2],stats[3],stats[4],stats[5])
-	    elif limited:
- 	    	print "limited: connlimit=%i RXLIMIT=%i TXLIMIT=%i" % (limited[1],limited[2],limited[3])
-	    	print " "
-	else:
-		print "found nuthing"
+    else:
+	print "found nuthing"
 
 def test_login():
+    """
+    simple test if the user should or should not work
+    """
     a = Auth()
     a.set_user(str(sys.argv[2]))
     a.set_password(str(sys.argv[3]))
