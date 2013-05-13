@@ -1,0 +1,24 @@
+\select@language {nynorsk}
+\contentsline {section}{\numberline {1}Innleiing}{4}
+\contentsline {subsection}{\numberline {1.1}Hensikta med dokumentet}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {1.2}Avgrensingar}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {1.3}Definisjonar og forkortingar}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {1.4}Referansar}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {1.5}Oversikt over innhald}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {section}{\numberline {2}Bakgrunn og oversikt}{5}
+\contentsline {subsection}{\numberline {2.1}Use Case -- UML-diagram}{5}
+\contentsline {section}{\numberline {3}Detaljerte krav}{6}
+\contentsline {subsection}{\numberline {3.1}Use Case: Logg inn}{6}
+\contentsline {subsection}{\numberline {3.2}Use Case: Vis statistikk}{6}
+\contentsline {subsection}{\numberline {3.3}Use Case: Administrer brannmur}{7}
+\contentsline {section}{\numberline {4}Systemsekvensdiagram}{8}
+\contentsline {subsection}{\numberline {4.1}Use Case: Logg inn}{8}
+\contentsline {subsection}{\numberline {4.2}Use Case: Vis statistikk}{8}
+\contentsline {subsection}{\numberline {4.3}Use Case: Administrere brannmur}{9}
+\contentsline {section}{\numberline {5}Problemdomenemodell}{10}
+\contentsline {paragraph}{}{10}

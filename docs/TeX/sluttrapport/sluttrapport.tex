@@ -1,0 +1,231 @@
+\documentclass[nynorsk,12pt,a4paper,oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{babel}
+\usepackage{hyperref}
+\usepackage{subfiles}
+\usepackage{pdflscape}
+\usepackage[final]{pdfpages}
+%\usepackage{biblatex}
+
+\title{Sluttrapport \\ Dynamisk Nettverksbrannmur}
+%\subtitle{Bacheloroppgåve 20E}
+\author{Espen Gjærde \and Svein Ove Undal}
+%\institute{Høgskolen i Sør-Trøndelag \\ Avdeling for Informatikk og e-Læring}
+\date{2013}
+\begin{document}
+\includepdf[pages=1]{apx/20E.pdf}
+\frontmatter
+\maketitle
+\chapter{Forord}
+\paragraph*{}
+Denne rapporten er ein del av bacheloroppgåva til forfattarane, og markerar avsluttinga av tre år på Dataingeniør-linja på Avdeling for Informatikk og e-Læring ved Høgskolen i Sør-Trøndelag. 
+\paragraph*{}
+Det er ikkje med noko forstudierapport til bacheloroppgåva, da dette er ei vidareføring av Svein Ove Undal sitt prosjekt <<prosjektnamn>> i faget <<RMI med prosjekt i distibuerte systemer>>. Svein Ove Undal ønska då å vidareføre denne oppgåva som bachelorprosjekt. 
+\begin{figure}[b]
+Trondheim, \today
+\vspace{1cm}
+\end{figure}
+\begin{table}[b!]
+	\centering
+	\begin{tabular}[c]{ c p{4cm} c } 
+		\emph{(sign.)} & ~ & \emph{(sign.)} \\ 
+		\cline{1-1} \cline{3-3}
+		\parbox{5cm}{\centering \textsc{Espen Gjærde}}
+		& & 
+		\parbox{5cm}{\centering \textsc{Svein Ove Undal}} \\
+	\end{tabular}
+\end{table}
+
+\part{Oppgåva}
+
+\chapter{Oppgåveteksten}
+
+\section{Orginal oppgåvetekst}
+\emph{<<Oppgava går ut på å lage ein streng gateway/brannmur der kun autentiserte brukarar kan logge seg på. Brannmuren skal dekke kjente problem med likandes system som mac-adresse spoofing og dns-tunnelering.>>}
+\paragraph*{}
+Denne oppgåveteksten vart revidert for å utvide oppgåva til to personar. Aktuelle utvidingar var då automatisk justering av bandbredde til kvar enkelt brukar, administrasjonspanel og støtte for IPv6.
+
+\section{Revidert oppgåvetekst}
+Ein ny og revidert oppgåvetekst vart laga, og går som følgjer:
+\paragraph*{}
+\emph{<<Lage ein gateway med brannmur som tvingar brukarar til å logge seg på før dei har tilgang til internett. Gatewayen skal automatisk justere bandbredde til den enkelte brukaren. Administratorar skal ha tilgang til eit oversiktleg administrasjonsgrensesnitt.>>}
+
+
+\chapter{Samandrag}
+\paragraph{Treige nettverk} er noko nesten alle har vore bort i, og irritasjonen over ei treig nettilkopling er noko mange kjenner til. Dette rammar oss ofte når vi nyttar oss av ymse offentlege -- gjerne trådlause -- nettverk. For oss studentar som gjerne bur i kollektiv og dermed deler nettlinja med fire-fem andre brukarar har også ofte kjent på korleis det er når nokon <<stjel>> nettlinja. Det er dette problemet vi vil til livs med denne bacheloroppgåva.
+\paragraph{}Ved å tvinge brukarane til å først logge seg inn, kan vi følje med på kor mykje av linja kvar enkelt legg beslag på, og ta affære om nokon øydelegg for andre. Slik kan vi sikre at alle får ein betre nettopplevelse og nettlinja vert rettferdig delt mellom brukarane. Det som skil dette systemet frå andre, er at vi ikkje sett avgrensar nettlinja til nokon av brukarane før bruken vert eit problem. Er du aleine på nettverket skal du sjølvsagt få heile linja -- og brukar dei andre brukarane berre ein liten del av linja, er det ikkje noko problem at du tek resten av linja. Avgreninga skjer først når bruken er større enn kapasiteten. Da må vi sjå til at alle får lik utnytting av linja. 
+\paragraph{}Det er også fleire ressursar enn berre bandbredde i ei nettlinje. Antall oppkoplingar kan fort bli eit problem for nokon rutarar. Derfor har vi tre <<dimensjonar>> vi ser på når vi avgrensar bruken. Dei to første bandbreidda opp og ned, men vi ser også på antall oppkoplingar. Ut i frå erfaringar vi fekk på <<TIHLDE-LAN>> gir antall oppkoplingar også ein god indikasjon på kven som nyttar mest av linja. Om nokon til dømes brukar torrent-teknologi, vil dei gjerne utmerke seg i statistikken med svært mange oppkoplingar. 
+
+\paragraph{Utviklingen} av systemet er gjort etter rammeverk og utviklingsprosessar som vi er kjent med frå faget <<Systemering med prosjekt>>, og vi har valt utviklingsprosessen UP. Vi fekk også testa delar av systemet under THILDE-LAN. Dette gav oss mange gode erfaringar, og vi fekk samla mykje trafikkdata som gjorde det enklare for oss å kjenne kvar skoen trykkjer. Vi fekk også prøve oss på XP-utvikling, da det sjølvsagt oppstod nokre bugs. Da var det berre å kaste seg rundt å komme med ei løysing. 
+
+\tableofcontents
+\mainmatter
+\part{Rapporten}
+\chapter{Introduksjon}
+\section{Introduksjon}
+
+\section{Definisjonar og forkortingar}
+\subsection{Ordliste}
+\paragraph{Apache} eller Apache HTTP Server er ein populær http-tjenar. Denne sørgjer for at nettsidene til systemet verte vist fram.
+\paragraph{Django} er eit rammeverk som gjer det enkelt å bygge dynamiske nettsider med python.
+\paragraph{Python} eit populært høgnivå kodespråk. Det er dette det meste av kodinga for prosjektet er gjort
+\paragraph{Bash(-script)} Bourne-Again-SHell. Er ein komandotolkar for unix-system. Det kan også setjast opp ei fil med komandoar som skal utførast av bash. Dette er eit bash-script.
+\paragraph{NAT} står for <<Network Address Translation>> og er ei fellesbenevning på oversetting av ip-addresser mellom ulike nettverk. 
+\paragraph{Port-Forward} er ei form for NAT der vi oversett portnummer. Med Port-Forward kan vi rute om trafikk frå ein spesiell TCP- eller UDP-port til ein annan.
+\paragraph{IPv4} er ei forkorting for <<Internet Protocol version 4>> og er i dag den IP-versjonen som er mest utbredt. 
+\paragraph{IPv6} er ein ny versjon av IP, med mange fleire tilgjenelege addresser enn IPv4. 
+\paragraph{Distro} er ei forkorting/slang-form av distribusjon og blir brukt om ei avgreining eller ein type linux.
+\paragraph{WebUI} Web User Interface -- eit nettbasert brukargrensesnitt. 
+
+\chapter{Teori}
+I denne delen av sluttrapporten vil vi gå gjennom teknologien vi har tilgjeneleg for å løyse oppgåva, og gje ei oversikt over dei konsepta vi kan bruke. 
+
+\section{Konsept}
+\subsection{Captive-Portal}
+\emph{Captive-Portal} er eit samleomgrep for nettverksløysingar der brukarar vert tvinga til å gå gjennom ei påloggingsprosedyre i nettlesaren. Det er ikkje nokon fast definisjon på ein Captive Portal. I følgje Cisco skal ein captive-portal videresende ein nettlesar til ein bestem plass, ta vare på orginal HTTP-informasjon og \emph{kan} videresende brukaren basert på denne informasjonen. \cite{ciscoCP}
+
+%Personal Teleco, som jobbar med ein standard for Captive Portal definerer slik: \\ \emph{<<[Captive Portals] work by forcing un-authenticated users to a web page, once you have "captured them" this way by allowing the web page to interact with the router/firewall you can completely control their access>>} \cite{pcmag}
+%\\ \emph{<<Captive Portal does not provide any content to subscribers. Its main purpose is to determine how to redirect the subscriber browser. It can also preserve and pass along information from the original subscriber request to the content applications.>>} \cite{ciscoCP}\\  Altså noko som tvingar deg til ei bestemt nettside.
+
+\subsection{Behandling av trafikk}
+
+\section{Aktuell teknologi}
+Når vi no ser på dei forskjellige teknologiane vi kan nytte, er det naturleg å dele desse inn i operativsystem, kodespråk og programvare. 
+\subsection{Operativsystem}
+\subsubsection{Debian 6.0.6 <<Squeeze>>} 
+Vi har valt å nytte oss av linux-systemet Debian. Vi nyttar versjon 6.0.6, som er den versjonen som var den siste stabile utgivinga av Debian då vi starta med bacheloroppgåva. Denne har kodenavnet <<Squeeze>>. Det har i ettertid (3.mai) kome ut ein ny stable-versjon av Debian, <<Debian 7 Wheezy>>. \cite{wheezy}
+
+\subsection{Kodespråk}
+\subsubsection{Python}
+Kodespråket Python er eit høgnivå kodespråk som kjem ferdiginstallert i dei fleste linux-distibusjonar. I Linuxversjonen vi nyttar er Python versjon 2.6.6 integrert. \cite{pythonversjon}. 
+Python har gode moglegheiter for å samarbeide med linux-systemet, og er eit kodespråk som <<plays well with others>>, altså er enkelt å setje opp mot andre systemer, slik som database og nettjenarar. \cite{python, pythonapps} I tillegg til dette er det også enkelt å gjere systemkall i linux frå Python. \cite{pythonsubprocess}
+
+
+\subsubsection{Django}
+Django er eit rammeverk for utvikling av nettsider i python. Å nytte dette rammeverket gjer at vi enkelt kan lage gode dynamiske nettsider. Django har gode modular for oppsett av nettsider, noko som gjer at vi slepp å lage mange nokså like modular. I staden kan vi bruke velkjente og gjennomtesta metodar og heller tilpasse desse til våra bruk. Dette sparar oss for mykje koding, blant anna av sesjonshandtering.\cite{djangowww, djangosessions}
+
+I dette prosjektet nyttar vi Django versjon 1.2.3, da det er denne som følgjer pakkebrønnen\footnote{Pakkebrønn: ein katalog av testa og godkjente programvare for eit system. \\For Debian:  \url{http://packages.debian.org} } til Debian Squeeze. \cite{djangopkg}
+
+\subsubsection{Bash-scripting}
+Bourne-Again SHell er eit kommandoskall, og er det komandoskallet som blir nytta som standard i debian linux. \cite{debbash, bashwww} Bash-scripting er ei liste med kommandoar som skal utførast av bash. Bash støttar også scripting språka til mange andre kjente og nytta unix-kommandoskall, deriblandt csh og ksh. \cite{bashabout}.
+
+\subsubsection{PHP}
+Hypertext Preprocessor er eit kodespråk for å lage dynamiske nettsider. Dette er eit poplært kodespråk som er godt utbredt i open kjeldekode-miljø. PHP er laga for at utviklarar hurtig skal kunne lage dynamiske nettsider. \cite{phpwww} Versjonen som er aktuell for Debian Squeeze er 5.3.3 \cite{phppkg}
+
+\subsection{Programvare}
+\subsubsection{Apache HTTP Server}
+Apache HTTP Server er den mest brukte http-tenaren på internett. \cite{apahcetraf}. Dette er ein robust vevstjenar som er basert på open kjeldekode. Dette har gjort at der er mange modular tilgjeneleg. Blandt desse har vi mod\textunderscore wsgi for Python og php5\textunderscore module for PHP. \cite{modwsgi, phpmodule}
+
+\subsubsection{MySQL Community Edition}
+MySQL er verdas mest populære opne relasjonsdatabase, og er spesielt vanlig å nytte til webapplikasjonar. Relasjonsdatabasen gir oss muligheten til å hurtig og effektivt lagre og hente data. 
+
+\subsection{Integrerte linuxmodular}
+\subsubsection{Netfilter og IPtables}
+Netfilter er et rammeverk for filtrering av nettverkstrafikk, og har vore ein del av linux-kjerna sidan linuxversjon 2.4 \cite{netfiltercore}. Gjennom netfilter og kommandoen <<iptabels>> gjer dette linux i stand til å mellom anna utføre NAT, pakkefiltrering for både IPv4 og IPv6, føre statistikk over oppkoplingar og utføre port forwarding. 
+
+\subsubsection{Linux Advanced Routing and Traffic Control}
+Linux Advanded Routing and Traffic Control (lartc) er eit sett med verktøy for å manipulere pakkar som går gjennom linux, og er ein del av kjerna i linux si pakkehandtering. \cite{lartcintro} Denne modulen gir mellom anna moglegheit for å merke pakkar slik at dei kan behandlast i andre verktøy seinare. 
+
+\subsection{isc-dhcp-server}
+
+\section{Kodefilisofi}
+I unix-filisofien heiter det seg at program skal <<gjere éin ting, og gjere den vel>>. Ein skal altså ha små men velfungerande modular, som skal fungere uavhengig av kvarandre \cite{unixprog}. På denne måten kan ein sikre at endringar i ein modul ikkje slår ut heile systemet, samstundes som at ein lagar eit fleksibelt og lett "hackbart"\footnote{Hack som i å nytte systemet på alternativ måte, ikkje hacking som i datainnbrot.} system. 
+
+\paragraph{Frå objekt-orinentert} programmering har vi også M-V-C prinsippet, som i grove trekk går ut på å dele koden i tre hovuddelar: \cite{mvc}
+
+\begin{description}
+	\item[Model] Som tek seg av kommunikasjon med ytre system som database, filsystemet, kjernefunksjonar osv.
+	\item[View] er framvisinga av informasjon og innhenting av data frå brukaren
+	\item[Controller] gjer all kontroll og konvertering av data mellom framvisinga og det bakanforliggande systemet.
+\end{description}
+
+\paragraph{}
+Ved å helde oss til desse prinsippa kan vi både lett halde oversikta når systemet verte komplekst, og enklare dele ansvarsområde for programmeringa mellom utviklarane.
+
+\chapter{Metode}
+I dette kapittelet vil vi gå gjennom og grunngi dei forskjellige vala av teknologi og greie ut om arbeidsprosessen fram mot det ferdige produktet. 
+ 
+\section{Oppdeling av koden}
+
+
+\section{Val av teknologi}
+\subsection{Operativsystem}
+Valet av operativsystem var eigentleg meir eit val mellom linuxdistribusjonar. I Windowsverda får vi ikkje samme kontroll over kva modular vi vil ha med, og kan dermed ikkje på same måte skreddersy operativsystemet til det behovet vi har. I tillegg er dei fleste linuxdistibudjonar fritt tilgjeneleg, i motseting til Microsoft-system. 
+
+Debian er eit stabilt og anerkjent linuxsystem, og er <<mor>> til mange andre distroar, deriblant den brukarretta versjonen Ubuntu. Når vi vel å kjøre debian ar det to hovudgrunnar til dette. Ein av dei er at Debian har eit stort og svært aktivt utviklermiljø som prioriterer tryggleik og stabilitet. Dette gjer at vi kan stole på programvaren som følg med, men også at vi ikkje får siste skrik når det gjeld versjonar. Til dømes nyttar vi Python 2.6.6 sjølv om siste versjon av Python2 er 2.7.4, og Django 1.2.3 sjølv om siste versjon er 1.5. 
+Den andre hovudgrunnen til at vi vel Debian er så enkel som at begge utviklarane har mykje erfaring med systemet. Det er også dette systemet som vert anbefalt for kurset <<Linux Systemdrift>> ved Høgskolen i Sør-Trøndelag.
+
+Når dette er sagt, er der ikkje nokon grunn til at systemet vi har utvikla ikkje skal fungere på andre distribusjonar. Dei linuxmodulane vi nyttar er felles for dei fleste system, og kommandoane er like. 
+
+\subsection{Programmeringsspråk}
+Valet her har vore mellom å lage eit sett av bash-script med PHP som WebUI, og å kode eit system i Python. Vi har valt å nytte oss av høgnivå-språket Python, med rammeverket Django for WebUI. Dette gjer at vi kan kode alt i eit programmeringspråk og gir ein enklare og tryggare måte å kommunisere mellom dei forskellige modulane. Å nytte Python gjer det også naturleg å skrive objektorientert kode, og dele inn systemet etter MVC-prinsippet. 
+
+Det systemet som var utvikla gjennom Svein Ove Undal sitt haustprosjekt var laga med bash-script og PHP. Det hadde derfor vore eit enkelt val å fortsette med dette, og berre bygge på meir på dette systemet. 
+
+Ingen av utviklarane hadde frå før mykje erfaring med Python, noko som førte til at vi måtte bruke litt tid på å lære oss programmeringsspråket. Vi brukte noko tid på dette før vi endeleg bestemte oss for Python. Når vi etterkvart såg kor velegna og enkelt dette språket var
+
+
+\chapter{Resultat}
+
+\section{Faglige resultat}
+\subsection{Måloppnåing}
+	
+\subsection{Kommentar til UseCase-ar}
+(UC)
+\subsubsection{UseCase 1: Logg inn}
+Innlogginga er fungerande og enkel for brukaren å utføre. \\
+scpr. innlogging?
+
+\subsubsection{Use Case 2: Vis statistikk}
+Når kvar brukar har logga seg inn, vil nettoppslag mot innloggingstjenaren videresende brukaren til ei statistikkside. Her vi brukaren kunne sjå kor mykje han har lasta ned totalt, kor mange tilkoplingar han brukar og kva som er gjennomsnittleg linjebruk for økta. Brukaren vil også få informasjon her dersom det er sett restriksjonar for linja han har.
+
+\subsubsection{Use Case 3: Administrer Brannmur}
+Administrator vil få tilgang til eigne administrasjonsider der dei kan sjå på innstillingane, få oversikt over aktive brukarar og eventuelt legge til nye. Her er også ei eiga side for å legge til eller fjerne reglar i brannmuren. Noko som ikkje kjem fram i UCen, men vart naudsynt er at brukaren først må velje kva del av brannmuren han vil lage regel for. Vi har eit sett reglar for innkommande til server, og eit sett for trafikk som skal vidaresendast.
+
+\section{Administrative resultat}
+
+
+\chapter{Drøfting}
+\section{Kvifor dette resultatet?}
+\section{Svakheiter ved produktet}
+\section{Styrkar ved produktet}
+\section{Vidareutvikling av produktet}
+\chapter{Konklusjon}
+\chapter{Kjelder og referansar}
+
+\bibliographystyle{IEEEtran}
+\bibliography{kilder}
+
+\part{Vedlegg}
+\appendix 
+\chapter{Testrapport frå TIHLDE-LAN}
+\chapter{Visjonsdokument}
+	Nummereringa på sidetala følgjer no vedlagt dokument.
+	\includepdf[pages=1-19]{apx/visjonsdokument.pdf}
+	\includepdf[pages=1,landscape]{apx/rosanalyse.pdf}
+\chapter{Kravdokument}
+	Nummereringa på sidetala følgjer no vedlagt dokument.
+	\includepdf[pages=-]{apx/kravdokument.pdf}
+\chapter{Arkitekturdokument}
+	Nummereringa på sidetala følgjer no vedlagt dokument.
+  	\includepdf[pages=-]{apx/arkitekturdokument.pdf}
+\chapter{Prosjekthandbok}
+	Nummereringa på sidetala følgjer no vedlagt dokument.
+%	\includepdf{apx/prosjekthandbok.pdf}
+	\section*{HER KJEM ET DOKUMENT!}
+	Nummereringa på sidetala følgjer no hovuddokumentet
+\chapter{Dokumentasjon frå haustprosjektet}
+		Nummereringa på sidetala følgjer no vedlagt dokument.
+	\includepdf[pages=-]{apx/sluttrapport_sou.pdf}
+	Nummereringa på sidetala følgjer no hovuddokumentet
+
+\backmatter
+\chapter{Etterord}
+\section{Takk!}
+\paragraph{Helge Hafting} for god rettleiing og gode fagkunnskapar.
+\paragraph{TIHLDE} og spesielt TIHLDE-LAN for at vi fekk nytte dei som testkaninar lenge før systemet var produksjonsklart. Dette gav oss mykje gode erfaringar.
+\paragraph{Deltakarane på TIHLDE-LAN} som var hyggelege og ga oss verdifulle tilbakemeldingar.
+\end{document}

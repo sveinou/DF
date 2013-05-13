@@ -1,0 +1,65 @@
+\select@language {nynorsk}
+\contentsline {section}{\numberline {1}Innleiing}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {section}{\numberline {2}Bakgrunn for prosjektet}{6}
+\contentsline {paragraph}{}{6}
+\contentsline {subsection}{\numberline {2.1}Skildring av problem og behov}{6}
+\contentsline {paragraph}{}{6}
+\contentsline {subsection}{\numberline {2.2}Skildring av dagens system og rutiner}{6}
+\contentsline {paragraph}{}{6}
+\contentsline {section}{\numberline {3}Prosjektm\IeC {\r a}l}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {subsection}{\numberline {3.1}Effektm\IeC {\r a}l}{7}
+\contentsline {subsection}{\numberline {3.2}Resultatm\IeC {\r a}l}{7}
+\contentsline {subsection}{\numberline {3.3}Prosessm\IeC {\r a}l}{7}
+\contentsline {subsection}{\numberline {3.4}Prosjektets omfang}{8}
+\contentsline {subsection}{\numberline {3.5}Prosjektets milep\IeC {\ae }lar og hovudaktivitetar}{8}
+\contentsline {subsubsection}{\numberline {3.5.1}Dokumentasjon}{8}
+\contentsline {subsubsection}{\numberline {3.5.2}Utviklingsteg / M\IeC {\r a}l}{8}
+\contentsline {subsection}{\numberline {3.6}Teknologi}{8}
+\contentsline {paragraph}{}{8}
+\contentsline {paragraph}{Debian Linux Wheezy}{9}
+\contentsline {paragraph}{PHP}{9}
+\contentsline {paragraph}{Python}{9}
+\contentsline {paragraph}{ISC DHCP-server}{9}
+\contentsline {paragraph}{IPtables}{9}
+\contentsline {paragraph}{Brukerdatabase - PAM}{9}
+\contentsline {section}{\numberline {4}Interessenter og rammebetingelser}{10}
+\contentsline {subsection}{\numberline {4.1}Interessentanalyse}{10}
+\contentsline {subsection}{\numberline {4.2}Rammebetingelser}{10}
+\contentsline {section}{\numberline {5}Kritiske suksessfaktorer}{11}
+\contentsline {subsection}{\numberline {5.1}Suksessfaktorer}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {subsection}{\numberline {5.2}Informasjonsbehov}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {section}{\numberline {6}Risikoanalyse}{12}
+\contentsline {paragraph}{}{12}
+\contentsline {section}{\numberline {7}Kost/nytte-analyse}{13}
+\contentsline {paragraph}{}{13}
+\contentsline {subsubsection}{\numberline {7.0.1}Kvantifiserbar nytte}{13}
+\contentsline {subsubsection}{\numberline {7.0.2}Ikkje-kvantifiserbar nytte}{13}
+\contentsline {subsection}{\numberline {7.1}Bortfall av direkte kostnadar}{13}
+\contentsline {subsection}{\numberline {7.2}Estimerte kostnadar}{13}
+\contentsline {subsection}{\numberline {7.3}Samanstilling av kostnadar og nytte}{13}
+\contentsline {paragraph}{}{13}
+\contentsline {section}{\numberline {8}Retningslinjer og standardar}{14}
+\contentsline {subsection}{\numberline {8.1}Krav til dokumentasjon}{14}
+\contentsline {paragraph}{}{14}
+\contentsline {subsection}{\numberline {8.2}Krav til kvalitetskontroll}{14}
+\contentsline {paragraph}{}{14}
+\contentsline {paragraph}{}{14}
+\contentsline {paragraph}{}{14}
+\contentsline {subsection}{\numberline {8.3}Krav til standardar og metoder}{14}
+\contentsline {paragraph}{}{14}
+\contentsline {subsubsection}{\numberline {8.3.1}Programmeringstandardar}{15}
+\contentsline {subsubsection}{\numberline {8.3.2}Konfigurasjonsfiler}{15}
+\contentsline {subsubsection}{\numberline {8.3.3}Bruk av verkt\IeC {\o }y}{15}
+\contentsline {subsubsection}{\numberline {8.3.4}Andre standardar}{15}
+\contentsline {subsection}{\numberline {8.4}Endringshandtering}{15}
+\contentsline {section}{\numberline {9}Prosjektorganisering}{16}
+\contentsline {paragraph}{}{16}
+\contentsline {section}{\numberline {10}Tilr\IeC {\r a}ding om vidare arbeid}{17}
+\contentsline {paragraph}{}{17}
+\contentsline {section}{\numberline {11}Vedlegg}{18}

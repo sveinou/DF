@@ -1,0 +1,25 @@
+\select@language {nynorsk}
+\contentsline {section}{\numberline {1}Innleiing}{4}
+\contentsline {subsection}{\numberline {1.1}Hensikta med dokumentet}{4}
+\contentsline {subsection}{\numberline {1.2}Avgrensingar}{4}
+\contentsline {subsection}{\numberline {1.3}Definisjonar og forkortingar}{4}
+\contentsline {subsection}{\numberline {1.4}Oversikt over innhald}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {section}{\numberline {2}Bakgrunn og oversikt}{5}
+\contentsline {subsection}{\numberline {2.1}UseCase modell}{5}
+\contentsline {subsection}{\numberline {2.2}Ikkje-funksjonelle krav}{6}
+\contentsline {subsection}{\numberline {2.3}Vilk\IeC {\r a}r og avhengigheiter}{6}
+\contentsline {paragraph}{Tjenarside}{6}
+\contentsline {paragraph}{Klientside}{6}
+\contentsline {section}{\numberline {3}Arkitekturperspektiv}{7}
+\contentsline {subsection}{\numberline {3.1}Logisk}{7}
+\contentsline {subsection}{\numberline {3.2}Prosess}{8}
+\contentsline {subsubsection}{\numberline {3.2.1}Dynfw daemon}{8}
+\contentsline {paragraph}{Dynfwd}{8}
+\contentsline {subsection}{\numberline {3.3}Implemetasjon}{9}
+\contentsline {paragraph}{}{9}
+\contentsline {subsection}{\numberline {3.4}Andre perspektiv}{10}
+\contentsline {subsubsection}{\numberline {3.4.1}Nettverksbehandling}{10}
+\contentsline {paragraph}{Nettverksflyt internt}{10}
+\contentsline {subsubsection}{\numberline {3.4.2}Systemet si plassering i nettverket}{11}
+\contentsline {paragraph}{Nettverkskisse}{11}
