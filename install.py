@@ -41,13 +41,13 @@ def pull_create_install():
 	subprocess.call("touch "+webservice, shell=True)
 	subprocess.call("touch "+access, shell=True)
 	
-def change_config(search,replace,file):
+def change_config(search,replace,file_path):
 	
-	with open(file, 'r') as file: data = file.readlines()
+	with open(file_path, 'r') as file: data = file.readlines()
 	for line in data:
 		if search in line:
 			data[data.index(line)] = replace+"\n"
-	with open(file, 'w') as file: file.writelines(data)
+	with open(file_path, 'w') as file: file.writelines(data)
 	return
 
 
@@ -135,8 +135,8 @@ def message(text):
 	print ""
 	time.sleep(1)
 
-packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server")
-packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd")
+packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daemon")
+packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd","/usr/lib/pymodules/python2.7/daemon/__init__.pyc")
 ping_server = "8.8.8.8"
 
 intro()
@@ -224,16 +224,17 @@ change_config("max_txs", "max_txs = "+tx,"/etc/dnf/dnf.conf")
 
 
 message("iptables and network config")
-change_config('INTERFACES=””','INTERFACES=”'+internal+'”',"/etc/default/isc-dhcp-server")
+change_config('INTERFACES=""','INTERFACES="'+internal+'"',"/etc/default/isc-dhcp-server")
 IP4 = "10.0.0.1"
-mask = "255.255.255.0"
+mask = "/24"
 NAT = "Y"
-subprocess.call("/bin/mv /etc/dhcpd/dhcpd.conf /etc/dhcpd/dhcpd.conf.old",shell=True)
-subprocess.call("/bin/mv /etc/dhcpd/dhcpd.dnf.conf /etc/dhcpd/dhcpd.conf",shell=True)
+change_config("internal_network","internal_network = "+IP4+mask,"/etc/dnf/dnf.conf")
+subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
+subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
 network_iptables(IP4,mask,NAT)
 
 
 
 	
 
-#edit dhcpd files
+#pidfolder, daemon log

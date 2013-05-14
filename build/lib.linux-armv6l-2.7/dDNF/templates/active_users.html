@@ -1,0 +1,95 @@
+{% extends "admin_page.html" %}
+{% load i18n %}
+
+{% block adminmodule %}
+{% if error %}
+<div id="warning">
+<h1>Oh snap! Something went wrong</h1>
+<p>We tried to do "{{ action }}". That didn't go well... 
+You might want to check iptables and user database for inconsistency
+</p>
+</div>
+{% endif%}
+<h2>{% trans "Currently active users" %}</h2>
+<p>
+
+<table class="borders">
+<tr>
+<th>{% trans "IP-address" %}</th>
+<th>{% trans "Username" %}</th>
+<th>{% trans "Login timestamp" %}</th>
+<th>{% trans "Action" %}</th>
+</tr>
+
+{% for user in active %}
+<tr>
+<td>{{ user.last_seen_ip }}</td>
+<td>{{ user.username }}</td>
+<td>{{ user.last_login }}</td>
+	<td>
+		<table><tr>
+		<form action="/admin/currently-active/limit/" method="POST">{% csrf_token %}
+		<td>
+			 TX <input type="radio" name="setlimit" value="TX"> 
+			 RX <input type="radio" name="setlimit" value="RX">
+			 Co <input type="radio" name="setlimit" value="C">
+		</td>
+		<td>
+			<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+			<input type="submit" value="{% trans "LIMIT" %} " class="mini">
+		</td>
+		</form>
+		<form action="/admin/currently-active/kick/" method="POST">{% csrf_token %}
+		<td>
+			<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+			<input type="submit" value="{% trans "KICK" %} " class="mini">
+		</td>
+		</form>
+		</tr></table>
+	</td>
+</tr>
+{% empty %}
+<tr><td>{% trans "No users currently active." %}</p></td></tr>
+{% endfor %}
+</table>
+</p>
+
+<table><tr><td>&nbsp;</td></tr></table>
+
+<h2>{% trans "Limited users" %}</h2>
+
+<table class="borders">
+<tr>
+<th>{% trans "IP-address" %}</th>
+<th>{% trans "Username" %}</th>
+<th>{% trans "Login timestamp" %}</th>
+<th>{% trans "Action" %}</th>
+</tr>
+{% for user in limited %}
+<tr>
+<td>{{ user.last_seen_ip }}</td>
+<td>{{ user.username }}</td>
+<td>{{ user.last_login }}</td>
+	<td>
+		<table><tr><td>
+		<form action="/admin/currently-active/free/" method="POST">{% csrf_token %}
+		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+		<input type="submit" value="{% trans "SET FREE" %} " class="mini">
+		</form>
+		</td><td>
+		<form action="/admin/currently-active/kick/" method="POST">{% csrf_token %}
+		<input type="hidden" value="{{ user.last_seen_ip }}" name="victim">
+		<input type="submit" value="{% trans "KICK" %} " class="mini">
+		</form>
+		</td></tr></table>
+	</td>
+</tr>
+{% empty %}
+</table>
+<table>
+<tr><td><em>
+{% trans "No user are currently limited" %}</p>
+{% endfor %}
+</em></td></tr>
+</table>
+{% endblock %}

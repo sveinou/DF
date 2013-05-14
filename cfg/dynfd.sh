@@ -27,7 +27,7 @@ case "$1" in
   start)
     echo "Starting server"
     # Start the daemon 
-    python /opt/DF/DNF/dynfd.py start
+    /usr/bin/python /opt/DF/DNF/dynfd.py start
     ;;
   stop)
     echo "Stopping server"

@@ -76,11 +76,6 @@ class Statistics:
             return {'pkt_sent':0, 'pkt_received':0, 'bytes_sent':0, 'bytes_received':0}
 
     def get_all_io(self, ips, io=[]):
-	"""
-	this wil get the stats from all the clients
-	then w8 10 seconds to get them again
-	it will then have an good idea about txs and rxs
-	"""
 	i = 0
         clients_bytes = []
      
