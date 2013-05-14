@@ -36,6 +36,8 @@ def main():
     		print update_stats()
     	elif program == "FLUSH" and len(sys.argv) == 3 and sys.argv[2].upper() == "LIMITED":
     		print rm_all_limit()
+	elif program == "RELOAD" and len(sys.argv) == 2:
+		print reload()
     	elif program == "LIMIT" and len(sys.argv) == 2:
     		print auto_limit_users()
     	elif program == "LIMIT" and len(sys.argv) == 5 and sys.argv[2].upper() == "SET":
@@ -57,8 +59,15 @@ def user_login():
     for l in plist:
         pwd = pwd + " " + l
     login.cli_login(sys.argv[3],pwd,sys.argv[2])
-    
 
+def reload():
+    int = conf.internal_interface
+    ext = conf.external_interface
+    network = conf.internal_network.split("/")
+    command = ("/bin/bash /opt/DF/iptables.sh %s %s %s %s %s") %(ext,int,network[0],"/"+network[1],"Y")
+    subprocess.call(command, shell=True)
+    
+    return
 def update_stats():
     """
     This finds every client that is active and updates stats like, tx,rx and connections
@@ -240,6 +249,7 @@ Syntax:
     LIMIT CONNLIMIT|RX|TX <ipv4-addr> (limits one spesific ip)
     LIMIT AUTO (auto set to avg limits bassed on users)
     LIMIT ( finds and set the allowed bandwith for limited users )
+    RELOAD (restarts dhcp, sets ip, reset iptables)
     
     """
 

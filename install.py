@@ -226,8 +226,9 @@ change_config("max_txs", "max_txs = "+tx,"/etc/dnf/dnf.conf")
 message("iptables and network config")
 change_config('INTERFACES=""','INTERFACES="'+internal+'"',"/etc/default/isc-dhcp-server")
 IP4 = "10.0.0.1"
-mask = "255.255.255.0"
+mask = "/24"
 NAT = "Y"
+change_config("internal_network","internal_network = "+IP4+mask,"/etc/dnf/dnf.conf")
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
 network_iptables(IP4,mask,NAT)

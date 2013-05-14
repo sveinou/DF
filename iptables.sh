@@ -45,7 +45,7 @@ network(){
 echo 1 > /proc/sys/net/ipv4/ip_forward
 #sysctl -w net.ipv6.conf.all.forwarding=1
 service isc-dhcp-server restart
-/sbin/ifconfig $INT $IP netmask $MASK
+/sbin/ifconfig $INT $IP$MASK
 }
 
 

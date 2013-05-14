@@ -20,6 +20,7 @@ server = parser.get("global", "server")
 external_ip = '10.10.10.101'
 internal_ip = '10.20.30.40'
 
+internal_network = parser.get("global", "internal_network")
 internal_interface = parser.get("global", "internal_interface")
 external_interface = parser.get("global", "external_interface")
 mode = parser.get("global", "mode")
