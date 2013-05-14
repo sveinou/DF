@@ -17,7 +17,29 @@
     url = "http://www.linuxmanpages.com/man8/dhcpd.8.php",
     month = "Mai",
     year = "2013",
-    }
+}
+@online{sqlabout,
+    title = "Appropriate Uses For SQLite",
+    organization = "Hipp, Wyrick \& Company, Inc",
+    month = "Mai",
+    year = "2013",
+    url = "http://www.sqlite.org/whentouse.html"
+}
+@online{sqlimit,
+    title = "Limits In SQLite",
+    organization = "Hipp, Wyrick \& Company, Inc",
+    month = "Mai",
+    year = "2013",
+    url = "http://www.sqlite.org/limits.html"
+}
+@book{upxpuml,
+    author = "Craig Larman"
+    publisher = "Pearson Educaton, Inc"
+    title = "Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development"
+    edition = "3"
+    year = "2005"
+}
+
 @manual{dhcpconf,
     title = "dhcpd configuration file",
     author = "Ted Lemon",
@@ -51,8 +73,8 @@
 	year = "07.05.2013",
 }
 @misc{rfc2131,
-    title = "Dynamic Host Configuration Protocol"
-    author = "R. Droms"
+    title = "Dynamic Host Configuration Protocol",
+    author = "R. Droms",
     organization = "Internet Engineering Task Force",
     howpublished = "RFC 2131",
     url = "http://tools.ietf.org/html/rfc2131#section-3.1",

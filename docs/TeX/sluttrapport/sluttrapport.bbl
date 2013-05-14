@@ -131,6 +131,18 @@ G.~Dumpleton, \emph{Python WSGI adapter module for Apache.}, 07.05.2013.
   \url{http://www.mysql.com/products/community/}
 \BIBentrySTDinterwordspacing
 
+\bibitem{sqlabout}
+\BIBentryALTinterwordspacing
+(2013, Mai) Appropriate uses for sqlite. Hipp, Wyrick \& Company, Inc.
+  [Online]. Kopling: \url{http://www.sqlite.org/whentouse.html}
+\BIBentrySTDinterwordspacing
+
+\bibitem{sqlimit}
+\BIBentryALTinterwordspacing
+(2013, Mai) Limits in sqlite. Hipp, Wyrick \& Company, Inc. [Online]. Kopling:
+  \url{http://www.sqlite.org/limits.html}
+\BIBentrySTDinterwordspacing
+
 \bibitem{dhcpconf}
 \BIBentryALTinterwordspacing
 T.~Lemon, \emph{dhcpd configuration file}, Internet Systems Consortium / Vixie
