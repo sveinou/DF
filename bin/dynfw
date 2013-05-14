@@ -119,22 +119,23 @@ def auto_limit_users():
     return returning
 
 def limit_ip(what, ip4):
-	"""
-	forces an limit to a spesific IP4 address
-	"""
-	if what == "CONNLIMIT":
-		Firewall().limit_connections(ip4)
-	elif what == "RXLIMIT":
-		Firewall().limit_rx(ip4)
-	elif what == "TXLIMIT":
-		Firewall().limit_tx(ip4)
-	return what+" "+ip4
+    """
+    forces an limit to a spesific IP4 address
+    """
+
+    if what == "CONNLIMIT":
+	Firewall().limit_connections(ip4)
+    elif what == "RXLIMIT":
+	Firewall().limit_rx(ip4)
+    elif what == "TXLIMIT":
+ 	Firewall().limit_tx(ip4)
+    return what+" "+ip4
 
 def auto_set_limit():
-	"""
-	This autosets how mutch linux trafic controll will limit 
-	the limit is bassed on the connection speed, number of clients and the ofsett
-	"""
+    """
+    This autosets how mutch linux trafic controll will limit 
+    the limit is bassed on the connection speed, number of clients and the ofsett
+    """
     lim = limit_per_user()
     tx_count = len(Data().above_up_limit(lim['txpu']))
     if tx_count >= 0:
@@ -233,7 +234,7 @@ Syntax:
     DROP <ipv4-addr>
     LOGIN <ipaddress> <user> <password>
     TESTLOGIN <user> <password>
-    INFO <IP4> (returns info about the ip)
+    INFO <IP4>|<user> (returns info about the client)
     UPDATE (updates stats to database)
     FLUSH LIMITED|ALLOWED (flush iptables rules, allowed not impl.)
     LIMIT CONNLIMIT|RX|TX <ipv4-addr> (limits one spesific ip)
