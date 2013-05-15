@@ -3,20 +3,23 @@ import subprocess
 import os
 import sys
 import time
+
 def missing(packages):
-    """
-    returns the packages that are missing
-    """
+        """
+        returns the packgages that are missing
+        """
+        missing = ""
+        for package in packages.split():
+                try:
+                        DEVNULL = open(os.devnull, 'w')
+                        dpkg = subprocess.Popen(["dpkg","-s",package], stdout = subprocess.PIPE, stderr = DEVNULL)
+                        out = dpkg.communicate()[0]
+                        if not "Status: install " in out:
+                                missing += package+" "
+                except Exception, e:
+                        error_log(e):
+        return missing
 
-    missing = ""
-    for package in packages:
-    	try:
-		if "/" in package:
-    			with open(package): pass
-	except IOError:
-   		missing += " "+package
-
-    return missing
 
 
 def install(packages):
