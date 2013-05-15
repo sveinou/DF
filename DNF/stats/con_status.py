@@ -76,7 +76,8 @@ class Con:
                         if interface:
                                 command = "/bin/ping -c 1 -I %s 8.8.8.8 | grep 64" % interface
                                 try:
-                                        ping = subprocess.Popen(["ping","-c","1","-I",interface,"8.8.8.8"], stdout = subprocess.PIPE)
+                                	DEVNULL = open(os.devnull, 'w')
+                                        ping = subprocess.Popen(["ping","-c","1","-I",interface,"8.8.8.8"], stdout = subprocess.PIPE, stderr = DEVNULL)
                                         ping = ping.communicate()[0]
                                         print ping
                                         if "64" in ping:
