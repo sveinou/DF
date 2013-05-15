@@ -79,7 +79,7 @@ def intro():
 	column size of current shell. ish
 	"""
 	#meh, have to change stuffs
-	columns = int(subprocess.check_output("tput cols", shell=True))
+	columns = int(subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0])
 	subprocess.call("clear", shell=True)
 	colorcode = 32
 	text1 = "Dynfw setup"
@@ -106,7 +106,7 @@ def intro():
 def question(tex,answers=""):
 	colorcode = 35
 	text = '\033[%dm%s\033[0m'%(colorcode,tex)
-	columns = int(subprocess.check_output("tput cols", shell=True))
+	columns = int(subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0])
 	text = "%s%s" %(" "*int(columns/2-len(text)),text)
 	print ""
 	print ""
@@ -127,7 +127,7 @@ def message(text):
 	subprocess.call("clear", shell=True)	
         colorcode = 35
         text = '\033[%dm%s\033[0m'%(colorcode,text)
-        columns = subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0]
+        columns = int(subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0])
         text = "%s%s" %(" "*int(columns/2-len(text)),text)
         print ""
         print ""
