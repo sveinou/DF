@@ -56,29 +56,39 @@ class Con:
 		else:
 			return False
 			
-	def find_if(self):
-    		command = "/sbin/ifconfig | grep HWaddr | awk '{print $1;}'"
-    		interfaces = subprocess.check_output(command, shell=True).split("\n")
-    		internal=""
-    		external=""
-    		for interface in interfaces:
-			x = int(interfaces.index(interface))+1
-			x = int(100/len(interfaces)*x)
-			Gui().loadingbar(x)
 
-        		if interface:
-                		command = "/bin/ping -c 1 -I %s 8.8.8.8 | grep 64" % interface
-                		try:
-                        		ping = subprocess.check_output(command, shell=True)
-                        		if ping:
-                                		external = interface
-					else:
-						internal = interface
+	def find_if():
+                ifconfig = subprocess.Popen(["ifconfig"], stdout = subprocess.PIPE, )
+                ifconfig = ifconfig.communicate()[0].split()
+                prev_word = ifconfig[0]
+                interfaces = ""
+                for word in ifconfig:
+                        if word == "Link" and prev_word != "lo":
+                                interfaces += " "+prev_word
+                        prev_word = word
+                internal=""
+                external=""
+                for interface in interfaces.split():
+                        x = int(interfaces.index(interface))+1
+                        x = int(100/len(interfaces)*x)
+                        Gui().loadingbar(x)
 
-                		except Exception, e:
-                        		internal = interface
-		Gui().loadingbar(100)
-    		return{'ext':external,'int':internal}
+                        if interface:
+                                command = "/bin/ping -c 1 -I %s 8.8.8.8 | grep 64" % interface
+                                try:
+                                        ping = subprocess.Popen(["ping","-c","1","-I",interface,"8.8.8.8"], stdout = subprocess.PIPE)
+                                        ping = ping.communicate()[0]
+                                        print ping
+                                        if "64" in ping:
+                                                external = interface
+                                        else:
+                                                internal = interface
+
+                                except Exception, e:
+                                        internal = interface
+                Gui().loadingbar(100)
+                return{'ext':external,'int':internal}
+
 
 
 		
