@@ -140,7 +140,7 @@ def message(text):
 	time.sleep(1)
 
 packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daemon")
-packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd","/usr/lib/pymodules/python2.7/daemon/__init__.pyc")
+#packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd","/usr/lib/pymodules/python2.7/daemon/__init__.pyc")
 ping_server = "8.8.8.8"
 
 intro()
@@ -149,7 +149,7 @@ if answ == 'N':
 	sys.exit()
 					# packageTestInstall
 message("ofcourse you would! ")
-miss = missing(packagespath)
+miss = missing(package)
 if miss:
 	message("There are some packages missing")
 	answ == question("install the missing packages?(Y/N)",("Y","N"))
