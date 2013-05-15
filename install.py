@@ -17,7 +17,7 @@ def missing(packages):
                         if not "Status: install " in out:
                                 missing += package+" "
                 except Exception, e:
-                        error_log(e):
+                        error_log(e)
         return missing
 
 
@@ -34,7 +34,8 @@ def pull_create_install():
 	newpath = r'/opt/DF' 
 	if not os.path.exists(newpath): os.makedirs(newpath)
 	subprocess.call("cd /opt/DF; git init; git pull https://github.com/sveinou/DF.git", shell=True)
-	subprocess.call("/usr/bin/python /opt/DF/setup.py install", shell=True)	
+	subprocess.call("cd /opt/DF; /usr/bin/python /opt/DF/setup.py sdist", shell=True)	
+	subprocess.call("/usr/bin/pip /opt/DF/dist/D* ", shell=True)	
 	logpath = r'/var/log/dnf/'
 	default = "/var/log/dnf/collect.log"
 	webservice = "/var/log/dnf/django.log"
@@ -139,7 +140,7 @@ def message(text):
 	print ""
 	time.sleep(1)
 
-packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daemon")
+packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daemon python-pip")
 #packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd","/usr/lib/pymodules/python2.7/daemon/__init__.pyc")
 ping_server = "8.8.8.8"
 
@@ -149,7 +150,7 @@ if answ == 'N':
 	sys.exit()
 					# packageTestInstall
 message("ofcourse you would! ")
-miss = missing(package)
+miss = missing(packages)
 if miss:
 	message("There are some packages missing")
 	answ == question("install the missing packages?(Y/N)",("Y","N"))
@@ -161,7 +162,7 @@ if miss:
 		message("installed hopfully some packages")
 				
 
-if missing(packagespath):
+if missing(packages):
 	message("meh, somthing wrong with packages, exiting")
 	sys.exit()
 	
