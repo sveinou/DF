@@ -58,7 +58,7 @@ class Con:
 			return False
 			
 
-	def find_if():
+	def find_if(self):
                 ifconfig = subprocess.Popen(["ifconfig"], stdout = subprocess.PIPE, )
                 ifconfig = ifconfig.communicate()[0].split()
                 prev_word = ifconfig[0]
