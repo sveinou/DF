@@ -67,7 +67,8 @@ def network_iptables(IP4,mask,NAT):
 	
 def database():
 	try:
-		hmm = subprocess.check_output("mysql -u root -p -h localhost < /opt/DF/database.sql", shell=True)
+		
+		subprocess.call("mysql -u root -p -h localhost < /opt/DF/database.sql", shell=True)
 	except Exception, e:
 		message("you fucked up. type in the root password for MYSQL server to make the df database")
 		database()
@@ -126,7 +127,7 @@ def message(text):
 	subprocess.call("clear", shell=True)	
         colorcode = 35
         text = '\033[%dm%s\033[0m'%(colorcode,text)
-        columns = int(subprocess.check_output("tput cols", shell=True))
+        columns = subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0]
         text = "%s%s" %(" "*int(columns/2-len(text)),text)
         print ""
         print ""
