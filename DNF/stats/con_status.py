@@ -24,7 +24,8 @@ class Con:
 		times = 100
 		for i in range(times):
 			Gui().loadingbar(i,"latency test")
-			p = subprocess.Popen(["ping","-c", "1", address], stdout = subprocess.PIPE)
+			DEVNULL = open(os.devnull, 'w')
+			p = subprocess.Popen(["ping","-c", "1", address], stdout = subprocess.PIPE, stderr = DEVNULL)
 			for word in p.communicate()[0].split(' '):
 				if "time" in word and "=" in word:
 					ms += float(word.split("=")[1])
@@ -59,7 +60,8 @@ class Con:
 			
 
 	def find_if(self):
-                ifconfig = subprocess.Popen(["ifconfig"], stdout = subprocess.PIPE, )
+		DEVNULL = open(os.devnull, 'w')
+                ifconfig = subprocess.Popen(["ifconfig"], stdout = subprocess.PIPE, stderr = DEVNULL)
                 ifconfig = ifconfig.communicate()[0].split()
                 prev_word = ifconfig[0]
                 interfaces = ""
