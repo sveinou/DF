@@ -15,44 +15,44 @@ Database file #2: kilder.bib
 ** IEEEtran BST control entry "trans" detected.
 
 Done.
-You've used 29 entries,
+You've used 32 entries,
             4039 wiz_defined-function locations,
-            1335 strings with 17950 characters,
-and the built_in function-call counts, 9602 in all, are:
-= -- 805
-> -- 64
-< -- 5
-+ -- 38
-- -- 10
-* -- 360
-:= -- 1844
-add.period$ -- 47
-call.type$ -- 29
-change.case$ -- 21
-chr.to.int$ -- 15
-cite$ -- 29
-duplicate$ -- 783
-empty$ -- 944
-format.name$ -- 10
-if$ -- 2050
+            1352 strings with 18370 characters,
+and the built_in function-call counts, 10800 in all, are:
+= -- 889
+> -- 80
+< -- 9
++ -- 44
+- -- 13
+* -- 409
+:= -- 2054
+add.period$ -- 53
+call.type$ -- 32
+change.case$ -- 23
+chr.to.int$ -- 27
+cite$ -- 32
+duplicate$ -- 882
+empty$ -- 1090
+format.name$ -- 13
+if$ -- 2325
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 177
-newline$ -- 161
-num.names$ -- 10
-pop$ -- 480
+int.to.str$ -- 31
+missing$ -- 192
+newline$ -- 174
+num.names$ -- 13
+pop$ -- 528
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 4
-skip$ -- 801
+skip$ -- 899
 stack$ -- 0
-substring$ -- 19
-swap$ -- 485
+substring$ -- 31
+swap$ -- 532
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 29
+type$ -- 32
 warning$ -- 0
-while$ -- 12
-width$ -- 30
-write$ -- 305
+while$ -- 17
+width$ -- 33
+write$ -- 332

@@ -12,15 +12,13 @@
 %\usepackage{biblatex}
 %\usepackage{makeidx}
 
-\usepackage[toc]{glossaries}
+%\usepackage[toc]{glossaries}
 
 \title{Sluttrapport \\ Dynamisk Nettverksbrannmur}
 %\subtitle{Bacheloroppgåve 20E}
 \author{Espen Gjærde \and Svein Ove Undal}
 %\institute{Høgskolen i Sør-Trøndelag \\ Avdeling for Informatikk og e-Læring}
 \date{2013}
-
-\makeglossaries
 
 \begin{document}
 \bstctlcite{trans}
@@ -99,6 +97,7 @@ Ein ny og revidert oppgåvetekst vart laga, og går som følgjer:
 \paragraph{WebUI} Web User Interface -- eit nettbasert brukargrensesnitt. 
 \paragraph{DHCP} \emph{Dynamic Host Configuration Protocol} er ein protokoll for utdeling av nettverkskonfigurasjon i eit nettverk. 
 \paragraph{Linuxkjerna} 
+\paragraph{CLI} \emph{Command Line Interface} eller <<ledetekst>> på norsk er eig grensesnitt for å sende kommandoar direkte til eit program. Det vert også ofte brukt om brukergrensesnitt som er basert i ein kommandoterminal.
 
 
 
@@ -163,8 +162,17 @@ Linux Advanded Routing and Traffic Control (lartc) er eit sett med verktøy for 
 DHCP er ein protokoll for utsending av nettverkskonfigurasjon til klientar i eit nettverk. Denne protokollen fungerar ved at ein klient sender ut ein førespurnad om DHCP-informasjon og ein server svarer på desse. Klienten vil deretter automatisk få IP-addresse og vanligvis også få tilsendt innstillingar for standardruter i nettverket og informasjon om navnetjenarar.  \cite{datakom} 
 For å unngå at det <<hopar seg opp>> med inaktive klientar, har desse automatiske innstillingane eit tidsavbrot. Det er klienten sitt ansvar å seie frå om at den framleis er aktiv. Dersom dette ikkje vert gjort, kan tenaren sende ut desse innstillingane til nye klientar. \cite{rfc2131}
 
+\section{Utviklingsprosess}
+\subsection{Arbeidsmetodikk}
+Her vil vi raskt gå gjennom nokon av dei arbeidsmetodikkan som var aktuelle å bruke i prosjektet. Alle desse er smidige og iterative prosessar. 
 
-\section{Kodefilisofi}
+\paragraph{Scrum} er ein arbeidsmetodikk som passar best for større multidisiplinære team. Prosessen involverer kunden etter hver iterasjon, eller <<sprint>> som det heter i Scrum-terminologien. Hver sprint varer typisk i to eller tre veker og ender med en fremvising av et ferdig produkt. \cite{scrumprimer}
+
+\paragraph{eXtreme Programming} (XP) er en utviklinsmetode som vil minimere tid brukt på design og planleggingsfasen, og heller fokusere på ofte og gode tilbakemeldingar frå kunde. Eit poeng er også å \emph{<<do the simplest thing that could possibly work>>}, \cite{xpbook}  og at ein skal programmere i lag, for å unngå misforståingar. 
+
+\paragraph{Unified Process} (UP) består av fire fasar. \emph{Oppstart} som er utviklinga av visjon og grove planskisser for prosjektet, \emph{utgreiing} av krav og utvikling av kjernefunksjonar, \emph{konstruksjon} av resterande funksjonalitet og start av implementasjon, og \emph{overgangen} til betatesting og utrullinga av programvaren. \cite{upxpuml} Det må understrekast at desse fire fasane ikkje er fire iterasjonar, men at kvar av desse fasane kan inneholde fleire iterasjonar. Det er også slik at vi ikkje er sekvensielt ferdig med prosessane (les: fossefall). Til dømes er ikkje visjonsdokumentet ferdig etter oppstartsfasen, men vert revidert gjennom heile prosessen. 
+
+\subsection{Kodefilisofi}
 I unix-filisofien heiter det seg at program skal <<gjere éin ting, og gjere den vel>>. Ein skal altså ha små men velfungerande modular, som skal fungere uavhengig av kvarandre \cite{unixprog}. På denne måten kan ein sikre at endringar i ein modul ikkje slår ut heile systemet, samstundes som at ein lagar eit fleksibelt og lett "hackbart"\footnote{Hack som i å nytte systemet på alternativ måte, ikkje hacking som i datainnbrot.} system. 
 
 \paragraph{Frå objekt-orinentert} programmering har vi også M-V-C prinsippet, som i grove trekk går ut på å dele koden i tre hovuddelar: \cite{mvc}
@@ -206,12 +214,28 @@ For å effektivt kunne lagre og hente ut data og statistikk frå systemet nyttar
 \paragraph{}
 Når vi også har valt å nytte Apache HTTP-server er det også tidlegare erfaingar som gjer at vi vel denne. Begge utviklarane har erfaring med konfigurasjon og oppsett, og har også her lært om denne i faget <<Linux Systemdrift>>. 
 
-\section{navn... Inn og utlogging av systemet}
 \paragraph{}
+
+\section{Systemarkitektur og strukturering av kode}
+Her vil vi gå gjennom de valgene som er gjort når det gjelder kodefilosofier og måter å bruke de forskjellige modeulene og programvarene på.
+
+\subsection{Kodestruktur}
+
+\subsection{Tekniske løysingar}
+\paragraph{Tvungen pålogging} til systemet blir gjort ved å lukke brannmuren for alle andre enn brukarar som alt er pålogga. Deretter brukar vi NAT for å avskjære trafikken og sende brukarane til ei påloggingside. Etter at brukarane her har logga på, åpnar vi brannmuren og fjernar avskjæringsfunkjonen for brukaren. Systemet vil no gå over i ein vanleg brannmur, gateway og ruter-funksjon for brukaren. 
+
+\paragraph{} For å unngå at brukarar skal jukse seg gjennom brannmuren ved å stele andre sine IP-addresser krev vi at alle adresser er utdelt av DHCP-serveren. Ved innlogging vert adressa og mac-adressa registert og sjekka mot DHCP-serven sitt register. Det er kombinasjonen av brukar, passord og IP-addresse som vert sett på som ein unik brukar, men ved å stille inn konfigurasjonsfila for systemet kan administrator tillate fleire innloggingar pr brukar.
+
+\paragraph{Automatisk utlogging ved tidsavbrot} gjer vi ved å utnytte oppførselen til klientar av DHCP-protokollen. I DHCP-serveren  si konfigurasjonsfil legg vil til nokre linje som gjer at CLI-kommandoen for utlogging av brukarar blir kjørt for IP-addresser som ikkje fornyar DHCP-leasen sin. På denne måten sikrar vi at pcar som ikkje er kopla til nettet automatisk vert logga ut. 
+
+\paragraph{Overvåking} av linja gjer vi fortløpande, og for å spare på ressursar overvakar vi i utgangspunktet kun totaltrafikken, men loggar trafikkmengda for kvar brukar. Først når systemet oppfattar at linja ut har kapasitetsproblem ser vi på trafikkmengda for kvar brukar, og avgjer om nokon må avgrensast. Vi vil etter dette følge brukaren, og sleppe brukaren fri frå avgrensingane når trafikkmengda frå brukaren er på eit akseptabelt nivå. 
+
+\paragraph{Avgrensinga} vert gjort ved at vi i brannmuren har laga eit sett med reglar som fungerar som eit <<fengsel>>. Brukaren er ikkje lenger fri til å bruke kapasitet, og all trafikk frå brukaren vert først flagga når dei kjem inn til systemet, og trafikk som går ut over fastsette grenser blir forkasta. .. ICMP-TIMEOUT? eller berre dROP?
+
 
 \section{Prosessen}
 \paragraph{}
-Som utviklingsprosess har vi valt å nytte \emph{Unified Process} (UP). Som alternativ til denne var også SCRUM nevnt, men utviklarane såg ikkje på dette som ein føremålstenleg utviklingsprossess når det var tre personar -- to utviklarara og ein rettleiar -- involvert. Nå begge også har mest erfaring med UP vart valet enkelt. 
+Som utviklingsprosess har vi valt å nytte \emph{Unified Process} (UP). Som alternativ til denne var også \emph{SCRUM} nevnt, men utviklarane såg ikkje på dette som ein føremålstenleg utviklingsprossess når det var tre personar -- to utviklarara og ein rettleiar -- involvert. Vi var også inne på tanken om å nytte \emph{eXtreme Programming}, men sidan begge utviklarane har mest erfaring med UP, falt valet på denne utviklingsprosessen.
 \paragraph{}
 Vi laga ikkje noko tradisjonelt GANT-diagram for utviklingsprosessen, men laga i staden ein tabell med mål og tidsfristar for når forskjellige utviklingsteg skulle vere ferdig. Vi jobba deretter iterativt fram mot desse, og har testa kvar modul undervegs. Dette vart gjort for vi av erfaring veit at det kan bli lite tid til testing mot slutten, og da var dette ein måte å være sikker på at testing vart gjennomført for kvar modul. 
 \paragraph{}
@@ -219,7 +243,7 @@ Det ligg ikkje føre noko forstudierapport for dette bachelorprosjektet, da det 
 \paragraph{}
 Første del av prosessen gjekk for det meste med til eiga opplæring, både i Python og deretter Django-rammeverket. Deretter brukte vi tida på å oversetje bash-script frå haustprosjektet til fungerande Python-program. Når dette var utført fekk systemet på mange måtar ein ilddåp, sidan vi skulle teste dette på TIHLDE-LAN . Dette var tidleg i prosessen og mykje av programvara var uferdig. Vi hadde CaptivePortal-funksjonaliteten på plass, og konsentrerte oss dermed om å lage statistikk-funksjonalitet for å samle mest mogleg data.
 \paragraph{}
-For å få testa mest mogleg funksjonalitet -- og rette nokon feil -- nytta vi under TIHLDE-LAN element frå utviklingsprosessen eXtreme Programming. Under lanet vart mange av metodane for avgrensing av bruk og samling av trafikkdata utvikla og testa. Vi brukte her ei form for parprogrammering der ein programmerte, medan den andre las over koden før den deretter vart testa. Dette gav gode resultat om ein ser på antall utvikla modular og linjer, men gav også eit stort etterarbeid i for dokumentasjonsdelen.
+For å få testa mest mogleg funksjonalitet -- og rette nokon feil -- nytta vi element frå utviklingsprosessen eXtreme Programming under TIHLDE-LAN. Under lanet vart mange av metodane for avgrensing av bruk og samling av trafikkdata utvikla og testa. Vi brukte her ei form for parprogrammering der ein programmerte, medan den andre las over koden før den deretter vart testa. Dette gav gode resultat om ein ser på antall utvikla modular og linjer, men gav også eit stort etterarbeid i for dokumentasjonsdelen.
 \paragraph{}
 
 

@@ -183,6 +183,25 @@ R.~Droms, ``Dynamic host configuration protocol,'' RFC 2131, Internet
   \url{http://tools.ietf.org/html/rfc2131#section-3.1}
 \BIBentrySTDinterwordspacing
 
+\bibitem{scrumprimer}
+\BIBentryALTinterwordspacing
+G.~o.~B. C.Larman, P.Deemer, \emph{The Scrum Primer}, 2nd~ed.\hskip 1em plus
+  0.5em minus 0.4em\relax Good Agile, 2012. [Online]. Kopling:
+  \url{http://www.goodagile.com/scrumprimer/scrumprimer20.pdf}
+\BIBentrySTDinterwordspacing
+
+\bibitem{xpbook}
+D.~M.~Stephens, \emph{Extreme Programming Refactored: The Case Against
+  XP}.\hskip 1em plus 0.5em minus 0.4em\relax Apress, 2003.
+
+\bibitem{upxpuml}
+\BIBentryALTinterwordspacing
+C.~Larman, \emph{Applying UML and Patterns: An Introduction to Object-Oriented
+  Analysis and Design and Iterative Development}, 2nd~ed.\hskip 1em plus 0.5em
+  minus 0.4em\relax Prentice Hall PTR, 2002. [Online]. Kopling:
+  \url{http://books.google.no/books?id=r8i-4En_aa4C}
+\BIBentrySTDinterwordspacing
+
 \bibitem{unixprog}
 \BIBentryALTinterwordspacing
 E.~S. Raymond, \emph{The Art of Unix Programming}.\hskip 1em plus 0.5em minus
