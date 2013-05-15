@@ -13,7 +13,7 @@ setup(
 	url='http://github.com/sveinou/DF',
 	license='LICENSE.txt',
 	description='Combined firewall and captive portal, with dynamic bandwidth allocation',
-	long_description=open('README.txt').read(),
+#	long_description=open('README.txt').read(),
 	data_files=[('/etc/dnf/',['cfg/dnf.conf','cfg/apache.wsgi']),
 				('/etc/init.d/',['cfg/dynfd.sh']),
 				('/etc/sudoers.d/', ['cfg/dynfw.sudo']),
