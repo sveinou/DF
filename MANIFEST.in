@@ -6,3 +6,4 @@ graft cfg
 graft dDNF/locale
 
 exclude dDNF/manage.py
+recursive-exclude docs/TeX
