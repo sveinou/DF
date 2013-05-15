@@ -2,6 +2,7 @@
 
 import subprocess
 from time import time
+import os
 from DNF.conf import bandwidth as bw
 from DNF.stats.df_user_stats import Statistics as stats
 from DNF.gui import Gui
