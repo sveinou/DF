@@ -1,0 +1,26 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="refresh" content="5;URL={{ link }}">
+<title>{% trans "Dynamic Network Firewall" %}</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/gfx/base.css">
+<body>
+<div id="header">
+<h1 class="header">{% trans "Dynamic Network Firewall" %}</h1>
+</div>
+<div class="menu"><ul>{% block menu %} {% endblock %}</ul></div>
+<div id="wrap">
+<h1>{% trans "You are being forwarded" %}</h1>
+<p>{% blocktrans %} Statistics about your usage is available at <a href="{{ site }}">{{ site }}</a>.
+To manually log out, got to <a href="{{ site }}/logout/">{{ site }}/logout/</a>
+{% endblocktrans %}
+</p>
+</div>
+<div id="footer">
+<p><a href="http://github.com/sveinou/df">{% trans "Dynamic Network Firewall" %}</a> {% trans "by Espen Gjærde and Svein Ove Undal" %}</p>
+</div>
+</body>
+</html>
