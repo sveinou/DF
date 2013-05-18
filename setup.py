@@ -3,17 +3,17 @@ from distutils.core import setup
 
 setup(
 	name='DynamicNetworkFirewall',
-	version='0.4.alpha',
+	version='0.5.rc1',
 	author='espengj && sveinou',
 	author_email='@stud.hist.no',
 	packages=['DNF','DNF.firewall','DNF.auth','DNF.stats','DNF.database',
               'dDNF','dDNF.statistics', 'dDNF.login', 'dDNF.manager'],
     package_data = {'dDNF':['templates/*.html', 'templates/media/*','locale/no/LC_MESSAGES/*']},
-	scripts=['bin/dynfw'], # setup_firewall should be a command from dynfw
+	scripts=['bin/dynfw'], 
 	url='http://github.com/sveinou/DF',
 	license='LICENSE.txt',
 	description='Combined firewall and captive portal, with dynamic bandwidth allocation',
-#	long_description=open('README.txt').read(),
+	long_description='README.txt',
 	data_files=[('/etc/dnf/',['cfg/dnf.conf','cfg/apache.wsgi']),
 				('/etc/init.d/',['cfg/dynfd.sh']),
 				('/etc/sudoers.d/', ['cfg/dynfw.sudo']),
