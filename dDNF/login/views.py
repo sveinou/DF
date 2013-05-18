@@ -49,7 +49,7 @@ def dnf_logout(request):
     ip_addr = str(request.META['REMOTE_ADDR'])
     d.ip4(ip_addr)
     logout(request)
-    return render_to_response('login.html',{'logout':True})
+    return render_to_response('login.html',{'logout':True}, context_instance=RequestContext(request))
 
 def checkmeta(request):
     values = request.META.items()
