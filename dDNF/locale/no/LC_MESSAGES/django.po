@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-22 17:10+0200\n"
+"POT-Creation-Date: 2013-05-18 15:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,13 +25,324 @@ msgstr "Norsk"
 msgid "English"
 msgstr "Engelsk"
 
-#: templates/base.html:6 templates/base.html.py:11 templates/base.html:15
+#: templates/active_users.html:13
+msgid "Currently active users"
+msgstr "Aktive brukarar"
+
+#: templates/active_users.html:18 templates/active_users.html.py:63
+#, fuzzy
+msgid "IP-address"
+msgstr "IP-adresse"
+
+#: templates/active_users.html:19 templates/active_users.html.py:64
+#: templates/login.html:32
+msgid "Username"
+msgstr "Brukarnamn"
+
+#: templates/active_users.html:20 templates/active_users.html.py:65
+msgid "Login timestamp"
+msgstr "Tid"
+
+#: templates/active_users.html:21 templates/active_users.html.py:66
+msgid "Action"
+msgstr "Handling"
+
+#: templates/active_users.html:39
+msgid "LIMIT"
+msgstr "AVGRENS"
+
+#: templates/active_users.html:45 templates/active_users.html.py:82
+msgid "KICK"
+msgstr "KAST UT"
+
+#: templates/active_users.html:52
+msgid "No users currently active."
+msgstr "For tida er ikkje nokon aktiv"
+
+#: templates/active_users.html:59
+msgid "Limited users"
+msgstr "Avgrensa brukarar"
+
+#: templates/active_users.html:77
+msgid "SET FREE"
+msgstr "Slepp laus"
+
+#: templates/active_users.html:91
+msgid "No user are currently limited"
+msgstr "Ingen brukarar er har avgensa kapasitet"
+
+#: templates/admin_home.html:5
+#, fuzzy
+msgid "Dynamic Network Firewall - Admin panel"
+msgstr "Dynamisk nettverksbrannmur"
+
+#: templates/admin_home.html:8
+msgid "" 
+"\n"
+"Most static settings must be set in the configfile located in /etc/dnf/dnf."
+"conf. For security purposes is this file not writable from your webserver.\n"
+msgstr "" 
+"\n"
+"Mesteparten av innstillingane må gjerast i konfigurasjonsfila. Denne finn du "
+"i /etc/dnf/dnf.confAv sikkerheitsårsakar er ikkje denne fila skrivbar frå "
+"det nettbaserte administrasjonsgrensesnittet \n"
+
+#: templates/admin_home.html:12
+msgid "Current settings"
+msgstr "Aktive innstillingar"
+
+#: templates/admin_home.html:16
+msgid "Setting"
+msgstr "Innstilling"
+
+#: templates/admin_home.html:17
+msgid "Value"
+msgstr "Verdi"
+
+#: templates/admin_home.html:18
+msgid "Type"
+msgstr "Type"
+
+#: templates/admin_home.html:19
+msgid "Comment"
+msgstr "Kommentar"
+
+#: templates/admin_home.html:28
+msgid "IP address of DNF-system server"
+msgstr "Systemet si ip-addresse"
+
+#: templates/admin_home.html:34
+msgid "Network Interface connected to inside network (LAN)"
+msgstr "Nettverkskort på innsida av DNF (LAN)"
+
+#: templates/admin_home.html:40
+msgid "Network Interface connected to external network (internet)"
+msgstr "Nettverkskort tilkopla internet (eksternt)"
+
+#: templates/admin_home.html:49
+msgid "Auto: DNF automaticly restricts users"
+msgstr "Auto: DNF avgjer kven som må avgrensast"
+
+#: templates/admin_home.html:55
+msgid "Force only one login pr user if true"
+msgstr "Tillét kun éi tilkopling for kvar brukar"
+
+#: templates/admin_home.html:64
+msgid "Address of MySQL-server"
+msgstr "Adressa til din MySQL-server"
+
+#: templates/admin_home.html:70
+msgid "MySQL user"
+msgstr "MySQL brukar"
+
+#: templates/admin_home.html:76
+msgid "database name"
+msgstr "namn på databasen"
+
+#: templates/admin_home.html:80
+msgid "NOT VISIBLE"
+msgstr "VISAST IKKJE"
+
+#: templates/admin_home.html:82
+msgid "Password of database user"
+msgstr "Passord for databasebrukar"
+
+#: templates/admin_home.html:88
+msgid "Port of MySQL-server. Default is 3306"
+msgstr "Port for MySQL-serveren. Standard er 3306"
+
+#: templates/admin_home.html:98
+msgid "Your dhcpd leasesfile."
+msgstr "DHCP-leasefila di"
+
+#: templates/admin_home.html:104
+msgid "DEPREACIATED"
+msgstr "AVSKRIVE"
+
+#: templates/admin_home.html:113
+msgid "10: DEBUG | 20: INFO | 40: WARNING | 50: ERROR | 60: SEVERE"
+msgstr ""
+
+#: templates/admin_home.html:120 templates/admin_home.html.py:130
+#: templates/admin_home.html:140
+msgid "to console (STDERR)"
+msgstr "til konsoll (STDERR)"
+
+#: templates/admin_home.html:123
+msgid "Default logfile"
+msgstr "Standard loggfil"
+
+#: templates/admin_home.html:133
+msgid "Logs user-specific activities. "
+msgstr "Loggar brukaraktivtetar"
+
+#: templates/admin_home.html:143
+msgid "Logs errors and actions from the webui"
+msgstr "Loggar feil og handlingar frå WebUI'et"
+
+#: templates/admin_home.html:152
+msgid "Unit of bandwidth"
+msgstr "Eining for bandbredde"
+
+#: templates/admin_home.html:158
+msgid "Maxlimit of line in. MUST BE (PURE) INTEGER"
+msgstr "Maksgrense for innkommande linje. MÅ VERE HEILTAL"
+
+#: templates/admin_home.html:164
+msgid "Maxlimit of line out. MUST BE (PURE) INTEGER"
+msgstr "Maksgrense for utgåande linje. MÅ VERE HEILTAL"
+
+#: templates/admin_home.html:170
+msgid "Capacity of simultanius connections. MUST BE (PURE) INTEGER"
+msgstr "Maksgrense for samtidige tilkoplingar. MÅ VERE HEILTAL"
+
+#: templates/admin_home.html:176
+msgid "Address to benchmark latency"
+msgstr ""
+
+#: templates/admin_home.html:182
+msgid "Latency limit in milliseconds. MUST BE PURE INTEGER"
+msgstr "Forsinkingsgrense i millisekund. MÅ VERE HEILTAL"
+
+#: templates/admin_home.html:188
+msgid "offset to keep deamon calm. float."
+msgstr "svingning før deamonen agerar. Float."
+
+#: templates/admin_home.html:194
+msgid "File to download as bandwidth benchmark"
+msgstr "Nedlastingsfil for å lage referanseverdi for nedlasting"
+
+#: templates/admin_home.html:200
+msgid "The time this download should take."
+msgstr "Tida nedlastinga burde ta"
+
+#: templates/admin_page.html:3 templates/admin_page.html.py:11
+msgid "Admin panel"
+msgstr "Administrasjonspanel"
+
+#: templates/admin_page.html:5
+msgid "Firewall"
+msgstr "Brannmur"
+
+#: templates/admin_page.html:6
+msgid "User administation"
+msgstr "Brukaradminstrasjon"
+
+#: templates/admin_page.html:7
+#, fuzzy
+msgid "Active users"
+msgstr "Aktive tilkoplingar"
+
+#: templates/admin_page.html:8
+msgid "Home"
+msgstr "Heim"
+
+#: templates/base.html:6 templates/base.html.py:11 templates/base.html:16
 msgid "Dynamic Network Firewall"
 msgstr "Dynamisk nettverksbrannmur"
 
-#: templates/base.html:15
+#: templates/base.html:16
 msgid "by Espen Gjærde and Svein Ove Undal"
 msgstr "av Espen Gjærde og Svein Ove Undal"
+
+#: templates/firewall.html:12
+msgid "Firewall configuration"
+msgstr "Innstililngar for brannmuren"
+
+#: templates/firewall.html:16
+msgid "Error"
+msgstr "Feil"
+
+#: templates/firewall.html:17
+msgid "DNF detected an error. Firewall not updated"
+msgstr "DNF oppdaga ein feil. Brannmuren vart ikkje oppdattert."
+
+#: templates/firewall.html:28
+msgid "Traffic forwarding rules"
+msgstr "Reglar for vidersending av trafikk"
+
+#: templates/firewall.html:32 templates/firewall.html.py:91
+msgid "Protocol"
+msgstr "Protokoll"
+
+#: templates/firewall.html:33 templates/firewall.html.py:92
+msgid "Source"
+msgstr "Kjelde"
+
+#: templates/firewall.html:35 templates/firewall.html.py:94
+msgid "Destination"
+msgstr "Destinasjon"
+
+#: templates/firewall.html:37 templates/firewall.html.py:96
+msgid "Target"
+msgstr "Mål"
+
+#: templates/firewall.html:38 templates/firewall.html.py:97
+msgid "Flush ALL rules"
+msgstr "Slett alle reglar"
+
+#: templates/firewall.html:54 templates/firewall.html.py:62
+#: templates/firewall.html:112 templates/firewall.html.py:120
+msgid "anywhere"
+msgstr "kor-som-helst"
+
+#: templates/firewall.html:73 templates/firewall.html.py:131
+msgid "Delete"
+msgstr "Slett"
+
+#: templates/firewall.html:79 templates/firewall.html.py:137
+msgid "No rules present."
+msgstr "Ingen reglar"
+
+#: templates/firewall.html:87
+msgid "Server rules"
+msgstr "Reglar for tjener"
+
+#: templates/firewall.html:143
+msgid "Add new rule"
+msgstr "Legg til regel"
+
+#: templates/firewall.html:144
+msgid ""
+"In the form below, you can enter new rules to the firewall. You hav to "
+"select chain. 'FORWARD' is traffic passing trough, while 'INPUT' is traffic "
+"directed AT the server."
+msgstr ""
+"I skjema nedanfor kan du lage nye brannmurreglar.Du må velje relgelsett "
+"først. 'Videresend' vil seie trafikk som passerar tjeneren.'INNKOMMANDE' vil "
+"seie trafikk som skal til tjenaren."
+
+#: templates/firewall.html:147
+msgid "CHAIN"
+msgstr "Regelsett"
+
+#: templates/firewall.html:148
+msgid "PROTOCOL"
+msgstr "PROTOKOLL"
+
+#: templates/firewall.html:149
+msgid "SRC IP"
+msgstr "SRC IP"
+
+#: templates/firewall.html:151
+msgid "SRC P"
+msgstr "SRC P"
+
+#: templates/firewall.html:152
+msgid "DST IP"
+msgstr ""
+
+#: templates/firewall.html:154
+msgid "DST P"
+msgstr ""
+
+#: templates/firewall.html:155
+msgid "TARGET"
+msgstr ""
+
+#: templates/firewall.html:181
+msgid "add"
+msgstr "legg til"
 
 #: templates/login.html:7
 msgid "Logged out"
@@ -70,33 +381,38 @@ msgstr "Du må logge inn for internettilgang"
 msgid "After the login, you will be forwarded to:"
 msgstr "Etter innlogging vil vi sende deg til "
 
-#: templates/login.html:32
-msgid "Username"
-msgstr "Brukarnamn"
-
 #: templates/login.html:33
 msgid "Password"
 msgstr "Passord"
 
 #: templates/stats.html:4
+#, fuzzy
+msgid "Log out"
+msgstr "Logg meg ut"
+
+#: templates/stats.html:6
+msgid "Adminpanel"
+msgstr ""
+
+#: templates/stats.html:10
 msgid "User statistics for"
 msgstr "Brukarstatistikk for"
 
-#: templates/stats.html:5
+#: templates/stats.html:11
 msgid "IP address:"
 msgstr "IP-adresse"
 
-#: templates/stats.html:7
+#: templates/stats.html:13
 msgid ""
 "Hey there boss! Want to check out the admin-panel? Just click the link "
 "below..."
 msgstr "Hei sjef! Sjekk linken nedanfor for å gå til administrasjonspanelet!"
 
-#: templates/stats.html:12
+#: templates/stats.html:18
 msgid "YOUR CONNECTION HAS BEEN LIMITED"
 msgstr "DI TILKOPLING HAR NO RESTRIKSJONAR"
 
-#: templates/stats.html:13
+#: templates/stats.html:19
 #, python-format
 msgid ""
 "You have been limited because you have violated %(limit)s. If you think this "
@@ -105,38 +421,38 @@ msgstr ""
 "Vi har satt restriksjonar på nettbruken din fordi du har brote  grensa "
 "%(limit)s. Ta kontakt med personalet om du trur dette er ein feil"
 
-#: templates/stats.html:17
+#: templates/stats.html:23
 msgid "Your statistics"
 msgstr "Din statistikk"
 
-#: templates/stats.html:20
+#: templates/stats.html:26
 msgid "Connections:"
 msgstr "Tilkoplingar:"
 
-#: templates/stats.html:26
+#: templates/stats.html:32
 msgid "Sent:"
 msgstr "Sendt:"
 
-#: templates/stats.html:27 templates/stats.html.py:33
+#: templates/stats.html:33 templates/stats.html.py:39
 msgid "bytes"
 msgstr "byte"
 
-#: templates/stats.html:28 templates/stats.html.py:34
+#: templates/stats.html:34 templates/stats.html.py:40
 msgid "packets"
 msgstr "pakkar"
 
-#: templates/stats.html:32
+#: templates/stats.html:38
 msgid "Recieved:"
 msgstr "Motteke:"
 
-#: templates/stats.html:40
+#: templates/stats.html:46
 msgid "Log me out"
 msgstr "Logg meg ut"
 
-#: templates/stats.html:47
+#: templates/stats.html:53
 msgid "Active connections"
 msgstr "Aktive tilkoplingar"
 
-#: templates/stats.html:52
+#: templates/stats.html:58
 msgid "NO ACVTIVE CONNECTIONS."
 msgstr "INGEN AKTIVE TILKOPLINGAR"
