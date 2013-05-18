@@ -1,9 +1,0 @@
-\beamer@endinputifotherversion {3.10pt}
-\select@language {nynorsk}
-\beamer@sectionintoc {1}{Oppg\IeC {\r a}vestillar}{3}{0}{1}
-\beamer@sectionintoc {2}{Oppg\IeC {\r a}va}{4}{0}{2}
-\beamer@subsectionintoc {2}{1}{Problemstilling}{4}{0}{2}
-\beamer@subsectionintoc {2}{2}{Grunngjeving av val}{5}{0}{2}
-\beamer@subsectionintoc {2}{3}{L\IeC {\o }ysinga}{6}{0}{2}
-\beamer@sectionintoc {3}{Resultatet}{7}{0}{3}
-\beamer@sectionintoc {4}{Vidare arbeid}{13}{0}{4}
