@@ -57,6 +57,19 @@ class Con:
 			return True
 		else:
 			return False
+
+    def inferface_ip(self,interface):
+    	interface = "wlan0"
+    	ifc = subprocess.Popen(["ifconfig",interface], stdout = subprocess.PIPE)
+    	ifc = ifc.communicate()[0]
+    	IP = ""
+    	for word in ifc.split():
+        	if "addr:" in word:
+                	if len(word.split("."))==4: IP = word.split(":")[1]
+                	break
+    	return IP
+
+	
 			
 
 	def find_if(self):
