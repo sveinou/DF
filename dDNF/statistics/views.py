@@ -19,7 +19,7 @@ def user_stats(request):
         limited = stats.is_limited(ipaddr)
         limit = [conf.bandwidth.max_connections,conf.bandwidth.max_rxs,conf.bandwidth.max_txs]
         intip = conf.internal_network
-		server = 'http://%s' % (intip)
+        server = 'http://%s' % (intip)
         return render_to_response('stats.html',{'server':server, 'ip':ipaddr,'io':io,'conn':conn, 'user':user, 'limited': limited, 'limit':limit[0]}, context_instance=RequestContext(request))
 
     logout(request)
