@@ -17,8 +17,7 @@ if not parser.read("/etc/dnf/dnf.conf"):
 # globale
 
 server = parser.get("global", "server")
-external_ip = '10.10.10.101'
-internal_ip = '10.20.30.40'
+external_ip = parser.get("global","external_ip")
 
 internal_network = parser.get("global", "internal_network")
 internal_interface = parser.get("global", "internal_interface")
