@@ -59,7 +59,6 @@ class Con:
             return False
 
     def inferface_ip(self,interface):
-        interface = "wlan0"
         ifc = subprocess.Popen(["ifconfig",interface], stdout = subprocess.PIPE)
         ifc = ifc.communicate()[0]
         IP = ""
