@@ -78,11 +78,12 @@ class Con:
         prev_word = ifconfig[0]
         interfaces = ""
         for word in ifconfig:
-            if word == "Link" and prev_word != "lo":
+            if word == "Link" and prev_word != "lo" and prev_word != "Link":
                 interfaces += " " + prev_word
                 prev_word = word
-                internal = ""
-                external = ""
+                
+        internal = ""
+        external = ""
         
         for interface in interfaces.split():
             x = int(interfaces.index(interface)) + 1
