@@ -240,7 +240,13 @@ change_config("<VirtualHost *:80>","<VirtualHost "+IP4+":80>", "/etc/apache2/con
 
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
-message("Now running the firewall, interface and dhcpd script")
+message("Now running the firewall, interface and dhcp script")
+answ = question("with your permission, this will flush iptables rules, and change internal ip. proceed?(Y/N)",("Y","N"))
+if answ is not N:
+	message("whell ok FINE!, do it yourselfe THEN!")
+	sys.exit()
+	
+
 network_iptables(IP4,mask,NAT)
 
 
