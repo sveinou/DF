@@ -65,11 +65,13 @@ def user_login():
 def drop_all():
     clients = Data().get_all_active_clients()
     words =""
-    if clients:
-    	for client in clients:
-    		Drop().ip4(client[2])
-    		words += client[2]+", "
-    return "Droped: "+words
+    print clients
+    #if clients:
+    #	for client in clients:
+    #		Drop().ip4(client[2])
+    #		words += client[2]+", "
+    #return "Droped: "+words
+    return clients
 
 def reload():
     
