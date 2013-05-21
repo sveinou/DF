@@ -79,7 +79,7 @@ def database():
 		if answ is "N":
 			sys.exit
 		else:
-		database()
+			database()
 	
 def intro():
 	"""
