@@ -80,8 +80,8 @@ class Con:
         for word in ifconfig:
             if word == "Link" and prev_word != "lo" and prev_word != "Link":
                 interfaces += " " + prev_word
-                prev_word = word
                 
+            prev_word = word
         internal = ""
         external = ""
         
