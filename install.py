@@ -235,7 +235,7 @@ IP4 = "10.0.0.1"
 mask = "/24"
 NAT = "Y"
 change_config("internal_network","internal_network = "+IP4+mask,"/etc/dnf/dnf.conf")
-change_config("NMV", "NameVirtualHost +"IP4+":80","/etc/apache2/conf.d/djangoDNF.conf")
+change_config("NMV", "NameVirtualHost +"+IP4+":80","/etc/apache2/conf.d/djangoDNF.conf")
 change_config("<VirtualHost *:80>","<VirtualHost "+IP4+":80>", "/etc/apache2/conf.d/djangoDNF.conf")
 
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
