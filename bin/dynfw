@@ -59,8 +59,18 @@ def user_login():
     for l in plist:
         pwd = pwd + " " + l
     login.cli_login(sys.argv[3],pwd,sys.argv[2])
+    
+def drop_all():
+    clients = Data().get_all_active_clients()
+    words =""
+    if clients:
+    	for client in clients:
+    		Drop().ip4(client[2])
+    		words += client[2]+", "
+    return "Droped: "+words
 
 def reload():
+    
     int = conf.internal_interface
     ext = conf.external_interface
     network = conf.internal_network.split("/")
