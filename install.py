@@ -185,6 +185,7 @@ except ImportError, e:
 interfaces = Con().find_if()
 internal = interfaces['int']
 external = interfaces['ext']
+external_ip = Con().inferface_ip(external)
 if not internal:
 	message("did not find a seccond interface, IM OUT!")
 	sys.exit()
@@ -196,6 +197,7 @@ if answ == "N":
 elif answ == "Y":
 	change_config("internal_interface","internal_interface = "+internal,"/etc/dnf/dnf.conf") 
 	change_config("external_interface","external_interface = "+external,"/etc/dnf/dnf.conf")
+	change_config("external_ip","external_ip = "+external_ip,"/etc/dnf/dnf.conf") 
 	
 					#configChanges - interface
 					
