@@ -34,7 +34,7 @@ def pull_create_install():
 	newpath = r'/opt/DF' 
 	if not os.path.exists(newpath): os.makedirs(newpath)
 	subprocess.call("cd /opt/DF; git init; git pull https://github.com/sveinou/DF.git", shell=True)
-	subprocess.call("cd /opt/DF; /usr/bin/python /opt/DF/setup.py install", shell=True)		
+	subprocess.call("cd /opt/DF; /usr/bin/python ./setup.py install", shell=True)		
 	logpath = r'/var/log/dnf/'
 	default = "/var/log/dnf/collect.log"
 	webservice = "/var/log/dnf/django.log"
