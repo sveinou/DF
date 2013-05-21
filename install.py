@@ -242,7 +242,7 @@ subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=Tr
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
 message("Now running the firewall, interface and dhcp script")
 answ = question("with your permission, this will flush iptables rules, and change internal ip. proceed?(Y/N)",("Y","N"))
-if answ is not N:
+if answ is not "Y":
 	message("whell ok FINE!, do it yourselfe THEN!")
 	sys.exit()
 	
