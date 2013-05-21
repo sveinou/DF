@@ -46,7 +46,7 @@ def main():
     		print auto_set_limit()
         elif program =="TESTLOGIN" and len(sys.argv == 4):
             	print test_login()
-        elif program =="DROP" and len(sys.argv == 3): and sys.argv[2].upper() == "ALL":
+        elif program =="DROP" and len(sys.argv == 3) and sys.argv[2].upper() == "ALL":
         	print drop_all()
         else:
             show_help()   
