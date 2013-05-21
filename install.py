@@ -240,6 +240,7 @@ change_config("<VirtualHost *:80>","<VirtualHost "+IP4+":80>", "/etc/apache2/con
 
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
+message("Now running the firewall, interface and dhcpd script")
 network_iptables(IP4,mask,NAT)
 
 
