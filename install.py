@@ -88,7 +88,7 @@ def intro():
 	text1 = "Dynfw setup"
 	text2 = "by Svein Ove Undal"
 	text3 = "and Espen Gjerde"
-	warning = "WARNING, two networkcards and an active connection are needed to install"
+	warning = "WARNING, installation requires two ACTIVE NIC's and a working internet connection"
 	print "\033[%dm" %(colorcode)
 	print " %s" %("_"*(columns/2+1))	
 	print "|%s |" %(" "*(columns/2))	
@@ -116,7 +116,7 @@ def question(tex,answers=""):
 	try:
 		ans = raw_input(text+":")
         except Exception, e:
-                message("you have to write sothing ! !")
+                message("I think you might ave forgotten that input... ")
 
 	if not answers: return ans	
 	for answer in answers:
@@ -144,7 +144,7 @@ packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daem
 ping_server = "8.8.8.8"
 
 intro()
-answ = question("This will install and setup the awesome dynfw, move allong?(Y/N)",('Y','N'))
+answ = question("This will install and setup Dynamic Network Firewakk, move along? (Y/N)",('Y','N'))
 if answ == 'N':
 	sys.exit()
 					# packageTestInstall
@@ -152,17 +152,17 @@ message("ofcourse you would! ")
 miss = missing(packages)
 if miss:
 	message("There are some packages missing")
-	answ == question("install the missing packages?(Y/N)",("Y","N"))
+	answ == question("Install the missing packages?(Y/N)",("Y","N"))
 	if answ == "N":
 		sys.exit()
 	elif answ == "Y":
-		message("installing some awesome packages")
+		message("Installing some awesome packages")
 		install(packages)
-		message("installed hopfully some packages")
+		message("I think that went OK...")
 				
 
 if missing(packages):
-	message("meh, somthing wrong with packages, exiting")
+	message("Something went wrong. Please check your apt-settings. Exiting")
 	sys.exit()
 	
 					#DYNDNF installation
@@ -188,7 +188,7 @@ external = interfaces['ext']
 if not internal:
 	message("did not find a seccond interface, IM OUT!")
 	sys.exit()
-message("internal interface "+internal+". external interface "+external)
+message("Internal interface "+internal+". External interface "+external)
 answ = question("is this correct?(Y/N)",("Y","N"))
 if answ == "N":
 	message("whell fuck you then!!") #im getting tired
@@ -233,6 +233,9 @@ IP4 = "10.0.0.1"
 mask = "/24"
 NAT = "Y"
 change_config("internal_network","internal_network = "+IP4+mask,"/etc/dnf/dnf.conf")
+change_config("NMV", "NameVirtualHost +"IP4+":80","/etc/apache2/conf.d/djangoDNF.conf")
+change_config("<VirtualHost *:80>","<VirtualHost "+IP4+":80>", "/etc/apache2/conf.d/djangoDNF.conf")
+
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
 network_iptables(IP4,mask,NAT)
