@@ -72,9 +72,13 @@ def network_iptables(IP4,mask,NAT):
 def database():
 	try:
 		
-		subprocess.call("mysql -u root -p -h localhost < /opt/DF/database.sql", shell=True)
+		subprocess.call("mysql -u root -p -h localhost < /opt/DF/db.sql", shell=True)
 	except Exception, e:
 		message("you fucked up. type in the root password for MYSQL server to make the df database")
+		answ = question("exit ??(Y/N)"("Y","N"))
+		if answ is "N":
+			sys.exit
+		else:
 		database()
 	
 def intro():
