@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': DNF.conf.db.name,                      # Or path to database file if using sqlite3.
         'USER': DNF.conf.db.user,                      # Not used with sqlite3.
         'PASSWORD': DNF.conf.db.pw ,                  # Not used with sqlite3.
