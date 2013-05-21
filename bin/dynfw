@@ -46,6 +46,8 @@ def main():
     		print auto_set_limit()
         elif program =="TESTLOGIN" and len(sys.argv == 4):
             	print test_login()
+        elif program =="DROP" and len(sys.argv == 3): and sys.argv[2].upper() == "ALL":
+        	print drop_all()
         else:
             show_help()   
     except ValueError:
@@ -250,7 +252,7 @@ by Svein Ove Undal and Espen Gjærde
 source available at http://github.com/sveinou/DF/
     
 Syntax:
-    DROP <ipv4-addr>
+    DROP <ipv4-addr> | DROP ALL
     LOGIN <ipaddress> <user> <password>
     TESTLOGIN <user> <password>
     INFO <IP4>|<user> (returns info about the client)
