@@ -1,23 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 3.3.7deb7
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 21, 2013 at 05:57 PM
--- Server version: 5.1.66
--- PHP Version: 5.3.3-7+squeeze14
-
-SET FOREIGN_KEY_CHECKS=0;
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT=0;
-START TRANSACTION;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
+create database IF NOT EXISTS df;
+grant all privileges on df.* to df@localhost identified by 'df';
+USE df;
 --
 -- Database: `df`
 --
@@ -342,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `limited` (
 -- Dumping data for table `limited`
 --
 
-INSERT INTO `limited` (`User`, `CONNLIMIT`, `RXLIMIT`, `TXLIMIT`) VALUES
+INSERT IGNORE INTO `limited` (`User`, `CONNLIMIT`, `RXLIMIT`, `TXLIMIT`) VALUES
 ('espen', 0, 0, 1);
 
 -- --------------------------------------------------------
@@ -361,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `login_loggedinuser` (
 -- Dumping data for table `login_loggedinuser`
 --
 
-INSERT INTO `login_loggedinuser` (`user_ptr_id`, `last_seen_ip`) VALUES
+INSERT IGNORE INTO `login_loggedinuser` (`user_ptr_id`, `last_seen_ip`) VALUES
 (4, '10.0.0.100'),
 (6, '10.0.0.100'),
 (8, '10.0.0.100');
@@ -388,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `manager_rule` (
 -- Dumping data for table `manager_rule`
 --
 
-INSERT INTO `manager_rule` (`id`, `chain`, `prot`, `src`, `spt`, `dst`, `dpt`, `action`) VALUES
+INSERT IGNORE INTO `manager_rule` (`id`, `chain`, `prot`, `src`, `spt`, `dst`, `dpt`, `action`) VALUES
 (3, 'FORWARD', 'TCP', '182.123.23.1/32', '22', '1.2.3.4/32', '44', 'DROP'),
 (4, 'FORWARD', 'TCP', '0.0.0.0/32', NULL, '', '25', 'DROP'),
 (5, 'INPUT', 'TCP', '10.10.10.1/32', '22', '', NULL, 'ACCEPT');
