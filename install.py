@@ -40,6 +40,7 @@ def pull_create_install():
 	webservice = "/var/log/dnf/django.log"
 	access  = "/var/log/dnf/access.log"
 	if not os.path.exists(logpath): os.makedirs(logpath)
+	if not os.path.exists("/var/run/dynfwd"): os.makedirs("/var/run/dynfwd")
 	subprocess.call("touch "+default, shell=True)
 	subprocess.call("touch "+webservice, shell=True)
 	subprocess.call("touch "+access, shell=True)
