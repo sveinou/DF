@@ -1,5 +1,4 @@
 
-
 create database IF NOT EXISTS df;
 grant all privileges on df.* to df@localhost identified by 'df';
 USE df;
@@ -201,14 +200,6 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `active` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `clients`
---
-
-INSERT INTO `clients` (`user`, `mac`, `ip4`, `ip6`, `active`) VALUES
-('espen', '08:00:27:9a:ce:72', '10.0.0.100', 'Not in use', 0),
-('django', '08:00:27:9a:ce:72', '10.0.0.100', 'Not in use', 1),
-('svein', '08:00:27:9a:ce:72', '10.0.0.100', 'Not in use', 0);
 
 -- --------------------------------------------------------
 
