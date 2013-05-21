@@ -28,7 +28,7 @@ def main():
         if(program == "DROP" and len(sys.argv) == 3) and sys.argv[2].split(".") == 4:
             drop = Drop()
             drop.ip4(sys.argv[2])
-        elif program =="DROP" and len(sys.argv == 3) and sys.argv[2].upper() == "ALL":
+        elif program =="DROP" and len(sys.argv) == 3 and sys.argv[2].upper() == "ALL":
         	print drop_all()
         elif(program == "LOGIN" and len(sys.argv) >= 5):
             user_login()
@@ -46,7 +46,7 @@ def main():
     		print set_limit(sys.argv[3],sys.argv[4])
     	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
     		print auto_set_limit()
-        elif program =="TESTLOGIN" and len(sys.argv == 4):
+        elif program =="TESTLOGIN" and len(sys.argv) == 4:
             	print test_login()
         else:
             show_help()   
