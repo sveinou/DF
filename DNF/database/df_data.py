@@ -125,7 +125,10 @@ class Data:
     
 
     def update_stats(self, user, connections, tx, rx): #updateStats
-    
+        
+
+        if not connections:
+            connections = 0
         sql = "select tx_total, rx_total, UNIX_TIMESTAMP(Time) from stats where User='%s'" % (user)
         row = db().get_row(sql)    
         if row:
