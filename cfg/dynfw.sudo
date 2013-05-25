@@ -1,3 +1,0 @@
-Cmnd_Alias IPTABLES = /sbin/iptables * ALLOWED * , /sbin/iptables * LIMITED *
-
-www-data ALL = (ALL)NOPASSWD: IPTABLES, /usr/local/bin/dynfw, /sbin/iptables
