@@ -54,7 +54,9 @@ def change_config(search,replace,file_path):
 	with open(file_path, 'w') as file: file.writelines(data)
 	return
 
-
+def chmod_file(file, mode):
+	cmd = ['chmod', mode, file]
+	subprocess.call(cmd, shell=True)
 	
 
 def network_iptables(IP4,mask,NAT):
@@ -254,11 +256,12 @@ if answ is not "Y":
 	message("That's OK, You have to do it yourself THEN!... but don't come complaining to ME")
 	sys.exit()
 	
+chmod_file('/etc/sudoers.d/DNFsudorights', '440')
 
 network_iptables(IP4,mask,NAT)
-message("Configuration file: /etc/dnf/dnf.con")
-message("You can now log in to the admin-interface with username: \"espen\" and passowrd \"espen\"")
-message("At http://%s:8080/" % (IP4))
+print("Configuration file: /etc/dnf/dnf.con")
+print("You can now log in to the admin-interface with username: \"espen\" and passowrd \"espen\"")
+print("At http://%s:8080/" % (IP4))
 
 
 
