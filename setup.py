@@ -16,7 +16,7 @@ setup(
 	long_description='README.txt',
 	data_files=[('/etc/dnf/',['cfg/dnf.conf','cfg/apache.wsgi']),
 				('/etc/init.d/',['cfg/dynfd.sh']),
-				('/etc/sudoers.d/', ['cfg/dynfw.sudo']),
+				('/etc/sudoers.d/', ['cfg/DNFsudorights']),
 				('/etc/dhcp/',['cfg/dhcpd.dnf.conf']),
 				('/etc/apache2/conf.d/',['cfg/djangoDNF.conf']),
                 ],
