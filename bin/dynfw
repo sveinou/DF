@@ -25,7 +25,7 @@ def main():
     program = sys.argv[1].upper()
 
     try:
-        if(program == "DROP" and len(sys.argv) == 3) and sys.argv[2].split(".") == 4:
+        if(program == "DROP" and len(sys.argv) == 3) and sys.argv[2].split(".") == 3:
             drop = Drop()
             drop.ip4(sys.argv[2])
         elif program =="DROP" and len(sys.argv) == 3 and sys.argv[2].upper() == "ALL":
