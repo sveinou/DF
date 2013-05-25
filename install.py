@@ -55,7 +55,7 @@ def change_config(search,replace,file_path):
 	return
 
 def chmod_file(file, mode):
-	cmd = ['chmod', mode, file]
+	cmd = 'chmod %s %s' % (mode, file)
 	subprocess.call(cmd, shell=True)
 	
 
