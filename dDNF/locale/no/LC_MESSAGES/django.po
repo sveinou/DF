@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-18 15:43+0200\n"
+"POT-Creation-Date: 2013-05-25 16:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,11 +77,11 @@ msgid "Dynamic Network Firewall - Admin panel"
 msgstr "Dynamisk nettverksbrannmur"
 
 #: templates/admin_home.html:8
-msgid "" 
+msgid ""
 "\n"
 "Most static settings must be set in the configfile located in /etc/dnf/dnf."
 "conf. For security purposes is this file not writable from your webserver.\n"
-msgstr "" 
+msgstr ""
 "\n"
 "Mesteparten av innstillingane må gjerast i konfigurasjonsfila. Denne finn du "
 "i /etc/dnf/dnf.confAv sikkerheitsårsakar er ikkje denne fila skrivbar frå "
@@ -198,7 +198,7 @@ msgstr "Maksgrense for samtidige tilkoplingar. MÅ VERE HEILTAL"
 
 #: templates/admin_home.html:176
 msgid "Address to benchmark latency"
-msgstr ""
+msgstr "Adresse for konroll av forsinking"
 
 #: templates/admin_home.html:182
 msgid "Latency limit in milliseconds. MUST BE PURE INTEGER"
@@ -238,10 +238,12 @@ msgid "Home"
 msgstr "Heim"
 
 #: templates/base.html:6 templates/base.html.py:11 templates/base.html:16
+#: templates/redirect_info.html:7 templates/redirect_info.html.py:12
+#: templates/redirect_info.html:23
 msgid "Dynamic Network Firewall"
 msgstr "Dynamisk nettverksbrannmur"
 
-#: templates/base.html:16
+#: templates/base.html:16 templates/redirect_info.html:23
 msgid "by Espen Gjærde and Svein Ove Undal"
 msgstr "av Espen Gjærde og Svein Ove Undal"
 
@@ -384,6 +386,19 @@ msgstr "Etter innlogging vil vi sende deg til "
 #: templates/login.html:33
 msgid "Password"
 msgstr "Passord"
+
+#: templates/redirect_info.html:16
+msgid "You are being forwarded"
+msgstr ""
+
+#: templates/redirect_info.html:17
+#, python-format
+msgid ""
+" Statistics about your usage is available at <a href=\"%(site )s\">%(site)s</"
+"a>.\n"
+"To manually log out, got to <a href=\"%(site)s/logout/\">%(site)s/logout/</"
+"a>\n"
+msgstr ""
 
 #: templates/stats.html:4
 #, fuzzy

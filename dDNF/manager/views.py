@@ -53,10 +53,10 @@ def list_active(request, action=None):
                 f.rm_limit(user.last_seen_ip)
             else:
                 error = True
-    
-        allowed = [LoggedInUser.objects.get(last_seen_ip=user[-1]) for user in f.get_allowed() if user[-1] != '0.0.0.0/0']
-        limited = [LoggedInUser.objects.get(last_seen_ip=user[-1]) for user in f.get_limited() if user[-1] != '0.0.0.0/0']
-        limited += [LoggedInUser.objects.get(last_seen_ip=user[-2]) for user in f.get_limited() if user[-2] != '0.0.0.0/0' and user[2] != 'CONNLIMIT']
+        allowed = [LoggedInUser.objects.filter(last_seen_ip=user[-1]).order_by('-last_login')[0] for user in f.get_allowed() if user[-1] != '0.0.0.0/0']
+        
+        limited = [LoggedInUser.objects.filter(last_seen_ip=user[-1]).order_by('-last_login')[0] for user in f.get_limited() if user[-1] != '0.0.0.0/0']
+        limited += [LoggedInUser.objects.filter(last_seen_ip=user[-2]).order_by('-last_login')[0] for user in f.get_limited() if user[-2] != '0.0.0.0/0' and user[2] != 'CONNLIMIT']
         
     except LoggedInUser.DoesNotExist:
         return render_to_response('active_users.html', {'limited':None, 'active':None, 'user':None, 'error':True, 'action':None}, context_instance=RequestContext(request))
