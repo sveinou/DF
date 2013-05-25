@@ -1,1 +1,1 @@
-www-data ALL=(ALL) NOPASSWD:/usr/local/bin/dynfw, /sbin/iptables, /bin/cat /proc/net/ip_conntrack
+www-data ALL=(ALL) NOPASSWD:/usr/local/bin/dynfw, /sbin/iptables, /bin/cat /proc/net/ip_conntrack, /usr/local/bin/dynfw
