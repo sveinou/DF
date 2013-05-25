@@ -124,6 +124,6 @@ INSTALLED_APPS = (
 )
 LOGIN_URL = '/'
 
-AUTHENTICATION_BACKENDS = ('dDNF.login.migrate.DjangoDBLogin',
-                           'dDNF.login.migrate.FirstLoginAuth',
+AUTHENTICATION_BACKENDS = ('dDNF.login.migrate.FirstLoginAuth',
+			   'dDNF.login.migrate.DjangoDBLogin',
                            'django.contrib.auth.backends.ModelBackend',)
