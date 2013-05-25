@@ -246,7 +246,7 @@ NAT = "Y"
 message("Loginpage set to run at %s:8080" % (IP4))
 change_config("internal_network","internal_network = "+IP4+mask,"/etc/dnf/dnf.conf")
 change_config("NMV", "NameVirtualHost "+IP4+":8080","/etc/apache2/conf.d/djangoDNF.conf")
-change_config("<VirtualHost *:8080>","<VirtualHost "+IP4+":8080>", "/etc/apache2/conf.d/djangoDNF.conf")
+change_config("<VirtualHost *:80>","<VirtualHost "+IP4+":8080>", "/etc/apache2/conf.d/djangoDNF.conf")
 
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
