@@ -92,7 +92,7 @@ def intro():
 	columns = int(subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0])
 	subprocess.call("clear", shell=True)
 	colorcode = 32
-	text1 = "Dynamic Network Firewall v.0.5.rc1 Installation and setup"
+	text1 = "Dynamic Network Firewall v.0.5.rc1\n Installation and setup"
 	text2 = "by Svein Ove Undal"
 	text3 = "and Espen Gjerde"
 	warning = "WARNING, installation requires two ACTIVE NIC's and a working internet connection"
@@ -260,8 +260,8 @@ chmod_file('/etc/sudoers.d/DNFsudorights', '440')
 
 network_iptables(IP4,mask,NAT)
 print("Configuration file: /etc/dnf/dnf.con")
-print("You can now log in to the admin-interface with username: \"espen\" and passowrd \"espen\"")
-print("At http://%s:8080/" % (IP4))
+print("You can now log in to the admin-interface. \nUsername: \"espen\" \nPassowrd \"espen\"")
+print("Address should be http://%s:8080/" % (IP4))
 
 
 
