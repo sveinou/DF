@@ -167,6 +167,8 @@ if miss:
 		install(packages)
 		message("And we're done installing!")
 				
+subprocess.call("a2dissite default", shell=True)
+subprocess.call("/etc/init.d/apache2 reload", shell=True)
 
 if missing(packages):
 	message("Something went wrong. Please check your apt-settings. Exiting")
@@ -255,7 +257,11 @@ answ = question("with your permission, this will flush iptables rules, and chang
 if answ is not "Y":
 	message("That's OK, You have to do it yourself THEN!... but don't come complaining to ME")
 	sys.exit()
-	
+message("Doing some cleanup... ")
+
+subprocess.call("a2dissite default", shell=True)
+subprocess.call("/etc/init.d/apache2 reload", shell=True)
+
 chmod_file('/etc/sudoers.d/DNFsudorights', '440')
 
 network_iptables(IP4,mask,NAT)
