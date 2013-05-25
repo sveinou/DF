@@ -74,7 +74,7 @@ def database():
 		
 		subprocess.call("mysql -u root -p -h localhost < /opt/DF/db.sql", shell=True)
 	except Exception, e:
-		message("you fucked up. type in the root password for MYSQL server to make the df database")
+		message("Too hard, was it? Type in the root password for MYSQL server to make the DNF database")
 		answ = question("exit ??(Y/N)"("Y","N"))
 		if answ is "N":
 			sys.exit
@@ -90,7 +90,7 @@ def intro():
 	columns = int(subprocess.Popen(["tput","cols"], stdout = subprocess.PIPE).communicate()[0])
 	subprocess.call("clear", shell=True)
 	colorcode = 32
-	text1 = "Dynfw setup"
+	text1 = "Dynamic Network Firewall v.0.5.rc1 Installation and setup"
 	text2 = "by Svein Ove Undal"
 	text3 = "and Espen Gjerde"
 	warning = "WARNING, installation requires two ACTIVE NIC's and a working internet connection"
@@ -121,7 +121,7 @@ def question(tex,answers=""):
 	try:
 		ans = raw_input(text+":")
         except Exception, e:
-                message("I think you might ave forgotten that input... ")
+                message("I think you might have forgotten that input i asked you about... ")
 
 	if not answers: return ans	
 	for answer in answers:
@@ -144,7 +144,7 @@ def message(text):
 	print ""
 	time.sleep(1)
 
-packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daemon python-django libapache2-mod-wsgi")
+packages = ("git apache2 mysql-server python-mysqldb isc-dhcp-server python-daemon python-django libapache2-mod-wsgi sudo")
 #packagespath = ("/usr/bin/git","/usr/sbin/apache2","/usr/bin/mysql","/usr/lib/python2.7/dist-packages/MySQLdb/__init__.pyc","/usr/sbin/dhcpd","/usr/lib/pymodules/python2.7/daemon/__init__.pyc")
 ping_server = "8.8.8.8"
 
@@ -153,7 +153,7 @@ answ = question("This will install and setup Dynamic Network Firewakk, move alon
 if answ == 'N':
 	sys.exit()
 					# packageTestInstall
-message("ofcourse you would! ")
+message("Nice choice. Checking dependencies... ")
 miss = missing(packages)
 if miss:
 	message("There are some packages missing")
@@ -163,7 +163,7 @@ if miss:
 	elif answ == "Y":
 		message("Installing some awesome packages")
 		install(packages)
-		message("I think that went OK...")
+		message("And we're done installing!")
 				
 
 if missing(packages):
@@ -171,20 +171,20 @@ if missing(packages):
 	sys.exit()
 	
 					#DYNDNF installation
-message("will now install dynfw")		
+message("Continuing to download and install the DNF-system")		
 pull_create_install()
 message("It probobly worked!")
 					#adding database and user
-message("setting up the database!, it will ask you for the root password")	
+message("setting up the database. You will now be asked to enter your root-password for your database.")	
 database()
 
 					#configChanges - interface
 message("Now we are gonna set up the config file!")
-message("interface test")
+message("Testing network interfaces ...")
 try:
 	from DNF.stats.con_status import Con
 except ImportError, e:
-	message("ohLord! seams like there is somthing wrong with our code!! more in logfile")
+	message("ohLord! seams like there is somthing wrong with our code!! more info in logfile")
 	error_log(e)
 	sys.exit()
 interfaces = Con().find_if()
@@ -192,12 +192,13 @@ internal = interfaces['int']
 external = interfaces['ext']
 external_ip = Con().inferface_ip(external)
 if not internal:
-	message("did not find a seccond interface, IM OUT!")
+	message("Did not find a second interface. Did you rememer to activate it?")
+	message("Anyways... im out.")
 	sys.exit()
 message("Internal interface "+internal+". External interface "+external)
 answ = question("is this correct?(Y/N)",("Y","N"))
 if answ == "N":
-	message("whell fuck you then!!") #im getting tired
+	message("Not? Too bad. Check your config and retry.") #im getting tired
 	sys.exit()
 elif answ == "Y":
 	change_config("internal_interface","internal_interface = "+internal,"/etc/dnf/dnf.conf") 
@@ -206,53 +207,58 @@ elif answ == "Y":
 	
 					#configChanges - interface
 					
-message("latency test next, make sure there is nothing downloading")
+message("Latency test next, please make sure there is nothing using your internetconnection")
 question("Are you sure there is nothing taking up this connection?(YES)",("YES","Y"))
 ms = Con().ping_cal(ping_server)
 ms += 2
 answ = "lol"
 while answ is not "Y":
-	answ = question("set latency_high to "+str(ms)+"(Y/N)",('Y','N'))
+	answ = question("Set latency_high to "+str(ms)+"(Y/N)",('Y','N'))
 	if answ == "N":
-		message("THEN YOU TYPE IT!!")
+		message("So.. you have a better suggestion? Type it in!")
 		ms = question("what latency_high setting you want then?(integer in ms)")
-message("Awesome! editing the freaking file")		
+message("Awesome! Editing the freaking file")		
 change_config("latency_high","latency_high = "+str(int(ms)),"/etc/dnf/dnf.conf")
 change_config("latency_test_addr","latency_test_addr = "+ping_server,"/etc/dnf/dnf.conf")
 
 					#configChanges - rxs/txs
-message("ok, we need to know how good your connection is")
+message("We need to know how good your connection is.")
 answ = "notY"
 rx = "1000"
 tx = "1000"
 while answ is not "Y":
-	rx = question("what is the rx(download) speed in K(BYTES)")
-	tx = question("what is the tx(upload) speed in K(BYTES)")
+	rx = question("What is the rx(download) speed in K(BYTES)")
+	tx = question("What is the tx(upload) speed in K(BYTES)")
 	answ = question("is this correct? tx="+tx+"rx="+rx+" (Y/N)",("Y","N"))
-message("FANTASTIC soon done :) changing config")
+message("FANTASTIC! We're soon done here :)")
 change_config("max_rxs","max_rxs = "+rx,"/etc/dnf/dnf.conf")
 change_config("max_txs", "max_txs = "+tx,"/etc/dnf/dnf.conf")
 
 
-message("iptables and network config")
+message("Firewall and network configuration")
+
 change_config('INTERFACES=""','INTERFACES="'+internal+'"',"/etc/default/isc-dhcp-server")
 IP4 = "10.0.0.1"
 mask = "/24"
 NAT = "Y"
+message("Loginpage set to run at %s:8080" % (IP4))
 change_config("internal_network","internal_network = "+IP4+mask,"/etc/dnf/dnf.conf")
-change_config("NMV", "NameVirtualHost "+IP4+":80","/etc/apache2/conf.d/djangoDNF.conf")
-change_config("<VirtualHost *:80>","<VirtualHost "+IP4+":80>", "/etc/apache2/conf.d/djangoDNF.conf")
+change_config("NMV", "NameVirtualHost "+IP4+":8080","/etc/apache2/conf.d/djangoDNF.conf")
+change_config("<VirtualHost *:8080>","<VirtualHost "+IP4+":8080>", "/etc/apache2/conf.d/djangoDNF.conf")
 
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.old",shell=True)
 subprocess.call("/bin/mv /etc/dhcp/dhcpd.dnf.conf /etc/dhcp/dhcpd.conf",shell=True)
 message("Now running the firewall, interface and dhcp script")
 answ = question("with your permission, this will flush iptables rules, and change internal ip. proceed?(Y/N)",("Y","N"))
 if answ is not "Y":
-	message("whell ok FINE!, do it yourselfe THEN!")
+	message("That's OK, You have to do it yourself THEN!... but don't come complaining to ME")
 	sys.exit()
 	
 
 network_iptables(IP4,mask,NAT)
+message("Configuration file: /etc/dnf/dnf.con")
+message("You can now log in to the admin-interface with username: \"espen\" and passowrd \"espen\"")
+message("At http://%s:8080/" % (IP4))
 
 
 
