@@ -25,7 +25,7 @@ def main():
     program = sys.argv[1].upper()
 
     try:
-        if(program == "DROP" and len(sys.argv) == 3) and sys.argv[2].split(".") == 3:
+        if(program == "DROP" and len(sys.argv) == 3) and sys.argv[2].split(".") == 4:
             drop = Drop()
             drop.ip4(sys.argv[2])
         elif program =="DROP" and len(sys.argv) == 3 and sys.argv[2].upper() == "ALL":
@@ -46,6 +46,8 @@ def main():
     		print set_limit(sys.argv[3],sys.argv[4])
     	elif program == "LIMIT" and len(sys.argv) == 3 and sys.argv[2].upper() == "AUTO":
     		print auto_set_limit()
+    	elif program == "LIMIT" and len(sys.argv) == 4 and sys.argv[2].upper() == "RM" and sys.argv[3].split(".") == 4:
+    		print rm_limit(sys.argv[3])
         elif program =="TESTLOGIN" and len(sys.argv) == 4:
             	print test_login()
         else:
@@ -103,6 +105,13 @@ def rm_all_limit():
     """
     Firewall().rm_all_limit()
     return "flushed LIMITED"
+
+def rm_limit(ip):
+    """
+    removes one limit
+    """
+    Firewall().rm_limit(ip)
+    return ip+" no longer limited"
 
 def auto_limit_users():
     """
