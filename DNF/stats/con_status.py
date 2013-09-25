@@ -99,6 +99,7 @@ class Con:
                         external = interface
                     else:
                         internal = interface
+                    if "bond" in interface: internal = interface
 
                 except Exception, e:
                     internal = interface
