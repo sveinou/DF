@@ -83,6 +83,7 @@ class Statistics:
 	"""
 	i = 0
         clients_bytes = []
+        res = ""
      
         for ip in ips:
             ipcmd = ['iptables', '-nvxL', 'ALLOWED']
